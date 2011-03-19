@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$struct_f_pix.html" title="FPix" alt="" coords="5,99,53,127"/>
+<area shape="rect" id="node4" href="$struct_numa.html" title="Numa" alt="" coords="107,99,163,127"/>
+<area shape="rect" id="node6" href="$struct_pix.html" title="Pix" alt="" coords="196,99,236,127"/>
+<area shape="rect" id="node8" href="$struct_pix_colormap.html" title="PixColormap" alt="" coords="168,6,264,34"/>
+</map>
