@@ -151,22 +151,22 @@ function toggleVisibility(linkObj) {
 <a name="l00029"></a>00029 <span class="preprocessor">#if  (!HAVE_LIBGIF) &amp;&amp; (!HAVE_LIBUNGIF)     </span><span class="comment">/* defined in environ.h */</span>
 <a name="l00030"></a>00030 <span class="comment">/* -----------------------------------------------------------------*/</span>
 <a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="leptprotos_8h.html#ac0519d26ea1fa6891b205c491df11e94">00032</a> <a class="code" href="struct_pix.html">PIX</a> * <a class="code" href="gifiostub_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a>(FILE *fp)
+<a name="l00032"></a>00032 <a class="code" href="struct_pix.html">PIX</a> * <a class="code" href="gifio_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a>(FILE *fp)
 <a name="l00033"></a>00033 {
 <a name="l00034"></a>00034     <span class="keywordflow">return</span> (<a class="code" href="struct_pix.html">PIX</a> * )<a class="code" href="environ_8h.html#a38a8310a83847948c9ce6620983be468">ERROR_PTR</a>(<span class="stringliteral">&quot;function not present&quot;</span>, <span class="stringliteral">&quot;pixReadStreamGif&quot;</span>, <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);
 <a name="l00035"></a>00035 }
 <a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="leptprotos_8h.html#a751022de5681af5bb08fafc535f82950">00037</a> <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="code" href="gifiostub_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif</a>(FILE *fp, <a class="code" href="struct_pix.html">PIX</a> *pix)
+<a name="l00037"></a>00037 <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="code" href="gifio_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif</a>(FILE *fp, <a class="code" href="struct_pix.html">PIX</a> *pix)
 <a name="l00038"></a>00038 {
 <a name="l00039"></a>00039     <span class="keywordflow">return</span> <a class="code" href="environ_8h.html#a8b17fe871312c2e1613fa694bb78a963">ERROR_INT</a>(<span class="stringliteral">&quot;function not present&quot;</span>, <span class="stringliteral">&quot;pixWriteStreamGif&quot;</span>, 1);
 <a name="l00040"></a>00040 }
 <a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="leptprotos_8h.html#a5d3d0c04c13c9addbfcab79aae068e48">00042</a> <a class="code" href="struct_pix.html">PIX</a> * <a class="code" href="gifiostub_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(<span class="keyword">const</span> <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> *cdata, <span class="keywordtype">size_t</span> <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>)
+<a name="l00042"></a>00042 <a class="code" href="struct_pix.html">PIX</a> * <a class="code" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(<span class="keyword">const</span> <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> *cdata, <span class="keywordtype">size_t</span> <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>)
 <a name="l00043"></a>00043 {
 <a name="l00044"></a>00044     <span class="keywordflow">return</span> (<a class="code" href="struct_pix.html">PIX</a> *)<a class="code" href="environ_8h.html#a38a8310a83847948c9ce6620983be468">ERROR_PTR</a>(<span class="stringliteral">&quot;function not present&quot;</span>, <span class="stringliteral">&quot;pixReadMemGif&quot;</span>, <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);
 <a name="l00045"></a>00045 }
 <a name="l00046"></a>00046 
-<a name="l00047"></a><a class="code" href="leptprotos_8h.html#a8156dbdbf8af18b34db32a9bb7beab5d">00047</a> <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="code" href="gifiostub_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif</a>(<a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> **pdata, <span class="keywordtype">size_t</span> *psize, <a class="code" href="struct_pix.html">PIX</a> *pix)
+<a name="l00047"></a>00047 <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="code" href="gifio_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif</a>(<a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> **pdata, <span class="keywordtype">size_t</span> *psize, <a class="code" href="struct_pix.html">PIX</a> *pix)
 <a name="l00048"></a>00048 {
 <a name="l00049"></a>00049     <span class="keywordflow">return</span> <a class="code" href="environ_8h.html#a8b17fe871312c2e1613fa694bb78a963">ERROR_INT</a>(<span class="stringliteral">&quot;function not present&quot;</span>, <span class="stringliteral">&quot;pixWriteMemGif&quot;</span>, 1);
 <a name="l00050"></a>00050 }

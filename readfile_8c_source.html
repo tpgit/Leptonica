@@ -452,7 +452,7 @@ function toggleVisibility(linkObj) {
 <a name="l00330"></a>00330         <span class="keywordflow">break</span>;
 <a name="l00331"></a>00331 
 <a name="l00332"></a>00332     <span class="keywordflow">case</span> <a class="code" href="imageio_8h.html#a726ca809ffd3d67ab4b8476646f26635a1fbf9dbab42fc7a61762f646929ca6dc">IFF_GIF</a>:
-<a name="l00333"></a>00333         <span class="keywordflow">if</span> ((pix = <a class="code" href="gifiostub_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a>(fp)) == <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)
+<a name="l00333"></a>00333         <span class="keywordflow">if</span> ((pix = <a class="code" href="gifio_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a>(fp)) == <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)
 <a name="l00334"></a>00334             <span class="keywordflow">return</span> (<a class="code" href="struct_pix.html">PIX</a> *)<a class="code" href="environ_8h.html#a38a8310a83847948c9ce6620983be468">ERROR_PTR</a>(<span class="stringliteral">&quot;gif: no pix returned&quot;</span>, procName, <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);
 <a name="l00335"></a>00335         <span class="keywordflow">break</span>;
 <a name="l00336"></a>00336 
@@ -914,7 +914,7 @@ function toggleVisibility(linkObj) {
 <a name="l00792"></a>00792         <span class="keywordflow">break</span>;
 <a name="l00793"></a>00793 
 <a name="l00794"></a>00794     <span class="keywordflow">case</span> <a class="code" href="imageio_8h.html#a726ca809ffd3d67ab4b8476646f26635a1fbf9dbab42fc7a61762f646929ca6dc">IFF_GIF</a>:
-<a name="l00795"></a>00795         <span class="keywordflow">if</span> ((pix = <a class="code" href="gifiostub_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(data, size)) == <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)
+<a name="l00795"></a>00795         <span class="keywordflow">if</span> ((pix = <a class="code" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(data, size)) == <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)
 <a name="l00796"></a>00796             <span class="keywordflow">return</span> (<a class="code" href="struct_pix.html">PIX</a> *)<a class="code" href="environ_8h.html#a38a8310a83847948c9ce6620983be468">ERROR_PTR</a>(<span class="stringliteral">&quot;gif: no pix returned&quot;</span>, procName, <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);
 <a name="l00797"></a>00797         <span class="keywordflow">break</span>;
 <a name="l00798"></a>00798 
@@ -1042,7 +1042,7 @@ function toggleVisibility(linkObj) {
 <a name="l00920"></a>00920         <span class="keywordflow">break</span>;
 <a name="l00921"></a>00921 
 <a name="l00922"></a>00922     <span class="keywordflow">case</span> <a class="code" href="imageio_8h.html#a726ca809ffd3d67ab4b8476646f26635a1fbf9dbab42fc7a61762f646929ca6dc">IFF_GIF</a>:  <span class="comment">/* cheating: read the pix */</span>
-<a name="l00923"></a>00923         <span class="keywordflow">if</span> ((pix = <a class="code" href="gifiostub_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(data, size)) == <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)
+<a name="l00923"></a>00923         <span class="keywordflow">if</span> ((pix = <a class="code" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(data, size)) == <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)
 <a name="l00924"></a>00924             <span class="keywordflow">return</span> <a class="code" href="environ_8h.html#a8b17fe871312c2e1613fa694bb78a963">ERROR_INT</a>( <span class="stringliteral">&quot;gif: pix not read&quot;</span>, procName, 1);
 <a name="l00925"></a>00925         <a class="code" href="leptprotos_8h.html#a11b8bc890f3872b0a19307f4c5a9b41e">pixGetDimensions</a>(pix, &amp;w, &amp;h, &amp;d);
 <a name="l00926"></a>00926         <a class="code" href="leptprotos_8h.html#a1b238e61b64e4e5c62f44849cddb9658">pixDestroy</a>(&amp;pix);

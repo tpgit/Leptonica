@@ -116,6 +116,9 @@ function toggleVisibility(linkObj) {
 </script>
 <div id="doc-content">
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <h1>gifio.c File Reference</h1>  </div>
 </div>
@@ -127,15 +130,225 @@ function toggleVisibility(linkObj) {
 <code>#include &lt;sys/types.h&gt;</code><br/>
 <code>#include &lt;unistd.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="allheaders_8h_source.html">allheaders.h</a>&quot;</code><br/>
+<code>#include &quot;gif_lib.h&quot;</code><br/>
 </div>
 <p><a href="gifio_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_pix.html">PIX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifio_8c.html#a881e0e698fa2790f40992bf949c430d2">pixInterlaceGIF</a> (<a class="el" href="struct_pix.html">PIX</a> *pixs)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifio_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a> (FILE *fp)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifio_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif</a> (FILE *fp, <a class="el" href="struct_pix.html">PIX</a> *pix)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a> (const <a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> *cdata, size_t <a class="el" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifio_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif</a> (<a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> **pdata, size_t *psize, <a class="el" href="struct_pix.html">PIX</a> *pix)</td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifio_8c.html#af4bfe8320c126d935e9030471cb889bf">InterlacedOffset</a> [] = {0, 4, 2, 1}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifio_8c.html#a92d94b33c15fdb10011bccafbaf18bcc">InterlacedJumps</a> [] = {8, 8, 4, 2}</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write gif format from/to file and memory. </p>
 
 <p>Definition in file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
-</div></div>
+</div><hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a881e0e698fa2790f40992bf949c430d2"></a><!-- doxytag: member="gifio.c::pixInterlaceGIF" ref="a881e0e698fa2790f40992bf949c430d2" args="(PIX *pixs)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="struct_pix.html">PIX</a> * pixInterlaceGIF </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
+          <td class="paramname"><em>pixs</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="gifio_8c_source.html#l00195">195</a> of file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00250">ERROR_PTR</a>, <a class="el" href="gifio_8c_source.html#l00058">InterlacedJumps</a>, <a class="el" href="gifio_8c_source.html#l00057">InterlacedOffset</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="pix1_8c_source.html#l00328">pixCreateTemplate()</a>, <a class="el" href="pix1_8c_source.html#l01358">pixGetData()</a>, <a class="el" href="pix1_8c_source.html#l00898">pixGetDimensions()</a>, <a class="el" href="pix1_8c_source.html#l00970">pixGetWpl()</a>, and <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>.</p>
+
+<p>Referenced by <a class="el" href="gifio_8c_source.html#l00071">pixReadStreamGif()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa381c4703df42f671fc9c5b2d3037eb0"></a><!-- doxytag: member="gifio.c::pixReadStreamGif" ref="aa381c4703df42f671fc9c5b2d3037eb0" args="(FILE *fp)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_pix.html">PIX</a>* pixReadStreamGif </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="gifio_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif()</a></p>
+<p>Input: stream Return: pix, or null on error </p>
+
+<p>Definition at line <a class="el" href="gifio_8c_source.html#l00071">71</a> of file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00250">ERROR_PTR</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="colormap_8c_source.html#l00271">pixcmapAddColor()</a>, <a class="el" href="colormap_8c_source.html#l00085">pixcmapCreate()</a>, <a class="el" href="colormap_8c_source.html#l00238">pixcmapDestroy()</a>, <a class="el" href="pix1_8c_source.html#l00269">pixCreate()</a>, <a class="el" href="pix1_8c_source.html#l01358">pixGetData()</a>, <a class="el" href="pix1_8c_source.html#l00970">pixGetWpl()</a>, <a class="el" href="gifio_8c_source.html#l00195">pixInterlaceGIF()</a>, <a class="el" href="pix1_8c_source.html#l01312">pixSetColormap()</a>, <a class="el" href="pix1_8c_source.html#l00748">pixTransferAllData()</a>, <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>, <a class="el" href="arrayaccess_8h_source.html#l00063">SET_DATA_BIT</a>, <a class="el" href="arrayaccess_8h_source.html#l00126">SET_DATA_BYTE</a>, <a class="el" href="arrayaccess_8h_source.html#l00083">SET_DATA_DIBIT</a>, and <a class="el" href="arrayaccess_8h_source.html#l00100">SET_DATA_QBIT</a>.</p>
+
+<p>Referenced by <a class="el" href="readfile_8c_source.html#l00285">pixReadStream()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac0bd8299fe39d8e2fdee92dd2a69a88b"></a><!-- doxytag: member="gifio.c::pixWriteStreamGif" ref="ac0bd8299fe39d8e2fdee92dd2a69a88b" args="(FILE *fp, PIX *pix)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> pixWriteStreamGif </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
+          <td class="paramname"><em>pix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="gifio_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif()</a></p>
+<p>Input: stream pix (1, 2, 4, 8, 16 or 32 bpp) Return: 0 if OK, 1 on error</p>
+<p>Notes: (1) All output gif have colormaps. If the pix is 32 bpp rgb, this quantizes the colors and writes out 8 bpp. If the pix is 16 bpp grayscale, it converts to 8 bpp first. (2) We can't write to memory using open_memstream() because the gif functions write through a file descriptor, not a file stream. </p>
+
+<p>Definition at line <a class="el" href="gifio_8c_source.html#l00244">244</a> of file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00214">CALLOC</a>, <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>, <a class="el" href="environ_8h_source.html#l00179">FALSE</a>, <a class="el" href="environ_8h_source.html#l00216">FREE</a>, <a class="el" href="arrayaccess_8h_source.html#l00060">GET_DATA_BIT</a>, <a class="el" href="arrayaccess_8h_source.html#l00118">GET_DATA_BYTE</a>, <a class="el" href="arrayaccess_8h_source.html#l00080">GET_DATA_DIBIT</a>, <a class="el" href="arrayaccess_8h_source.html#l00097">GET_DATA_QBIT</a>, <a class="el" href="environ_8h_source.html#l00257">L_WARNING</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="pix1_8c_source.html#l00440">pixClone()</a>, <a class="el" href="colormap_8c_source.html#l00271">pixcmapAddColor()</a>, <a class="el" href="colormap_8c_source.html#l00085">pixcmapCreate()</a>, <a class="el" href="colormap_8c_source.html#l00632">pixcmapGetColor()</a>, <a class="el" href="colormap_8c_source.html#l00517">pixcmapGetCount()</a>, <a class="el" href="pixconv_8c_source.html#l01053">pixConvertRGBToColormap()</a>, <a class="el" href="pixconv_8c_source.html#l02297">pixConvertTo8()</a>, <a class="el" href="pix1_8c_source.html#l00466">pixDestroy()</a>, <a class="el" href="pix1_8c_source.html#l01288">pixGetColormap()</a>, <a class="el" href="pix1_8c_source.html#l01358">pixGetData()</a>, <a class="el" href="pix1_8c_source.html#l00863">pixGetDepth()</a>, <a class="el" href="pix1_8c_source.html#l00898">pixGetDimensions()</a>, <a class="el" href="pix1_8c_source.html#l01204">pixGetText()</a>, <a class="el" href="pix1_8c_source.html#l00970">pixGetWpl()</a>, <a class="el" href="pix1_8c_source.html#l01312">pixSetColormap()</a>, <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>, and <a class="el" href="environ_8h_source.html#l00175">TRUE</a>.</p>
+
+<p>Referenced by <a class="el" href="writefile_8c_source.html#l00277">pixWriteStream()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a349f947999c0c8dda651b8b3d277ffee"></a><!-- doxytag: member="gifio.c::pixReadMemGif" ref="a349f947999c0c8dda651b8b3d277ffee" args="(const l_uint8 *cdata, size_t size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_pix.html">PIX</a>* pixReadMemGif </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> *&#160;</td>
+          <td class="paramname"><em>cdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif()</a></p>
+<p>Input: data (const; gif-encoded) size (of data) Return: pix, or null on error</p>
+<p>Notes: (1) Of course, we are cheating here -- writing the data out to file and then reading it back in as a gif format. (2) This should not be assumed to be safe from a sophisticated attack, even though we have attempted to make the filename difficult to guess by embedding the process number and the current time in microseconds. The best way to handle temporary files is to use file descriptors (capabilities) or file handles. However, I know of no way to do this for gif files because of the way that libgif handles the file descriptors. The canonical approach would be to do this: char templ[] = "hiddenfilenameXXXXXX"; l_int32 fd = mkstemp(templ); FILE *fp = fdopen(fd, "w+b"); fwrite(data, 1, size, fp); rewind(fp); <a class="el" href="struct_pix.html">Pix</a> *pix = pixReadStreamGif(fp); but this fails because fp is in a bad state after writing. </p>
+
+<p>Definition at line <a class="el" href="gifio_8c_source.html#l00441">441</a> of file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00250">ERROR_PTR</a>, <a class="el" href="environ_8h_source.html#l00216">FREE</a>, <a class="el" href="utils_8c_source.html#l02816">genTempFilename()</a>, <a class="el" href="utils_8c_source.html#l01601">l_binaryWrite()</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="readfile_8c_source.html#l00155">pixRead()</a>, and <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>.</p>
+
+<p>Referenced by <a class="el" href="readfile_8c_source.html#l00849">pixReadHeaderMem()</a>, and <a class="el" href="readfile_8c_source.html#l00744">pixReadMem()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9ff33d3975762d1c0547e0e819a23089"></a><!-- doxytag: member="gifio.c::pixWriteMemGif" ref="a9ff33d3975762d1c0547e0e819a23089" args="(l_uint8 **pdata, size_t *psize, PIX *pix)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> pixWriteMemGif </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> **&#160;</td>
+          <td class="paramname"><em>pdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>psize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
+          <td class="paramname"><em>pix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="gifio_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif()</a></p>
+<p>Input: &amp;data (&lt;return&gt; data of gif compressed image) &amp;size (&lt;return&gt; size of returned data) pix Return: 0 if OK, 1 on error</p>
+<p>Notes: (1) See comments in <a class="el" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif()</a> </p>
+
+<p>Definition at line <a class="el" href="gifio_8c_source.html#l00477">477</a> of file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>, <a class="el" href="environ_8h_source.html#l00216">FREE</a>, <a class="el" href="utils_8c_source.html#l02816">genTempFilename()</a>, <a class="el" href="imageio_8h_source.html#l00048">IFF_GIF</a>, <a class="el" href="utils_8c_source.html#l01531">l_binaryRead()</a>, <a class="el" href="writefile_8c_source.html#l00190">pixWrite()</a>, and <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>.</p>
+
+<p>Referenced by <a class="el" href="writefile_8c_source.html#l00576">pixWriteMem()</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Variable Documentation</h2>
+<a class="anchor" id="af4bfe8320c126d935e9030471cb889bf"></a><!-- doxytag: member="gifio.c::InterlacedOffset" ref="af4bfe8320c126d935e9030471cb889bf" args="[]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="el" href="gifio_8c.html#af4bfe8320c126d935e9030471cb889bf">InterlacedOffset</a>[] = {0, 4, 2, 1}<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="gifio_8c_source.html#l00057">57</a> of file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
+
+<p>Referenced by <a class="el" href="gifio_8c_source.html#l00195">pixInterlaceGIF()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a92d94b33c15fdb10011bccafbaf18bcc"></a><!-- doxytag: member="gifio.c::InterlacedJumps" ref="a92d94b33c15fdb10011bccafbaf18bcc" args="[]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="el" href="gifio_8c.html#a92d94b33c15fdb10011bccafbaf18bcc">InterlacedJumps</a>[] = {8, 8, 4, 2}<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="gifio_8c_source.html#l00058">58</a> of file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
+
+<p>Referenced by <a class="el" href="gifio_8c_source.html#l00195">pixInterlaceGIF()</a>.</p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>

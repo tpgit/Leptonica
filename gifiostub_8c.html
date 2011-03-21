@@ -116,8 +116,6 @@ function toggleVisibility(linkObj) {
 </script>
 <div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <h1>gifiostub.c File Reference</h1>  </div>
 </div>
@@ -129,147 +127,12 @@ function toggleVisibility(linkObj) {
 </div>
 <p><a href="gifiostub_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifiostub_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a> (FILE *fp)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifiostub_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif</a> (FILE *fp, <a class="el" href="struct_pix.html">PIX</a> *pix)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifiostub_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a> (const <a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> *cdata, size_t <a class="el" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gifiostub_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif</a> (<a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> **pdata, size_t *psize, <a class="el" href="struct_pix.html">PIX</a> *pix)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write gif format from/to file and memory. </p>
 
 <p>Definition in file <a class="el" href="gifiostub_8c_source.html">gifiostub.c</a>.</p>
-</div><hr/><h2>Function Documentation</h2>
-<a class="anchor" id="aa381c4703df42f671fc9c5b2d3037eb0"></a><!-- doxytag: member="gifiostub.c::pixReadStreamGif" ref="aa381c4703df42f671fc9c5b2d3037eb0" args="(FILE *fp)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_pix.html">PIX</a>* pixReadStreamGif </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>fp</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="gifiostub_8c_source.html#l00032">32</a> of file <a class="el" href="gifiostub_8c_source.html">gifiostub.c</a>.</p>
-
-<p>References <a class="el" href="environ_8h_source.html#l00250">ERROR_PTR</a>, and <a class="el" href="environ_8h_source.html#l00171">NULL</a>.</p>
-
-<p>Referenced by <a class="el" href="readfile_8c_source.html#l00285">pixReadStream()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac0bd8299fe39d8e2fdee92dd2a69a88b"></a><!-- doxytag: member="gifiostub.c::pixWriteStreamGif" ref="ac0bd8299fe39d8e2fdee92dd2a69a88b" args="(FILE *fp, PIX *pix)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> pixWriteStreamGif </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>fp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
-          <td class="paramname"><em>pix</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="gifiostub_8c_source.html#l00037">37</a> of file <a class="el" href="gifiostub_8c_source.html">gifiostub.c</a>.</p>
-
-<p>References <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>.</p>
-
-<p>Referenced by <a class="el" href="writefile_8c_source.html#l00277">pixWriteStream()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a349f947999c0c8dda651b8b3d277ffee"></a><!-- doxytag: member="gifiostub.c::pixReadMemGif" ref="a349f947999c0c8dda651b8b3d277ffee" args="(const l_uint8 *cdata, size_t size)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_pix.html">PIX</a>* pixReadMemGif </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> *&#160;</td>
-          <td class="paramname"><em>cdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="gifiostub_8c_source.html#l00042">42</a> of file <a class="el" href="gifiostub_8c_source.html">gifiostub.c</a>.</p>
-
-<p>References <a class="el" href="environ_8h_source.html#l00250">ERROR_PTR</a>, and <a class="el" href="environ_8h_source.html#l00171">NULL</a>.</p>
-
-<p>Referenced by <a class="el" href="readfile_8c_source.html#l00849">pixReadHeaderMem()</a>, and <a class="el" href="readfile_8c_source.html#l00744">pixReadMem()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9ff33d3975762d1c0547e0e819a23089"></a><!-- doxytag: member="gifiostub.c::pixWriteMemGif" ref="a9ff33d3975762d1c0547e0e819a23089" args="(l_uint8 **pdata, size_t *psize, PIX *pix)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> pixWriteMemGif </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> **&#160;</td>
-          <td class="paramname"><em>pdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>psize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
-          <td class="paramname"><em>pix</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="gifiostub_8c_source.html#l00047">47</a> of file <a class="el" href="gifiostub_8c_source.html">gifiostub.c</a>.</p>
-
-<p>References <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>.</p>
-
-<p>Referenced by <a class="el" href="writefile_8c_source.html#l00576">pixWriteMem()</a>.</p>
-
-</div>
-</div>
-</div>
+</div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>

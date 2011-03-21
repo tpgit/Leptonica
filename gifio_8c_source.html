@@ -175,9 +175,9 @@ function toggleVisibility(linkObj) {
 <a name="l00053"></a>00053 <span class="preprocessor">#include &quot;gif_lib.h&quot;</span>
 <a name="l00054"></a>00054 
 <a name="l00055"></a>00055     <span class="comment">/* GIF supports 4-way horizontal interlacing */</span>
-<a name="l00056"></a>00056 <span class="keyword">static</span> <a class="code" href="struct_pix.html">PIX</a> * pixInterlaceGIF(<a class="code" href="struct_pix.html">PIX</a>  *pixs);
-<a name="l00057"></a>00057 <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> InterlacedOffset[] = {0, 4, 2, 1};
-<a name="l00058"></a>00058 <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> InterlacedJumps[] = {8, 8, 4, 2};
+<a name="l00056"></a>00056 <span class="keyword">static</span> <a class="code" href="struct_pix.html">PIX</a> * <a class="code" href="gifio_8c.html#a881e0e698fa2790f40992bf949c430d2">pixInterlaceGIF</a>(<a class="code" href="struct_pix.html">PIX</a>  *pixs);
+<a name="l00057"></a><a class="code" href="gifio_8c.html#af4bfe8320c126d935e9030471cb889bf">00057</a> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="code" href="gifio_8c.html#af4bfe8320c126d935e9030471cb889bf">InterlacedOffset</a>[] = {0, 4, 2, 1};
+<a name="l00058"></a><a class="code" href="gifio_8c.html#a92d94b33c15fdb10011bccafbaf18bcc">00058</a> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> <a class="code" href="gifio_8c.html#a92d94b33c15fdb10011bccafbaf18bcc">InterlacedJumps</a>[] = {8, 8, 4, 2};
 <a name="l00059"></a>00059 
 <a name="l00060"></a>00060 
 <a name="l00061"></a>00061 <span class="comment">/*---------------------------------------------------------------------*</span>
@@ -190,7 +190,7 @@ function toggleVisibility(linkObj) {
 <a name="l00068"></a>00068 <span class="comment"> *      Return: pix, or null on error</span>
 <a name="l00069"></a>00069 <span class="comment"> */</span>
 <a name="l00070"></a>00070 <a class="code" href="struct_pix.html">PIX</a> *
-<a name="l00071"></a>00071 <a class="code" href="gifiostub_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a>(FILE  *fp)
+<a name="l00071"></a><a class="code" href="leptprotos_8h.html#ac0519d26ea1fa6891b205c491df11e94">00071</a> <a class="code" href="gifio_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a>(FILE  *fp)
 <a name="l00072"></a>00072 {
 <a name="l00073"></a>00073 <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          fd, wpl, i, j, w, h, d, cindex, ncolors;
 <a name="l00074"></a>00074 <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          rval, gval, bval;
@@ -304,7 +304,7 @@ function toggleVisibility(linkObj) {
 <a name="l00182"></a>00182     }
 <a name="l00183"></a>00183 
 <a name="l00184"></a>00184     <span class="keywordflow">if</span> (gif-&gt;Image.Interlace) {
-<a name="l00185"></a>00185         pixdi = pixInterlaceGIF(pixd);
+<a name="l00185"></a>00185         pixdi = <a class="code" href="gifio_8c.html#a881e0e698fa2790f40992bf949c430d2">pixInterlaceGIF</a>(pixd);
 <a name="l00186"></a>00186         <a class="code" href="leptprotos_8h.html#acbf8564c358269de6f9def17f6059f4b">pixTransferAllData</a>(pixd, &amp;pixdi, 0, 0);
 <a name="l00187"></a>00187     }
 <a name="l00188"></a>00188 
@@ -314,7 +314,7 @@ function toggleVisibility(linkObj) {
 <a name="l00192"></a>00192 
 <a name="l00193"></a>00193 
 <a name="l00194"></a>00194 <span class="keyword">static</span> <a class="code" href="struct_pix.html">PIX</a> *
-<a name="l00195"></a>00195 pixInterlaceGIF(<a class="code" href="struct_pix.html">PIX</a>  *pixs)
+<a name="l00195"></a><a class="code" href="gifio_8c.html#a881e0e698fa2790f40992bf949c430d2">00195</a> <a class="code" href="gifio_8c.html#a881e0e698fa2790f40992bf949c430d2">pixInterlaceGIF</a>(<a class="code" href="struct_pix.html">PIX</a>  *pixs)
 <a name="l00196"></a>00196 {
 <a name="l00197"></a>00197 <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    w, h, d, wpl, j, k, srow, drow;
 <a name="l00198"></a>00198 <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>  *datas, *datad, *lines, *lined;
@@ -331,8 +331,8 @@ function toggleVisibility(linkObj) {
 <a name="l00209"></a>00209     datas = <a class="code" href="leptprotos_8h.html#a44546f758f2cf71bb109bfc114e3ca7f">pixGetData</a>(pixs);
 <a name="l00210"></a>00210     datad = <a class="code" href="leptprotos_8h.html#a44546f758f2cf71bb109bfc114e3ca7f">pixGetData</a>(pixd);
 <a name="l00211"></a>00211     <span class="keywordflow">for</span> (k = 0, srow = 0; k &lt; 4; k++) {
-<a name="l00212"></a>00212         <span class="keywordflow">for</span> (drow = InterlacedOffset[k]; drow &lt; h;
-<a name="l00213"></a>00213              drow += InterlacedJumps[k], srow++) {
+<a name="l00212"></a>00212         <span class="keywordflow">for</span> (drow = <a class="code" href="gifio_8c.html#af4bfe8320c126d935e9030471cb889bf">InterlacedOffset</a>[k]; drow &lt; h;
+<a name="l00213"></a>00213              drow += <a class="code" href="gifio_8c.html#a92d94b33c15fdb10011bccafbaf18bcc">InterlacedJumps</a>[k], srow++) {
 <a name="l00214"></a>00214             lines = datas + srow * wpl;
 <a name="l00215"></a>00215             lined = datad + drow * wpl;
 <a name="l00216"></a>00216             <span class="keywordflow">for</span> (j = 0; j &lt; w; j++)
@@ -363,7 +363,7 @@ function toggleVisibility(linkObj) {
 <a name="l00241"></a>00241 <span class="comment"> *          file stream.</span>
 <a name="l00242"></a>00242 <span class="comment"> */</span>
 <a name="l00243"></a>00243 <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>
-<a name="l00244"></a>00244 <a class="code" href="gifiostub_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif</a>(FILE  *fp,
+<a name="l00244"></a><a class="code" href="leptprotos_8h.html#a751022de5681af5bb08fafc535f82950">00244</a> <a class="code" href="gifio_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif</a>(FILE  *fp,
 <a name="l00245"></a>00245                   <a class="code" href="struct_pix.html">PIX</a>   *pix)
 <a name="l00246"></a>00246 {
 <a name="l00247"></a>00247 <span class="keywordtype">char</span>            *text;
@@ -560,7 +560,7 @@ function toggleVisibility(linkObj) {
 <a name="l00438"></a>00438 <span class="comment"> *          but this fails because fp is in a bad state after writing.</span>
 <a name="l00439"></a>00439 <span class="comment"> */</span>
 <a name="l00440"></a>00440 <a class="code" href="struct_pix.html">PIX</a> *
-<a name="l00441"></a>00441 <a class="code" href="gifiostub_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(<span class="keyword">const</span> <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>  *cdata,
+<a name="l00441"></a><a class="code" href="leptprotos_8h.html#a5d3d0c04c13c9addbfcab79aae068e48">00441</a> <a class="code" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>(<span class="keyword">const</span> <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>  *cdata,
 <a name="l00442"></a>00442               <span class="keywordtype">size_t</span>          <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>)
 <a name="l00443"></a>00443 {
 <a name="l00444"></a>00444 <span class="keywordtype">char</span>     *tname;
@@ -596,7 +596,7 @@ function toggleVisibility(linkObj) {
 <a name="l00474"></a>00474 <span class="comment"> *      (1) See comments in pixReadMemGif()</span>
 <a name="l00475"></a>00475 <span class="comment"> */</span>
 <a name="l00476"></a>00476 <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>
-<a name="l00477"></a>00477 <a class="code" href="gifiostub_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif</a>(<a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>  **pdata,
+<a name="l00477"></a><a class="code" href="leptprotos_8h.html#a8156dbdbf8af18b34db32a9bb7beab5d">00477</a> <a class="code" href="gifio_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif</a>(<a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>  **pdata,
 <a name="l00478"></a>00478                <span class="keywordtype">size_t</span>    *psize,
 <a name="l00479"></a>00479                <a class="code" href="struct_pix.html">PIX</a>       *pix)
 <a name="l00480"></a>00480 {
