@@ -148,7 +148,26 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level implementation of grayscale image arithmetic. </p>
+<div class="fragment"><pre class="fragment">    One image grayscale arithmetic (8, 16 or 32 bpp)
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#ad209f0e6847407c6bbd5f401aca3bf7a">addConstantGrayLow</a>()
+          void       <a class="code" href="arithlow_8c.html#a8c5418878a58056b2358d85fdf3914e9">multConstantGrayLow</a>()
 
+    Two image grayscale arithmetic (8, 16 or 32 bpp)
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#a03602b3b183a11a1fa8af71faa28b08c">addGrayLow</a>()
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#aa7a82b8c12901bf3bc6ca7703b7d3f7f">subtractGrayLow</a>()
+
+    Grayscale threshold operation (8, 16 or 32 bpp)
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#a8f5253689799bc42f0a1b571c693af3d">thresholdToValueLow</a>()
+
+    Image accumulator arithmetic operations (8, 16, 32 bpp)
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#a53f51b7df9b6253bbc831539c837a586">finalAccumulateLow</a>()
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#af649134987facad189895d162ebf512a">finalAccumulateThreshLow</a>()
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#a5d254d257143efd212cdef87b043549b">accumulateLow</a>()
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#a6cf135cbe43c093cd3419238e58639a8">multConstAccumulateLow</a>()
+
+    Absolute value of difference, component-wise.
+          <span class="keywordtype">void</span>       <a class="code" href="arithlow_8c.html#a9a2883683bc1982433b86870e5af2e2d">absDifferenceLow</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="arithlow_8c_source.html">arithlow.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ad209f0e6847407c6bbd5f401aca3bf7a"></a><!-- doxytag: member="arithlow.c::addConstantGrayLow" ref="ad209f0e6847407c6bbd5f401aca3bf7a" args="(l_uint32 *data, l_int32 w, l_int32 h, l_int32 d, l_int32 wpl, l_int32 val)" -->

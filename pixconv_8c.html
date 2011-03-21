@@ -183,7 +183,101 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Convert between images of different types without scaling. </p>
+<div class="fragment"><pre class="fragment">    These functions convert between images of different types
+    without scaling.
 
+    Conversion from 8 bpp grayscale to 1, 2, 4 and 8 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a53b2608644e4798ab3e94e29abead86c">pixThreshold8</a>()
+
+    Conversion from colormap to full color or grayscale
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a422b2e45ac5ed1185c1804fdca9f7528">pixRemoveColormap</a>()
+
+    Add colormap losslessly (8 to 8)
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ad02c72f59e71c58c5b3693fef53a2877">pixAddGrayColormap8</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a6382da79ee5d3d4e62f1dd7199909535">pixAddMinimalGrayColormap8</a>()
+
+    Conversion from RGB color to grayscale
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a44e5faddaf3507b26f5fac41218db5a2">pixConvertRGBToLuminance</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#abf1671a1c997c4126b3caafc08a69b74">pixConvertRGBToGray</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ae25ad297a85cf5b0583d8b768a83a624">pixConvertRGBToGrayFast</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a51fa5354c3347fc7fb4e4bdf9903b880">pixConvertRGBToGrayMinMax</a>()
+
+    Conversion from grayscale to colormap
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a6b5866f2ada763ff8f368c1437a3bda6">pixConvertGrayToColormap</a>()  -- 2, 4, 8 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a05b2b77fc1a78f6b7d509ecf7f968225">pixConvertGrayToColormap8</a>()  -- 8 bpp only
+
+    Colorizing conversion from grayscale to color
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#af3d4c931ad843c34a76f42a7039a90dc">pixColorizeGray</a>()  -- 8 bpp or cmapped
+
+    Conversion from RGB color to colormap
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ae5c5c3c0b1377e147bd6171b7299e5aa">pixConvertRGBToColormap</a>()
+
+    Quantization for relatively small number of <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> in source
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a8c647938255e39d39293284e7d8bf104">pixQuantizeIfFewColors</a>()
+
+    Conversion from 16 bpp to 8 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a8c50b152deda980871a5eaee18609519">pixConvert16To8</a>()
+
+    Conversion from grayscale to false color
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a413c221d0bc2b13dd6c50854619345c0">pixConvertGrayToFalseColor</a>()
+
+    Unpacking conversion from 1 bpp to 2, 4, 8, 16 and 32 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a4f254619a8e4c3b551536758931db3e8">pixUnpackBinary</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a233328f800a4f578b196fc85cc647934">pixConvert1To16</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aa9be60fc344e6d95c8dfa7b820ec07b9">pixConvert1To32</a>()
+
+    Unpacking conversion from 1 bpp to 2 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ae1a36301492cf215436e4456d6f1e469">pixConvert1To2Cmap</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a5b3cf59edc39c9b75011ac60932f105a">pixConvert1To2</a>()
+
+    Unpacking conversion from 1 bpp to 4 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a81b1a2feb90b52194e31bdb43a0825a2">pixConvert1To4Cmap</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ace50e7c745481f832ef84c98bcfe995c">pixConvert1To4</a>()
+
+    Unpacking conversion from 1, 2 and 4 bpp to 8 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a5b37337f1ecff5386328dc324aac36ec">pixConvert1To8</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aaef7e55dd7dbd5c5a91b9861265f72ca">pixConvert2To8</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a61ebec8063943fc6eef8eeea1dc0d48c">pixConvert4To8</a>()
+
+    Unpacking conversion from 8 bpp to 16 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a7dbcd9bfce2c3c89cd5a8f484dff168d">pixConvert8To16</a>()
+
+    Top-level conversion to 1 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#af21a63b658173d3c3ce1c4dc4a5d87ee">pixConvertTo1</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a308da6f7fdff7e04d460fc8b1b342b8c">pixConvertTo1BySampling</a>()
+
+    Top-level conversion to 8 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a5e10c5c2eec6d2bdd4defa3c48d4331c">pixConvertTo8</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ac82545097c495c705c511e00bc84762e">pixConvertTo8BySampling</a>()
+
+    Top-level conversion to 16 bpp
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a8007b604056474204fc2b8b15879c187">pixConvertTo16</a>()
+
+    Top-level conversion to 32 bpp (RGB)
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a14716dd95fae40ec7838dc3db6783473">pixConvertTo32</a>()   ***
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a9f577fb1d4a1a84e5104bd3aa804e584">pixConvertTo32BySampling</a>()   ***
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ae7a5adf53634a0c1457cd6b5db5e1845">pixConvert8To32</a>()  ***
+
+    Top-level conversion to 8 or 32 bpp, without colormap
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aedba221c834c5351b612926712024bcf">pixConvertTo8Or32</a>
+
+    Conversion between 24 bpp and 32 bpp rgb
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aa194b43be752d7ad38058b90924a8ac1">pixConvert24To32</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#adaba9ef92a48391b9dbe667c2fdde6e9">pixConvert32To24</a>()
+
+    Lossless depth conversion (unpacking)
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a3ab232f86330880054fd7a4bca6db63c">pixConvertLossless</a>()
+
+    Conversion for printing in PostScript
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a638efac2122aaecd749cc11c46d34393">pixConvertForPSWrap</a>()
+
+    Scaling conversion to subpixel RGB
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a50f0099909b791334d1daf1bbc800534">pixConvertToSubpixelRGB</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ab569ca086dc176b124db66ecfe50181c">pixConvertGrayToSubpixelRGB</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aa70fc47d83ca861d34e73828e8d5082c">pixConvertColorToSubpixelRGB</a>()
+
+ indicates implicit assumption about RGB component ordering
+</pre></div> 
 <p>Definition in file <a class="el" href="pixconv_8c_source.html">pixconv.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a206b185e433260b867bdb395a4e4e245"></a><!-- doxytag: member="pixconv.c::DEBUG_CONVERT_TO_COLORMAP" ref="a206b185e433260b867bdb395a4e4e245" args="" -->

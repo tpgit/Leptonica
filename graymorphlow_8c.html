@@ -137,7 +137,66 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level implementation of grayscale morphology. </p>
+<div class="fragment"><pre class="fragment">    Low-level grayscale morphological operations
 
+          <span class="keywordtype">void</span>     <a class="code" href="graymorphlow_8c.html#ac2967ee7d30bc313a7f9447b755fcc4d">dilateGrayLow</a>()
+          void     <a class="code" href="graymorphlow_8c.html#a2be05d83f85671c2c1ef212619e03672">erodeGrayLow</a>()
+
+    
+    We use the van Herk/Gil-Werman (vHGW) algorithm, [van Herk,
+    Patt. Recog. Let. 13, pp. 517-521, 1992; Gil and Werman,
+    IEEE Trans PAMI 15(5), pp. 504-507, 1993.] 
+    This was the first grayscale morphology
+    algorithm to compute dilation and erosion with
+    complexity independent of the <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> of the structuring
+    element.  It is simple and elegant, and surprising that
+    it was discovered as recently as 1992.  It works for
+    SEs composed of horizontal and/or vertical lines.  The
+    general case requires finding the Min or Max over an
+    arbitrary set of pixels, and this requires a number of
+    pixel comparisons equal to the SE &quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot; at each pixel
+    in the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>.  The vHGW algorithm requires not
+    more than 3 comparisons at each point.  The algorithm has been
+    recently refined by Gil and Kimmel (&quot;Efficient Dilation
+    Erosion, Opening and Closing Algorithms&quot;, in &quot;Mathematical
+    Morphology and its Applications to Image and Signal Processing&quot;,
+    the proceedings of the International Symposium on Mathematical
+    Morphology, Palo Alto, CA, June 2000, Kluwer Academic
+    Publishers, pp. 301-310).  They bring this number down below
+    1.5 comparisons per output pixel but at a cost of significantly
+    increased complexity, so I don&#39;t bother with that here.
+
+    In brief, the method is as follows.  We evaluate the dilation
+    in groups of &quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot; pixels, equal to the <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> of the SE.
+    For horizontal, we start at x = &quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot;/2 and go
+    (w - 2 * (&quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot;/2))/&quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot; steps.  This means that
+    we don&#39;t evaluate the first 0.5 * &quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot; pixels and, worst
+    case, the last 1.5 * &quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot; pixels.  Thus we embed the
+    <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> in a larger <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> with these augmented dimensions, where
+    the new border pixels are appropriately initialized (0 for
+    dilation; 255 for erosion), and remove the boundary at the end.
+    (For vertical, use h instead of w.)   Then for each group
+    of &quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot; pixels, we form an array of length 2 * &quot;<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>&quot; + 1,
+    consisting of backward and forward partial maxima (for
+    dilation) or minima (for erosion).  This represents a
+    jumping window computed from the source <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, over which
+    the SE will slide.  The center of the array gets the source
+    pixel at the center of the SE.  Call this the center pixel
+    of the window.  Array values to left of center get
+    the maxima(minima) of the pixels from the center
+    one and going to the left an equal distance.  Array
+    values to the right of center get the maxima(minima) to
+    the pixels from the center one and going to the right
+    an equal distance.  These are computed sequentially starting
+    from the center one.  The SE (of length &quot;size&quot;) can slide over this 
+    window (of length 2 * &quot;size + 1) at &quot;size&quot; different places.
+    At each place, the maxima(minima) of the values in the window
+    that correspond to the end points of the SE give the extremal
+    values over that interval, and these are stored at the dest
+    pixel corresponding to the SE center.  A picture is worth
+    at least this many words, so if this isn&#39;t clear, see the
+    leptonica documentation on grayscale morphology.
+</pre></div> 
 <p>Definition in file <a class="el" href="graymorphlow_8c_source.html">graymorphlow.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ac2967ee7d30bc313a7f9447b755fcc4d"></a><!-- doxytag: member="graymorphlow.c::dilateGrayLow" ref="ac2967ee7d30bc313a7f9447b755fcc4d" args="(l_uint32 *datad, l_int32 w, l_int32 h, l_int32 wpld, l_uint32 *datas, l_int32 wpls, l_int32 size, l_int32 direction, l_uint8 *buffer, l_uint8 *maxarray)" -->

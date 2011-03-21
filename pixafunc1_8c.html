@@ -161,7 +161,34 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Binary <a class="el" href="struct_pixa.html">Pixa</a> (array of <a class="el" href="struct_pix.html">Pix</a>) filtering, sorting, clipping. See <a class="el" href="conncomp_8c.html" title="Connected component counting and extraction (Heckbert&#39;s seedfill algorithm)">conncomp.c</a>. </p>
+<div class="fragment"><pre class="fragment">    Filters
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#aaa937150a2bf18ca3b82d3ed7535399c">pixSelectBySize</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a78fd9b5f7816f92ba7887c013b8459ee">pixaSelectBySize</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a950096fab029bdba8349bae060ece9c4">pixSelectByAreaPerimRatio</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a1bdab42dce315cf8c640d77654691f40">pixaSelectByAreaPerimRatio</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a4a18593df57c95a80bc8025585aa44b4">pixSelectByAreaFraction</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a4bfb47006f64394ef8bdc4185c614959">pixaSelectByAreaFraction</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a6afe4e7f57b7c109eece7a9daa242862">pixSelectByWidthHeightRatio</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a4709ee690593f84f950186fc0f6105c7">pixaSelectByWidthHeightRatio</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a735e45826b07f0e37570b3ee15e07a77">pixaSelectWithIndicator</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a0e83b86bba15dd3b683dce6fde6d4825">pixRemoveWithIndicator</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#aaf491c1f2f8a90db11e3c280321e9bed">pixAddWithIndicator</a>()
 
+    Sort functions
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#ac210a5da80d7d20f96ab30600b6727b1">pixaSort</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a4f65588f18118d4355034ce9f4918a2e">pixaBinSort</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#af0fb15418e72bc9dd17e147bb87c2ea6">pixaSortByIndex</a>()
+         <a class="code" href="struct_pixaa.html">PIXAA</a>    *<a class="code" href="leptprotos_8h.html#a08a3d733d200fac235df50605710b948">pixaSort2dByIndex</a>()
+
+    Miscellaneous
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#ab64635baabfbd17e1a2faac9b56f3224">pixaAddBorderGeneral</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a7b526b1cd1e73a971bb0b499baa0737f">pixaaFlattenToPixa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a3123ecc9bfd2fd709ad18e4a745963a9">pixaSizeRange</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a1e6a280a98124e0f08cacc16c933da9a">pixaClipToPix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ac3ecc853f0c1a761022220f855dc327f">pixaAnyColormaps</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a267bfe90a4de41052fa1b0de62ec0c5b">pixaGetDepthInfo</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a02d1b7c41a87a7fbff1395578217503b">pixaEqual</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="pixafunc1_8c_source.html">pixafunc1.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a10885354f5531032e067467b363be8f2"></a><!-- doxytag: member="pixafunc1.c::pixSelectBySize" ref="a10885354f5531032e067467b363be8f2" args="(PIX *pixs, l_int32 width, l_int32 height, l_int32 connectivity, l_int32 type, l_int32 relation, l_int32 *pchanged)" -->

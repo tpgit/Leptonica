@@ -181,7 +181,76 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements <a class="el" href="struct_pixa.html">Pixa</a> (array of <a class="el" href="struct_pix.html">Pix</a>) and <a class="el" href="struct_pixaa.html">Pixaa</a> (2d array of <a class="el" href="struct_pix.html">Pix</a>) class. </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_pixa.html">Pixa</a> creation, destruction, copying
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a7a6d1b9b5457c3dc9bc8f77a39a81147">pixaCreate</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#ae384a2f908c4d8806b9997ed5bac89c2">pixaCreateFromPix</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a43e25d38d76c3498270baf7f84923cb1">pixaCreateFromBoxa</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a5e3f965e552c7531c215fb194d792b6c">pixaSplitPix</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#a6775cff91fdef2336a3f3037f7bb55f3">pixaDestroy</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a48c34deef0641f5af8e88e8c40a78b6c">pixaCopy</a>()
 
+    <a class="code" href="struct_pixa.html">Pixa</a> addition
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a4dd659e18d878e2f3b900c2565b61ccc">pixaAddPix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#af444611687d3e803dcc7a5071fddf28e">pixaExtendArray</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a1e2f67b80a2c3a00c394213a1a14ba00">pixaExtendArrayToSize</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a1abb61141468578877eb70e15202df0d">pixaAddBox</a>()
+
+    <a class="code" href="struct_pixa.html">Pixa</a> accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a098d32e94acc16c5d6e91a930a4b45ff">pixaGetCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a2afb9b7a65e44fcc332a56046537bca2">pixaChangeRefcount</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a3f62a77cf11114981267a6cf9918fc45">pixaGetPix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a3c667443c3111b5456736a117e6a7386">pixaGetPixDimensions</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a582e5188b5bce8636ef9f94f8015de68">pixaGetBoxa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a8da7ddd2f9cf205d03b323413551965b">pixaGetBoxaCount</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="leptprotos_8h.html#a28a4918cee17288fcb4b1af28241bfdc">pixaGetBox</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a6ca38f706b845845e4cc626e29cc1128">pixaGetBoxGeometry</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     **<a class="code" href="leptprotos_8h.html#adec762523a24d6e948ef0675beb9b3a5">pixaGetPixArray</a>()
+
+    <a class="code" href="struct_pixa.html">Pixa</a> array modifiers
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a7d50abda5c58501aa81a6db8852e6bb4">pixaReplacePix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#afa462fdacee0008cbedef9445b315c6d">pixaInsertPix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a109a9ea1baf76d326a0e149106a000c4">pixaRemovePix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a36ae0c7d0ba2352e0ccf9c27da7cd315">pixaInitFull</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a34c629d0d723692161409667ac3da3a9">pixaClear</a>()
+
+    <a class="code" href="struct_pixa.html">Pixa</a> combination
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a0e353f5a207fdeaf05e7985fca4e4b2b">pixaJoin</a>()
+
+    <a class="code" href="struct_pixaa.html">Pixaa</a> creation, destruction
+         <a class="code" href="struct_pixaa.html">PIXAA</a>    *<a class="code" href="leptprotos_8h.html#a1ac1e184cbacdf1288408d58c6f426f0">pixaaCreate</a>()
+         <a class="code" href="struct_pixaa.html">PIXAA</a>    *<a class="code" href="leptprotos_8h.html#a5ab18f5218db8a3671c62be7ff8cb906">pixaaCreateFromPixa</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#a46ae0572a3faf3ccbda850973855d849">pixaaDestroy</a>()
+
+    <a class="code" href="struct_pixaa.html">Pixaa</a> addition
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a275f473ad8258e43948fb6e0b76a5199">pixaaAddPixa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a171ff2da724bcafeeae0e8ef45f65383">pixaaExtendArray</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a3f3242f3b8e597efe07df7136977f2ad">pixaaAddBox</a>()
+
+    <a class="code" href="struct_pixaa.html">Pixaa</a> accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a0692c542d46daef23fb86d0122553d6a">pixaaGetCount</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#abb96ec0a09fa720b62cabb2604406938">pixaaGetPixa</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="leptprotos_8h.html#a3d7a50732abc327d178cbdfddea5b85e">pixaaGetBoxa</a>()
+
+    <a class="code" href="struct_pixa.html">Pixa</a> serialized I/O  (requires png support)
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a0ef012fa45f11ae2746f4b639ba8973b">pixaRead</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#aff3fa670fa1a3b4b4aa735a595379666">pixaReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ad46505ddd5054d9ac854ce7a2d7d7881">pixaWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a20e533fcefa4a9b264dfbd1a8006b190">pixaWriteStream</a>()
+
+    <a class="code" href="struct_pixaa.html">Pixaa</a> serialized I/O  (requires png support)
+         <a class="code" href="struct_pixaa.html">PIXAA</a>    *<a class="code" href="leptprotos_8h.html#a26bd3447f239f9f3f15c68d6d7ac0c74">pixaaRead</a>()
+         <a class="code" href="struct_pixaa.html">PIXAA</a>    *<a class="code" href="leptprotos_8h.html#a52a0ad4f66b87240c8d0d9aff7634041">pixaaReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a9112d32b6f260de7cbc72c961dbb3802">pixaaWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ae8bd3dd638b376f218a6ab198c1b4441">pixaaWriteStream</a>()
+
+ 
+ Important note on reference counting:
+   Reference counting for the <a class="code" href="struct_pixa.html">Pixa</a> is analogous to that for the <a class="code" href="struct_boxa.html">Boxa</a>.
+   See pix.<a class="code" href="struct_pix.html#aa9034805b31bcd55e4298a368ee21996">h</a> for details.   <a class="code" href="leptprotos_8h.html#a48c34deef0641f5af8e88e8c40a78b6c">pixaCopy</a>() provides three possible modes
+   of copy.  The basic rule is that however a <a class="code" href="struct_pixa.html">Pixa</a> is obtained
+   (e.g., from <a class="code" href="leptprotos_8h.html#a7a6d1b9b5457c3dc9bc8f77a39a81147">pixaCreate</a>*(), <a class="code" href="leptprotos_8h.html#a48c34deef0641f5af8e88e8c40a78b6c">pixaCopy</a>(), or a <a class="code" href="struct_pixaa.html">Pixaa</a> accessor),
+   it is necessary to call <a class="code" href="leptprotos_8h.html#a6775cff91fdef2336a3f3037f7bb55f3">pixaDestroy</a>() on it.
+</pre></div> 
 <p>Definition in file <a class="el" href="pixabasic_8c_source.html">pixabasic.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a5c93690323ada14e34322c90e2a9d594"></a><!-- doxytag: member="pixabasic.c::pixaCreate" ref="a5c93690323ada14e34322c90e2a9d594" args="(l_int32 n)" -->

@@ -154,7 +154,25 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Unsupervised classification of connected components and words; image comparison using word bounding boxes. </p>
+<div class="fragment"><pre class="fragment">    Top-level jb2 correlation and rank-hausdorff
 
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>         <a class="code" href="classapp_8c.html#a1d5f70e7bdf53093f790a8df71302428">jbCorrelation</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>         <a class="code" href="classapp_8c.html#a3b2cd9bdd26cf8d0f583dd9915347617">jbRankHaus</a>()
+
+    Extract and classify words in textline order
+
+       <a class="code" href="struct_jb_classer.html">JBCLASSER</a>      *<a class="code" href="classapp_8c.html#a3588c792e8a7b6f52541682070481885">jbWordsInTextlines</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>         <a class="code" href="classapp_8c.html#a9806bfebc3ab61e41954b104dc3623e6">pixGetWordsInTextlines</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>         <a class="code" href="classapp_8c.html#ade05d324ccf3723d7dea1d16c4d62533">pixGetWordBoxesInTextlines</a>()
+
+    Use word bounding boxes to compare page images
+
+       <a class="code" href="struct_numaa.html">NUMAA</a>          *<a class="code" href="classapp_8c.html#a8106140c0b8206e3521c08ed3f1bd44d">boxaExtractSortedPattern</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>         <a class="code" href="classapp_8c.html#aec9bbe37d521eac9b7c1922d20bff664">numaaCompareImagesByBoxes</a>()
+       static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  <a class="code" href="classapp_8c.html#a416103cff29ff2305f87b50d9450c801">testLineAlignmentX</a>()
+       static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  <a class="code" href="classapp_8c.html#a1b4cec1ae73b3356b51727784d3f8373">countAlignedMatches</a>()
+       static <span class="keywordtype">void</span>     <a class="code" href="classapp_8c.html#a84ec7d18f21117a262327d71062ca68a">printRowIndices</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="classapp_8c_source.html">classapp.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="af1791633b3a1a12a9aa449aa6d558327"></a><!-- doxytag: member="classapp.c::L_BUF_SIZE" ref="af1791633b3a1a12a9aa449aa6d558327" args="" -->

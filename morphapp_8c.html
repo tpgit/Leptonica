@@ -157,7 +157,54 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Composite morph ops: component-wise, union/isect, tophat, gradient, granulometry. </p>
+<div class="fragment"><pre class="fragment">    These are some useful and/or interesting composite
+    <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> processing operations, of the type that are often
+    useful in applications.  Most are morphological in
+    nature.
 
+    Extraction of boundary pixels
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a1973891dd5d717f6c52607f54b9049b9">pixExtractBoundary</a>()
+
+    Selective morph sequence operation under mask
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a781505e89953cf4972ad725275efe78e">pixMorphSequenceMasked</a>()
+
+    Selective morph sequence operation on each component
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#ac93964e9994517cf3bb8eba3fb072b2f">pixMorphSequenceByComponent</a>()
+          <a class="code" href="struct_pixa.html">PIXA</a>      *<a class="code" href="leptprotos_8h.html#acb33e06912ae68e90d2ffee2e66bb3b5">pixaMorphSequenceByComponent</a>()
+
+    Selective morph sequence operation on each region
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#ac0335265f277f75c0d9c32a3e4c45312">pixMorphSequenceByRegion</a>()
+          <a class="code" href="struct_pixa.html">PIXA</a>      *<a class="code" href="leptprotos_8h.html#abac40de0dad5003cfe34c1ad96110152">pixaMorphSequenceByRegion</a>()
+
+    Union and intersection of parallel composite operations
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a45b4dd83526a878b71d66da8968c75d9">pixUnionOfMorphOps</a>()
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#af11d47f1f5b1429f4483507e55dd2e05">pixIntersectionOfMorphOps</a>()
+
+    Selective connected component filling
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a68ee9acc901b12206ed1f278c64b1e21">pixSelectiveConnCompFill</a>()
+
+    Removal of matched patterns
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a7506a6a913259f2c447108d83c7c20a2">pixRemoveMatchedPattern</a>()
+
+    Display of matched patterns
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a1250f141defd092dea4ed571e150f2b8">pixDisplayMatchedPattern</a>()
+
+    Iterative morphological seed filling (don&#39;t use for real work)
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#ad6d28e76b7d57b40dde1cad961a68855">pixSeedfillMorph</a>()
+    
+    Granulometry on binary images
+          <a class="code" href="struct_numa.html">NUMA</a>      *<a class="code" href="leptprotos_8h.html#a8cb3a3f95dc46f5be920720bb08a1ed1">pixRunHistogramMorph</a>()
+
+    Composite operations on grayscale images
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a5be3f698beef6a532a8d56a6298b2bcf">pixTophat</a>()
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a0c23650170e06e2215e18741f9cd328a">pixHDome</a>()
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a5214e0cb3a9bdd623fc06d886177f599">pixFastTophat</a>()
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#aeb2ed450595e468537d4440c870b6a70">pixMorphGradient</a>()
+
+    Centroid of component
+          <a class="code" href="struct_pta.html">PTA</a>       *<a class="code" href="leptprotos_8h.html#ab3509eb44877b85988432e6e2462e1bb">pixaCentroids</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ad961ad7f6bcdc43bf46b7b3574d80b78">pixCentroid</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="morphapp_8c_source.html">morphapp.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a5d9d454d4b9f2ff8106d5199ac0d0186"></a><!-- doxytag: member="morphapp.c::SWAP" ref="a5d9d454d4b9f2ff8106d5199ac0d0186" args="(x, y)" -->

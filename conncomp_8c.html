@@ -163,7 +163,64 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Connected component counting and extraction (Heckbert's seedfill algorithm) </p>
+<div class="fragment"><pre class="fragment">  Connected component counting and extraction, <span class="keyword">using</span> Heckbert<span class="stringliteral">&#39;s</span>
+<span class="stringliteral">  stack-based filling algorithm.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    4- and 8-connected components: counts, bounding boxes and images</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Top-level calls:</span>
+<span class="stringliteral">         BOXA     *pixConnComp()</span>
+<span class="stringliteral">         BOXA     *pixConnCompPixa()</span>
+<span class="stringliteral">         BOXA     *pixConnCompBB()</span>
+<span class="stringliteral">         l_int32   pixCountConnComp()</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Identify the next c.c. to be erased:</span>
+<span class="stringliteral">         l_int32   nextOnPixelInRaster()</span>
+<span class="stringliteral">         l_int32   nextOnPixelInRasterLow()</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Erase the c.c., saving the b.b.:</span>
+<span class="stringliteral">         BOX      *pixSeedfillBB()</span>
+<span class="stringliteral">         BOX      *pixSeedfill4BB()</span>
+<span class="stringliteral">         BOX      *pixSeedfill8BB()</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Just erase the c.c.:</span>
+<span class="stringliteral">         l_int32   pixSeedfill()</span>
+<span class="stringliteral">         l_int32   pixSeedfill4()</span>
+<span class="stringliteral">         l_int32   pixSeedfill8()</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Static stack helper functions for single raster line seedfill:</span>
+<span class="stringliteral">         static void    pushFillsegBB()</span>
+<span class="stringliteral">         static void    pushFillseg()</span>
+<span class="stringliteral">         static void    popFillseg()</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">The basic method in pixConnCompBB() is very simple.  We scan the</span>
+<span class="stringliteral">image in raster order, looking for the next ON pixel.  When it</span>
+<span class="stringliteral">is found, we erase it and every pixel of the 4- or 8-connected</span>
+<span class="stringliteral">component to which it belongs, using Heckbert&#39;</span>s seedfill
+algorithm.  As pixels are erased, we keep track of the
+minimum rectangle that encloses all erased pixels; after
+the connected component has been erased, we save its
+bounding box in an array of boxes.  When all pixels in the
+image have been erased, we have an array that describes every
+4- or 8-connected component in terms of its bounding box.
 
+pixConnCompPixa() is a slight variation on <a class="code" href="conncomp_8c.html#a134833bb47a2481e5c137b9933c71cc4">pixConnCompBB</a>(),
+where we additionally save an array of images (in a <a class="code" href="struct_pixa.html">Pixa</a>)
+of each of the 4- or 8-connected components.  This is done trivially
+by maintaining two temporary images.  We erase a component from one,
+and use the bounding box to extract the pixels within the b.b.
+from each of the two images.  An <a class="code" href="bincompare_8c.html#a45cd11034d1a7d86c3a88d36f5e7f1ab">XOR</a> between these subimages
+gives the erased component.  Then we erase the component from the
+second image <span class="keyword">using</span> the <a class="code" href="bincompare_8c.html#a45cd11034d1a7d86c3a88d36f5e7f1ab">XOR</a> again, with the extracted component
+placed on the second image at the location of the bounding box.
+Rasterop does all the work.  At the end, we have an array
+of the 4- or 8-connected components, as well as an array of the
+bounding boxes that describe where they came from in the original image.
+
+If you just want the number of connected components, <a class="code" href="conncomp_8c.html#ac3775d2fb1fe6ef9cf4a92b4823a1bd9">pixCountConnComp</a>()
+is a bit faster than <a class="code" href="conncomp_8c.html#a134833bb47a2481e5c137b9933c71cc4">pixConnCompBB</a>(), because it doesn&#39;t have to
+keep track of the bounding rectangles for each c.c.
+</pre></div> 
 <p>Definition in file <a class="el" href="conncomp_8c_source.html">conncomp.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ad72dbcf6d0153db1b8d8a58001feed83"></a><!-- doxytag: member="conncomp.c::DEBUG" ref="ad72dbcf6d0153db1b8d8a58001feed83" args="" -->

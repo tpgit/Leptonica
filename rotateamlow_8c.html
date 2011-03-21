@@ -142,7 +142,23 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level helpers for interpolated rotation. </p>
+<div class="fragment"><pre class="fragment">    Grayscale and color rotation (area mapped)
 
+        32 bpp grayscale rotation about <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> center
+             <span class="keywordtype">void</span>    <a class="code" href="leptprotos_8h.html#abd23b2375349456018c6b10d9d0142b0">rotateAMColorLow</a>()
+
+        8 bpp grayscale rotation about <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> center
+             <span class="keywordtype">void</span>    <a class="code" href="leptprotos_8h.html#a39b4e0c91fbefae196e2f6c39b3909ee">rotateAMGrayLow</a>()
+
+        32 bpp grayscale rotation about UL corner of <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+             <span class="keywordtype">void</span>    <a class="code" href="leptprotos_8h.html#a29e9b525a4221e1933ffd4b3feb56b09">rotateAMColorCornerLow</a>()
+
+        8 bpp grayscale rotation about UL corner of <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+             <span class="keywordtype">void</span>    <a class="code" href="leptprotos_8h.html#ad0e7d7e74d4193d0331ecb3842c27783">rotateAMGrayCornerLow</a>()
+
+        Fast RGB color rotation about center:
+             <span class="keywordtype">void</span>    <a class="code" href="leptprotos_8h.html#a684d813ed9d530d11225dacf43531a0f">rotateAMColorFastLow</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="rotateamlow_8c_source.html">rotateamlow.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a2d170dcdeb0f4fefbb0daa2d59aefb28"></a><!-- doxytag: member="rotateamlow.c::rotateAMColorLow" ref="a2d170dcdeb0f4fefbb0daa2d59aefb28" args="(l_uint32 *datad, l_int32 w, l_int32 h, l_int32 wpld, l_uint32 *datas, l_int32 wpls, l_float32 angle, l_uint32 colorval)" -->

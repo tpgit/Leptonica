@@ -144,7 +144,30 @@ Typedefs</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Struct for generic double-linked list; macros for list traversal. </p>
+<div class="fragment"><pre class="fragment">     Cell <span class="keywordflow">for</span> <span class="keywordtype">double</span>-linked lists
 
+     This allows composition of a list of cells with 
+         prev, next and data pointers.  Generic data
+         structures hang on the list cell data pointers.
+
+     The list is not circular because that would add much
+         complexity in traversing the list under general
+         conditions where list cells can be added and removed.
+         The only disadvantage of not having the head point to
+         the last cell is that the list must be traversed to
+         find its tail.  However, <span class="keyword">this</span> traversal is fast, and
+         the <a class="code" href="leptprotos_8h.html#a8591aa41473d696f6b89e303a430443f">listRemoveFromTail</a>() function updates the tail
+         so there is no searching overhead with repeated use.
+
+     The list macros are used to run through a list, and their
+     use is encouraged.  They are invoked, e.g., as
+
+           <a class="code" href="struct_double_linked_list.html">DLLIST</a>  *head, *elem;
+           ...
+           <a class="code" href="list_8h.html#ab379b434593ccabb9bda30e5db8e0220">L_BEGIN_LIST_FORWARD</a>(head, elem)
+               &lt;do something with elem and/or elem-&gt;data &gt;
+           <a class="code" href="list_8h.html#a825ab690ad471d73d597c2d35b2af2c8">L_END_LIST</a>
+</pre></div> 
 <p>Definition in file <a class="el" href="list_8h_source.html">list.h</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ab379b434593ccabb9bda30e5db8e0220"></a><!-- doxytag: member="list.h::L_BEGIN_LIST_FORWARD" ref="ab379b434593ccabb9bda30e5db8e0220" args="(head, element)" -->

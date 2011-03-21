@@ -161,7 +161,55 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Basic operations on image kernels for convolution; special kernels. </p>
+<div class="fragment"><pre class="fragment">    Basic operations on kernels <span class="keywordflow">for</span> <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> convolution
 
+       Create/destroy/copy
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#a6909fec904c99cc82bfdfe76c7ae20f1">kernelCreate</a>()
+          void        <a class="code" href="kernel_8c.html#a2a3c9ff4ee0a7acd479e3fbcb156e1d7">kernelDestroy</a>()
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#ad1687dddf2d50c319b2894810a37c575">kernelCopy</a>()
+
+       Accessors:
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#a4c603b9be3f0014c9800c5bb846d8fbe">kernelGetElement</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#a9d19bb0e64a2e200b67d2f17a1a16231">kernelSetElement</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#afd71fa1cab74e58388191f225fdef48c">kernelGetParameters</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#a70ae8436c5a9d2c42ec6006a4098a44a">kernelSetOrigin</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#ac9bcaadf7e0ae16c911e3479973ea68c">kernelGetSum</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#a913747f0f41ac9446957e6aabffda478">kernelGetMinMax</a>()
+
+       Normalize/invert
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#a7f8117cb321ab98f4d8fb1ea5e6ce3d2">kernelNormalize</a>()
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#a26904503156016493bf5cdd2aa0b9c69">kernelInvert</a>()
+
+       Helper function
+          <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a> **<a class="code" href="kernel_8c.html#ab8d72331c813fd5c3c52411b3770cf5e">create2dFloatArray</a>()
+
+       Serialized I/O
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#a13eca1411653a7f7eabe6192e974fe98">kernelRead</a>()
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#ad6615bbd348b3b8042633353f0386f8c">kernelReadStream</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#a01fb9b8ac095a71da4c9483a2c31035e">kernelWrite</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="kernel_8c.html#aaa202d14e97e50b880952dcae91f7a5b">kernelWriteStream</a>()
+     
+       Making a kernel from a compiled <span class="keywordtype">string</span>
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#ae88773dfb217e3995a37e1c53ea25d92">kernelCreateFromString</a>()
+
+       Making a kernel from a simple file format
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#afda53ac33fc06b73d3554eff03caa9f8">kernelCreateFromFile</a>()
+
+       Making a kernel from a Pix
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#ad79ad455b75f71174934a07fdc3dfbcc">kernelCreateFromPix</a>()
+
+       Display a kernel in a pix
+          <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="kernel_8c.html#ab2b2ed92d6fc6e86fe161ac00a7d905e">kernelDisplayInPix</a>()
+
+       Parse <span class="keywordtype">string</span> to extract numbers
+          <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="kernel_8c.html#a79d72480ace1e5cff4551c8a127a6677">parseStringForNumbers</a>()
+
+    Simple parametric kernels
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#a27e9590fa71f6150eb61aff8dc34c013">makeFlatKernel</a>()
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#a2853cbda369fe63ed0bf84efbd72abd4">makeGaussianKernel</a>()
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#a9766b08638458375bea5996b15c67095">makeGaussianKernelSep</a>()
+          <a class="code" href="struct_l___kernel.html">L_KERNEL</a>   *<a class="code" href="kernel_8c.html#ab13281c09b4114948948694aad75e059">makeDoGKernel</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="kernel_8c_source.html">kernel.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a6909fec904c99cc82bfdfe76c7ae20f1"></a><!-- doxytag: member="kernel.c::kernelCreate" ref="a6909fec904c99cc82bfdfe76c7ae20f1" args="(l_int32 height, l_int32 width)" -->

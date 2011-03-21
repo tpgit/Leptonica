@@ -154,7 +154,115 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Blend (optionally with a mask) and re-coloring images. </p>
+<div class="fragment"><pre class="fragment">    Blending two images that are not colormapped
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#aa54f843a3af2e59878454fe41d41a614">pixBlend</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#aa3711c698d4fb80d7129018b5162f9c6">pixBlendMask</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a4d49fe68f0b6f6c4b487a82a0a78fdd5">pixBlendGray</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a35ed557a91a1ad527ef4a6c00e91e6a1">pixBlendColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a73515ff61cf772d6f6d93579a876b53e">pixBlendColorByChannel</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a288c03f9eb9ff330240ff1555e38b0ea">pixBlendGrayAdapt</a>()
+         static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="blend_8c.html#ad12eec2ea8dff86628c6d5717214da66">blendComponents</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a75cf8f041f0819375b30f289fe74249d">pixFadeWithGray</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#adccd01da6572ef3c8b2a4b955ec4c623">pixBlendHardLight</a>()
+         static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="blend_8c.html#aece01093947264a4b0363e6190875035">blendHardLightComponents</a>()
 
+    Blending two colormapped images
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="blend_8c.html#ad4e4745c0c48b3ae04b988e21386d2f3">pixBlendCmap</a>()
+
+    Blending two images using a third (alpha mask)
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a51d08d3ae19c515a5fabf42db1daf85b">pixBlendWithGrayMask</a>()
+
+    Coloring &quot;gray&quot; pixels
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="blend_8c.html#ac5f519c9ae69dfca48ca7c8419c45d0d">pixColorGray</a>()
+
+    Adjusting one or more <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> to a target color
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a76725349efc43bd2cb2e0e6ceeeb4752">pixSnapColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#aba28c871b7e90d3ccada2794fb4d764e">pixSnapColorCmap</a>()
+
+    Mapping <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> based on a source/target pair
+         <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="blend_8c.html#a6997981bec4c8aa87a355506068d3a09">pixLinearMapToTargetColor</a>()
+         <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>         <a class="code" href="blend_8c.html#a757fbd3f00aff2464713880c3991bfaf">pixelLinearMapToTargetColor</a>()
+
+    Fractional shift of RGB towards black or white
+         <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>         <a class="code" href="blend_8c.html#a809afc500fb12c76e303e447affda840">pixelFractionalShift</a>()
+
+In blending operations a new pix is produced where typically
+a subset of pixels in src1 are changed by the set of pixels
+in src2, when src2 is located in a given position relative
+to src1.  This is similar to rasterop, except that the
+blending operations we allow are more complex, and typically
+result in dest pixels that are a linear combination of two
+pixels, such as src1 and its inverse.  I find it convenient
+to think of src2 as the &quot;blender&quot; (the one that takes the action)
+and src1 as the &quot;blendee&quot; (the one that changes).
+
+Blending works best when src1 is 8 or 32 bpp.  We also allow
+src1 to be colormapped, but the colormap is removed before blending,
+so if src1 is colormapped, we can&#39;t allow in-place blending.
+
+Because src2 is typically smaller than src1, we can implement by
+clipping src2 to src1 and then transforming some of the dest
+pixels that are under the support of src2.  In practice, we
+do the clipping in the inner pixel loop.  For grayscale and
+color src2, we also allow a simple form of transparency, where
+pixels of a particular value in src2 are transparent; for those pixels,
+no blending is done.
+
+The blending functions are categorized by the depth of src2,
+the blender, and not that of src1, the blendee.
+
+ - If src2 is 1 bpp, we can do one of three things:
+   (1) <a class="code" href="pix_8h.html#a0944a4353780132eeab7b06e3e42291da8fd0f1d495f371c29d8175c6aac407da">L_BLEND_WITH_INVERSE</a>: Blend a given fraction of src1 with its
+       inverse color for those pixels in src2 that are fg (ON),
+       and leave the dest pixels unchanged for pixels in src2 that
+       are bg (OFF).
+   (2) <a class="code" href="pix_8h.html#a0944a4353780132eeab7b06e3e42291da885c98d30276d11068bd5b613cbb6510">L_BLEND_TO_WHITE</a>: Fade the src1 pixels toward white by a
+       given fraction for those pixels in src2 that are fg (ON),
+       and leave the dest pixels unchanged for pixels in src2 that
+       are bg (OFF).
+   (3) <a class="code" href="pix_8h.html#a0944a4353780132eeab7b06e3e42291daa1ef08fc35a77d1716f7c3b7e39acb1c">L_BLEND_TO_BLACK</a>: Fade the src1 pixels toward black by a
+       given fraction for those pixels in src2 that are fg (ON),
+       and leave the dest pixels unchanged for pixels in src2 that
+       are bg (OFF).
+   The blending function is <a class="code" href="blend_8c.html#aa3711c698d4fb80d7129018b5162f9c6">pixBlendMask</a>().
+
+ - If src2 is 8 bpp grayscale, we can do one of two things
+   (but see <a class="code" href="blend_8c.html#a75cf8f041f0819375b30f289fe74249d">pixFadeWithGray</a>() below):
+   (1) <a class="code" href="pix_8h.html#a0944a4353780132eeab7b06e3e42291da5f7056c3021d9af1f9cc65d9d1dbf7a2">L_BLEND_GRAY</a>: If src1 is 8 bpp, mix the two values, using
+       a fraction of src2 and (1 - fraction) of src1.
+       If src1 is 32 bpp (rgb), mix the fraction of src2 with
+       each of the color components in src1.
+   (2) <a class="code" href="pix_8h.html#a0944a4353780132eeab7b06e3e42291dad8b010b4a7f8372a4b36ef2df3dee05f">L_BLEND_GRAY_WITH_INVERSE</a>: Use the grayscale value in src2
+       to determine how much of the inverse of a src1 pixel is
+       to be combined with the pixel value.  The input fraction
+       further acts to scale the change in the src1 pixel.
+   The blending function is <a class="code" href="blend_8c.html#a4d49fe68f0b6f6c4b487a82a0a78fdd5">pixBlendGray</a>().
+
+ - If src2 is color, we blend a given fraction of src2 with
+   src1.  If src1 is 8 bpp, the resulting <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> is 32 bpp.
+   The blending function is <a class="code" href="blend_8c.html#a35ed557a91a1ad527ef4a6c00e91e6a1">pixBlendColor</a>().
+
+ - For all three blending functions -- <a class="code" href="blend_8c.html#aa3711c698d4fb80d7129018b5162f9c6">pixBlendMask</a>(), <a class="code" href="blend_8c.html#a4d49fe68f0b6f6c4b487a82a0a78fdd5">pixBlendGray</a>()
+   and <a class="code" href="blend_8c.html#a35ed557a91a1ad527ef4a6c00e91e6a1">pixBlendColor</a>() -- you can apply the blender to the blendee
+   either in-place or generating a new pix.  For the in-place
+   operation, this requires that the depth of the resulting pix
+   must equal that of the input pixs1.
+
+ - We remove colormaps from src1 and src2 before blending.
+   Any quantization would have to be done after blending.
+
+We include another function, <a class="code" href="blend_8c.html#a75cf8f041f0819375b30f289fe74249d">pixFadeWithGray</a>(), that blends
+a gray or color src1 with a gray src2.  It does one of these things:
+   (1) <a class="code" href="pix_8h.html#a0944a4353780132eeab7b06e3e42291da885c98d30276d11068bd5b613cbb6510">L_BLEND_TO_WHITE</a>: Fade the src1 pixels toward white by
+       a number times the value in src2.
+   (2) <a class="code" href="pix_8h.html#a0944a4353780132eeab7b06e3e42291daa1ef08fc35a77d1716f7c3b7e39acb1c">L_BLEND_TO_BLACK</a>: Fade the src1 pixels toward black by
+       a number times the value in src2.
+
+Also included is a generalization of the so-called &quot;hard light&quot;
+blending: <a class="code" href="blend_8c.html#adccd01da6572ef3c8b2a4b955ec4c623">pixBlendHardLight</a>().  We generalize by allowing a fraction &lt; 1.0
+of the blender to be admixed with the blendee.  The standard function
+does full mixing.
+</pre></div> 
 <p>Definition in file <a class="el" href="blend_8c_source.html">blend.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ad12eec2ea8dff86628c6d5717214da66"></a><!-- doxytag: member="blend.c::blendComponents" ref="ad12eec2ea8dff86628c6d5717214da66" args="(l_int32 a, l_int32 b, l_float32 fract)" -->

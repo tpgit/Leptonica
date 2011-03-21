@@ -160,7 +160,63 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Standard, simple, general grayscale quantization. </p>
+<div class="fragment"><pre class="fragment">    Thresholding from 8 bpp to 1 bpp
 
+        Floyd-Steinberg dithering to binary
+            <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="grayquant_8c.html#acaa60003b944a27639db5df7f4ea2de4">pixDitherToBinary</a>()
+            <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="grayquant_8c.html#ab4f56a43143491151bee008a0ad33478">pixDitherToBinarySpec</a>()
+
+        Simple (pixelwise) binarization with fixed threshold
+            <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="grayquant_8c.html#ae860cea63ac0db20d92af73cf17f37c7">pixThresholdToBinary</a>()
+
+        Binarization with variable threshold
+            <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="grayquant_8c.html#ab3cd276d0ba9aabdcc7a2165724aab7b">pixVarThresholdToBinary</a>()
+
+        Slower implementation of Floyd-Steinberg dithering, using LUTs
+            <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="grayquant_8c.html#abf3d8b88984f004aae26e0b46db7b000">pixDitherToBinaryLUT</a>()
+
+        Generate a binary mask from pixels of particular values
+            <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="grayquant_8c.html#a7b1ce9bba23ca636b5a375f82c5d9759">pixGenerateMaskByValue</a>()
+            <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="grayquant_8c.html#a8cb4b4a02dd87f6b6577af59acdb13f4">pixGenerateMaskByBand</a>()
+
+    Thresholding from 8 bpp to 2 bpp
+
+        Dithering to 2 bpp
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#a6b38a8f5e0d12b077cb002545d3d14eb">pixDitherTo2bpp</a>()
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#ab95548869f5ef1cedca1974bec7b6b5d">pixDitherTo2bppSpec</a>()
+
+        Simple (pixelwise) thresholding to 2 bpp with optional cmap
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#a28f0a87372b62df5b1480f58136823d1">pixThresholdTo2bpp</a>()
+
+    Simple (pixelwise) thresholding from 8 bpp to 4 bpp
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#a3ceb912e2683196af6b07494dd3a40e4">pixThresholdTo4bpp</a>()
+
+    Simple (pixelwise) quantization on 8 bpp grayscale
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#a60ad24aeaabd86b3172d67f8c554ea79">pixThresholdOn8bpp</a>()
+
+    Arbitrary (pixelwise) thresholding from 8 bpp to 2, 4 or 8 bpp
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#aaaeb6bde945e04910ae3722eadbff09a">pixThresholdGrayArb</a>()
+
+    Quantization tables for linear thresholds of grayscale images
+            <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  *<a class="code" href="grayquant_8c.html#a81972acff746db6a4da98ede8016b0b6">makeGrayQuantIndexTable</a>()
+            <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  *<a class="code" href="grayquant_8c.html#a0d31c335238af9a0f70a75497ad7308a">makeGrayQuantTargetTable</a>()
+
+    Quantization table for arbitrary thresholding of grayscale images
+            <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="grayquant_8c.html#a7803b7a0e3d87efbf7598dd60471e177">makeGrayQuantTableArb</a>()
+            <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="grayquant_8c.html#a7e7ea1b723bfa3905822d96454812ff5">makeGrayQuantColormapArb</a>()
+
+    Thresholding from 32 bpp rgb to 1 bpp
+    (really color quantization, but it&#39;s better placed in this file)
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#a708dd95f480cdd04749bedfb66101dc4">pixGenerateMaskByBand32</a>()
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#a9ba82604f7479feeeee4656c52316335">pixGenerateMaskByDiscr32</a>()
+
+    Histogram-based grayscale quantization
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#ae5d29a35d86c34b6f4d465e61e720eea">pixGrayQuantFromHisto</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="grayquant_8c.html#acacc3a64b1f2a391a58ca11a961ac2de">numaFillCmapFromHisto</a>()
+
+    Color quantize grayscale image using existing colormap
+            <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="grayquant_8c.html#a53fdbfca6e8f50c109297eb144cd1f26">pixGrayQuantFromCmap</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="grayquant_8c_source.html">grayquant.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="acacc3a64b1f2a391a58ca11a961ac2de"></a><!-- doxytag: member="grayquant.c::numaFillCmapFromHisto" ref="acacc3a64b1f2a391a58ca11a961ac2de" args="(NUMA *na, PIXCMAP *cmap, l_float32 minfract, l_int32 maxsize, l_int32 **plut)" -->

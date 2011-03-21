@@ -196,7 +196,146 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Basic operations for float/int arrays (<a class="el" href="struct_numa.html">Numa</a>, <a class="el" href="struct_numaa.html">Numaa</a>, <a class="el" href="struct_numa2d.html">Numa2d</a>, <a class="el" href="struct_numa_hash.html">NumaHash</a>) </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_numa.html">Numa</a> creation, destruction, copy, clone, etc.
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#afd300f95a02894e9529623a260ffac8a">numaCreate</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a797b5ce4cf4bf44f8a7a6c20c2707352">numaCreateFromIArray</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a86f2bf5524e967be424e9972f8121d1e">numaCreateFromFArray</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#aba8d7e230092813965301cca699a6ebc">numaDestroy</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#af191b6f0b78cef67fee530408a4ce429">numaCopy</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#ad97cb5a7bb5a66a9f631ffce6f2ae3d1">numaClone</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a32e503cb2d0e5ab9123448f158c477f5">numaEmpty</a>()
 
+    Add/remove number (<span class="keywordtype">float</span> or integer)
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a50f6b1a964dc2bb2b200a228dc92ca2c">numaAddNumber</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a4e6a3f410f51357a74fed51fa6956c64">numaExtendArray</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac5567de7563b4d45046d9e5de4d242c7">numaInsertNumber</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a2dd9ae62a40f9f7de7215be18a700fc6">numaRemoveNumber</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a81ee18f36b2627d5c0fd23b5dbead9a2">numaReplaceNumber</a>()
+
+    <a class="code" href="struct_numa.html">Numa</a> accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a3d022536ec48f28421c56f586d697295">numaGetCount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#af4616c37b7ee50e2538be5c7f44d0384">numaSetCount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#af59481588f8640c51cb411f6cff18d3c">numaGetIValue</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a9fc8c2ee1c5af6d982bda74e44a9fabe">numaGetFValue</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a4d89262196cce2e60f9c1584606fe80d">numaSetValue</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a84391c834b5f690180e78005fac5ea8c">numaShiftValue</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     *<a class="code" href="leptprotos_8h.html#a29427b3c1cc779eadcf11e2e326886ef">numaGetIArray</a>()
+        <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>   *<a class="code" href="leptprotos_8h.html#a02162a51978fa66f772b70b4eaab0945">numaGetFArray</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a299547e383a47f9621b11a204de3a44e">numaGetRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ab23117ce34f329bb69479a5e21325bbe">numaChangeRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a354fd9817e3991ddff18675c1fae83bf">numaGetXParameters</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#af5ff7dbe7bac38b1e23016fb959459ba">numaSetXParameters</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac9384d66565f0b7904c736ef5fd84be4">numaCopyXParameters</a>()
+
+    Serialize numa for I/O
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#aa9c4888e95adda3880e5f28d9bea022c">numaRead</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#abb4fd34610d4d0b94f579fff7c256e49">numaReadStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a6f8e42fa1d61e47b9995962fd3f219a0">numaWrite</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a86759f6e60fb4ccc8e75551adfc412b6">numaWriteStream</a>()
+
+    <a class="code" href="struct_numaa.html">Numaa</a> creation, destruction
+        <a class="code" href="struct_numaa.html">NUMAA</a>       *<a class="code" href="leptprotos_8h.html#a7488728dc77f4329f06b2f509eadf80e">numaaCreate</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#a94241ea78bf70e5b365af36e1dc2e58f">numaaDestroy</a>()
+
+    Add <a class="code" href="struct_numa.html">Numa</a> to <a class="code" href="struct_numaa.html">Numaa</a>
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a865178e5e08de39497f5d9d92bc9d535">numaaAddNuma</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a92433c9356c5c360117f8c7c941ee158">numaaExtendArray</a>()
+
+    <a class="code" href="struct_numaa.html">Numaa</a> accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a0b963b3140b0a6593325bfb0c52e7287">numaaGetCount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac9bfde02e98f5fa82c7440f439787370">numaaGetNumaCount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a3089b85427b56dfddc6147868c2e1a01">numaaGetNumberCount</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>       **<a class="code" href="leptprotos_8h.html#a1484c36b6cf12f7f4f9b1b366f98404e">numaaGetPtrArray</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a0f362ecbc3dc96e9f1302a368bf9c2dd">numaaGetNuma</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#ad79f0c3e8eea684f5c79d08aaf00a79e">numaaReplaceNuma</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac46567737882d6f699d11253b403ca03">numaaGetValue</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a139a98d1b5de76bc85799b0d185deeb6">numaaAddNumber</a>()
+
+    Serialize numaa for I/O
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a4d0b759d0020d99eaddbb151c5905565">numaaRead</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a1049efff361bbf7894e22a72db88eb13">numaaReadStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a96d88afec2f733895049fa7f141b328d">numaaWrite</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a048486960ae7566cb963ee3b950d71ed">numaaWriteStream</a>()
+
+    <a class="code" href="struct_numa2d.html">Numa2d</a> creation, destruction
+        <a class="code" href="struct_numa2d.html">NUMA2D</a>      *<a class="code" href="leptprotos_8h.html#a4ef1fd66ea712ca9e5459c09c373633f">numa2dCreate</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#a2f807d3064489eaa480d0fcc2a77c677">numa2dDestroy</a>()
+
+    <a class="code" href="struct_numa2d.html">Numa2d</a> Accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a9b59f3c57925a716eb84a637c720037f">numa2dAddNumber</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a76a0954fdbc644a605d036eef8bb1890">numa2dGetCount</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a725c305ca40b52c6a2c0f45f466e40f4">numa2dGetNuma</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a571e5a8b4fade33d60d337e8694627bb">numa2dGetFValue</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a5cc9feaee1a948b59fcca9ecfa17b95e">numa2dGetIValue</a>()
+
+    <a class="code" href="struct_numa_hash.html">NumaHash</a> creation, destruction
+        <a class="code" href="struct_numa_hash.html">NUMAHASH</a>    *<a class="code" href="leptprotos_8h.html#ab0e53e46e5776fcd38c674f03d5585da">numaHashCreate</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#a453be41b417b90351a9759f1f88f2fef">numaHashDestroy</a>()
+
+    <a class="code" href="struct_numa_hash.html">NumaHash</a> Accessors
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#aa5bdf5d6be24d74a8b3ebf2464ba1007">numaHashGetNuma</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#a2123f20499744a1ceedbd062634be808">numaHashAdd</a>()
+
+  (1) The numa is a struct, not an array.  Always use the accessors
+      in this file, never the fields directly.
+
+  (2) The number array holds <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a> values.  It can also
+      be used to store <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> values.
+
+  (3) Storing and retrieving numbers:
+
+ to append a new number to the array, use <a class="code" href="leptprotos_8h.html#a50f6b1a964dc2bb2b200a228dc92ca2c">numaAddNumber</a>().  If
+       the number is an <span class="keywordtype">int</span>, it will will automatically be converted
+       to <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a> and stored.
+
+ to reset a value stored in the array, use <a class="code" href="leptprotos_8h.html#a4d89262196cce2e60f9c1584606fe80d">numaSetValue</a>().
+
+ to increment or decrement a value stored in the array,
+       use <a class="code" href="leptprotos_8h.html#a84391c834b5f690180e78005fac5ea8c">numaShiftValue</a>().
+
+ to obtain a value from the array, use either <a class="code" href="leptprotos_8h.html#af59481588f8640c51cb411f6cff18d3c">numaGetIValue</a>()
+       or <a class="code" href="leptprotos_8h.html#a9fc8c2ee1c5af6d982bda74e44a9fabe">numaGetFValue</a>(), depending on whether you are retrieving
+       an integer or a <span class="keywordtype">float</span>.  This avoids doing an explicit cast,
+       such as
+         (a) return a <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a> and cast it to an <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>
+         (b) cast the return directly to (<a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a> *) to
+             satisfy the function prototype, as in
+               numaGetFValue(na, index, (<a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a> *)&amp;ival);   [ugly!]
+
+  (4) <span class="keywordtype">int</span> &lt;--&gt; <span class="keywordtype">float</span> conversions:
+
+      Tradition dictates that type conversions go automatically from
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> --&gt; <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>, even though it is possible to lose
+      precision for large integers, whereas you must cast (<a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>)
+      to go from l_float32 --&gt; <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> because you&#39;re truncating
+      to the integer value.
+
+  (5) As with other arrays in leptonica, the numa has both an allocated
+      size and a count of the stored numbers.  When you add a number, it
+      goes on the end of the array, and causes a realloc if the array
+      is already filled.  However, in situations where you want to
+      add numbers randomly into an array, such as when you build a
+      histogram, you must set the count of stored numbers in advance.
+      This is done with <a class="code" href="leptprotos_8h.html#af4616c37b7ee50e2538be5c7f44d0384">numaSetCount</a>().  If you set a count larger
+      than the allocated array, it does a realloc to the size requested.
+
+  (6) In situations where the data in a numa correspond to a function
+      y(x), the values can be either at equal spacings in x or at
+      arbitrary spacings.  For the former, we can represent all x values
+      by two parameters: startx (corresponding to y[0]) and delx
+      for the change in x for adjacent values y[i] and y[i+1].
+      startx and delx are initialized to 0.0 and 1.0, rsp.
+      For arbitrary spacings, we use a second numa, and the two
+      numas are typically denoted nay and nax.
+
+  (7) The numa is also the basic struct used for histograms.  Every numa
+      has startx and delx fields, initialized to 0.0 and 1.0, that can
+      be used to represent the &quot;x&quot; value for the location of the
+      first bin and the bin width, respectively.  Accessors are the
+      numa*XParameters() functions.  All functions that make numa
+      histograms must set these fields properly, and many functions
+      that use numa histograms rely on the correctness of these values.
+</pre></div> 
 <p>Definition in file <a class="el" href="numabasic_8c_source.html">numabasic.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a3d0488dcacd4f7223249eb696a9d7216"></a><!-- doxytag: member="numabasic.c::numaCreate" ref="a3d0488dcacd4f7223249eb696a9d7216" args="(l_int32 n)" -->

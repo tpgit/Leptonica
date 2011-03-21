@@ -151,7 +151,33 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Function access to pixels in 32-bit arrays. </p>
+<div class="fragment"><pre class="fragment">   Access within an <a class="code" href="struct_numa.html#a61817e4e267f58a697b701a9728db6fe">array</a> of 32-bit words
 
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="arrayaccess_8c.html#a74835565d58b464361c05742b6edc8fd">l_getDataBit</a>()
+         void        <a class="code" href="arrayaccess_8c.html#a57145bffe40a9456689a73ded77c644a">l_setDataBit</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a01a655313a7adbb9afbbe10fe1eecbd0">l_clearDataBit</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a19cc639c2835c062d3cbb26808b877cf">l_setDataBitVal</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="arrayaccess_8c.html#adb48f70e078f0db74f6b3bccdefceb8e">l_getDataDibit</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a1d05e2b7f75f5249a5576cd69c9e524a">l_setDataDibit</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a2c0b86d0d7ab65b905eae80444628e57">l_clearDataDibit</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="arrayaccess_8c.html#ade87e9314b416d69f6f9db46a94a168d">l_getDataQbit</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#ae2605bb061039dc52eebb940946e1977">l_setDataQbit</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a30f8193aa1a96b13e44dee74e085768f">l_clearDataQbit</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="arrayaccess_8c.html#ab50a389606faaedd0958ed3cb21220f7">l_getDataByte</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a52a05edfee364e3c1a5a46af0c3a445f">l_setDataByte</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="arrayaccess_8c.html#a4bc49509cb772087869c77b74da310e9">l_getDataTwoBytes</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a2993f5282e6756b53d17e8faab8840f9">l_setDataTwoBytes</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="arrayaccess_8c.html#aaac4c6a17928cdcdd13b66ba7b797302">l_getDataFourBytes</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="arrayaccess_8c.html#a1d750fb8003a5ff7117333bcc0a7b3af">l_setDataFourBytes</a>()
+
+   Note that these all require 32-bit alignment, and hence an input
+   ptr to <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>.  However, this is not enforced by the compiler.
+   Instead, we allow the use of a <span class="keywordtype">void</span>* ptr, because the line ptrs
+   are an efficient way to get random access (see <a class="code" href="leptprotos_8h.html#a5b80b30d89ea4541aadde89502c802ec">pixGetLinePtrs</a>()).
+   It is then necessary to cast internally within each function
+   because ptr arithmetic requires knowing the <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> of the units
+   being referenced.
+</pre></div> 
 <p>Definition in file <a class="el" href="arrayaccess_8c_source.html">arrayaccess.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a74835565d58b464361c05742b6edc8fd"></a><!-- doxytag: member="arrayaccess.c::l_getDataBit" ref="a74835565d58b464361c05742b6edc8fd" args="(void *line, l_int32 n)" -->

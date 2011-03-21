@@ -178,7 +178,84 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Shift, scale, convolve, histograms, rank statistics, splitting distributions, extrema finding, threshold crossing, frequency analysis. </p>
+<div class="fragment"><pre class="fragment">    Morphological (min/max) operations
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a196edde46bc615c083b170792ee66b38">numaErode</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a34747deabc664a3dc391538b9a170b1d">numaDilate</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#ad599c6852b69545dce5dbd834f500a8b">numaOpen</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#ae1ffa009f221db7507ef93e0e1b953d8">numaClose</a>()
 
+    Other transforms
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a32d038fb97e5d558e059ff2d946a538a">numaTransform</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a177de49836339dd575d7fb38ba7d4afa">numaWindowedStats</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a8cfbb0854f5960550609c885a6209561">numaWindowedMean</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a05ead246ba0e2f101f9c0502c768f63b">numaWindowedMeanSquare</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac8d3ead82c11b32b1a645e869c633565">numaWindowedVariance</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a082c208a098a63b05e3bf70ece8f5b06">numaConvertToInt</a>()
+
+    Histogram generation and statistics
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a59de3094f2f8b141e3036f6b26507435">numaMakeHistogram</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#abb8732e0199e4c875622e84b23dafef7">numaMakeHistogramAuto</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#ac8b1ffa526ca6e9a164bdd46cedb1b8a">numaMakeHistogramClipped</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a6f578763aff74592b985b8937a78835d">numaRebinHistogram</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#abc5a0982ddf20f3c17e2f2b2e2f99945">numaNormalizeHistogram</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a73a63584463c24ba462d71b080d485b5">numaGetStatsUsingHistogram</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#adb201eb0e0bed655d53c5b70f53800cf">numaGetHistogramStats</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a7e1958c57565c2d5276b0a0ff4f5deb3">numaGetHistogramStatsOnInterval</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a381194a34f9ee7c3e7286117982f1a71">numaMakeRankFromHistogram</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a8c04a4783fcfee542ca3d7a49b1e50e9">numaHistogramGetRankFromVal</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a7d33b553ca7d221122e50ca582f0f2cb">numaHistogramGetValFromRank</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a1a685307c2cf0d12e1bd7ac28926bd76">numaDiscretizeRankAndIntensity</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac3a2bcd95a54189ece42ae0bea39386a">numaGetRankBinValues</a>()
+
+    Splitting a distribution
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#aaf2fcc746d17ba6d3ab9105000b263f2">numaSplitDistribution</a>()
+
+    Extrema finding
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a3a68260e335816a7575e7177ca8dd21b">numaFindPeaks</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#acee1dcda4142fb16becd8e78b83e554d">numaFindExtrema</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     *<a class="code" href="leptprotos_8h.html#a5f89bb80611100922eea23c2480e9f3a">numaCountReversals</a>()
+
+    Threshold crossings and frequency analysis
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ad862adab4cdc9360b41a4a1fedcf53dc">numaSelectCrossingThreshold</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#aa1c313389ebdb9a927c5acca54adca35">numaCrossingsByThreshold</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a06dc0bbe4e0bca75ac4176bf21c03815">numaCrossingsByPeaks</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a8230f07b482a51419b673782f4e7a9bd">numaEvalBestHaarParameters</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#aba0fdc4438aa7aa2ecef070de0d3951d">numaEvalHaarSum</a>()
+
+  Things to remember when using the <a class="code" href="struct_numa.html">Numa</a>:
+
+  (1) The numa is a struct, not an array.  Always use accessors
+      (see numabasic.c), never the fields directly.
+
+  (2) The number array holds l_float32 values.  It can also
+      be used to store <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> values.  See numabasic.c for
+      details on using the accessors.
+
+  (3) Occasionally, in the comments we denote the i-th element of a
+      numa by na[i].  This is conceptual only -- the numa is not an array!
+
+  Some general comments on histograms:
+
+  (1) Histograms are the generic statistical representation of
+      the data about some attribute.  Typically they&#39;re not
+      normalized -- they simply give the number of occurrences
+      within each range of values of the attribute.  This range
+      of values is referred to as a &#39;bucket&#39;.  For example,
+      the histogram could specify how many connected components
+      are found for each value of their width; in that case,
+      the bucket size is 1.
+
+  (2) In leptonica, all buckets have the same size.  Histograms
+      are therefore specified by a numa of occurrences, along
+      with two other numbers: the &#39;value&#39; associated with the
+      occupants of the first bucket and the size (i.e., &#39;width&#39;)
+      of each bucket.  These two numbers then allow us to calculate
+      the value associated with the occupants of each bucket.
+      These numbers are fields in the numa, initialized to
+      a startx value of 0.0 and a binsize of 1.0.  Accessors for
+      these fields are functions numa*XParameters().  All histograms
+      must have these two numbers properly set.
+</pre></div> 
 <p>Definition in file <a class="el" href="numafunc2_8c_source.html">numafunc2.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="afa7b10929c94a9a3177b3c9ddc65c8fc"></a><!-- doxytag: member="numafunc2.c::DEBUG_HISTO" ref="afa7b10929c94a9a3177b3c9ddc65c8fc" args="" -->

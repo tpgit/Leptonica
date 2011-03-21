@@ -143,7 +143,20 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level helpers for orthogonal rotation. </p>
+<div class="fragment"><pre class="fragment">    90-degree rotation (cw)
+          void      <a class="code" href="leptprotos_8h.html#ad388f8287213ac5a4dabfe57b4de91b3">rotate90Low</a>()
 
+    LR-flip
+          <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#ac8a4e9c80a6f9d2ddd880cbc54723494">flipLRLow</a>()
+
+    TB-flip
+          <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#ad7307157ace22cb02146af1a22440efa">flipTBLow</a>()
+
+    Byte reverse tables
+          <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>  *<a class="code" href="leptprotos_8h.html#a8d89613584bb8a1fc09da067b64225b3">makeReverseByteTab1</a>()
+          <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>  *<a class="code" href="leptprotos_8h.html#a3f214e7f2864a262b8cd47fbe5739f49">makeReverseByteTab2</a>()
+          <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>  *<a class="code" href="leptprotos_8h.html#ad798bdaf96ca982b41d837585da71fbd">makeReverseByteTab4</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="rotateorthlow_8c_source.html">rotateorthlow.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a3373a83c54eac009f4ad39f14f38d528"></a><!-- doxytag: member="rotateorthlow.c::rotate90Low" ref="a3373a83c54eac009f4ad39f14f38d528" args="(l_uint32 *datad, l_int32 wd, l_int32 hd, l_int32 d, l_int32 wpld, l_uint32 *datas, l_int32 wpls, l_int32 direction)" -->

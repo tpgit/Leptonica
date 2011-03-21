@@ -157,7 +157,30 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Boxa/Box transforms; Boxa/Boxaa sorting; <a class="el" href="struct_boxaa.html">Boxaa</a> utilities. </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_boxa.html">Boxa</a>/<a class="code" href="struct_box.html">Box</a> transform (shift, scale) and orthogonal rotation
+         <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="boxfunc2_8c.html#aa6da5e527d639aa1c6de3d96f4d1e5aa">boxaTransform</a>()
+         <a class="code" href="struct_box.html">BOX</a>             *<a class="code" href="boxfunc2_8c.html#a701b3c9d3f8b62ed4dc0550c20d05dce">boxTransform</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="boxfunc2_8c.html#a94bfdc5a70ecc90f2f88b0233b0d6c04">boxaTransformOrdered</a>()
+         <a class="code" href="struct_box.html">BOX</a>             *<a class="code" href="boxfunc2_8c.html#a6f210a679422bee3006b0dfb8932478c">boxTransformOrdered</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="boxfunc2_8c.html#a6a781d1361e21715836db5bb702c04a9">boxaRotateOrth</a>()
+         <a class="code" href="struct_box.html">BOX</a>             *<a class="code" href="boxfunc2_8c.html#a51c753f9c7a7daa74d8e66a3323f2f9c">boxRotateOrth</a>()
 
+    <a class="code" href="struct_boxa.html">Boxa</a> sort
+         <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="boxfunc2_8c.html#acdccb94898da554da1649680d08e8ca4">boxaSort</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="boxfunc2_8c.html#ad6e6f7fea992098c4bf236ae1c297f1b">boxaBinSort</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="boxfunc2_8c.html#ad2638836613011d52afb4583474e2dfd">boxaSortByIndex</a>()
+         <a class="code" href="struct_boxaa.html">BOXAA</a>           *<a class="code" href="boxfunc2_8c.html#aed7e190de55fe7933dba210a15206aa6">boxaSort2d</a>()
+         <a class="code" href="struct_boxaa.html">BOXAA</a>           *<a class="code" href="boxfunc2_8c.html#a1d17be24681792d7fb74fc007ef6f2b4">boxaSort2dByIndex</a>()
+
+    <a class="code" href="struct_boxa.html">Boxa</a> statistics
+         <a class="code" href="struct_box.html">BOX</a>             *<a class="code" href="boxfunc2_8c.html#a44355dcf7186e0f999f5c96bd794d22c">boxaGetRankSize</a>()
+         <a class="code" href="struct_box.html">BOX</a>             *<a class="code" href="boxfunc2_8c.html#af472f1547125ae5082f905c1ee52e86c">boxaGetMedian</a>()
+
+    Other boxaa functions
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="boxfunc2_8c.html#aaf36748f534e2ff4dbe056175643c530">boxaaGetExtent</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="boxfunc2_8c.html#aaaa668f4cada943084c89153ba7a4ee4">boxaaFlattenToBoxa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="boxfunc2_8c.html#a443def4efe9dd7ac33999a2eca85a2fa">boxaaAlignBox</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="boxfunc2_8c_source.html">boxfunc2.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aa6da5e527d639aa1c6de3d96f4d1e5aa"></a><!-- doxytag: member="boxfunc2.c::boxaTransform" ref="aa6da5e527d639aa1c6de3d96f4d1e5aa" args="(BOXA *boxas, l_int32 shiftx, l_int32 shifty, l_float32 scalex, l_float32 scaley)" -->

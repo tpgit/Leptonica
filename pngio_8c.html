@@ -163,7 +163,84 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write png format from/to file and memory. </p>
+<div class="fragment"><pre class="fragment">  Read png from file
+        <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a95e4d40810c5dbd1ccdb2445a4494f89">pixReadStreamPng</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ada65317753c4d9e8fd851102eb67120d">readHeaderPng</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#af7c9e06738d83f4bd54837612c785bee">freadHeaderPng</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a82e6470fe2d3f4b06e0b5903b8d7a94e">sreadHeaderPng</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#af55548748e5c7e4d96ed09c471a8443c">fgetPngResolution</a>()
 
+  Write png to file
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aa0ebd7d73642a20369b839b072ad17c8">pixWritePng</a>()  [ special top level ]
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#afad4964edb0eeae162ff4a04a887b10e">pixWriteStreamPng</a>()
+        
+  Read and write of png to/from RGBA pix
+        <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#afa4b43b49cf54d8681f578a500c9696f">pixReadRGBAPng</a>();
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a78496d6f623d4a07f9152b5f46d08d49">pixWriteRGBAPng</a>();
+
+  Setting flags for special modes
+        <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#ab9b3b3c3e5be5e916368f51f7e9b22bc">l_pngSetStrip16To8</a>()
+        <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#a7d1934123f4c70e6f69995b28e3ccc82">l_pngSetStripAlpha</a>()
+        <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#a17f641f6db245d5483220488cb39d7a9">l_pngSetWriteAlpha</a>()
+        <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#aba73d9a84ccc5e953fdd15dcda74de34">l_pngSetZlibCompression</a>()
+
+  Read/write to memory   [not on windows]
+        <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a0a42f8de7a5519f7daa4721f2b354619">pixReadMemPng</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a53fa41a499c910dd7e5058b4bf7aad20">pixWriteMemPng</a>()
+
+  Documentation: libpng.txt and example.c
+
+  On input (decompression from file), palette color images
+  are read into an 8 bpp <a class="code" href="struct_pix.html">Pix</a> with a colormap, and 24 bpp
+  3 component color images are read into a 32 bpp <a class="code" href="struct_pix.html">Pix</a> with
+  rgb samples.  On output (compression to file), palette color
+  images are written as 8 bpp with the colormap, and 32 bpp
+  full color images are written compressed as a 24 bpp,
+  3 component color image.
+
+  In the following, we use these abbreviations:
+     bps == bit/sample
+     spp == samples/pixel
+     bpp == bits/pixel of image in <a class="code" href="struct_pix.html">Pix</a> (memory)
+  where each component is referred to as a &quot;sample&quot;.
+
+  There are three special flags for determining the number or
+  <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> of samples retained or written:
+  (1) var_PNG_STRIP_16_to_8: default is <a class="code" href="environ_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>.  This strips each
+      16 bit sample down to 8 bps:
+       - For 16 bps rgb (16 bps, 3 spp) --&gt; 32 bpp rgb <a class="code" href="struct_pix.html">Pix</a>
+       - For 16 bps gray (16 bps, 1 spp) --&gt; 8 bpp grayscale <a class="code" href="struct_pix.html">Pix</a>
+  (2) <a class="code" href="pngio_8c.html#a93777f5d842b77f9442a23c2d986be5f">var_PNG_STRIP_ALPHA</a>: default is <a class="code" href="environ_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>.  This does not copy
+      the alpha channel to the pix:
+       - For 8 bps rgba (8 bps, 4 spp) --&gt; 32 bpp rgb <a class="code" href="struct_pix.html">Pix</a>
+  (3) <a class="code" href="pngio_8c.html#a003cedee0c869928a2f09bcda065eaf2">var_PNG_WRITE_ALPHA</a>: default is <a class="code" href="environ_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>.  The default generates
+      an RGB png file with 3 spp.  If set to <a class="code" href="environ_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>, this generates
+      an RGBA png file with 4 spp, and writes the alpha channel.
+  These are set with accessors.
+
+  Two convenience functions are included for reading the alpha
+  channel (if it exists) into the pix, and for writing out the
+  alpha sample of a pix to a png file:
+      pixReadRGBAPng()
+      pixWriteRGBAPng()
+  These use two of the special flags, setting to the non-default
+  value before use and resetting to default afterwards.
+  In leptonica, we make almost no explicit use of the alpha channel.
+      
+  Another special flag, <a class="code" href="pngio_8c.html#a70dbcf0fdadd2caa3588f47c4f4897d4">var_ZLIB_COMPRESSION</a>, is used to determine
+  the compression level.  Default is for standard png compression.
+  The zlib compression value can be set [0 ... 9], with
+       0     no compression (huge files)
+       1     fastest compression
+       -1    default compression  (equivalent to 6 in latest <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a>)
+       9     best compression
+  If not set, we use the default compression in zlib.
+  Note that if you are using the defined constants in zlib instead
+  of the compression integers given above, you must include zlib.<a class="code" href="struct_pix.html#aa9034805b31bcd55e4298a368ee21996">h</a>.
+
+  Note: All special flags use global constants, so if used with
+        multi-threaded applications, results can be non-deterministic.
+</pre></div> 
 <p>Definition in file <a class="el" href="pngio_8c_source.html">pngio.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ad72dbcf6d0153db1b8d8a58001feed83"></a><!-- doxytag: member="pngio.c::DEBUG" ref="ad72dbcf6d0153db1b8d8a58001feed83" args="" -->

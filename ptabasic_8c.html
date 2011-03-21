@@ -169,7 +169,52 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements 1d and 2d arrays of points (<a class="el" href="struct_pta.html">Pta</a>, <a class="el" href="struct_ptaa.html">Ptaa</a>) </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_pta.html">Pta</a> creation, destruction, copy, clone, empty
+         <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="leptprotos_8h.html#a6f854462ee35cb8c974752cacc4170ed">ptaCreate</a>()
+         <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="leptprotos_8h.html#a29debc2aa8a79cf4f096330c2e9c0df7">ptaCreateFromNuma</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#a42d592277e3ea9d8f0c308e9db38d8cb">ptaDestroy</a>()
+         <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="leptprotos_8h.html#ac778bf6dc2a489e11c78a4e68421f642">ptaCopy</a>()
+         <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="leptprotos_8h.html#a237cb666a7203e9363db5545dee47200">ptaClone</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#aaa7f79b5993226bbd68d69c9c0ac3198">ptaEmpty</a>()
 
+    <a class="code" href="struct_pta.html">Pta</a> array extension
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#af57296aef44526f203752fa079d4dbb5">ptaAddPt</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#abf0d1f3e0dc1dccc507a5fad33bbf56b">ptaExtendArrays</a>()
+
+    <a class="code" href="struct_pta.html">Pta</a> Accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#afd9f985f960934e0a8a2b508684b6585">ptaGetRefcount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ab1c28790211c5c73e7a5984bcaf9d234">ptaChangeRefcount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a9d82186f3918b3a1ea80c90e6a1d7439">ptaGetCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a8c9c39712d916f24af8f9c60523ccc44">ptaGetPt</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ae6f6802a5d75f596d84ffa8451443aa0">ptaGetIPt</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a70b4eaed066ff5db971ff263e6c16df8">ptaSetPt</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a5b8f727eb78320b851bfe370cf1ab980">ptaGetArrays</a>()
+
+    <a class="code" href="struct_pta.html">Pta</a> serialized for I/O
+         <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="leptprotos_8h.html#abf8b607c65db2667135c6bdf9ee529ea">ptaRead</a>()
+         <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="leptprotos_8h.html#a24b6b9894f923f0f93d62370e63a58b1">ptaReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a2a28595b925473be1484968bec0d5942">ptaWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a9cc3bd272ded7419031e521cef40f322">ptaWriteStream</a>()
+
+    <a class="code" href="struct_ptaa.html">Ptaa</a> creation, destruction
+         <a class="code" href="struct_ptaa.html">PTAA</a>     *<a class="code" href="leptprotos_8h.html#afb43fe09f30f9d937e1e350b98051161">ptaaCreate</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#ab1af4e69a9f5c574349334cc3967f4f6">ptaaDestroy</a>()
+
+    <a class="code" href="struct_ptaa.html">Ptaa</a> array extension
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a249fb8304c181d7c07dc5b6d5b47c5c8">ptaaAddPta</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a2f6c29eae5b2a6524e19cb252c69ca19">ptaaExtendArray</a>()
+
+    <a class="code" href="struct_ptaa.html">Ptaa</a> Accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a98d02c3941142fa220789146b73d5c41">ptaaGetCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a75d5fcc5bf9a597f7b06cb5f2c046f44">ptaaGetPta</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a8015908757907ee28d783bc580972b8c">ptaaGetPt</a>()
+
+    <a class="code" href="struct_ptaa.html">Ptaa</a> serialized for I/O
+         <a class="code" href="struct_ptaa.html">PTAA</a>     *<a class="code" href="leptprotos_8h.html#af71c83060740d6f438ab6a7fd1914c24">ptaaRead</a>()
+         <a class="code" href="struct_ptaa.html">PTAA</a>     *<a class="code" href="leptprotos_8h.html#aace047a68d532681fca51896e7dc66a4">ptaaReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a40b22fc39074854b9b52469b839ac8f1">ptaaWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#adde2056039e02d6c0daa9b9fd19a7312">ptaaWriteStream</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="ptabasic_8c_source.html">ptabasic.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ad7f029bd6e2c7838fd81beb6e0c42fa7"></a><!-- doxytag: member="ptabasic.c::ptaCreate" ref="ad7f029bd6e2c7838fd81beb6e0c42fa7" args="(l_int32 n)" -->

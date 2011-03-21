@@ -162,7 +162,207 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Dewarp scanned book pages by generating a vertical disparity array based on textlines. </p>
+<div class="fragment"><pre class="fragment">    Create/destroy
+        <a class="code" href="struct_l___dewarp.html">L_DEWARP</a>      *<a class="code" href="dewarp_8c.html#ab3732ef1dea996da9cc7d61ec22f7679">dewarpCreate</a>()
+        void           <a class="code" href="dewarp_8c.html#a6f045fbf4b3cd7abd1bf591a444ad578">dewarpDestroy</a>()
 
+    Build warp model
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#a0026d507fe7f3668adb4c1a40935b4ef">dewarpBuildModel</a>()
+        <a class="code" href="struct_ptaa.html">PTAA</a>          *<a class="code" href="dewarp_8c.html#a40f7425d986ee386118256c5552af2e1">pixGetTextlineCenters</a>()
+        <a class="code" href="struct_pta.html">PTA</a>           *<a class="code" href="dewarp_8c.html#a62551436da5029afe3ca1ee2ea229561">pixGetMeanVerticals</a>()
+        <a class="code" href="struct_ptaa.html">PTAA</a>          *<a class="code" href="dewarp_8c.html#a11986e2d6aa276ce7d6313ffb32c0e58">ptaaRemoveShortLines</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="dewarp_8c.html#a97ab39152799f67aff65d5e7dbf2e41b">fpixBuildHorizontalDisparity</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="dewarp_8c.html#a8ce00f74fc4d9ede453fa7d5b3a6af84">fpixSampledDisparity</a>()
+
+    Apply warping disparity array
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#a7ab5f4edbe5de252b075bb1df2c2770c">dewarpApplyDisparity</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#a2b40c78dd875eec3980384cc6e5673e7">pixApplyVerticalDisparity</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#a5edd9b5fe8990c008d062404cad63c9f">pixApplyHorizontalDisparity</a>()
+
+    Stripping out data and populating full res disparity
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#ab1069c27323d07e4dddab5f3de59fa0e">dewarpMinimize</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#ab7e72e62f5ca0fbbbc4416cb0066cc26">dewarpPopulateFullRes</a>()
+
+    Serialized I/O
+        <a class="code" href="struct_l___dewarp.html">L_DEWARP</a>      *<a class="code" href="dewarp_8c.html#afd745d76986778386eeaef73715ac584">dewarpRead</a>()
+        <a class="code" href="struct_l___dewarp.html">L_DEWARP</a>      *<a class="code" href="dewarp_8c.html#a7c42c5bade33d41e4ce249a3b2dc914a">dewarpReadStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#ac6089601d0fd423363c5f53cb610df61">dewarpWrite</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="dewarp_8c.html#aa8e412e6989ef5bb3893feba8e959fd2">dewarpWriteStream</a>()
+
+Basic functioning:
+   <a class="code" href="struct_pix.html">Pix</a> *pixb = &quot;binarize&quot;(pixs);
+   <a class="code" href="struct_l___dewarp.html">L_Dewarp</a> *dew = <a class="code" href="dewarp_8c.html#ab3732ef1dea996da9cc7d61ec22f7679">dewarpCreate</a>(pixb, ...);
+   <a class="code" href="dewarp_8c.html#a0026d507fe7f3668adb4c1a40935b4ef">dewarpBuildModel</a>(dew, 0);
+   <a class="code" href="dewarp_8c.html#a7ab5f4edbe5de252b075bb1df2c2770c">dewarpApplyDisparity</a>(dew, pixs, 0);
+   <span class="comment">// result is in dew-&gt;pixd;</span>
+
+Minimizing the data in a model by stripping out images,
+numas, and full resolution disparity arrays:
+   <a class="code" href="dewarp_8c.html#ab1069c27323d07e4dddab5f3de59fa0e">dewarpMinimize</a>(dew);
+
+Applying a model (stripped or not) to another image:
+   <a class="code" href="dewarp_8c.html#a7ab5f4edbe5de252b075bb1df2c2770c">dewarpApplyDisparity</a>(dew, newpix, 0);
+
+Description of the problem and the approach
+-------------------------------------------
+
+When a book page is scanned, there are several possible causes
+for the text lines to appear to be curved:
+ (1) A barrel (fish-eye) effect because the camera is at
+     a finite distance from the page.  Take the normal from
+     the camera to the page (the &#39;optic axis&#39;).  Lines on
+     the page &quot;below&quot; this point will appear to curve upward
+     (negative curvature); lines &quot;above&quot; this will curve downward.
+ (2) Radial distortion from the camera lens.  Probably not
+     a big factor.
+ (3) Local curvature of the page in to (or out of) the image
+     plane (which is perpendicular to the optic axis).
+     This has no effect if the page is flat.
+
+The goal is to compute the &quot;disparity&quot; field, D(x,y), which
+is actually a vector composed of the horizontal and vertical
+disparity fields H(x,y) and V(x,y).  Each of these is a local
+function that gives the amount each point in the image is
+required to move in order to rectify the horizontal and vertical
+lines.
+
+Effects (1) and (2) can be compensated for by calibrating
+the scene, using a flat page with horizontal and vertical lines.
+Then H(x,y) and V(x,y) can be found as two (non-parametric) arrays
+of values.  Suppose this has been done.  Then the remaining
+distortion is due to (3).
+
+Now, if we knew everywhere the angle between the perpendicular
+to the paper and the optic axis (call it &#39;alpha&#39;), the
+actual shape of the page could in principle be found by integration,
+and the remaining disparities, H(x,y) and V(x,y), could be
+found.  But we don&#39;t know alpha.  If there are text lines on
+the page, we can assume they should be horizontal, so we can
+compute the vertical disparity, which is the local translation
+required to make the text lines parallel to the rasters.
+
+The basic question relating to (3) is this:
+
+   Is it possible, using the shape of the text lines alone,
+   to compute both the vertical and horizontal disparity fields?
+
+The problem is to find H(x,y).  In an image with horizontal
+text lines, the only vertical &quot;lines&quot; that we can infer are
+perhaps the left and right margins.
+
+Start with a simple case.  Suppose the binding is along a
+vertical line, and the page curvature is independent of y.
+Then if the page curves in toward the binding, there will be
+a fractional foreshortening of that region in the x-direction, going
+as the sine of the angle between the optic axis and local the
+normal to the page.  For this situation, the horizontal
+disparity is independent of y: H(x,y) == H(x).
+
+Now consider V(x,0) and V(x,h), the vertical disparity along
+the top and bottom of the image.  With a little thought you
+can convince yourself that the local foreshortening,
+as a function of x, is proportional to the difference
+between the slope of V(x,0) and V(x,h).  The horizontal
+disparity can then be computed by integrating the local foreshortening
+over x.  Integration of the slope of V(x,0) and V(x,h) gives
+the vertical disparity itself.  We have to normalize to h, the
+height of the page.  So the very simple result is that
+
+    H(x) ~ (V(x,0) - V(x,h)) / h         [1]
+
+which is easily computed.  There is a proportionality constant
+that depends on the ratio of h to the distance to the camera.
+Can we actually believe this for the case where the bending
+is independent of y?  I believe the answer is yes,
+as <span class="keywordtype">long</span> as you first remove the apparent distortion due
+to the camera being at a finite distance.
+
+If you know the intersection of the optical axis with the page
+and the distance to the camera, and if the page is perpendicular
+to the optic axis, you can compute the horizontal and vertical
+disparities due to (1) and (2) and remove them.  The resulting
+distortion should be entirely due to bending (3), for which
+the relation
+
+    Hx(x) dx = C * ((Vx(x,0) - Vx(x, h))/h) dx         [2]
+
+holds for each point in x (Hx and Vx are partial derivatives w/rt x).
+Integrating over x, and using H(0) = 0, we get the result [1].
+
+I believe this result holds differentially for each value of y, so
+that in the case where the bending is not independent of y,
+the expression (V(x,0) - V(x,h)) / h goes over to Vy(x,y).  Then
+
+   H(x,y) = Integral(0,x) (Vyx(x,y) dx)         [3]
+
+where Vyx() is the partial derivative of V w/rt both x and y.
+
+There should be a simple mathematical relation between
+the horizontal and vertical disparities for the situation
+where the paper bends without stretching or kinking.
+I was hoping that we would get a relation between H and V such
+as Hx(x,y) ~ Vy(x,y), which would imply that H and V are real
+and imaginary parts of a complex potential, each of which
+satisfy the laplace equation.  But then the gradients of the
+two potentials would be normal, and that does not appear to be the case.
+Thus, the questions of proving the relations above (for small bending),
+or finding a simpler relation between H and V than those equations,
+remain open.  So far, we have only used [1] for the horizontal
+disparity H(x).
+
+In the <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> of the code that follows, we use text lines
+to find V(x,y), and then, optionally, approximate H(x)
+from the values V(x,0) and V(x,h), as described above.
+The details are all in the code, but here is the basic outline.
+We assume that in the plane perpendicular to the optic axis
+(alpha = 0), horizontal and vertical lines have been rectified.
+(If not, they can be rectified using the methods described below,
+applied separately as steps (1,2,3) in the horizontal and
+vertical directions.)
+
+(1) Find lines going approximately through the center of the
+    text in each text line.  Accept only lines that are
+    close in length to the longest line.
+(2) Generate a regular and highly subsampled vertical
+    disparity field V(x,y).
+(3) Interpolate this to generate a full resolution vertical
+    disparity field.
+(4) Optionally generate a full resolution horizontal disparity
+    field, H(x).
+(5) Apply the vertical dewarping, followed optionally by the
+    horizontal dewarping.
+
+Step (1) is clearly described by the code in <a class="code" href="dewarp_8c.html#a40f7425d986ee386118256c5552af2e1">pixGetTextlineCenters</a>().
+
+Steps (2) and (3) follow directly from the data in step (1),
+and constitute the bulk of the work done in <a class="code" href="dewarp_8c.html#a0026d507fe7f3668adb4c1a40935b4ef">dewarpBuildModel</a>().
+Virtually all the noise in the data is smoothed out by doing
+least-square quadratic fits, first horizontally to the data
+points representing the text line centers, and then vertically.
+The trick is to sample these lines on a regular grid.
+First each horizontal line is sampled at equally spaced
+intervals horizontally.  We thus get a set of points,
+one in each line, that are vertically aligned, and
+the data we represent is the vertical distance of each point
+from the min or max value on the curve, depending on the
+sign of the curvature component.  Each of these vertically
+aligned sets of points constitutes a sampled vertical disparity,
+and we do a LS quartic fit to each of them, followed by
+vertical sampling at regular intervals.  We now have a subsampled
+grid of points, all equally spaced, giving at each point the local
+vertical disparity.  Finally, the full resolution vertical disparity
+is formed by interpolation.  All the least square fits do a
+great job of smoothing everything out, as can be observed by
+the contour maps that are generated for the vertical disparity field.
+
+Step (4) is trivially done with the approximation described above.
+Once V(x,y) and H(x,y) are derived, step (5) is done trivially.
+For vertical dewarp, source pixels at the top and bottom image
+boundaries are used whenever a request is made for a pixel that
+is outside the image.  For horizontal dewarp, the dest image width
+is increased to hold all transformed source pixels (remember,
+in that step, the image is widened).
+</pre></div> 
 <p>Definition in file <a class="el" href="dewarp_8c_source.html">dewarp.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ad18be613e6673673e5303df308d17e66"></a><!-- doxytag: member="dewarp.c::DEBUG_TEXTLINE_CENTERS" ref="ad18be613e6673673e5303df308d17e66" args="" -->

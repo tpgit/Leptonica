@@ -150,7 +150,186 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements doubly-linked list of generic pointers. </p>
+<div class="fragment"><pre class="fragment">    Inserting and removing elements
 
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#a691409c6a5cd0e38df9c2eaab6357642">listDestroy</a>()
+         <a class="code" href="struct_double_linked_list.html">DLLIST</a>   *<a class="code" href="leptprotos_8h.html#a45fc02e6330e1efa1ec2319b02737061">listAddToHead</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#adf65d4e334c0ecdf29a5d3b911104567">listAddToTail</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#aaf7bd7bcf5ff0636bb4c728610c6d473">listInsertBefore</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a7fd5203ce258d0d89a9879bb9a22e315">listInsertAfter</a>()
+         <span class="keywordtype">void</span>     *<a class="code" href="leptprotos_8h.html#a7e44104c792826f9a9329de6ec6176dc">listRemoveElement</a>()
+         <span class="keywordtype">void</span>     *<a class="code" href="leptprotos_8h.html#a31d45d8809d490a82b3bdfa1923fd0e2">listRemoveFromHead</a>()
+         <span class="keywordtype">void</span>     *<a class="code" href="leptprotos_8h.html#a8591aa41473d696f6b89e303a430443f">listRemoveFromTail</a>()
+
+    Other list operations
+
+         <a class="code" href="struct_double_linked_list.html">DLLIST</a>   *<a class="code" href="leptprotos_8h.html#a0d2fbcf6dda1cb169e586a93d36361d9">listFindElement</a>()
+         <a class="code" href="struct_double_linked_list.html">DLLIST</a>   *<a class="code" href="leptprotos_8h.html#a22e06c8eb31e7d7fd657e59af1704aec">listFindTail</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#af12bd3e5061481c29a64bc23a2c92756">listGetCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a7ea065d7a5e33e87424ada851bc52bcb">listReverse</a>()
+         <a class="code" href="struct_double_linked_list.html">DLLIST</a>   *<a class="code" href="leptprotos_8h.html#aea64926562fbd3cc921a178ff395ad7d">listJoin</a>()
+
+    Lists are much harder to handle than arrays.  There is
+    more overhead for the programmer, both cognitive and
+    codewise, and more likelihood that an error can be made.
+    For that reason, lists should only be used when it is
+    inefficient to use arrays, such as when elements are
+    routinely inserted or deleted from inside arrays whose
+    average <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> is greater than about 10.
+
+    A list of data structures can be implemented in a number
+    of ways.  The two most popular are:
+
+       (1) The list can be composed of a linked list of
+           pointer cells (&quot;cons cells&quot;), where the data structures
+           are hung off the cells.  This is more difficult
+           to use because you have to keep track of both
+           your hanging data and the cell structures.
+           It requires 3 pointers for every data structure
+           that is put in a list.  There is no problem
+           cloning (using reference counts) for structures that
+           are put in such a list.  We implement lists by this
+           method here.
+
+       (2) The list pointers can be inserted directly into
+           the data structures.  This is easy to implement
+           and easier to use, but it adds 2 ptrs of overhead
+           to every data structure in which the ptrs are embedded.
+           It also requires special care not to put the ptrs
+           in any data that is cloned with a reference count;
+           else your lists will break.
+
+    Writing C code that uses list pointers explicitly to make
+    and alter lists is difficult and prone to error.
+    Consequently, a generic list utility that handles lists
+    of arbitrary objects and doesn&#39;t force the programmer to
+    touch the &quot;next&quot; and &quot;prev&quot; pointers, is quite useful.
+    Such functions are provided here.   However, the usual
+    situation requires traversing a list and applying some
+    function to one or more of the list elements.  Macros
+    for traversing the list are, in general, necessary, to
+    achieve the goal of invisibly handling all &quot;next&quot; and &quot;prev&quot;
+    pointers in generic lists.  We provide macros for
+    traversing a list in both forward and reverse directions.
+
+    Because of the typing in C, implementation of a general
+    list utility requires casting.  If macros are used, the
+    casting can be done implicitly; otherwise, using functions,
+    some of the casts must be explicit.  Fortunately, this
+    can be implemented with <span class="keywordtype">void</span>* so the programmer using
+    the library will not have to make any casts!  (Unless you
+    compile with g++, in which case the rules on implicit
+    conversion are more strict.)
+
+    For example, to add an arbitrary data structure foo to the
+    tail of a list, use
+           <a class="code" href="leptprotos_8h.html#adf65d4e334c0ecdf29a5d3b911104567">listAddToTail</a>(&amp;head, &amp;tail, pfoo);
+    where head and tail are list cell ptrs and pfoo is
+    a pointer to the foo <span class="keywordtype">object</span>.
+    And to remove an arbitrary data structure foo from a
+    list, when you know the list cell element it is hanging from,
+    use
+           pfoo = <a class="code" href="leptprotos_8h.html#a7e44104c792826f9a9329de6ec6176dc">listRemoveElement</a>(&amp;head, elem)
+    where head and elem are list cell ptrs and pfoo is a pointer
+    to the foo <span class="keywordtype">object</span>.  No casts are required for foo in
+    either direction in ANSI C.  (However, casts are
+    required for ANSI C++).
+    
+    We use lists that are composed of doubly-linked
+    cells with data structures hanging off the cells.
+    We use doubly-linked cells to simplify insertion
+    and deletion, and to allow operations to proceed in either
+    direction along the list.  With doubly-linked lists,
+    it is tempting to make them circular, by setting head-&gt;prev
+    to the tail of the list and tail-&gt;next to the head.
+    The circular list costs nothing extra in storage, and
+    allows operations to proceed from either end of the list
+    with equal speed.  However, the circular link adds 
+    cognitive overhead for the application programmer in 
+    general, and it greatly complicates list traversal when
+    arbitrary list elements can be added or removed as you
+    move through.  It can be done, but in the spirit of
+    simplicity, we avoid the temptation.  The price to be paid
+    is the extra cost to find the tail of a list -- a full
+    traversal -- before the tail can be used.  This is a
+    cheap price to pay to avoid major headaches and buggy code.
+
+    When you are only applying some function to each element
+    in a list, you can go either forwards or backwards.
+    To run through a list forwards, use:
+
+        for (elem = head; elem; elem = nextelem) {
+            nextelem = elem-&gt;next;   (in <span class="keywordflow">case</span> we destroy elem)
+            &lt;<span class="keywordflow">do</span> something with elem-&gt;data&gt;
+        }
+
+    To run through a list backwards, find the tail and use:
+
+        <span class="keywordflow">for</span> (elem = tail; elem; elem = prevelem) {
+<span class="preprocessor"> #              prevelem = elem-&gt;prev;  (in case we destroy elem)</span>
+<span class="preprocessor"></span>            &lt;<span class="keywordflow">do</span> something with elem-&gt;data&gt;
+        }
+
+    Even though these patterns are very simple, they are so common
+    that we<span class="stringliteral">&#39;ve provided macros for them in list.h.  Using the</span>
+<span class="stringliteral">    macros, this becomes:</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">        L_BEGIN_LIST_FORWARD(head, elem)</span>
+<span class="stringliteral">            &lt;do something with elem-&gt;data&gt;</span>
+<span class="stringliteral">        L_END_LIST</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">        L_BEGIN_LIST_REVERSE(tail, elem)</span>
+<span class="stringliteral">            &lt;do something with elem-&gt;data&gt;</span>
+<span class="stringliteral">        L_END_LIST</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Note again that with macros, the application programmer does</span>
+<span class="stringliteral">    not need to refer explicitly to next and prev fields.  Also,</span>
+<span class="stringliteral">    in the reverse case, note that we do not explicitly</span>
+<span class="stringliteral">    show the head of the list.  However, the head of the list</span>
+<span class="stringliteral">    is always in scope, and functions can be called within the</span>
+<span class="stringliteral">    iterator that change the head.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Some special cases are simpler.  For example, when</span>
+<span class="stringliteral">    removing all items from the head of the list, you can use</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">        while (head) {</span>
+<span class="stringliteral">            obj = listRemoveFromHead(&amp;head);</span>
+<span class="stringliteral">            &lt;do something with obj&gt;</span>
+<span class="stringliteral">        }</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Removing successive elements from the tail is equally simple:</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">        while (tail) {</span>
+<span class="stringliteral">            obj = listRemoveFromTail(&amp;head, &amp;tail);</span>
+<span class="stringliteral">            &lt;do something with obj&gt;</span>
+<span class="stringliteral">        }</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    When removing an arbitrary element from a list, use</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">            obj = listRemoveElement(&amp;head, elem);</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    All the listRemove*() functions hand you the object,</span>
+<span class="stringliteral">    destroy the list cell to which it was attached, and</span>
+<span class="stringliteral">    reset the list pointers if necessary.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    Several other list operations, that do not involve</span>
+<span class="stringliteral">    inserting or removing objects, are also provided.</span>
+<span class="stringliteral">    The function listFindElement() locates a list pointer</span>
+<span class="stringliteral">    by matching the object hanging on it to a given</span>
+<span class="stringliteral">    object.  The function listFindTail() gets a handle</span>
+<span class="stringliteral">    to the tail list ptr, allowing backwards traversals of</span>
+<span class="stringliteral">    the list.  listGetCount() gives the number of elements</span>
+<span class="stringliteral">    in a list.  Functions that reverse a list and concatenate</span>
+<span class="stringliteral">    two lists are also provided.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">    These functions can be modified for efficiency in the</span>
+<span class="stringliteral">    situation where there is a large amount of creation and</span>
+<span class="stringliteral">    destruction of list cells.  If millions of cells are</span>
+<span class="stringliteral">    made and destroyed, but a relatively small number are</span>
+<span class="stringliteral">    around at any time, the list cells can be stored for</span>
+<span class="stringliteral">    later re-use in a stack (see the generic stack functions</span>
+<span class="stringliteral">    in stack.c).</span>
+</pre></div> 
 <p>Definition in file <a class="el" href="list_8c_source.html">list.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="af92bb8d3511b0fecc52c18fe209fd367"></a><!-- doxytag: member="list.c::listDestroy" ref="af92bb8d3511b0fecc52c18fe209fd367" args="(DLLIST **phead)" -->

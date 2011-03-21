@@ -141,7 +141,13 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level <a class="el" href="struct_sel.html">Sel</a> implementation for <a class="el" href="fhmtgen_81_8c.html" title="DWA morphology with auto-generated hit-miss sels (high-level)">fhmtgen.1.c</a>. </p>
-
+<div class="fragment"><pre class="fragment">N.B.  In all the low-level routines, the part of the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+      that is accessed has been clipped by 32 pixels on
+      all four sides.  This is done in the higher level
+      code by redefining w and h smaller and by moving the
+      start-of-<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> pointers up to the beginning of <span class="keyword">this</span>
+      interior rectangle.
+</pre></div> 
 <p>Definition in file <a class="el" href="fhmtgenlow_81_8c_source.html">fhmtgenlow.1.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a1e8757dafbcd04fa26d026ea8c9c582a"></a><!-- doxytag: member="fhmtgenlow.1.c::fhmt_1_0" ref="a1e8757dafbcd04fa26d026ea8c9c582a" args="(l_uint32 *, l_int32, l_int32, l_int32, l_uint32 *, l_int32)" -->

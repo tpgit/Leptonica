@@ -192,7 +192,53 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write tiff format from/to file and memory. </p>
+<div class="fragment"><pre class="fragment">   Reading tiff:
+           <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a54bf7fe353ae12fc6dbc0981f5fb54cf">pixReadTiff</a>()    [ special top level ]
+           <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#aff62defa64ac3c307957d20b6c3781ac">pixReadStreamTiff</a>()
+    static <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="tiffio_8c.html#a6ad483c26cc246c49f75b6aeeecf1595">pixReadFromTiffStream</a>()
 
+   Writing tiff:
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ac2aca639c4b5c84de35ccc617383f233">pixWriteTiff</a>()   [ special top level ]
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a183b0f7c4e6e4a132aa5afa517d0886c">pixWriteTiffCustom</a>()   [ special top level ]
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#af46114439f8fef518adb7c6805306be7">pixWriteStreamTiff</a>()
+    static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="tiffio_8c.html#a9b9d9e6e15eb53e3821c39dd6c8e000f">pixWriteToTiffStream</a>()
+    static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="tiffio_8c.html#a43454c70f6a544151c20f3d2e3d55f31">writeCustomTiffTags</a>()
+
+   Reading and writing multipage tiff
+           <a class="code" href="struct_pixa.html">PIXA</a>       <a class="code" href="leptprotos_8h.html#a4a52e686cf67f0e5bfda661fc3a3fb7b">pixaReadMultipageTiff</a>()
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a26fcdaaefd3cc545b21ff6d889e66c46">writeMultipageTiff</a>()  [ special top level ]
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a05e17358ef5ee2c90ff667690e625d8e">writeMultipageTiffSA</a>()
+
+   Information about tiff file
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a88afa451150d49159e8a2fec93af1064">fprintTiffInfo</a>()
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aeb0d7c43cca93ad81cc5191b4bb6b741">tiffGetCount</a>()
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a7760f4ec592786758e5cfccedab26a9e">getTiffResolution</a>()
+    static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="tiffio_8c.html#ad98051a17ce50bf0e54e4e3591e1a079">getTiffStreamResolution</a>()
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a0ef7447b74625986ffce71307fd2561d">readHeaderTiff</a>()
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a2d380bc8a195616872d419c65719dbf6">freadHeaderTiff</a>()
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#afbba705ff3823d99596c70a3ad00064e">readHeaderMemTiff</a>()
+    static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="tiffio_8c.html#a98ac57a85bfd93a7f5b6777a1c0a4ac5">tiffReadHeaderTiff</a>()
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a6a822b9943377b0d1dc73bd3902b4a04">findTiffCompression</a>()
+    static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="tiffio_8c.html#acfdf03551d327e763f00312d752ecec5">getTiffCompressedFormat</a>()
+
+   Extraction of tiff g4 data:
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae8934524b200206c5305a42cae08130b">extractG4DataFromFile</a>()
+
+   Open tiff stream from file stream
+    static TIFF      *<a class="code" href="tiffio_8c.html#ac5a922f2c288e008220c851ab7de8d8d">fopenTiff</a>()
+
+   Wrapper for TIFFOpen:
+    static TIFF      *<a class="code" href="tiffio_8c.html#a3387ff9cfcc1e6f1f6d41e8e0136c8e0">openTiff</a>()
+
+   Memory I/O: reading memory --&gt; pix and writing pix --&gt; memory
+           [10 static helper functions]
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a41b0d139a28351a7c42222eb46a8a03d">pixReadMemTiff</a>();
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a32f0b2dedb0dea539cc23d9a0b7fdcac">pixWriteMemTiff</a>();
+           <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#acf40a1967ad528fcf3e00db9fdafac6d">pixWriteMemTiffCustom</a>();
+
+ Note:  You should be using <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> 3.7.4 of libtiff to be certain
+        that all the necessary functions are included.
+</pre></div> 
 <p>Definition in file <a class="el" href="tiffio_8c_source.html">tiffio.c</a>.</p>
 </div><hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="a2c95f96835bd6a5631b6ea80a3f18fc4"></a><!-- doxytag: member="tiffio.c::L_MEMSTREAM" ref="a2c95f96835bd6a5631b6ea80a3f18fc4" args="" -->

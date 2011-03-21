@@ -146,7 +146,37 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Simple interface for grayscale image arithmetic. </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_pixacc.html">Pixacc</a> creation, destruction
+         <a class="code" href="struct_pixacc.html">PIXACC</a>   *<a class="code" href="leptprotos_8h.html#a0e2e0089312ea85c89935ccb51753cff">pixaccCreate</a>()
+         <a class="code" href="struct_pixacc.html">PIXACC</a>   *<a class="code" href="leptprotos_8h.html#ae1420e2d2f7906ef024defca79abd52e">pixaccCreateWithPix</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#a7a5efe501afe8c661a494d30d7940a1c">pixaccDestroy</a>()
 
+    <a class="code" href="struct_pixacc.html">Pixacc</a> finalization
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a02c5a46bc355ca8ca1c6d67218875135">pixaccFinal</a>()
+
+    <a class="code" href="struct_pixacc.html">Pixacc</a> accessors
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a01edbc3aee55d3aa190a2dd9ecdd144d">pixaccGetPix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a652bc3fb92382527ce8547f1cc3e4902">pixaccGetOffset</a>()
+
+    <a class="code" href="struct_pixacc.html">Pixacc</a> accumulators
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a6189cb73e7e530d46cece185005242c9">pixaccAdd</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ae73ab0f432122a2324c924aa26274ee1">pixaccSubtract</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#add6baa74475e798bb78c3c04f1c7c1f4">pixaccMultConst</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a38f15da2744cb592be99b9fb049f081f">pixaccMultConstAccumulate</a>()
+
+This is a simple interface for some of the pixel arithmetic operations 
+in pixarith.c.  These are easy to code up, but not as fast as
+hand-coded functions that do arithmetic on corresponding pixels.
+
+Suppose you want to make a linear combination of pix1 and pix2:
+   pixd = 0.4 * pix1 + 0.6 * pix2
+where pix1 and pix2 are the same <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> and have depth &#39;<a class="code" href="struct_pix.html#a180bb054e9b41bd59b8e2285830bd64e">d</a>&#39;.  Then:
+   <a class="code" href="struct_pixacc.html">Pixacc</a> *pacc = <a class="code" href="leptprotos_8h.html#ae1420e2d2f7906ef024defca79abd52e">pixaccCreateWithPix</a>(pix1, 0);  <span class="comment">// first; addition only</span>
+   <a class="code" href="leptprotos_8h.html#add6baa74475e798bb78c3c04f1c7c1f4">pixaccMultConst</a>(pacc, 0.4);
+   <a class="code" href="leptprotos_8h.html#a38f15da2744cb592be99b9fb049f081f">pixaccMultConstAccumulate</a>(pacc, pix2, 0.6);  <span class="comment">// Add in 0.6 of the second</span>
+   pixd = <a class="code" href="leptprotos_8h.html#a02c5a46bc355ca8ca1c6d67218875135">pixaccFinal</a>(pacc, <a class="code" href="struct_pix.html#a180bb054e9b41bd59b8e2285830bd64e">d</a>);  <span class="comment">// Get the result</span>
+   <a class="code" href="leptprotos_8h.html#a7a5efe501afe8c661a494d30d7940a1c">pixaccDestroy</a>(&amp;pacc);
+</pre></div> 
 <p>Definition in file <a class="el" href="pixacc_8c_source.html">pixacc.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="adc518b37022d4430fa61ccba1f293fb6"></a><!-- doxytag: member="pixacc.c::pixaccCreate" ref="adc518b37022d4430fa61ccba1f293fb6" args="(l_int32 w, l_int32 h, l_int32 negflag)" -->

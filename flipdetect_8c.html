@@ -159,7 +159,140 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Page orientation detection (on roman text) </p>
+<div class="fragment"><pre class="fragment">    Page orientation detection (pure rotation by 90 degree increments):
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#af670a303f57219144cf7fd04e1ff2f4c">pixOrientDetect</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#a45a20d7c87d6337ef86b3f4551a66478">makeOrientDecision</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#a874ca9246ea3cf9b3f0f7d1d7f72c6f2">pixUpDownDetect</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#a22cd6014b228227358b4c26bf86c8141">pixUpDownDetectGeneral</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#abe25deaa2051d0cae352d3253c120217">pixOrientDetectDwa</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#ad22989644038c0d86f1ac421c3c76bd9">pixUpDownDetectDwa</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#a49f1ff436538f64fa1faf39b2e1af2de">pixUpDownDetectGeneralDwa</a>()
 
+    Page mirror detection (flip 180 degrees about line in plane of <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>):
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#a7a5e1ecd344df80a7fa42f78001d016d">pixMirrorDetect</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="flipdetect_8c.html#a5fdab025e1161aafe5838cbe339ab6f3">pixMirrorDetectDwa</a>()
+
+    Static debug helper
+        void         <a class="code" href="flipdetect_8c.html#a528eb13eda1143f808ba73923fa6bfcd">pixDebugFlipDetect</a>()
+
+===================================================================    
+
+Page transformation detection:
+
+Once a page is deskewed, there are 8 possible states that it
+can be in, shown symbolically below.  Suppose state 0 is correct.
+    
+    0: correct     1          2          3
+    +------+   +------+   +------+   +------+      
+    | **** |   | *    |   | **** |   |    * |       
+    | *    |   | *    |   |    * |   |    * |      
+    | *    |   | **** |   |    * |   | **** |      
+    +------+   +------+   +------+   +------+      
+
+       4          5          6          7
+    +-----+    +-----+    +-----+    +-----+   
+    | *** |    |   * |    | *** |    | *   |   
+    |   * |    |   * |    | *   |    | *   |   
+    |   * |    |   * |    | *   |    | *   |   
+    |   * |    | *** |    | *   |    | *** |   
+    +-----+    +-----+    +-----+    +-----+   
+
+Each of the other seven can be derived from state 0 by applying some
+combination of a 90 degree clockwise rotation, a flip about
+a horizontal line, and a flip about a vertical line,
+all abbreviated as:
+    R = Rotation (about a line perpendicular to the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>)
+    H = Horizontal flip (about a vertical line in the plane of the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>)
+    V = Vertical flip (about a horizontal line in the plane of the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>)
+
+We get these transformations:
+    RHV
+    000  -&gt; 0
+    001  -&gt; 1
+    010  -&gt; 2
+    011  -&gt; 3
+    100  -&gt; 4
+    101  -&gt; 5
+    110  -&gt; 6
+    111  -&gt; 7
+    
+Note that in four of these, the sum of H and V is 1 (odd).
+For these four, we have a change in parity (handedness) of
+the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, and the transformation cannot be performed by
+rotation about a vertical line out of the page.   Under
+rotation R, the set of 8 transformations decomposes into
+two subgroups linking {0, 3, 4, 7} and {1, 2, 5, 6} independently.
+
+pixOrientDetect*() <a class="code" href="alltests__reg_8c.html#a3eb5f726cdf59abb8b0df20ce8902180">tests</a> <span class="keywordflow">for</span> a pure rotation (0, 90, 180, 270 degrees).
+It doesn<span class="stringliteral">&#39;t change parity.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">pixMirrorDetect*() tests for a horizontal flip about the vertical axis.</span>
+<span class="stringliteral">It changes parity.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">The landscape/portrait rotation can be detected in two ways:</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">  (1) Compute the deskew confidence for an image segment,</span>
+<span class="stringliteral">      both as is and rotated 90 degrees  (see skew.c).</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">  (2) Compute the ascender/descender signal for the image,</span>
+<span class="stringliteral">      both as is and rotated 90 degrees  (implemented here).</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">The ascender/descender signal is useful for determining text</span>
+<span class="stringliteral">orientation in Roman alphabets because the incidence of letters</span>
+<span class="stringliteral">with straight-line ascenders (b, d, h, k, l, &lt;t&gt;) outnumber</span>
+<span class="stringliteral">those with descenders (&lt;g&gt;, p, q).  The letters &lt;t&gt; and &lt;g&gt;</span>
+<span class="stringliteral">will respond variably to the filter, depending on the type face.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">What about the mirror image situations?  These aren&#39;</span>t common
+unless you<span class="stringliteral">&#39;re dealing with film, for example.</span>
+<span class="stringliteral">But you can reliably test if the image has undergone a</span>
+<span class="stringliteral">parity-changing flip once about some axis in the plane</span>
+<span class="stringliteral">of the image, using pixMirrorDetect*().  This works ostensibly by</span>
+<span class="stringliteral">counting the number of characters with ascenders that</span>
+<span class="stringliteral">stick out to the left and right of the ascender.  Characters</span>
+<span class="stringliteral">that are not mirror flipped are more likely to extend to the</span>
+<span class="stringliteral">right (b, h, k) than to the left (d).  Of course, that is for</span>
+<span class="stringliteral">text that is rightside-up.  So before you apply the mirror</span>
+<span class="stringliteral">test, it is necessary to insure that the text has the ascenders</span>
+<span class="stringliteral">going up, and not down or to the left or right.  But here&#39;</span>s
+what *really* happens.  It turns out that the pre-filtering before
+the hit-miss transform (HMT) is crucial, and surprisingly, when
+the pre-filtering is chosen to generate a large signal, the majority
+of the signal comes from open regions of common lower-case
+letters such as &#39;e&#39;, &#39;c&#39; and &#39;f&#39;.
+
+All operations are given in two implementations whose results are
+identical: rasterop morphology and dwa morphology.  The dwa
+implementations are between 2x and 3x faster.
+
+The set of operations you actually use depends on your prior knowledge:
+
+(1) If the page is known to be either rightside-up or upside-down, use
+    either <a class="code" href="flipdetect_8c.html#af670a303f57219144cf7fd04e1ff2f4c">pixOrientDetect</a>*() with pleftconf = <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, or
+    <a class="code" href="flipdetect_8c.html#a874ca9246ea3cf9b3f0f7d1d7f72c6f2">pixUpDownDetect</a>*().   [The &#39;*&#39; refers to either the rasterop
+    or dwa versions.]
+
+(2) If any of the four orientations are possible, use <a class="code" href="flipdetect_8c.html#af670a303f57219144cf7fd04e1ff2f4c">pixOrientDetect</a>*().
+
+(3) If the text is horizontal and rightside-up, the only remaining
+    degree of freedom is a left-right mirror flip: use
+    <a class="code" href="flipdetect_8c.html#a7a5e1ecd344df80a7fa42f78001d016d">pixMirrorDetect</a>*().
+
+(4) If you have a relatively large amount of numbers on the page,
+    us the slower <a class="code" href="flipdetect_8c.html#a22cd6014b228227358b4c26bf86c8141">pixUpDownDetectGeneral</a>().
+
+We summarize the full orientation and mirror flip detection process:
+
+(1) First determine which of the four 90 degree rotations
+    causes the text to be rightside-up.  This can be done
+    with either skew confidence or the <a class="code" href="flipdetect_8c.html#af670a303f57219144cf7fd04e1ff2f4c">pixOrientDetect</a>*()
+    signals.  For the latter, see the table for <a class="code" href="flipdetect_8c.html#af670a303f57219144cf7fd04e1ff2f4c">pixOrientDetect</a>().
+
+(2) Then, with ascenders pointing up, apply <a class="code" href="flipdetect_8c.html#a7a5e1ecd344df80a7fa42f78001d016d">pixMirrorDetect</a>*().
+    In the normal situation the confidence confidence will be
+    large and positive.  However, if mirror flipped, the
+    confidence will be large and negative.
+</pre></div> 
 <p>Definition in file <a class="el" href="flipdetect_8c_source.html">flipdetect.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a528eb13eda1143f808ba73923fa6bfcd"></a><!-- doxytag: member="flipdetect.c::pixDebugFlipDetect" ref="a528eb13eda1143f808ba73923fa6bfcd" args="(const char *filename, PIX *pixs, PIX *pixhm, l_int32 enable)" -->

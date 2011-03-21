@@ -164,7 +164,82 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Image enhancements: gamma TRC mapping; contrast enhancement, histogram eq; unsharp-masking; hue and saturation. </p>
+<div class="fragment"><pre class="fragment">    Gamma TRC (tone reproduction curve) mapping
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a92332d1787e616ac37e3a562b247f1bd">pixGammaTRC</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#af20ef63f35d094e7073b45e8db30b4f3">pixGammaTRCMasked</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#ade289b100cd6316d6ef34d40beb375c2">pixGammaTRCWithAlpha</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>    *<a class="code" href="enhance_8c.html#a60ce9a27457184d68caeec56235e8fbb">numaGammaTRC</a>()
 
+    Contrast enhancement
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a6f790aa405d9fc3b53e900113e9391ad">pixContrastTRC</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a9a1c475ce543878b8a8379052aebac33">pixContrastTRCMasked</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>    *<a class="code" href="enhance_8c.html#a0c4dffaa9db89b56cf0ddc1afaaf3e46">numaContrastTRC</a>()
+
+    Histogram equalization
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a46c8fa4508fef511a6715eb0558c9359">pixEqualizeTRC</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>    *<a class="code" href="enhance_8c.html#aeb4b175ff5f2b0f6376010e6ada6cadb">numaEqualizeTRC</a>()
+
+    Generic TRC mapper
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a887947a474dc858878303991f6f72d82">pixTRCMap</a>()
+
+    Unsharp-masking
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#af7e170de5872171544f0cad0374b0884">pixUnsharpMasking</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#ae5b042cee460e91d536254b96b1e1fa0">pixUnsharpMaskingGray</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a782652fed646a59e9e2676848307caf4">pixUnsharpMaskingFast</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a593c6281824deb2526c02f8ad736a032">pixUnsharpMaskingGrayFast</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#aef976bcfe83d46a48fab113788a33543">pixUnsharpMaskingGray1D</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#ae08a1f3b4a2efe23ab42d8dd06314e5f">pixUnsharpMaskingGray2D</a>()
+
+    Hue and saturation modification
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a336c0a17b04ca185a4934a54ea3e448c">pixModifyHue</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a7b2bbe479fec52aaa1f92b9a2b61999c">pixModifySaturation</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  <a class="code" href="enhance_8c.html#a03e19860a51a18b49e8603dbbc876f60">pixMeasureSaturation</a>()
+
+    General multiplicative constant color transform
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a849857333869305bc4a6f8758e6905a2">pixMultConstantColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a7c193d38f57104cfdba9e10e81b6fa2f">pixMultMatrixColor</a>()
+
+    Edge by bandpass
+         <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="enhance_8c.html#a2b43dbbab3bf68d664e1023721dbd611">pixHalfEdgeByBandpass</a>()
+
+    Gamma correction, contrast enhancement and histogram equalization
+    apply a simple mapping function to each pixel (or, for color
+    images, to each sample (i.e., r,g,b) of the pixel).
+
+     - Gamma correction either lightens the image or darkens
+       it, depending on whether the gamma factor is greater
+       or less than 1.0, respectively.
+
+     - Contrast enhancement darkens the pixels that are already
+       darker than the middle of the dynamic range (128)
+       and lightens pixels that are lighter than 128.
+
+     - Histogram equalization remaps to have the same number
+       of image pixels at each of 256 intensity values.  This is
+       a quick and dirty method of adjusting contrast and brightness
+       to bring out details in both light and dark regions.
+
+    Unsharp masking is a more complicated enhancement.
+    A &quot;high frequency&quot; image, generated by subtracting
+    the smoothed (&quot;low frequency&quot;) part of the image from
+    itself, has all the energy at the <a class="code" href="compfilter__reg_8c.html#aa76c39342559c1b1c8e43e89850fe00c">edges</a>.  This &quot;edge image&quot;
+    has 0 average value.  A fraction of the edge image is
+    then added to the original, enhancing the differences
+    between pixel values at <a class="code" href="compfilter__reg_8c.html#aa76c39342559c1b1c8e43e89850fe00c">edges</a>.  Because we represent
+    images as <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> arrays, we preserve dynamic range and
+    handle negative values by doing all the arithmetic on
+    shifted <a class="code" href="environ_8h.html#a44325897ae2a352c62931134b7c7b6a2">l_uint16</a> arrays; the <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a> values are recovered
+    at the end.
+
+    Hue and saturation modification work in HSV space.  Because
+    this is too large for efficient table lookup, each pixel value
+    is transformed to HSV, modified, and transformed back.
+    It&#39;s not the fastest way to do this, but the method is
+    easily understood.
+
+    Unsharp masking is never in-place, and returns a clone if no
+    operation is to be performed.
+</pre></div> 
 <p>Definition in file <a class="el" href="enhance_8c_source.html">enhance.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a92332d1787e616ac37e3a562b247f1bd"></a><!-- doxytag: member="enhance.c::pixGammaTRC" ref="a92332d1787e616ac37e3a562b247f1bd" args="(PIX *pixd, PIX *pixs, l_float32 gamma, l_int32 minval, l_int32 maxval)" -->

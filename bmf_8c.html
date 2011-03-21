@@ -158,7 +158,40 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Generation of bitmap fonts. </p>
+<div class="fragment"><pre class="fragment"> Acquisition and generation of bitmap fonts.
 
+     <a class="code" href="struct_l___bmf.html">L_BMF</a>           *<a class="code" href="bmf_8c.html#a139b8a8d92a9bc0f1f3b6232fa76cccd">bmfCreate</a>()
+     <a class="code" href="struct_l___bmf.html">L_BMF</a>           *<a class="code" href="bmf_8c.html#a0ac6dcd38c4cb74ba2b1a73e239e88eb">bmfDestroy</a>()
+
+     <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="bmf_8c.html#a535a158ec913844c1d63ab4eeeaec354">bmfGetPix</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="bmf_8c.html#abb69ddf54a146f2fce9fea15f5915870">bmfGetWidth</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="bmf_8c.html#af9f8863cae07bfe3bb2f5346bdf3ef74">bmfGetBaseline</a>()
+
+     <a class="code" href="struct_pixa.html">PIXA</a>            *<a class="code" href="bmf_8c.html#a6332fd3f4f3f3064ad549c794db25447">pixaGetFont</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="bmf_8c.html#afe26ba66d721b7e548c6aecadc7cddac">pixaSaveFont</a>()
+     <a class="code" href="struct_pixa.html">PIXA</a>            *<a class="code" href="bmf_8c.html#ae8e23002ba3a5bf28e7898ef68d45ea7">pixaGenerateFont</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="bmf_8c.html#ab97059919a3e12ea5962597888f64c4e">pixGetTextBaseline</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="bmf_8c.html#a91d2def350f73015c6f5a274bc362349">bmfMakeAsciiTables</a>()
+
+ This is not a very general utility, because it only uses bitmap
+ representations of a single font, Palatino-Roman, with the
+ normal style.  It uses bitmaps generated for nine <a class="code" href="genfonts_8c.html#a7b4fcaf183d9c0d1f71be15c145df1e0">sizes</a>, from
+ 4 to 20 pts, rendered at 300 ppi.  Generalization to different
+ fonts, styles and sizes is straightforward.
+
+ I chose Palatino-Roman is because I like it.
+ The input font images were generated from a set of small
+ PostScript files, such as chars-12.ps, which were rendered
+ into the inputfont[] bitmap files using GhostScript.  See, for
+ example, the bash script prog/ps2tiff, which will &quot;rip&quot; a
+ PostScript file into a set of ccitt-g4 compressed tiff files.
+
+ The set of ascii characters from 32 through 126 are the 95
+ printable ascii chars.  Palatino-Roman is missing <span class="keywordtype">char</span> 92, &#39;\&#39;.
+ I have substituted &#39;/&#39;, <span class="keywordtype">char</span> 47, for 92, so that there will be
+ no missing printable chars in this set.  The space is <span class="keywordtype">char</span> 32,
+ and I have given it a width equal to twice the width of &#39;!&#39;.
+</pre></div> 
 <p>Definition in file <a class="el" href="bmf_8c_source.html">bmf.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a99f2f555ff1f178241a5521b821af951"></a><!-- doxytag: member="bmf.c::NFONTS" ref="a99f2f555ff1f178241a5521b821af951" args="" -->

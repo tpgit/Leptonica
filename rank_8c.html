@@ -140,7 +140,81 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Rank order filters (generalization of min/median/max filters) </p>
+<div class="fragment"><pre class="fragment">    Rank filter (gray and rgb)
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a3893f682f776a9c32d73e10c270ed194">pixRankFilter</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a3f915334c3f7eff621de55fc9587a9d4">pixRankFilterRGB</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ae7d866c8a944abe11cba1cc64a68a36d">pixRankFilterGray</a>()
 
+    Median filter
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a6c4d463bff3ee9af3101a9fbcefed1e3">pixMedianFilter</a>()
+
+What is a brick rank filter?
+
+  A brick rank order filter evaluates, for every pixel in the image,
+  a rectangular set of n = wf x hf pixels in its neighborhood (where the
+  pixel in question is at the &quot;center&quot; of the rectangle and is
+  included in the evaluation).  It determines the value of the
+  neighboring pixel that is the r-th smallest in the set,
+  where r is some integer between 1 and n.  The input rank parameter
+  is a fraction between 0.0 and 1.0, where 0.0 represents the
+  smallest value (r = 1) and 1.0 represents the largest value (r = n).
+  A median filter is a rank filter where rank = 0.5.
+
+  It is important to note that grayscale erosion is equivalent
+  to rank = 0.0, and grayscale dilation is equivalent to rank = 1.0.
+  These are much easier to calculate than the general rank value,
+  thanks to the van Herk/Gil-Werman algorithm:
+     http:<span class="comment">//www.leptonica.com/grayscale-morphology.html</span>
+  so you should use <a class="code" href="graymorph_8c.html#aee278aba67aee93d3c0df36a33726e0d">pixErodeGray</a>() and <a class="code" href="graymorph_8c.html#adea1263a1aaf5a3ee2e8f21ce9e1a6e9">pixDilateGray</a>() for
+  rank 0.0 and 1.0, rsp.  See notes below in the function <a class="code" href="alltests__reg_8c.html#ae64f2c0aa53b2c8ed55b251ca159af46">header</a>.
+
+How is a rank filter implemented efficiently on an image?
+
+  Sorting will not work.
+
+ The best sort algorithms are O(n*logn), where n is the number
+      of values to be sorted (the area of the filter).  For large
+      filters this is an impractically large number.
+
+ Selection of the rank value is O(n).  (To understand why it&#39;s not
+      O(n*logn), see Numerical Recipes in C, 2nd edition, 1992,  p. 355ff).
+      This also still far too much computation for large filters.
+
+ Suppose we get clever.  We really only need to do an incremental
+      selection or sorting, because, for example, moving the filter
+      down by one pixel causes one filter width of pixels to be added
+      and another to be removed.  Can we do this incrementally in
+      an efficient way?  Unfortunately, no.  The sorted values will be
+      in an array.  Even if the filter width is 1, we can expect to
+      have to move O(n) pixels, because insertion and deletion can happen
+      anywhere in the array.  By comparison, heapsort is excellent for
+      incremental sorting, where the cost for insertion or deletion
+      is O(logn), because the array itself doesn&#39;t need to
+      be sorted into strictly increasing order.  However, heapsort
+      only gives the max (or min) value, not the general rank value.
+
+  This leaves histograms.
+
+ Represented as an array.  The problem with an array of 256
+      bins is that, in general, a significant fraction of the
+      entire histogram must be summed to find the rank value bin.
+      Suppose the filter <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> is 5x5.  You spend most of your time
+      adding zeroes.  Ouch!
+
+ Represented as a linked list.  This would overcome the
+      summing-over-empty-bin problem, but you lose random access
+      for insertions and deletions.  No way.
+
+ Two histogram solution.  Maintain two histograms with
+      bin <a class="code" href="genfonts_8c.html#a7b4fcaf183d9c0d1f71be15c145df1e0">sizes</a> of 1 and 16.  Proceed from coarse to fine.
+      First locate the coarse bin for the given rank, of which
+      there are only 16.  Then, in the 256 entry (fine) histogram,
+      you need look at a maximum of 16 bins.  For each output
+      pixel, the average number of bins summed over, both in the
+      coarse and fine histograms, is thus 16.
+
+If someone has a better method, please let me know!
+</pre></div> 
 <p>Definition in file <a class="el" href="rank_8c_source.html">rank.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="afc223d2fcf33760be8ad969622d01930"></a><!-- doxytag: member="rank.c::pixRankFilter" ref="afc223d2fcf33760be8ad969622d01930" args="(PIX *pixs, l_int32 wf, l_int32 hf, l_float32 rank)" -->

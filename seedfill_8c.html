@@ -164,7 +164,131 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Binary and gray seedfill; distance functions; voronoi-like seed spreading; local extrema. </p>
+<div class="fragment"><pre class="fragment">    Binary seedfill (source: Luc Vincent)
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a80a932865f1d954fac536721ae08f0d2">pixSeedfillBinary</a>()
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#afd4f2086d7fc47297cbaac374f030398">pixSeedfillBinaryRestricted</a>()
 
+    Applications of binary seedfill to find and fill holes,
+    and to remove c.c. touching the border:
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a10f18506736b59678642fbf228b9e3a1">pixHolesByFilling</a>()
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a1716bf995cb610e02926b6f34793a195">pixFillClosedBorders</a>()
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a2b3aa0ffca9edefa95653435df5cfe77">pixExtractBorderConnComps</a>()
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ad0af7f7a6a0b2ce82e720510883fb9ad">pixRemoveBorderConnComps</a>()
+
+    Hole-filling of components to bounding rectangle
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#aa14d41d7c27195bf82de683698e975ec">pixFillHolesToBoundingRect</a>()
+
+    Gray seedfill (source: Luc Vincent:fast-hybrid-grayscale-reconstruction)
+             <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ad1b2fc8ce6c2dea20e3bc1cdce28c07c">pixSeedfillGray</a>()
+             <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a719b0d9ecf5c7edc4fc5cbd84d02858c">pixSeedfillGrayInv</a>()
+
+    Gray seedfill (source: Luc Vincent: sequential-reconstruction algorithm)
+             <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a3961ee4076a1fceda3d5ced7d3671c60">pixSeedfillGraySimple</a>()
+             <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#acf345b2e36bec88f56a59d8624a2a8f9">pixSeedfillGrayInvSimple</a>()
+
+    Gray seedfill variations
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#af332f52bd985523f28fbc7be1d456c9d">pixSeedfillGrayBasin</a>()
+
+    Distance function (source: Luc Vincent)
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a1440d508d821df91e1ac9ffe29eab319">pixDistanceFunction</a>()
+
+    Seed spread (based on distance function)
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a6353d2064b22bf7623350fb8b63bbe51">pixSeedspread</a>()
+
+    Local extrema:
+             <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#afeba811c92a0cd20334bf4e82b5b4cd0">pixLocalExtrema</a>()
+      static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="seedfill_8c.html#a24736f4cb532eb3a03a999f8642cd55e">pixQualifyLocalMinima</a>()
+             <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a77a66b62f3afc00c2b3c6f1924670f6a">pixSelectedLocalExtrema</a>()
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ae6f7ea101d2968faefdf253593eafe4e">pixFindEqualValues</a>()
+
+    Selection of minima in mask of connected components
+             <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="leptprotos_8h.html#a84df2ec73df0f0082c0fd18dddf9add8">pixSelectMinInConnComp</a>()
+
+    Removal of seeded connected components from a mask
+             <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a0b4960f8fc860051f4e8e08f30943a73">pixRemoveSeededComponents</a>()
+
+
+         ITERATIVE RASTER-ORDER SEEDFILL
+
+    The basic method in the Vincent seedfill (aka reconstruction)
+    algorithm is simple.  We describe here the situation for
+    binary seedfill.  Pixels are sampled in raster order in
+    the seed <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>.  If they are 4-connected to ON pixels
+    either directly above or to the left, and are not masked
+    out by the mask <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, they are turned on (or remain on).
+    (Ditto for 8-connected, except you need to check 3 pixels
+    on the previous line as well as the pixel to the left
+    on the current line.  This is extra computational work
+    for relatively little gain, so it is preferable
+    in most situations to use the 4-connected <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a>.)
+    The algorithm proceeds from UR to LL of the image, and
+    then reverses and sweeps up from LL to UR.
+    These <span class="keywordtype">double</span> sweeps are iterated until there is no change.
+    At this point, the seed has entirely filled the region it
+    is allowed to, as delimited by the mask image.
+
+    The grayscale seedfill is a straightforward generalization
+    of the binary seedfill, and is described in seedfillLowGray().
+
+    For some applications, the filled seed will later be OR&#39;d
+    with the negative of the mask.   This is used, for example,
+    when you flood fill into a 4-connected region of OFF pixels
+    and you want the result after those pixels are turned ON.
+
+    Note carefully that the mask we use delineates which pixels
+    are allowed to be ON as the seed is filled.  We will call this
+    a &quot;filling mask&quot;.  As the seed expands, it is repeatedly
+    ANDed with the filling mask: s &amp; fm.  The process can equivalently
+    be formulated using the inverse of the filling mask, which
+    we will call a &quot;blocking mask&quot;: bm = ~fm.   As the seed
+    expands, the blocking mask is repeatedly used to prevent
+    the seed from expanding into the blocking mask.  This is done
+    by set subtracting the blocking mask from the expanded seed:
+    s - bm.  Set subtraction of the blocking mask is equivalent
+    to ANDing with the inverse of the blocking mask: s &amp; (~bm).
+    But from the inverse relation between blocking and filling
+    masks, this is equal to s &amp; fm, which proves the equivalence.
+
+    For efficiency, the pixels can be taken in larger units
+    for processing, but still in raster order.  It is natural
+    to take them in 32-bit words.  The outline of the work
+    to be done for 4-cc (not including special cases for boundary
+    words, such as the first line or the last word in each line)
+    is as follows.  Let the filling mask be m.  The
+    seed is to fill &quot;under&quot; the mask; i.e., limited by an AND
+    with the mask.  Let the current word be w, the word
+    in the line above be wa, and the previous word in the
+    current line be wp.   Let t be a temporary word that
+    is used in computation.  Note that masking is performed by
+    w &amp; m.  (If we had instead used a &quot;blocking&quot; mask, we
+    would perform masking by the set subtraction operation,
+    w - m, which is defined to be w &amp; ~m.)
+
+    The entire operation can be implemented with shifts,
+    logical operations and <a class="code" href="alltests__reg_8c.html#a3eb5f726cdf59abb8b0df20ce8902180">tests</a>.  For each word in the seed image
+    there are two steps.  The first step is to OR the word with
+    the word above and with the rightmost pixel in wp (call it &quot;x&quot;).
+    Because wp is shifted one pixel to its right, &quot;x&quot; is ORed
+    to the leftmost pixel of w.  We then clip to the ON pixels in
+    the mask.  The result is
+             t  &lt;--  (w | wa | x000... ) &amp; m
+    We&#39;ve now finished taking data from above and to the left.
+    The second step is to allow filling to propagate horizontally
+    in t, always making sure that it is properly masked at each
+    step.  So if filling can be done (i.e., t is neither all 0s
+    nor all 1s), iteratively take:
+         t  &lt;--  (t | (t &gt;&gt; 1) | (t &lt;&lt; 1)) &amp; m
+    until t stops changing.  Then write t back into w.
+
+    Finally, the boundary conditions require we note that in doing
+    the above steps:
+        (a) The words in the first row have no wa
+        (b) The first word in each row has no wp in that row
+        (c) The last word in each row must be masked so that
+            pixels don&#39;t propagate beyond the right edge of the
+            actual image.  (This is easily accomplished by
+            setting the out-of-bound pixels in m to OFF.)
+</pre></div> 
 <p>Definition in file <a class="el" href="seedfill_8c_source.html">seedfill.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ad328ed1ae83b7f36a0920d57c8b61ba7"></a><!-- doxytag: member="seedfill.c::DEBUG_PRINT_ITERS" ref="ad328ed1ae83b7f36a0920d57c8b61ba7" args="" -->

@@ -147,7 +147,71 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Interpolated image rotation. </p>
+<div class="fragment"><pre class="fragment">   Grayscale and color rotation <span class="keywordflow">for</span> area mapping (== interpolation)
 
+       Rotation about the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> center
+                <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#aca487906f2c51c87688d70d0fe05d342">pixRotateAM</a>()
+                <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a1c3950d754be3efc2ce3728e8c00ef1d">pixRotateAMColor</a>()
+                <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a5479158a37e946d54e5e6218fdcd211b">pixRotateAMGray</a>()
+
+       Rotation about the UL corner of the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+                <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a009f8f27166dd855733b1ed4a49fb245">pixRotateAMCorner</a>()
+                <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#abf273cb3ef414424eca4a8f4dd9177be">pixRotateAMColorCorner</a>()
+                <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a57ddc8fe23a8bbd2f9ac17a75dcb2da1">pixRotateAMGrayCorner</a>()
+
+       Faster color rotation about the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> center
+                <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a8fc6f28e9d1b4affa4f8426e21fc305e">pixRotateAMColorFast</a>()
+
+   Rotations are measured in radians; clockwise is positive.
+
+   The basic area mapping grayscale rotation works on 8 bpp images.
+   For color, the same method is applied to each color separately.
+   This can be done in two ways: (1) as here, computing each dest
+   rgb pixel from the appropriate four src rgb pixels, or (2) separating
+   the color <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> into three 8 bpp images, rotate each of these,
+   and then combine the result.  Method (1) is about 2.5x faster.
+   We have also implemented a fast approximation for color area-mapping
+   rotation (<a class="code" href="leptprotos_8h.html#a8fc6f28e9d1b4affa4f8426e21fc305e">pixRotateAMColorFast</a>()), which is about 25% faster
+   than the standard color rotator.  If you need the extra speed,
+   use it.
+
+   Area mapping works as follows.  For each dest
+   pixel you find the 4 source pixels that it partially
+   covers.  You then compute the dest pixel value as
+   the area-weighted average of those 4 source pixels.
+   We make two simplifying approximations:
+
+     -  For simplicity, compute the areas as if the dest
+        pixel were translated but not rotated.
+
+     -  Compute area overlaps on a discrete sub-pixel grid.
+        Because we are using 8 bpp images with 256 levels,
+        it is convenient to break each pixel into a
+        16x16 sub-pixel grid, and count the number of
+        overlapped sub-pixels.
+
+   It is interesting to note that the digital filter that
+   implements the area mapping algorithm for rotation
+   is identical to the digital filter used for linear
+   interpolation when arbitrarily scaling grayscale images.
+
+   The advantage of area mapping over pixel sampling
+   in grayscale rotation is that the former naturally
+   blurs sharp <a class="code" href="compfilter__reg_8c.html#aa76c39342559c1b1c8e43e89850fe00c">edges</a> (&quot;anti-aliasing&quot;), so that stair-step
+   artifacts are not introduced.  The disadvantage is that
+   it is significantly slower.
+
+   But it is still pretty fast.  With standard 3 GHz hardware,
+   the anti-aliased (area-mapped) color rotation speed is
+   about 15 million pixels/sec.
+
+   The function pixRotateAMColorFast() is about 10-20% faster
+   than <a class="code" href="leptprotos_8h.html#a1c3950d754be3efc2ce3728e8c00ef1d">pixRotateAMColor</a>().  The quality is slightly worse,
+   and if you make many successive small rotations, with a
+   <a class="code" href="compfilter__reg_8c.html#a720e0421210add66839c567994e2127a">total</a> angle of 360 degrees, it has been noted that the
+   center wanders -- it seems to be doing a 1 pixel translation
+   in addition to the rotation.
+</pre></div> 
 <p>Definition in file <a class="el" href="rotateam_8c_source.html">rotateam.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a0e868db9e92cfed14553143e64ff1beb"></a><!-- doxytag: member="rotateam.c::pixRotateAM" ref="a0e868db9e92cfed14553143e64ff1beb" args="(PIX *pixs, l_float32 angle, l_int32 incolor)" -->

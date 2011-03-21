@@ -151,7 +151,21 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Parse output of cpp to generate ANSII C function prototypes from a file of C functions. </p>
+<div class="fragment"><pre class="fragment">     <span class="keywordtype">char</span>             *<a class="code" href="leptprotos_8h.html#a334acdfc658637aec84ed8418596a758">parseForProtos</a>()
 
+  Static helpers
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#acc36850cb6aaf17398fe4b1a1450c506">getNextNonCommentLine</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#a79aa018aa4d2d7d77b21fe2ba0835f8b">getNextNonBlankLine</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#ad5f95b40a78defb6f0c9820ffe358a01">getNextNonDoubleSlashLine</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#ad6d884b01498299e78c32eb9269f1804">searchForProtoSignature</a>()
+     static <span class="keywordtype">char</span>      *<a class="code" href="parseprotos_8c.html#a1648d12491cdfc7b7f18651905f24896">captureProtoSignature</a>()
+     static <span class="keywordtype">char</span>      *<a class="code" href="parseprotos_8c.html#a8adc1e0961e6de20c04c43d0e55f2fc1">cleanProtoSignature</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#a1c2b4611002266e8ea54b46179757a88">skipToEndOfFunction</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#a4820631cf3d6cfdc36f419d6f42f9986">skipToMatchingBrace</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#ae1a93766b923cb6f090774a2c06533a3">skipToSemicolon</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#a0f0875921971ac89d509788fc9a64612">getOffsetForCharacter</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="parseprotos_8c.html#a90d91adf6764cd8972c784eb7bb7f1b8">getOffsetForMatchingRP</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="parseprotos_8c_source.html">parseprotos.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="af1791633b3a1a12a9aa449aa6d558327"></a><!-- doxytag: member="parseprotos.c::L_BUF_SIZE" ref="af1791633b3a1a12a9aa449aa6d558327" args="" -->

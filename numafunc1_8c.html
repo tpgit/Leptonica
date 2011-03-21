@@ -180,7 +180,86 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Arithmetic, data extraction, interpolation, sorting on numas. </p>
+<div class="fragment"><pre class="fragment">    Arithmetic and logic
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#aa3b9b12b55f6e7dcdfe9bd6f297ad523">numaArithOp</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a4ea1b502f8efcfeb0992ec7cd6090757">numaLogicalOp</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a21aaad335af3b0e31d74ba43d26ca5a1">numaInvert</a>()
 
+    Simple extractions
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a9b0f9a0a56a3a41a6405dbaa956486fa">numaGetMin</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a96311307223a95b427ebba3addc90035">numaGetMax</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a907d93d30aae4660ac98e9b9dcc7fcb6">numaGetSum</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a721e0a061c38356d15d2a019c0ef81a4">numaGetPartialSums</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a88d2d6bbd5d1e0aed98ab3d2ab583065">numaGetSumOnInterval</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a333dcb8f83fae128b06939a28a708d83">numaHasOnlyIntegers</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a27f3f90de946630672dec278dc0b3667">numaSubsample</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a4e96202a0461fc4dce9574baddcbc3f4">numaMakeDelta</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#aa3ca46ccb99596c9e5fe11d418999051">numaMakeSequence</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a8dd81b9e29e3b0d348978892e0d94977">numaMakeConstant</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a99a48ccd0b77062aeba663c9a1fafd90">numaAddBorder</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a498b18e156f58fe50ae2b6d4f001b93f">numaAddSpecifiedBorder</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a16a361702222e50cf75e50f15b9fae95">numaRemoveBorder</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#af42be3b659885f53ed2843eb891e215f">numaGetNonzeroRange</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ab91a42bd63d9acd2c5ca64546eed6ee8">numaGetCountRelativeToZero</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a8467d8919fb97b0385ff32c4482e6c13">numaClipToInterval</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#af2b00238fb6a48b2f77aa7955905ef23">numaMakeThresholdIndicator</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a1ddada7efb94bc3036f83903910f4912">numaUniformSampling</a>()
+
+    Signal feature extraction
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a9098f0db1b7fee4945e93c020db8320a">numaLowPassIntervals</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#ae5c229b2be9c8f295c5b067a8fba3dd0">numaThresholdEdges</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#aefdadf831d46fd6375d10fd903c3a5bd">numaGetSpanValues</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a5eb04a1d830490c4b54a7ec54edd23f6">numaGetEdgeValues</a>()
+
+    Interpolation
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ade8a5c6195c0ce70fff256466a2a091a">numaInterpolateEqxVal</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac886f9d546b9ed93770285be56394077">numaInterpolateEqxInterval</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a49ed5634ae19ec1f89fff40916e3d508">numaInterpolateArbxVal</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a7440c16b72927a65f1386dad96dfe1aa">numaInterpolateArbxInterval</a>()
+
+    Functions requiring interpolation
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a5376a366f3638efda4f9a072da4f6098">numaFitMax</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a687b0c5851f98d4fc0391f69b86274ff">numaDifferentiateInterval</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ad83ce3f2a227c15761b034a214a0058c">numaIntegrateInterval</a>()
+
+    Sorting
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a3114221a3e4ada31b231ed592bcdab39">numaSort</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a8d0dd280a7cae996711d6c7a4785c933">numaGetSortIndex</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a30d90fe0a52125cd21314cb6a404f66b">numaSortByIndex</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ae6592b1c310b03f3cb45e49d8e96e14d">numaIsSorted</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a8146bd3823075e6af3376a2106e2b8cf">numaSortPair</a>()
+
+    Random permutation
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a84e4ccc7255a2f333fe27e9b03528d4a">numaPseudorandomSequence</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a2dbcdce5ae5ebd7f4bcc09862f2f5e30">numaRandomPermutation</a>()
+
+    Functions requiring sorting
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ae390314aa361fe38c6bea25a36c04fbe">numaGetRankValue</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac7e4e44ef40e733515a46263ce018444">numaGetMedian</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a65eaf7da665f2ef72b884145555571ee">numaGetMode</a>()
+
+    <a class="code" href="struct_numa.html">Numa</a> combination
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a3bb6413953ce80ba9fb10a0ba483d63e">numaJoin</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a095afeb587cb1f312a57a0a4e85d264a">numaaFlattenToNuma</a>()
+
+
+  Things to remember when using the <a class="code" href="struct_numa.html">Numa</a>:
+
+  (1) The numa is a struct, not an array.  Always use accessors
+      (see numabasic.c), never the fields directly.
+
+  (2) The number array holds l_float32 values.  It can also
+      be used to store <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> values.  See numabasic.c for
+      details on using the accessors.
+
+  (3) If you use <a class="code" href="leptprotos_8h.html#afd300f95a02894e9529623a260ffac8a">numaCreate</a>(), no numbers are stored and the size is 0.
+      You have to add numbers to increase the size.
+      If you want to start with a numa of a fixed size, with each
+      entry initialized to the same value, use <a class="code" href="leptprotos_8h.html#a8dd81b9e29e3b0d348978892e0d94977">numaMakeConstant</a>().
+
+  (4) Occasionally, in the comments we denote the i-th element of a
+      numa by na[i].  This is conceptual only -- the numa is not an array!
+</pre></div> 
 <p>Definition in file <a class="el" href="numafunc1_8c_source.html">numafunc1.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ac30f70b4127b177c6b6df32f608f9228"></a><!-- doxytag: member="numafunc1.c::numaArithOp" ref="ac30f70b4127b177c6b6df32f608f9228" args="(NUMA *nad, NUMA *na1, NUMA *na2, l_int32 op)" -->

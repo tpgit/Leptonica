@@ -177,7 +177,105 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>local adaptive grayscale quantization; mostly gray-to-gray in preparation </p>
+<div class="fragment"><pre class="fragment">===================================================================
+Image binarization algorithms are found in:
+   grayquant.c:   standard, simple, general grayscale quantization
+   adaptmap.c:    local adaptive; mostly gray-to-gray in preparation
+                  <span class="keywordflow">for</span> binarization
+   binarize.c:    special binarization methods, locally adaptive.
+===================================================================
 
+    Adaptive background normalization (top-level functions)
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#a233918c78f70365dc44896bdd31f3128">pixBackgroundNormSimple</a>()     8 and 32 bpp
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#aa3fe2b6bb8ae91ed1a60c7e7375c2213">pixBackgroundNorm</a>()           8 and 32 bpp
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#affcfd6286be3fa5b622ae23dcf219fbf">pixBackgroundNormMorph</a>()      8 and 32 bpp
+
+    Arrays of inverted background values <span class="keywordflow">for</span> normalization (16 bpp)
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#afb9d7d9b75ffc3c4feae308b437ceb78">pixBackgroundNormGrayArray</a>()   8 bpp input
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#add048bf24e2cf94820ebb0be52943950">pixBackgroundNormRGBArrays</a>()   32 bpp input
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#a76cc4d9363a7cdeb56abcfb79531a0aa">pixBackgroundNormGrayArrayMorph</a>()   8 bpp input
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#ad17d0d5e57a33f020e0db24cb0f593a0">pixBackgroundNormRGBArraysMorph</a>()   32 bpp input
+
+    Measurement of local background
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#a59a725884de416e753b314efd7d71ca1">pixGetBackgroundGrayMap</a>()        8 bpp
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#a585c22168928353eb067ef7b4a6108ae">pixGetBackgroundRGBMap</a>()         32 bpp
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#affe15c0de2f0c21a3c9e6042b2f451b7">pixGetBackgroundGrayMapMorph</a>()   8 bpp
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#a68a15cb82890d5209d82a411ecb0421e">pixGetBackgroundRGBMapMorph</a>()    32 bpp
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#ada079477a9407ec07b78fecb517e9743">pixFillMapHoles</a>()
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#ada1eb7772a595c3134f666d37b981426">pixExtendByReplication</a>()         8 bpp
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#a45053d0f0218037920ccde6ab9140655">pixSmoothConnectedRegions</a>()      8 bpp
+
+    Measurement of local foreground
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    pixGetForegroundGrayMap()        8 bpp
+
+    Generate inverted background map for each component
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#a7091e401bb650442dcb107af4dfd5fcd">pixGetInvBackgroundMap</a>()   16 bpp
+
+    Apply inverse background map to <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#a72d3d614d7c74e1472d3d19e7c0f1824">pixApplyInvBackgroundGrayMap</a>()   8 bpp
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#ac907cba948847db16ef5314c237964de">pixApplyInvBackgroundRGBMap</a>()    32 bpp
+
+    Apply variable map
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#ab6db0c56104225ea842cb07329d64939">pixApplyVariableGrayMap</a>()        8 bpp
+
+    Non-adaptive (global) mapping
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#a3170f659c64f65dbeb102007cb904bba">pixGlobalNormRGB</a>()               32 bpp or cmapped
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#a9300091b9fad2cd13dfa9851b5670e3e">pixGlobalNormNoSatRGB</a>()          32 bpp
+
+    Adaptive threshold spread normalization
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="adaptmap_8c.html#a3591959edf92747b4505ed76f6c6f85e">pixThresholdSpreadNorm</a>()         8 bpp
+
+    Adaptive background normalization (flexible adaptaption)
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="adaptmap_8c.html#ac67911a59e9720e47627b4e79dffb6d1">pixBackgroundNormFlex</a>()          8 bpp
+
+    Adaptive contrast normalization
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="adaptmap_8c.html#a502604211c3a2d99257c5e1fe0b1990b">pixContrastNorm</a>()          8 bpp
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="adaptmap_8c.html#a731cf3a594e2f31fe44d36da6e1edf94">pixMinMaxTiles</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="adaptmap_8c.html#a539071d9aca75a01b1e17faa1c6cd5a2">pixSetLowContrast</a>()
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="adaptmap_8c.html#a7cea80d0ab97cbda2574f4af3b5202bf">pixLinearTRCTiled</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  *<a class="code" href="adaptmap_8c.html#a239c3079c1f5a9da31f92a909fb6fc89">iaaGetLinearTRC</a>()
+
+Background normalization is done by generating a reduced map (or set
+of maps) representing the estimated background value of the
+input <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, and using this to shift the pixel values so that
+this background value is set to some constant value.
+
+Specifically, normalization has 3 steps:
+  (1) Generate a background map at a reduced scale.
+  (2) Make the array of inverted background values by inverting
+      the map.  The result is an array of local multiplicative factors.
+  (3) Apply this inverse background map to the image
+
+The inverse background arrays can be generated in two different ways here:
+  (1) Remove the &#39;foreground&#39; pixels and average over the remaining
+      pixels in each tile.  Propagate values into tiles where
+      values have not been assigned, either because there was not
+      enough background in the tile or because the tile is covered
+      by a foreground region described by an image mask.
+      After the background map is made, the inverse map is generated by
+      smoothing over some number of adjacent tiles
+      (block convolution) and then inverting.
+  (2) Remove the foreground pixels using a morphological closing
+      on a subsampled <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> of the image.  Propagate values
+      into pixels covered by an optional image mask.  Invert the
+      background map without preconditioning by convolutional smoothing.
+
+Note: Several of these functions make an implicit assumption about RGB
+      component ordering.
+
+Other methods for adaptively normalizing the image are also given here.
+
+(1) <a class="code" href="adaptmap_8c.html#a3591959edf92747b4505ed76f6c6f85e">pixThresholdSpreadNorm</a>() computes a local threshold over the image
+    and normalizes the input pixel values so that this computed threshold
+    is a constant across the entire image.
+
+(2) <a class="code" href="adaptmap_8c.html#a502604211c3a2d99257c5e1fe0b1990b">pixContrastNorm</a>() computes and applies a local TRC so that the
+    local dynamic range is expanded to the full 8 bits, where the
+    darkest pixels are mapped to 0 and the lightest to 255.  This is
+    useful for improving the appearance of pages with very light
+    foreground or very dark background, and where the local TRC
+    function doesn&#39;t change rapidly with position.
+</pre></div> 
 <p>Definition in file <a class="el" href="adaptmap_8c_source.html">adaptmap.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ad5c208fa570790ba3fc78b4bba087fe5"></a><!-- doxytag: member="adaptmap.c::DEBUG_GLOBAL" ref="ad5c208fa570790ba3fc78b4bba087fe5" args="" -->

@@ -152,7 +152,31 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Composable affine coordinate transforms. </p>
+<div class="fragment"><pre class="fragment">    Composable coordinate transforms
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>   *<a class="code" href="affinecompose_8c.html#abae222833f44c7d4383b35e4ba9a897f">createMatrix2dTranslate</a>()
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>   *createMatrixScale()
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>   *createMatrixRotate()
 
+    Special coordinate transforms on pta
+         <a class="code" href="struct_pta.html">PTA</a>         *<a class="code" href="affinecompose_8c.html#a94704c171e6d6cf79332e95f88f65715">ptaTranslate</a>()
+         <a class="code" href="struct_pta.html">PTA</a>         *<a class="code" href="affinecompose_8c.html#a39c36a39f280a6538f301567c1cb2600">ptaScale</a>()
+         <a class="code" href="struct_pta.html">PTA</a>         *<a class="code" href="affinecompose_8c.html#a2c5d4d2c4c9c64519520b2c329f76266">ptaRotate</a>()
+
+    Special coordinate transforms on boxa
+         <a class="code" href="struct_boxa.html">BOXA</a>        *<a class="code" href="affinecompose_8c.html#a92b0728307234540ff6f4eb93e389f0f">boxaTranslate</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>        *<a class="code" href="affinecompose_8c.html#a2b87822d0d59ed41807337ab3ac9270a">boxaScale</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>        *<a class="code" href="affinecompose_8c.html#a2659219e86b2b3765fc7fa2cf9c3e637">boxaRotate</a>()
+
+    General coordinate transform on pta and boxa
+         <a class="code" href="struct_pta.html">PTA</a>         *<a class="code" href="affinecompose_8c.html#abe8fb97249b91d8f6ce2a46a0655b060">ptaAffineTransform</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>        *<a class="code" href="affinecompose_8c.html#af0ac474552a001d3bc4930f4138008fc">boxaAffineTransform</a>()
+
+    Matrix operations
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="affinecompose_8c.html#a8def8b3125eefc90d14d902b57343635">l_productMatVec</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="affinecompose_8c.html#ae0730a6ad900b526458c7b739dd54a1a">l_productMat2</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="affinecompose_8c.html#a280f230eadd17d0147b1b819ccac995d">l_productMat3</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="affinecompose_8c.html#a4c00c387ac00e6bbe88e00c3ced9559a">l_productMat4</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="affinecompose_8c_source.html">affinecompose.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="abae222833f44c7d4383b35e4ba9a897f"></a><!-- doxytag: member="affinecompose.c::createMatrix2dTranslate" ref="abae222833f44c7d4383b35e4ba9a897f" args="(l_float32 transx, l_float32 transy)" -->

@@ -153,7 +153,35 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Decode barcodes after sequence of widths is found. </p>
+<div class="fragment"><pre class="fragment">    Dispatcher
+        <span class="keywordtype">char</span>            *<a class="code" href="bardecode_8c.html#a938cd0be5104765e5c6bc7625580f080">barcodeDispatchDecoder</a>()
 
+    Format Determination
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="bardecode_8c.html#a2a19a8608eb82f67316dbcb394883246">barcodeFindFormat</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="bardecode_8c.html#af373697803c55e6ed25a1235ac80f5e7">barcodeFormatIsSupported</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="bardecode_8c.html#af9bd089586e18139560f22e9b8a97413">barcodeVerifyFormat</a>()
+
+    Decode 2 of 5
+        static <span class="keywordtype">char</span>     *<a class="code" href="bardecode_8c.html#adaac4e478c512e6c7a0e76eaa9f49b6b">barcodeDecode2of5</a>()
+
+    Decode Interleaved 2 of 5
+        static <span class="keywordtype">char</span>     *<a class="code" href="bardecode_8c.html#a06d0c6509b1846f4f8f2c1508627d2d6">barcodeDecodeI2of5</a>()
+
+    Decode Code 93
+        static <span class="keywordtype">char</span>     *<a class="code" href="bardecode_8c.html#af62159776012bb43d4a2313a3d487fe9">barcodeDecode93</a>()
+
+    Decode Code 39
+        static <span class="keywordtype">char</span>     *<a class="code" href="bardecode_8c.html#a8a81ac7bdd9f8ee2b132926f8fc7a4cc">barcodeDecode39</a>()
+
+    Decode <a class="code" href="readbarcode_8h.html#a9430bbcd96a80ffac60b37ed0264deee">Codabar</a>
+        static <span class="keywordtype">char</span>     *<a class="code" href="bardecode_8c.html#a1a27b92e8d4e3bc4e5f2bef0ab2fd393">barcodeDecodeCodabar</a>()
+
+    Decode UPC-A
+        static <span class="keywordtype">char</span>     *<a class="code" href="bardecode_8c.html#a80728d8e22fae6d4fa758b0e320e122f">barcodeDecodeUpca</a>()
+
+    Decode EAN 13
+        static <span class="keywordtype">char</span>     *<a class="code" href="bardecode_8c.html#af3c623d2c3b8718bdb9aa19371c3919e">barcodeDecodeEan13</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="bardecode_8c_source.html">bardecode.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ab4b704931212061eb5f9b8c3149a4286"></a><!-- doxytag: member="bardecode.c::DEBUG_CODES" ref="ab4b704931212061eb5f9b8c3149a4286" args="" -->

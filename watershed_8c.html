@@ -170,7 +170,88 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Find watershed basins from specified seeds in grayscale image. </p>
+<div class="fragment"><pre class="fragment">    Top-level
+          <a class="code" href="struct_l___w_shed.html">L_WSHED</a>         *<a class="code" href="leptprotos_8h.html#a0524659ec775f8d4bf08dd51f47a3c42">wshedCreate</a>()
+          void             <a class="code" href="leptprotos_8h.html#a5ec30434017f7d517fe0df4ea5242713">wshedDestroy</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a0328fbb3fb44dae48502b332387bd215">wshedApply</a>()
 
+    Helpers
+          static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="watershed_8c.html#a61bde1bc4b4694dc7e3928ef55c39af7">identifyWatershedBasin</a>()
+          static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="watershed_8c.html#ac7d27902df99928b86f913ce9a71eaa9">mergeLookup</a>()
+          static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="watershed_8c.html#a3a0c609aaabd7735a16ecbe3bb4257d1">wshedGetHeight</a>()
+          static <span class="keywordtype">void</span>      <a class="code" href="watershed_8c.html#a3425b9cae6b2e120f0728b383bfef50b">pushNewPixel</a>()
+          static <span class="keywordtype">void</span>      <a class="code" href="watershed_8c.html#a3ca651df9c77227899bb748e71d4a5c5">popNewPixel</a>()
+          static <span class="keywordtype">void</span>      <a class="code" href="watershed_8c.html#aa980f5908953b2a22fcf9c6481f2f9c6">pushWSPixel</a>()
+          static <span class="keywordtype">void</span>      <a class="code" href="watershed_8c.html#a6d741c3c8b7ee7c0875c4ead4fb5320b">popWSPixel</a>()
+          static <span class="keywordtype">void</span>      <a class="code" href="watershed_8c.html#a78c5ce9a13fa18c53b0978a169cfabbe">debugPrintLUT</a>()
+          static <span class="keywordtype">void</span>      <a class="code" href="watershed_8c.html#a67c62f50705600095088865dc9e2123b">debugWshedMerge</a>()
+
+    Output
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#abe2725699dbe9dc70b44ce275656f2b5">wshedBasins</a>()
+          <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="leptprotos_8h.html#a51ed87035191dfd0e96a6a829738a29c">wshedRenderFill</a>()
+          <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="leptprotos_8h.html#ae163fc49ee7bc8b2fed73317b5ebc0b8">wshedRenderColors</a>()
+
+The watershed function identifies the &quot;catch basins&quot; of the input
+8 bpp <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, with respect to the specified seeds or &quot;markers&quot;.
+The use is in segmentation, but the selection of the markers is
+critical to getting meaningful results.
+
+How are the markers selected?  You can&#39;t simply use the local
+minima, because a typical image has sufficient noise so that 
+a useful catch basin can easily have multiple local minima.  However
+they are selected, the question for the watershed function is
+how to handle local minima that are not markers.  The reason
+this is important is because of the algorithm used to find the
+watersheds, which is roughly like this:
+
+  (1) Identify the markers and the local minima, and enter them
+      into a priority queue based on the pixel value.  Each marker
+      is shrunk to a single pixel, if necessary, before the
+      operation starts.
+  (2) Feed the priority queue with neighbors of pixels that are
+      popped off the queue.  Each of these queue pixels is labelled
+      with the <a class="code" href="struct_l___reg_params.html#a6fa45512d6be2dfca4fd0621f3527b08">index</a> value of its parent.
+  (3) Each pixel is also labelled, in a 32-bit image, with the marker
+      or local minimum <a class="code" href="struct_l___reg_params.html#a6fa45512d6be2dfca4fd0621f3527b08">index</a>, from which it was originally derived.
+  (4) There are actually 3 classes of labels: seeds, minima, and
+      fillers.  The fillers are labels of regions that have already
+      been identified as watersheds and are continuing to fill, for
+      the purpose of finding higher watersheds.
+  (5) When a pixel is popped that has already been labelled in the
+      32-bit image and that label differs from the label of its
+      parent (stored in the queue pixel), a boundary has been crossed.
+      There are several cases:
+       (a) Both parents are derived from markers but at least one
+           is not deep enough to become a watershed.  Absorb the
+           shallower basin into the deeper one, fixing the LUT to
+           redirect the shallower index to the deeper one.
+       (b) Both parents are derived from markers and both are deep
+           enough.  Identify and save the watershed for each marker.
+       (c) One parent was derived from a marker and the other from
+           a minima: absorb the minima basin into the marker basin.
+       (d) One parent was derived from a marker and the other is
+           a filler: identify and save the watershed for the marker.
+       (e) Both parents are derived from minima: merge them.
+       (f) One parent is a filler and the other is derived from a
+           minima: merge the minima into the filler.
+  (6) The output of the watershed operation consists of:
+       - a pixa of the basins
+       - a pta of the markers
+       - a numa of the watershed levels
+
+Typical usage:
+    <a class="code" href="struct_l___w_shed.html">L_WShed</a> *wshed = <a class="code" href="leptprotos_8h.html#a0524659ec775f8d4bf08dd51f47a3c42">wshedCreate</a>(pixs, pixseed, mindepth, 0);
+    <a class="code" href="leptprotos_8h.html#a0328fbb3fb44dae48502b332387bd215">wshedApply</a>(wshed);
+
+    <a class="code" href="leptprotos_8h.html#abe2725699dbe9dc70b44ce275656f2b5">wshedBasins</a>(wshed, &amp;pixa, &amp;nalevels);
+      ... do something with pixa, nalevels ...
+    <a class="code" href="leptprotos_8h.html#a6775cff91fdef2336a3f3037f7bb55f3">pixaDestroy</a>(&amp;pixa);
+    <a class="code" href="leptprotos_8h.html#aba8d7e230092813965301cca699a6ebc">numaDestroy</a>(&amp;nalevels);
+
+    <a class="code" href="struct_pix.html">Pix</a> *pixd = <a class="code" href="leptprotos_8h.html#a51ed87035191dfd0e96a6a829738a29c">wshedRenderFill</a>(wshed);
+
+    <a class="code" href="leptprotos_8h.html#a5ec30434017f7d517fe0df4ea5242713">wshedDestroy</a>(&amp;wshed);
+</pre></div> 
 <p>Definition in file <a class="el" href="watershed_8c_source.html">watershed.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a5f929ee6e3248db11c050861cf9c169e"></a><!-- doxytag: member="watershed.c::DEBUG_WATERSHED" ref="a5f929ee6e3248db11c050861cf9c169e" args="" -->

@@ -142,7 +142,17 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write webp format from/to file. </p>
+<div class="fragment"><pre class="fragment">  Read WebP from file
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="leptprotos_8h.html#a2f851c5dfadfb6fec05329f8a4cffb9c">pixReadStreamWebP</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a416cc11301f44dd9d080d3e1caf35a6f">readHeaderWebP</a>()
 
+  Write WebP to file
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a1db5efb2e508d6c3bea105a6ba71b9bb">pixWriteWebP</a>()  [ special top level ]
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a17e04b3f0846a10b4db334a6b402af9c">pixWriteStreamWebP</a>()
+
+  Write WebP to file with target psnr
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a9098c3ef39bf7cb9cfedeb36cd5d1094">pixWriteWebPwithTargetPSNR</a>
+</pre></div> 
 <p>Definition in file <a class="el" href="webpio_8c_source.html">webpio.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a2250de8b6b660dbf1e38c82b353d82dc"></a><!-- doxytag: member="webpio.c::pixReadStreamWebP" ref="a2250de8b6b660dbf1e38c82b353d82dc" args="(FILE *fp)" -->

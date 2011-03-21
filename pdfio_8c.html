@@ -188,7 +188,121 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write pdf format from/to file and memory. </p>
+<div class="fragment"><pre class="fragment">  |=============================================================|
+  |                         Important note                      |
+  |=============================================================|
+  | Some of these functions require libtiff, libjpeg, and libz  |
+  | If you <span class="keywordflow">do</span> not have these libraries, you must <span class="keyword">set</span>            |
+  |      #define  <a class="code" href="environ_8h.html#a7100fda241c49d7a00a6081de6ecd283">USE_PDFIO</a>     0                               |
+  | in environ.h.  This will link pdfiostub.c                   |
+  |=============================================================|
 
+   The first <span class="keyword">set</span> of functions converts a <span class="keyword">set</span> of images to a multi-page
+   pdf file, with one <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> on each page.  All images are rendered
+   at the same (input) resolution.  The images can be specified as
+   being in a directory, or they can be in an sarray.  The output
+   pdf can be either a file or an array of bytes in memory.
+
+   The second set of functions implements a pdf output &quot;device driver&quot;
+   for wrapping (encoding) any number of images on a single page
+   in pdf.  The images can be rendered using a pdf viewer,
+   such as gv, evince, xpdf or acroread.
+   See: http:<span class="comment">//www.adobe.com/devnet/pdf/pdf_reference_archive.html</span>
+
+   The third set of functions (segmented) takes an <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, an
+   optional binary mask, an encoding flag, and some other parameters,
+   and generates a single-page mixed raster pdf.
+
+   The fourth set of functions (concatenated) takes a set of single-page
+   pdf files and concatenates them into a multi-page pdf
+
+   1. Convert specified image files to Pdf (one image file per page)
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a364ba9ca7deb6c84cd192cbf4340653b">convertFilesToPdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#afb6aecd94049b3fda29992da769d152b">saConvertFilesToPdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#ae0bc3e00a2951e40610dcabbe1707e22">saConvertFilesToPdfData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a1c1bd92358f19b55bf49ef5b002b8182">selectDefaultPdfEncoding</a>()
+
+   2. Single page, multi-image converters
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a97ce0faf2cbf9b824e52f576cfaa9aa7">convertToPdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a694c4def35176747d8bd959480ef1200">convertImageDataToPdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a7c73b155153505c124a5acf15ca7761a">convertToPdfData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a40d7b6531ee3b98e337043a029a4ce3a">convertImageDataToPdfData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#aaece1bfab245d40b6577f8f031e0f17f">pixConvertToPdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#ac5555cba4668c034f7b6423a2970a740">pixConvertToPdfData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a7f35e96560a8d1235c8687448a5200ab">pixWriteStreamPdf</a>()
+
+   3. Segmented multi-page, multi-image converter
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a251fc9d683296888210a8c9715e905b5">convertSegmentedFilesToPdf</a>()
+
+   4. Segmented single page, multi-image converters
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a29925e7ef3c34e067269c170da6a4025">convertToPdfSegmented</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#aad3547151ce10380de005a32e8585cb7">pixConvertToPdfSegmented</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#ad365b98c08497d8ae32e0d93c7ca8879">convertToPdfDataSegmented</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a8a1ae54a57c345a4f87df64f0866183c">pixConvertToPdfDataSegmented</a>()
+
+   Helper functions for generating the output pdf <span class="keywordtype">string</span>
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#ade424f6e143c280346f4da7a9ca48504">l_generatePdf</a>()
+        static <span class="keywordtype">void</span>         <a class="code" href="pdfio_8c.html#aca2d1b3a6806dab1fed917cba91bc43e">generateFixedStringsPdf</a>()
+        static <span class="keywordtype">void</span>         <a class="code" href="pdfio_8c.html#a710424d90d8fcebb1458e63db2791f13">generateMediaboxPdf</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#a1633e9044d4b759e1702ef83c211ca42">generatePageStringPdf</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#a7ca327cf2e995879c4362bae520c4c61">generateContentStringPdf</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#a5887deadb991777f8dfcf25eddc58579">generatePreXStringsPdf</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#a7504d216306658610850a9c35387ae2b">generateColormapStringsPdf</a>()
+        static <span class="keywordtype">void</span>         <a class="code" href="pdfio_8c.html#ad04eaf8758dc98a299974d4c119439a4">generateTrailerPdf</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#a755af29970abebfe4a24e41853032a30">makeTrailerStringPdf</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#ae363d7f383e0f162c6afa5c5ad0f45e4">generateOutputDataPdf</a>()
+
+   5. Multi-page concatenation
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a7f8a4cea2759082f0bec9aaac988541f">concatenatePdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a0c8fb1ddd8e6c89ad9d524732b9d914e">saConcatenatePdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a4b3bef479cb11746043f7a380d4c5ca3">ptraConcatenatePdf</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a042ada13c16ec4eee037e0e77c27a44e">concatenatePdfToData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a2a432408d422c296575babeee99c2e09">saConcatenatePdfToData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="leptprotos_8h.html#a49c65a37b27649fff27cfa0b4ffa63b4">ptraConcatenatePdfToData</a>()
+
+   Helper functions for generating the multi-page pdf output
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="pdfio_8c.html#af7c3a2a287cf2967279348068bbb0fbe">parseTrailerPdf</a>()
+        static <span class="keywordtype">char</span>        *<a class="code" href="pdfio_8c.html#a7c9b93f71d16e9dcb569b4da015d29fb">generatePagesObjStringPdf</a>()
+        static <a class="code" href="struct_l___bytea.html">L_BYTEA</a>     *<a class="code" href="pdfio_8c.html#a851ef9899b56a4f6ad7f0b87c3be028b">substituteObjectNumbers</a>()
+
+   Create/destroy/access pdf data
+        static <a class="code" href="struct_l___pdf___data.html">L_PDF_DATA</a>         *<a class="code" href="pdfio_8c.html#a88f85b6b047458486f5249135d6ceee3">pdfdataCreate</a>()
+        static <span class="keywordtype">void</span>                <a class="code" href="pdfio_8c.html#a6e4daabddb15ea71282f137f020b880d">pdfdataDestroy</a>()
+        static <a class="code" href="struct_l___compressed___data.html">L_COMPRESSED_DATA</a>  *<a class="code" href="pdfio_8c.html#a5dbd1546a55e6b4f7a9a3300ff0551b9">pdfdataGetCid</a>()
+
+   Set flags for special modes
+        <span class="keywordtype">void</span>                <a class="code" href="leptprotos_8h.html#a385b8710665598daf0d07db9fdf92970">l_pdfSetG4ImageMask</a>()
+        <span class="keywordtype">void</span>                <a class="code" href="leptprotos_8h.html#aa1c2344d4b65e778f12e008a84a1f058">l_pdfSetDateAndVersion</a>()
+
+   The top-level multi-image functions can be visualized as follows:
+        Output pdf data to file:
+           <a class="code" href="leptprotos_8h.html#a97ce0faf2cbf9b824e52f576cfaa9aa7">convertToPdf</a>()  and  <a class="code" href="leptprotos_8h.html#a694c4def35176747d8bd959480ef1200">convertImageDataToPdf</a>()
+                   --&gt; <a class="code" href="leptprotos_8h.html#aaece1bfab245d40b6577f8f031e0f17f">pixConvertToPdf</a>()
+                         --&gt; <a class="code" href="leptprotos_8h.html#ac5555cba4668c034f7b6423a2970a740">pixConvertToPdfData</a>()
+
+        Output pdf data to array in memory:
+           <a class="code" href="leptprotos_8h.html#a7c73b155153505c124a5acf15ca7761a">convertToPdfData</a>()  and  <a class="code" href="leptprotos_8h.html#a40d7b6531ee3b98e337043a029a4ce3a">convertImageDataToPdfData</a>()
+                   --&gt; <a class="code" href="leptprotos_8h.html#ac5555cba4668c034f7b6423a2970a740">pixConvertToPdfData</a>()
+
+   The top-level segmented image functions can be visualized as follows:
+        Output pdf data to file:
+           <a class="code" href="leptprotos_8h.html#a29925e7ef3c34e067269c170da6a4025">convertToPdfSegmented</a>()
+                   --&gt; <a class="code" href="leptprotos_8h.html#aad3547151ce10380de005a32e8585cb7">pixConvertToPdfSegmented</a>()
+                         --&gt; <a class="code" href="leptprotos_8h.html#a8a1ae54a57c345a4f87df64f0866183c">pixConvertToPdfDataSegmented</a>()
+
+        Output pdf data to array in memory:
+           <a class="code" href="leptprotos_8h.html#ad365b98c08497d8ae32e0d93c7ca8879">convertToPdfDataSegmented</a>()
+                   --&gt; <a class="code" href="leptprotos_8h.html#a8a1ae54a57c345a4f87df64f0866183c">pixConvertToPdfDataSegmented</a>()
+
+   For multi-page concatenation, there are three different types of input
+      (1) directory and optional <a class="code" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a> filter
+      (2) sarray of filenames
+      (3) ptra of byte arrays of pdf data
+   and two types of output for the concatenated pdf data
+      (1) <a class="code" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a>
+      (2) data array and <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>
+   High-level interfaces are given for each of the six combinations.
+</pre></div> 
 <p>Definition in file <a class="el" href="pdfio_8c_source.html">pdfio.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="af0a52d18423da8247f264dd18ab7ed94"></a><!-- doxytag: member="pdfio.c::L_SMALLBUF" ref="af0a52d18423da8247f264dd18ab7ed94" args="" -->

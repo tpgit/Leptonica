@@ -156,7 +156,65 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Code generator, writes dwa code for user-supplied hit-miss transform Sels. </p>
+<div class="fragment"><pre class="fragment">  Main function calls:
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="fhmtauto_8c.html#a97cd2a554c56907a8f0611ae4d78724e">fhmtautogen</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="fhmtauto_8c.html#a4d66724bc5f27100a760d2eb56d84b80">fhmtautogen1</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="fhmtauto_8c.html#a01d4ea12229ba95b0e5da0a320ae81fd">fhmtautogen2</a>()
 
+  Static helpers:
+     static <a class="code" href="struct_sarray.html">SARRAY</a>      *<a class="code" href="fhmtauto_8c.html#a7bc99f15492cfc8196305ffca7bf71e5">sarrayMakeWplsCode</a>()
+     static <a class="code" href="struct_sarray.html">SARRAY</a>      *<a class="code" href="fhmtauto_8c.html#a7e9a6411ddc276f8e1462b077cb452cc">sarrayMakeInnerLoopDWACode</a>()
+     static <span class="keywordtype">char</span>        *<a class="code" href="fhmtauto_8c.html#acfe6d63e0a6c0424c49f33ceb20a9194">makeBarrelshiftString</a>()
+
+  This automatically generates dwa code for the hit-miss transform.
+  Here&#39;s a road map for how it all works.
+
+  (1) You generate an array (a <a class="code" href="struct_sela.html">SELA</a>) of hit-miss transform SELs.
+      This can be done in several ways, including
+         (a) calling the function <a class="code" href="leptprotos_8h.html#a760046b4eda5885bac763cb685d4684d">selaAddHitMiss</a>() for
+             pre-compiled SELs
+         (b) generating the <a class="code" href="struct_sela.html">SELA</a> in code in line
+         (c) reading in a <a class="code" href="struct_sela.html">SELA</a> from file, using <a class="code" href="leptprotos_8h.html#ac88a47bf9f6ec5764f98cc3924b57e17">selaRead</a>()
+             or various other formats.
+
+  (2) You call <a class="code" href="fhmtauto_8c.html#a4d66724bc5f27100a760d2eb56d84b80">fhmtautogen1</a>() and <a class="code" href="fhmtauto_8c.html#a01d4ea12229ba95b0e5da0a320ae81fd">fhmtautogen2</a>() on this <a class="code" href="struct_sela.html">SELA</a>.
+      This uses the text files hmttemplate1.txt and
+      hmttemplate2.txt for building up the source code.  See the file
+      prog/<a class="code" href="fhmtauto_8c.html#a97cd2a554c56907a8f0611ae4d78724e">fhmtautogen</a>.c for an example of how this is done.
+      The output is written to files named fhmtgen.*.c
+      and fhmtgenlow.*.c, where &quot;*&quot; is an integer that you
+      input to this function.  That integer labels both
+      the output files, as well as all the functions that
+      are generated.  That way, using different integers,
+      you can invoke <a class="code" href="fhmtauto_8c.html#a97cd2a554c56907a8f0611ae4d78724e">fhmtautogen</a>() any number of times
+      to get functions that all have different names so that
+      they can be linked into one program.
+      
+  (3) You copy the generated source code back to your src
+      directory for compilation.  Put their names in the
+      Makefile, regnerate the prototypes, and recompile
+      the libraries.  Look at the Makefile to see how I&#39;ve
+      included fhmtgen.1.c and fhmtgenlow.1.c.  These files
+      provide the high-level interfaces for the hmt, and
+      the low-level interfaces to do the actual work.
+
+  (4) In an application, you now use this interface.  Again
+      for the example files generated, using integer &quot;1&quot;:
+
+         <a class="code" href="struct_pix.html">PIX</a>   *<a class="code" href="fhmtgen_81_8c.html#a24637e30a3e92ce9d0479b8081a36b73">pixHMTDwa_1</a>(<a class="code" href="struct_pix.html">PIX</a> *pixd, <a class="code" href="struct_pix.html">PIX</a> *pixs, <span class="keywordtype">char</span> *selname);
+
+            or
+
+         <a class="code" href="struct_pix.html">PIX</a>   *<a class="code" href="fhmtgen_81_8c.html#a29707f0365a89208dc5d333ebf612124">pixFHMTGen_1</a>(<a class="code" href="struct_pix.html">PIX</a> *pixd, <a class="code" href="struct_pix.html">PIX</a> *pixs, <span class="keywordtype">char</span> *selname);
+
+      where the selname is one of the set that were defined
+      as the name field of sels.  This set is listed at the
+      beginning of the file fhmtgen.1.c.
+      As an example, see the file prog/fmtauto_reg.c, which
+      verifies the correctness of the implementation by
+      comparing the dwa result with that of full-image
+      rasterops. 
+</pre></div> 
 <p>Definition in file <a class="el" href="fhmtauto_8c_source.html">fhmtauto.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a3f45513616abab349630b0ae671d44a1"></a><!-- doxytag: member="fhmtauto.c::OUTROOT" ref="a3f45513616abab349630b0ae671d44a1" args="" -->

@@ -149,7 +149,38 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements queue of generic pointers. </p>
+<div class="fragment"><pre class="fragment">    Create/Destroy <a class="code" href="struct_l___queue.html">L_Queue</a>
+        <a class="code" href="struct_l___queue.html">L_QUEUE</a>    *<a class="code" href="leptprotos_8h.html#a4605e48502cb8599e7c654a0a55b26d2">lqueueCreate</a>()
+        void       *<a class="code" href="leptprotos_8h.html#aaf8649fc1fd226f8a37a79b0736ebba7">lqueueDestroy</a>()
 
+    Operations to add/remove to/from a <a class="code" href="struct_l___queue.html">L_Queue</a>
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ad3ffbbf255ceee47ca0296110f5edb1e">lqueueAdd</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ae2630c590e42a073f77046b2cd3ea42e">lqueueExtendArray</a>()
+        <span class="keywordtype">void</span>       *<a class="code" href="leptprotos_8h.html#a09b5434eb82c54b71b87dac1675f070c">lqueueRemove</a>()
+
+    Accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a9d6db3cd063510290bf7b090c411af20">lqueueGetCount</a>()
+
+    Debug output
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a595222ffdee6522b8a2bc1735419727e">lqueuePrint</a>()
+
+  The lqueue is a fifo that implements a queue of <span class="keywordtype">void</span>* pointers.
+  It can be used to hold a queue of any type of struct.
+  Internally, it maintains two counters: 
+      nhead:  location of head (in ptrs) from the beginning
+              of the buffer
+      nelem:  number of ptr elements stored in the queue
+  As items are added to the queue, nelem increases.
+  As items are removed, nhead increases and nelem decreases.
+  Any time the tail reaches the end of the allocated buffer,
+    all the pointers are shifted to the left, so that the head
+    is at the beginning of the array.
+  If the buffer becomes more than 3/4 full, it doubles in <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>.
+
+  [A circular queue would allow us to skip the shifting and
+  to resize only when the buffer is full.  For most applications,
+  the extra work we do for a linear queue is not significant.]
+</pre></div> 
 <p>Definition in file <a class="el" href="queue_8c_source.html">queue.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aec97d1f2b890df1fafdc0dbc0056a1fc"></a><!-- doxytag: member="queue.c::lqueueCreate" ref="aec97d1f2b890df1fafdc0dbc0056a1fc" args="(l_int32 nalloc)" -->

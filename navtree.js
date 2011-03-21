@@ -1,7 +1,7 @@
 var NAVTREE =
 [
   [ "Leptonica", "index.html", [
-    [ "Main Page", "index.html", null ],
+    [ "Leptonica Reference Documentation", "index.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "BMP_FileHeader", "struct_b_m_p___file_header.html", null ],
       [ "BMP_InfoHeader", "struct_b_m_p___info_header.html", null ],

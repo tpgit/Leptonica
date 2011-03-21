@@ -163,7 +163,98 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements 1d and 2d arrays of generic pointers (Ptra, Ptraa) </p>
+<div class="fragment"><pre class="fragment">    Ptra creation and destruction
+        <a class="code" href="struct_l___ptra.html">L_PTRA</a>      *<a class="code" href="leptprotos_8h.html#a7699f2dc86c5adc2126f99957b1faab9">ptraCreate</a>()
+        void        *<a class="code" href="leptprotos_8h.html#a4338c58714d0c9f55885cf8b06e30b61">ptraDestroy</a>()
 
+    Add/insert/remove/replace generic ptr <span class="keywordtype">object</span>
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a112cd35c86452896946fea43f0d7f149">ptraAdd</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#aecf48ffe2147cc0bd03138d5b9746734">ptraExtendArray</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a5c709d368e78d07c2e9b8c9c62192e29">ptraInsert</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#a8d06d8d2a50ef68d2326b0375f100314">ptraGetHandle</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#acc51f024780a5b15f5ab8975368df2af">ptraRemove</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#a6fc3e7a173dbbd1b4529c346eb39f42c">ptraRemoveLast</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#a89a29130b399d31b6b3673dd8d716e62">ptraReplace</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a5137c5ca6cc7bb9da45ddc1c2a7dac04">ptraSwap</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a0d8a41c0996b76f9e6985f1a734c4ac0">ptraCompactArray</a>()
+
+    Other array operations
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a093112e0f8a676af5732291b079bcda1">ptraReverse</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ac78d9bc28b3e3507ba76eff2f60de8a1">ptraJoin</a>()
+
+    Simple Ptra accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a3d5e5986e2d3a0c076ee6616e6de94c8">ptraGetMaxIndex</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a247d7858d4600838c23cf8293d38ae6b">ptraGetActualCount</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#adc60a78f5eb11ab339025a6bb64f0421">ptraGetPtrToItem</a>()
+
+    Ptraa creation and destruction
+        <a class="code" href="struct_l___ptraa.html">L_PTRAA</a>     *<a class="code" href="leptprotos_8h.html#a0dc3e0a4c9aa59ef86285e4e4c062da8">ptraaCreate</a>()
+        <span class="keywordtype">void</span>        *<a class="code" href="leptprotos_8h.html#af1a72803cafd4887c4b5a1bb1fd0dc29">ptraaDestroy</a>()
+
+    Ptraa accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#ad0e6b104438b7eec88c4046c41dc8913">ptraaGetSize</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="leptprotos_8h.html#a81b37c9d98db04d49c23aa64dbc032f0">ptraaInsertPtra</a>()
+        <a class="code" href="struct_l___ptra.html">L_PTRA</a>      *<a class="code" href="leptprotos_8h.html#a560955634b42acdb60dac408c4bd3ae5">ptraaGetPtra</a>()
+
+    Ptraa conversion
+        <a class="code" href="struct_l___ptra.html">L_PTRA</a>      *<a class="code" href="leptprotos_8h.html#aed61c1dbe9065dab6a93d828aebc735b">ptraaFlattenToPtra</a>()
+
+    Functions using <a class="code" href="struct_l___ptra.html">L_PTRA</a>
+        <a class="code" href="struct_numa.html">NUMA</a>        *<a class="code" href="leptprotos_8h.html#a15fd71d08d234b57a7688eed76b2a621">numaGetBinSortIndex</a>()
+
+  Notes on the Ptra:
+
+  (1) The Ptra is a struct, not an array.  Always use the accessors
+      in this file, never the fields directly.
+  (2) Items can be placed anywhere in the allocated ptr array,
+      including one index beyond the last ptr (in which case the
+      ptr array is realloc&#39;<a class="code" href="struct_pix.html#a180bb054e9b41bd59b8e2285830bd64e">d</a>).
+  (3) Thus, the items on the ptr array need not be compacted.  In
+      general there will be null pointers in the ptr array.
+  (4) A compacted array will remain compacted on removal if
+      arbitrary items are removed with compaction, or if items
+      are removed from the end of the array.
+  (5) For addition to and removal from the end of the array, this
+      functions exactly like a stack, and with the same O(1) cost.
+  (6) This differs from the generic stack in that we allow
+      random access for insertion, removal and replacement.
+      Removal can be done without compacting the array.
+      Insertion into a null ptr in the array has no effect on
+      the other pointers, but insertion into a location already
+      occupied by an item has a cost proportional to the
+      distance to the next null ptr in the array.
+  (7) Null ptrs are valid input args for both insertion and
+      replacement; this allows arbitrary swapping.
+  (8) The item in the array with the largest index is at pa-&gt;imax.
+      This can be any value from -1 (initialized; all array ptrs
+      are null) up to pa-&gt;nalloc - 1 (the last ptr in the array).
+  (9) In referring to the array: the first ptr is the &quot;top&quot; or
+      &quot;beginning&quot;; the last pointer is the &quot;bottom&quot; or &quot;end&quot;;
+      items are shifted &quot;up&quot; towards the top when compaction occurs;
+      and items are shifted &quot;down&quot; towards the bottom when forced to
+      move due to an insertion.
+ (10) It should be emphasized that insertion, removal and replacement
+      are general:
+ You can insert an item into any ptr location in the
+         allocated ptr array, as well as into the next ptr address
+         beyond the allocated array (in which case a realloc will occur).   
+ You can remove or replace an item from any ptr location
+         in the allocated ptr array.
+ When inserting into an occupied location, you have
+         three options for downshifting.
+ When removing, you can either leave the ptr null or
+         compact the array.
+
+  Notes on the Ptraa:
+
+  (1) The Ptraa is a fixed <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> ptr array for holding Ptra.
+      In that respect, it is different from other pointer arrays, which
+      are extensible and grow using the *Add*() functions.
+  (2) In general, the Ptra ptrs in the Ptraa can be randomly occupied.
+      A typical usage is to allow an O(n) horizontal sort of <a class="code" href="struct_pix.html">Pix</a>,
+      where the <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> of the Ptra array is the width of the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>,
+      and each Ptra is an array of all the Pix at a specific x location.
+</pre></div> 
 <p>Definition in file <a class="el" href="ptra_8c_source.html">ptra.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a3115b8ea3860d455064aab0d4e48e7fd"></a><!-- doxytag: member="ptra.c::ptraCreate" ref="a3115b8ea3860d455064aab0d4e48e7fd" args="(l_int32 n)" -->

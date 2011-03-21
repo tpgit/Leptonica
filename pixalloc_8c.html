@@ -154,7 +154,17 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Custom memory allocation for <a class="el" href="struct_pix.html">Pix</a> memory. </p>
+<div class="fragment"><pre class="fragment">    Custom memory storage with allocator and deallocator
 
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#aea041e96ed9efc1ccc647afb8a8d9b4e">pmsCreate</a>()
+        void          <a class="code" href="leptprotos_8h.html#a9fe96f718380a805d8007918dbb835da">pmsDestroy</a>()
+        <span class="keywordtype">void</span>         *<a class="code" href="leptprotos_8h.html#a02c10474413407207072018772c1d7ac">pmsCustomAlloc</a>()
+        <span class="keywordtype">void</span>          <a class="code" href="leptprotos_8h.html#a55558c127ec63cfe0145d506deeea7ed">pmsCustomDealloc</a>()
+        <span class="keywordtype">void</span>         *<a class="code" href="leptprotos_8h.html#a83661a6b0ad1d75a742dd5bfcfe7db9f">pmsGetAlloc</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a186fd7c98f9b153856e69d97dcb09922">pmsGetLevelForAlloc</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a239dc24fbeb62807f78a5fad0e1f73e5">pmsGetLevelForDealloc</a>()
+        <span class="keywordtype">void</span>          <a class="code" href="leptprotos_8h.html#a6e9f6308f959e9d34b621b4ac817f441">pmsLogInfo</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="pixalloc_8c_source.html">pixalloc.c</a>.</p>
 </div><hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="a10a80d5c92ac035abd7b2c7e5a858359"></a><!-- doxytag: member="pixalloc.c::L_PIX_MEM_STORE" ref="a10a80d5c92ac035abd7b2c7e5a858359" args="" -->

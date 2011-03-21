@@ -138,7 +138,46 @@ Typedefs</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Struct for representing generic expandable priority queue (<a class="el" href="struct_l___heap.html">L_Heap</a>) </p>
+<div class="fragment"><pre class="fragment">    Expandable priority queue configured as a heap <span class="keywordflow">for</span> arbitrary <span class="keywordtype">void</span>* data
 
+    The <a class="code" href="struct_l___heap.html">L_Heap</a> is used to implement a priority queue.  The elements
+    in the heap are ordered in either increasing or decreasing key value.
+    The key is a <span class="keywordtype">float</span> field <span class="stringliteral">&#39;keyval&#39;</span> that is required to be
+    contained in the elements of the queue.
+ 
+    The heap is a simple binary tree with the following constraints:
+       - the key of each node is &gt;= the keys of the two children
+       - the tree is complete, meaning that each level (1, 2, 4, ...)
+         is filled and the last level is filled from left to right
+
+    The tree structure is implicit in the queue array, with the
+    array elements numbered as a breadth-first search of the tree
+    from left to right.  It is thus guaranteed that the largest
+    (or smallest) key belongs to the first element in the array.
+
+    Heap sort is used to sort the array.  Once an array has been
+    sorted as a heap, it is convenient to use it as a priority queue,
+    because the min (or max) elements are always at the root of
+    the tree (element 0), and once removed, the heap can be
+    resorted in not more than log[n] steps, where n is the number
+    of elements on the heap.  Likewise, if an arbitrary element is
+    added to the end of the array A, the sorted heap can be restored
+    in not more than log[n] steps.
+
+    A <a class="code" href="struct_l___heap.html">L_Heap</a> differs from a <a class="code" href="struct_l___queue.html">L_Queue</a> in that the elements in the former
+    are sorted by a key.  Internally, the array is maintained
+    as a queue, with a pointer to the end of the array.  The
+    head of the array always remains at array[0].  The array is
+    maintained (sorted) as a heap.  When an item is removed from
+    the head, the last item takes its place (thus reducing the
+    array length by 1), and this is followed by array element
+    swaps to restore the heap property.   When an item is added,
+    it goes at the end of the array, and is swapped up to restore
+    the heap.  If the ptr array is full, adding another item causes
+    the ptr array <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> to <span class="keywordtype">double</span>.
+    
+    For further implementation details, see heap.c.
+</pre></div> 
 <p>Definition in file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
 </div><hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="a0311a12ab653ff0b7681fbf363d57bc4"></a><!-- doxytag: member="heap.h::L_HEAP" ref="a0311a12ab653ff0b7681fbf363d57bc4" args="" -->

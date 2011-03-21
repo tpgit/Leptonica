@@ -165,7 +165,43 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_box.html">Box</a> intersection, union, containment; <a class="el" href="struct_boxa.html">Boxa</a> union, extent, permutation. </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_box.html">Box</a> geometry
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a77d61926edc3fd6a9c9dc835215446df">boxContains</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a53d6bcaba9d945e014ded0f6a8797a87">boxIntersects</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#a34c4b4f11b13c40d6461822c7153fa20">boxaContainedInBox</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#a58d630acf422576941d2e4f54cb3b277">boxaIntersectsBox</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#a8fbbe8c99cfc171cc5449bb8f623b0b8">boxaClipToBox</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#a42ee9e3a7bfd5168b4fcb70f3ea8ad3c">boxaCombineOverlaps</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxfunc1_8c.html#a8647c990ccaecd8f886a8e5c1c9300cb">boxOverlapRegion</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxfunc1_8c.html#ac89cee48fb0fa3843d568fdbdb26a162">boxBoundingRegion</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a9e2c1c99eda405f1117dfdd2bd92d8f8">boxOverlapFraction</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#ad4bfe780cc3ba8ad6b8e82be17f28386">boxContainsPt</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxfunc1_8c.html#a1cbfbd753cab482c7ac00023db910034">boxaGetNearestToPt</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a00e5892f9c6c64b127c72229b1f5efd2">boxIntersectByLine</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a15f4760d5f1aa46dbd3688a2b33d89a3">boxGetCenter</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxfunc1_8c.html#a474167386fb9f702208ace3de6fc8e09">boxClipToRectangle</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxfunc1_8c.html#a24e42510b722e8805689f82522455cc3">boxRelocateOneSide</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxfunc1_8c.html#aed8fcef2e9caac631fb5bd65a018175e">boxAdjustSides</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#aa56c130d5c545e703d0a008fa55c1310">boxEqual</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a5e9b2d2e1921e6710db3c935ccc114e1">boxaEqual</a>()
 
+    <a class="code" href="struct_boxa.html">Boxa</a> combination
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a4c7b344ce775177418eaee2b0a03bd47">boxaJoin</a>()
+
+    Other boxa functions
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a1adc6888b47fedf51f5866ddc8407694">boxaGetExtent</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a2d9b1f0e5e9fe1dcf4b10b0ca8e5470c">boxaGetCoverage</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a5a1705b57be6f7b8f3da4f04f326999b">boxaSizeRange</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#ad2a8deb180f3c2ef8dcb6e133bdec53f">boxaLocationRange</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#a2f7eac861b2be231f1377d4506692bc0">boxaSelectBySize</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>     *<a class="code" href="boxfunc1_8c.html#ab5748c529e993aadb996c31b4edcebea">boxaMakeSizeIndicator</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#af001464bd491da0df682929d9929ed41">boxaSelectWithIndicator</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#ad4c4475be2ec50ae2a28db76b2cee3d2">boxaPermutePseudorandom</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#abef3f3424719a3398b063ed4c257fea8">boxaPermuteRandom</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxfunc1_8c.html#a563a7308bbc44e9a2725480ee895a145">boxaSwapBoxes</a>()
+         <a class="code" href="struct_pta.html">PTA</a>      *<a class="code" href="boxfunc1_8c.html#ab9afde5d4487662c8976c0c04d1aa28d">boxaConvertToPta</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxfunc1_8c.html#a42208dc68600e013f45365ad9ebb63aa">ptaConvertToBoxa</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="boxfunc1_8c_source.html">boxfunc1.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a77d61926edc3fd6a9c9dc835215446df"></a><!-- doxytag: member="boxfunc1.c::boxContains" ref="a77d61926edc3fd6a9c9dc835215446df" args="(BOX *box1, BOX *box2, l_int32 *presult)" -->

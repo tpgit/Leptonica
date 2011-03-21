@@ -142,7 +142,35 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Paint onto colormap images - regions, masks. </p>
+<div class="fragment"><pre class="fragment">    These in-place functions paint onto colormap images.
 
+    Repaint selected pixels in region
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a1d0027f524993f58b88a5589df046f84">pixSetSelectCmap</a>()
+
+    Repaint non-white pixels in region
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a173b1fc0ec5148e58c1390c743110123">pixColorGrayCmap</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a5bc75c19a35a189032651dc4a157280c">addColorizedGrayToCmap</a>()
+
+    Repaint selected pixels through mask
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#acf3ad19615cb32bc73018d43da9e394f">pixSetSelectMaskedCmap</a>()
+
+    Repaint all pixels through mask
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aae81fbb45def1b0adc2deac004e11cce">pixSetMaskedCmap</a>()
+
+
+The &#39;set select&#39; functions condition the setting on a specific
+pixel value (i.e., index into the colormap) of the underyling
+<a class="code" href="struct_pix.html">Pix</a> that is being modified.  The same conditioning is used in
+<a class="code" href="blend_8c.html#ad4e4745c0c48b3ae04b988e21386d2f3">pixBlendCmap</a>().
+
+The <a class="code" href="leptprotos_8h.html#a173b1fc0ec5148e58c1390c743110123">pixColorGrayCmap</a>() function sets all truly gray (r = g = b) pixels,
+with the exception of either black or white pixels, to a new color.
+
+The <a class="code" href="leptprotos_8h.html#acf3ad19615cb32bc73018d43da9e394f">pixSetSelectMaskedCmap</a>() function conditions pixel painting
+on both a specific pixel value and location within the fg mask.
+By contrast, <a class="code" href="leptprotos_8h.html#aae81fbb45def1b0adc2deac004e11cce">pixSetMaskedCmap</a>() sets all pixels under the
+mask foreground, without considering the initial pixel values.
+</pre></div> 
 <p>Definition in file <a class="el" href="paintcmap_8c_source.html">paintcmap.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a8bcd53f160ca873e73874c37c945092c"></a><!-- doxytag: member="paintcmap.c::pixSetSelectCmap" ref="a8bcd53f160ca873e73874c37c945092c" args="(PIX *pixs, BOX *box, l_int32 sindex, l_int32 rval, l_int32 gval, l_int32 bval)" -->

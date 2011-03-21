@@ -169,7 +169,61 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Rendering shapes from lines (using <a class="el" href="struct_pta.html">Pta</a> representation) </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_pta.html">Pta</a> generation <span class="keywordflow">for</span> arbitrary shapes built with lines
 
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#aa840b849663d9a26433ce764131f95bc">generatePtaLine</a>()
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#ae066afa27d60c4e36d8fae8a52119ddc">generatePtaWideLine</a>()
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#a42fddf42c3282c5ce87f675668127559">generatePtaBox</a>()
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#aacef844c33ea3f3bd24e08a185f4356d">generatePtaHashBox</a>()
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#ae87ee0c2390a6d182be109d5d8148601">generatePtaBoxa</a>()
+        <a class="code" href="struct_ptaa.html">PTAA</a>       *<a class="code" href="graphics_8c.html#a9933631b2a46e5d22a845e28cb282581">generatePtaaBoxa</a>()
+        <a class="code" href="struct_ptaa.html">PTAA</a>       *<a class="code" href="graphics_8c.html#a58773bf361c94628669b9a6426529022">generatePtaaHashBoxa</a>()
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#a601f26b4200181d60eb082aeb5d4a0a6">generatePtaPolyline</a>()
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#af5126341b3658c5634280823d91b90ef">generatePtaFilledCircle</a>()
+        <a class="code" href="struct_pta.html">PTA</a>        *<a class="code" href="graphics_8c.html#a9943ee2d300312513c3273cb08490517">generatePtaLineFromPt</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#acb199a352e527027ea9a8e3dd6e54175">locatePtRadially</a>()
+
+    <a class="code" href="struct_pta.html">Pta</a> rendering
+
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a3303328fc720fc46b9dc9bb659422d48">pixRenderPta</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a6fe43f380fb611f8fa175799a40ff8e4">pixRenderPtaArb</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a89481f674a074bfdce76cd433c4b86f2">pixRenderPtaBlend</a>()
+
+    Rendering of arbitrary shapes built with lines
+
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a2ad6646f605b52b69ffb848bb7c21de7">pixRenderLine</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a7ca2a992e615660f79d781b935e7ac45">pixRenderLineArb</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a1496859a81fc84fc11ce1bf8865265a1">pixRenderLineBlend</a>()
+
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a115b9033e0cd8f41561baaab6fadbca3">pixRenderBox</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a2978ca29c3f2226604bb56ed005f94e3">pixRenderBoxArb</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#aca5659f61604e893ff357f1c4dba3b1a">pixRenderBoxBlend</a>()
+
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#afe1775526d1a439174d8ff95169952eb">pixRenderHashBox</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a5c7fbf05971a9245cc3141c4ff5634b2">pixRenderHashBoxArb</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a28883e27d0567f6d4d9e5908016e546e">pixRenderHashBoxBlend</a>()
+
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#ae92ca7a9480cee42967e96b4a91c40e8">pixRenderBoxa</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#aeb4f7f3c1fa27bf6e919d812306830ae">pixRenderBoxaArb</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a038a3ec828ea2f6576ecbd53b61c0330">pixRenderBoxaBlend</a>()
+
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a1e318928d775577e7c555bc4e433d06f">pixRenderPolyline</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#ae9705038b54578a926b4089db998949a">pixRenderPolylineArb</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a997a0856ac39d4d7499c86551e50d6e7">pixRenderPolylineBlend</a>()
+
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="graphics_8c.html#a45d43918c108ace55145f616483d8d25">pixRenderRandomCmapPtaa</a>()
+
+    Contour rendering on grayscale images
+
+        <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="graphics_8c.html#aeff29fdff97ab72f7949256d66306855">pixRenderContours</a>()
+        <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="graphics_8c.html#aa71974954e2bda61cb397c1b6f3d56c3">fpixRenderContours</a>()
+
+The line rendering functions are relatively crude, but they
+get the job done for most simple situations.  We use the pta
+as an intermediate data structure.  A pta is generated
+for a line.  One of two rendering functions are used to
+render this onto a <a class="code" href="struct_pix.html">Pix</a>.
+</pre></div> 
 <p>Definition in file <a class="el" href="graphics_8c_source.html">graphics.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aa840b849663d9a26433ce764131f95bc"></a><!-- doxytag: member="graphics.c::generatePtaLine" ref="aa840b849663d9a26433ce764131f95bc" args="(l_int32 x1, l_int32 y1, l_int32 x2, l_int32 y2)" -->

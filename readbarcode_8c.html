@@ -168,7 +168,55 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Early beta code for locating and identifying line widths in 1d barcodes. </p>
+<div class="fragment"><pre class="fragment">    Basic operations to locate and identify the line widths
+    in 1D barcodes.
 
+    Top level
+        <a class="code" href="struct_sarray.html">SARRAY</a>          *<a class="code" href="leptprotos_8h.html#a5ddf6386db8ae843633a9a198f6e53cc">pixProcessBarcodes</a>()
+
+    Next levels
+        <a class="code" href="struct_pixa.html">PIXA</a>            *<a class="code" href="leptprotos_8h.html#a7d98e57198fe0dfb9102ec5eb8aa9452">pixExtractBarcodes</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>          *<a class="code" href="leptprotos_8h.html#accdfae71621e9b73b1fad1156b538ff9">pixReadBarcodes</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a5767967db3ba34c20f579177a7b2d960">pixReadBarcodeWidths</a>()
+
+    Location
+        <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="leptprotos_8h.html#a5f37e84334bbb2e288622b44014fbfe6">pixLocateBarcodes</a>()
+        static <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="readbarcode_8c.html#aa1b7b849ab91dc5158dbbfc869e2d701">pixGenerateBarcodeMask</a>()
+
+    Extraction and deskew
+        <a class="code" href="struct_pixa.html">PIXA</a>            *pixDeskewBarcodes()  
+
+    Process to get line widths
+        <a class="code" href="struct_numa.html">NUMA</a>            *<a class="code" href="leptprotos_8h.html#ae64a3f0049c2c6c0b724a5f205e2800c">pixExtractBarcodeWidths1</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>            *<a class="code" href="leptprotos_8h.html#ac78dbd93edb4c82cc5ee2f48f6ce6991">pixExtractBarcodeWidths2</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>            *<a class="code" href="leptprotos_8h.html#ab979faa2461247ac805e2552659609f6">pixExtractBarcodeCrossings</a>()
+
+    Average adjacent rasters
+        static <a class="code" href="struct_numa.html">NUMA</a>     *<a class="code" href="readbarcode_8c.html#a34e660b328157290f06093bca19e4e0b">pixAverageRasterScans</a>() 
+
+    Signal processing for barcode widths
+        <a class="code" href="struct_numa.html">NUMA</a>            *<a class="code" href="leptprotos_8h.html#af0f11c4535bd8d938c431a79f6018813">numaQuantizeCrossingsByWidth</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="readbarcode_8c.html#a23afe80142caa98560be1464b16363da">numaGetCrossingDistances</a>()
+        static <a class="code" href="struct_numa.html">NUMA</a>     *<a class="code" href="readbarcode_8c.html#a9b507bd392dea72296ea05d529f245ee">numaLocatePeakRanges</a>()
+        static <a class="code" href="struct_numa.html">NUMA</a>     *<a class="code" href="readbarcode_8c.html#aa2af8232b07e71913d798cddbeed75ee">numaGetPeakCentroids</a>()
+        static <a class="code" href="struct_numa.html">NUMA</a>     *<a class="code" href="readbarcode_8c.html#abb480a1f0c4fbb6b84c4132ab5dfcdfa">numaGetPeakWidthLUT</a>()
+        <a class="code" href="struct_numa.html">NUMA</a>            *<a class="code" href="leptprotos_8h.html#a149bd0f2022a30a59e753f641d87d88b">numaQuantizeCrossingsByWindow</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="readbarcode_8c.html#a53dd2e7742e0fca1008451b3de3abdb9">numaEvalBestWidthAndShift</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="readbarcode_8c.html#ac7f20761ad2f06691fae8291865323fe">numaEvalSyncError</a>()
+
+
+NOTE CAREFULLY: This is &quot;early beta&quot; code.  It has not been tuned
+to work robustly on a large database of barcode images.  I&#39;m putting
+it out so that people can play with it, find out how it breaks, and
+contribute decoders for other barcode formats.  Both the functional
+interfaces and ABI will almost certainly change in the coming
+few months.  The actual decoder, in bardecode.c, at present only
+works on the following codes: Code I2of5, Code 2of5, Code 39, Code 93
+<a class="code" href="readbarcode_8h.html#a9430bbcd96a80ffac60b37ed0264deee">Codabar</a> and UPCA.  To add another barcode format, it is necessary
+to make changes in readbarcode.h and bardecode.c.
+The program prog/barcodetest shows how to run from the top level
+(image --&gt; decoded data).
+</pre></div> 
 <p>Definition in file <a class="el" href="readbarcode_8c_source.html">readbarcode.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ac5b130e4af1a2fbb19e5b18135f6868b"></a><!-- doxytag: member="readbarcode.c::DEBUG_DESKEW" ref="ac5b130e4af1a2fbb19e5b18135f6868b" args="" -->

@@ -172,7 +172,68 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level implementation of scaling functions. </p>
+<div class="fragment"><pre class="fragment">       Color (interpolated) scaling: general case
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a98481d5a37a6463bf69e76c668bf064b">scaleColorLILow</a>()
 
+       Grayscale (interpolated) scaling: general case
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ac0d83ed0ff45b3a18c7edd2ba658896a">scaleGrayLILow</a>()
+
+       Color (interpolated) scaling: 2x upscaling
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ad1a688c4e1f0b789b37657fdaa7fdf16">scaleColor2xLILow</a>()
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ad9f6e17b9f6352596f357f63cffe7a22">scaleColor2xLILineLow</a>()
+
+       Grayscale (interpolated) scaling: 2x upscaling
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a1286355f0eb32c182e665bc8f6b53c81">scaleGray2xLILow</a>()
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#abbe84ec3f9bca2f06b08e418fefa7b96">scaleGray2xLILineLow</a>()
+
+       Grayscale (interpolated) scaling: 4x upscaling
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a8b060cb263b3c5d95821273103dd5f21">scaleGray4xLILow</a>()
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#af7ee25ab247b0604dd4623ba75675af9">scaleGray4xLILineLow</a>()
+
+       Grayscale and color scaling by closest pixel sampling
+                <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#adba9a7021cc14c6f4fee2c0def3533eb">scaleBySamplingLow</a>()
+
+       Color and grayscale downsampling with (antialias) lowpass filter
+                <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a4f6f216c0b434f44dc767505b129a296">scaleSmoothLow</a>()
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a69019df3a7ab17f0eeff3ae5b3e62baa">scaleRGBToGray2Low</a>()
+
+       Color and grayscale downsampling with (antialias) area mapping
+                <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a8bb3a9efeb2ed3fecb282c360f4bf969">scaleColorAreaMapLow</a>()
+                <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a1981c522033d57cffaa880608ac1b034">scaleGrayAreaMapLow</a>()
+                <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a5414b0dd9dab76d55ddd0531ad24c895">scaleAreaMapLow2</a>()
+
+       Binary scaling by closest pixel sampling
+                <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a22af42cf4497cd9f7ff6440bee1d4a1c">scaleBinaryLow</a>()
+
+       Scale-to-gray 2x
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a7a657556e9f837142b3b37f5b69cc4d3">scaleToGray2Low</a>()
+                <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>  *<a class="code" href="leptprotos_8h.html#a47fe6e34800b3e9f72e9d6e456812765">makeSumTabSG2</a>()
+                <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a076aa5880b6941c76a856c3f5717333d">makeValTabSG2</a>()
+
+       Scale-to-gray 3x
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a7575744c99b24b79a58354b8c7ff751d">scaleToGray3Low</a>()
+                <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>  *<a class="code" href="leptprotos_8h.html#ab150f72dee435427b6d983d6767c0b23">makeSumTabSG3</a>()
+                <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a816198aa07e79f16736501a2733a7614">makeValTabSG3</a>()
+
+       Scale-to-gray 4x
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a41a5c1ab3a3c18e628e016b5fa1ab474">scaleToGray4Low</a>()
+                <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>  *<a class="code" href="leptprotos_8h.html#a0c0304ed6a0dd7e88e8791b7af40e814">makeSumTabSG4</a>()
+                <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a48a49271262147b91eef69297b678c7e">makeValTabSG4</a>()
+
+       Scale-to-gray 6x
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a2b3921f340b2ea97254cd13a5aa9838c">scaleToGray6Low</a>()
+                <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a4e22341eb0683723e3b7133969a0276a">makeValTabSG6</a>()
+
+       Scale-to-gray 8x
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ad3a5584d750aca2612a6e47c15e1acbe">scaleToGray8Low</a>()
+                <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a84985477c21e8a7e81c66353e39d8c96">makeValTabSG8</a>()
+
+       Scale-to-gray 16x
+                <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a17c4a960a07536d47acb976238c3ce6b">scaleToGray16Low</a>()
+
+       Grayscale mipmap
+                <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a47b85cc3632882162f0e733b58df94f4">scaleMipmapLow</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="scalelow_8c_source.html">scalelow.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a2e6ef1d051de5adf2891411a48101974"></a><!-- doxytag: member="scalelow.c::DEBUG_OVERFLOW" ref="a2e6ef1d051de5adf2891411a48101974" args="" -->

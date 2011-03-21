@@ -173,7 +173,32 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_pix.html">Pix</a> to memory and disk; selecting format. </p>
+<div class="fragment"><pre class="fragment">   High-level procedures <span class="keywordflow">for</span> writing images to file:
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a272764210c00ebd4722ba4271dd8f0cf">pixaWriteFiles</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a5a9a534e77de5e57d74ff3d678ca59e0">pixWrite</a>()    [behavior depends on <a class="code" href="writefile_8c.html#a9b002dd91b762e62c7ddab0b72d8e58d">WRITE_AS_NAMED</a>]
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab5b5cb272959ae58013608ef003ee8c4">pixWriteStream</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a2b9a72c7c023590d61c23cd83fecce45">pixWriteImpliedFormat</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ac9410acecd625250fa039e79ffd8e6a7">pixWriteTempfile</a>()
 
+   Selection of output format if default is requested
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab72d1c4f19b281d7f3ba191f6c41aa6d">pixChooseOutputFormat</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a21157d10ee5884114b4f9f4396652b61">getImpliedFileFormat</a>()
+      const <span class="keywordtype">char</span> *<a class="code" href="leptprotos_8h.html#a5bffb82d89cf2b612c5304b20f479f49">getFormatExtension</a>()
+
+   Write to memory
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a85c946d975a30bd258dbd451315ffe08">pixWriteMem</a>()
+
+   Image <a class="code" href="struct_l___reg_params.html#a6907e4514a9014ba21bb23e5faf85923">display</a> for debugging
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ae8a779aa459f8d1c386363bf2a5c06f5">pixDisplay</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#abfdb7bca89ec16e69b7f9748823cf7aa">pixDisplayWithTitle</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a19758131737f1ef664bb58e9e4ee9ac3">pixDisplayMultiple</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a5f7e20d7f986e81b5caa47e38def8985">pixDisplayWrite</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a08e3c51293e0ca20859055fedab8182d">pixDisplayWriteFormat</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a5bdc8398d337c9a8a7495421d34b8f2d">pixSaveTiled</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab7181702d648784337bfc14fd136ebb5">pixSaveTiledOutline</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#addcc499e0354b66c9222cdc3305aeb3a">pixSaveTiledWithText</a>()
+      <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#ac5d22d3cb2d3a5c61b12147e7f8ca9a0">l_chooseDisplayProg</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="writefile_8c_source.html">writefile.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a9b002dd91b762e62c7ddab0b72d8e58d"></a><!-- doxytag: member="writefile.c::WRITE_AS_NAMED" ref="a9b002dd91b762e62c7ddab0b72d8e58d" args="" -->

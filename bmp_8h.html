@@ -145,7 +145,15 @@ Typedefs</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Structs for bmp file format (uncompressed) </p>
-
+<div class="fragment"><pre class="fragment"> This file is here to describe the fields in the <a class="code" href="alltests__reg_8c.html#ae64f2c0aa53b2c8ed55b251ca159af46">header</a> of
+ the BMP file.  These fields are not used directly in Leptonica.
+ The only thing we use are the <a class="code" href="genfonts_8c.html#a7b4fcaf183d9c0d1f71be15c145df1e0">sizes</a> of these two headers.
+ Furthermore, because of potential <span class="keyword">namespace </span>conflicts with
+ the typedefs and defined <a class="code" href="genfonts_8c.html#a7b4fcaf183d9c0d1f71be15c145df1e0">sizes</a>, we have changed the names
+ to protect anyone who may also need to use the original definitions.
+ Thanks to J. D. Bryan for pointing out the potential problems when
+ developing on Win32 compatible systems.
+</pre></div> 
 <p>Definition in file <a class="el" href="bmp_8h_source.html">bmp.h</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a90aeed1cb2bc4d1ab703c222dd6d68fe"></a><!-- doxytag: member="bmp.h::BMP_FHBYTES" ref="a90aeed1cb2bc4d1ab703c222dd6d68fe" args="" -->

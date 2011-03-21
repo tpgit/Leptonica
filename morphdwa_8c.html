@@ -153,7 +153,105 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Binary morphological (dwa) operations. </p>
+<div class="fragment"><pre class="fragment">  Binary morphological (dwa) ops with brick Sels
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a9fd643b4fc2b9372f680028cf91b20e5">pixDilateBrickDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a2c76ba7c0b70219317a602629f9d50c9">pixErodeBrickDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a84d7fa57c639e5cc5bed6afb0a983d6c">pixOpenBrickDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a2ce8942e37166b655a29ef9c45d36699">pixCloseBrickDwa</a>()
 
+  Binary composite morphological (dwa) ops with brick Sels
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#ae24807fa6a805f60743348780d4b2c18">pixDilateCompBrickDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a4359415193a8758775ea59403681d008">pixErodeCompBrickDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#ab7a8302baca4870b117511bb58e79a3a">pixOpenCompBrickDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a038ec5dd9dfb132f81a5e11cc85fbd63">pixCloseCompBrickDwa</a>()
+
+  Binary extended composite morphological (dwa) ops with brick Sels
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a21a18ba471dc01f3943f8b5cabd5016d">pixDilateCompBrickExtendDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a7fb7c7078fb9dc92485a852b46744b67">pixErodeCompBrickExtendDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#aaa3cbb6eb7845eb024227e7f5ddb3009">pixOpenCompBrickExtendDwa</a>()
+       <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#a8182ead0590035172676f9ef9d78ec56">pixCloseCompBrickExtendDwa</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  <a class="code" href="leptprotos_8h.html#a7f2d0705be57a58f2ae189b9861bd8ea">getExtendedCompositeParameters</a>()
+
+  These are higher-level interfaces for dwa morphology with brick Sels.
+  Because many morphological operations are performed using
+  separable brick Sels, it is useful to have a simple interface
+  for this.
+
+  We have included all 58 of the brick Sels that are generated
+  by <a class="code" href="leptprotos_8h.html#a77c6613db8b2ca9f7d8a441d2c6d2aef">selaAddBasic</a>().  These are sufficient for all the decomposable
+  bricks up to <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> 63, which is the limit for dwa Sels with
+  origins at the center of the Sel.
+
+  All three sets can be used as the basic interface for general
+  brick operations.  Here are the internal calling sequences:
+
+    (1) If you try to apply a non-decomposable operation, such as
+        <a class="code" href="leptprotos_8h.html#a2c76ba7c0b70219317a602629f9d50c9">pixErodeBrickDwa</a>(), with a Sel size that doesn&#39;t exist,
+        this calls a decomposable operation, <a class="code" href="leptprotos_8h.html#a4359415193a8758775ea59403681d008">pixErodeCompBrickDwa</a>(),
+        instead.  This can differ in linear Sel size by up to
+        2 pixels from the request.
+
+    (2) If either Sel brick dimension is greater than 63, the extended
+        composite function is called.
+
+    (3) The extended composite function calls the composite function
+        a number of times with size 63, and once with size &lt; 63.
+        Because each operation with a size of 63 is done compositely
+        with 7 x 9 (exactly 63), the net result is correct in
+        length to within 2 pixels.
+
+  For composite operations, both using a comb and extended (beyond 63),
+  horizontal and vertical operations are composed separately
+  and sequentially.
+
+  We have also included use of all the 76 comb Sels that are generated
+  by <a class="code" href="leptprotos_8h.html#aca0c3dde02c3cb39a8a9c6e1683ce415">selaAddDwaCombs</a>().  The generated code is in dwacomb.2.c
+  and dwacomblow.2.c.  These are used for the composite dwa
+  brick operations.
+
+  The non-composite brick operations, such as <a class="code" href="leptprotos_8h.html#a9fd643b4fc2b9372f680028cf91b20e5">pixDilateBrickDwa</a>(),
+  will call the associated composite operation in situations where
+  the requisite brick Sel has not been compiled into fmorphgen*.1.c.
+
+  If you want to use brick Sels that are not represented in the
+  basic set of 58, you must generate the dwa code to implement them.
+  You have three choices for how to use these:
+
+  (1) Add both the new Sels and the dwa code to the library:
+      - For simplicity, add your new brick Sels to those defined
+        in <a class="code" href="leptprotos_8h.html#a77c6613db8b2ca9f7d8a441d2c6d2aef">selaAddBasic</a>().
+      - Recompile the library.
+      - Make prog/<a class="code" href="fmorphauto_8c.html#a56512d7a2246929852ba7c1ebc74f5bd">fmorphautogen</a>.
+      - Run prog/<a class="code" href="fmorphauto_8c.html#a56512d7a2246929852ba7c1ebc74f5bd">fmorphautogen</a>, to generate new versions of the
+        dwa code in fmorphgen.1.c and fmorphgenlow.1.c.
+      - Copy these two files to src.
+      - Recompile the library again.
+      - Use the new brick Sels in your program and compile it.
+
+  (2) Make both the new Sels and dwa code outside the library,
+      and link it directly to an executable:
+      - Write a function to generate the new Sels in a <a class="code" href="struct_sela.html">Sela</a>, and call
+        fmorphautogen(sela, &lt;N&gt;, <a class="code" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a>) to generate the code.
+      - Compile your program that uses the newly generated function
+        pixMorphDwa_&lt;N&gt;(), and link to the two new C files.
+
+  (3) Make the new Sels in the library and use the dwa code outside it:
+      - Add code in the library to generate your new brick Sels.
+        (It is suggested that you NOT add these Sels to the
+        <a class="code" href="leptprotos_8h.html#a77c6613db8b2ca9f7d8a441d2c6d2aef">selaAddBasic</a>() function; write a new function that generates
+        a new Sela.)
+      - Recompile the library.
+      - Write a small program that generates the Sela and calls
+        fmorphautogen(sela, &lt;N&gt;, <a class="code" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a>) to generate the code.
+      - Compile your program that uses the newly generated function
+        pixMorphDwa_&lt;N&gt;(), and link to the two new C files.
+     As an example of this approach, see prog/dwamorph*_reg.c:
+      - added <a class="code" href="leptprotos_8h.html#a32f71826d8017221e6ad43f326c64284">selaAddDwaLinear</a>() to sel2.c
+      - wrote dwamorph1_reg.c, to generate the dwa code.
+      - compiled and linked the generated code with the application,
+        dwamorph2_reg.c.  (Note: because this was a regression test,
+        dwamorph1_reg also builds and runs the application program.)
+</pre></div> 
 <p>Definition in file <a class="el" href="morphdwa_8c_source.html">morphdwa.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a903ccd39e69e441aaf142d99f616265d"></a><!-- doxytag: member="morphdwa.c::DEBUG_SEL_LOOKUP" ref="a903ccd39e69e441aaf142d99f616265d" args="" -->

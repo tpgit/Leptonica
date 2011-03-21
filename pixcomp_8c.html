@@ -176,7 +176,82 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Handles compressed pix arrays in memory. </p>
+<div class="fragment"><pre class="fragment">    Pixcomp creation and destruction
+         <a class="code" href="struct_pix_comp.html">PIXC</a>     *<a class="code" href="leptprotos_8h.html#a7335f000336ef8b2a2f78dc5e58b3a12">pixcompCreateFromPix</a>()
+         <a class="code" href="struct_pix_comp.html">PIXC</a>     *<a class="code" href="leptprotos_8h.html#aa658bdbd3331b7216424242fa8f18a39">pixcompCreateFromString</a>()
+         <a class="code" href="struct_pix_comp.html">PIXC</a>     *<a class="code" href="leptprotos_8h.html#aa1519bf21b85284c478c1778e5462106">pixcompCreateFromFile</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#aaf0e5828d131e1de2734345e5b66a592">pixcompDestroy</a>()
 
+    Pixcomp accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a71fe309e63a6ba2bc21c6bad7eb1f5f8">pixcompGetDimensions</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#af2debfe44d2b195606cc8e7435bb66d7">pixcompDetermineFormat</a>()
+
+    Pixcomp conversion to <a class="code" href="struct_pix.html">Pix</a>
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#abf68e8bdaf290d3612aae2c425a6b4b4">pixCreateFromPixcomp</a>()
+
+    Pixacomp creation and destruction
+         <a class="code" href="struct_pixa_comp.html">PIXAC</a>    *<a class="code" href="leptprotos_8h.html#a2a4cae6340c5ef8d6937670979eb8ccf">pixacompCreate</a>()
+         <a class="code" href="struct_pixa_comp.html">PIXAC</a>    *<a class="code" href="leptprotos_8h.html#aaff0ef70aa91c7b52179a104128b9ec5">pixacompCreateInitialized</a>()
+         <a class="code" href="struct_pixa_comp.html">PIXAC</a>    *<a class="code" href="leptprotos_8h.html#a1351a837dfcfcec749a94005ed815043">pixacompCreateFromPixa</a>()
+         <a class="code" href="struct_pixa_comp.html">PIXAC</a>    *<a class="code" href="leptprotos_8h.html#aa3730a9632f66162dac8c4288b2871f5">pixacompCreateFromFiles</a>()
+         <a class="code" href="struct_pixa_comp.html">PIXAC</a>    *<a class="code" href="leptprotos_8h.html#a1746c4caeeca84cacadf2ff74a08e7fa">pixacompCreateFromSA</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="leptprotos_8h.html#a8a867985bb832a242c2cc6c1eea3104c">pixacompDestroy</a>()
+
+    Pixacomp addition/replacement
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a3c4c33072398f18916e7d63143190381">pixacompAddPix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a2a98571eb12ce173f4c5d72e73ce5e4e">pixacompAddPixcomp</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a3e518207bf86f17e3305c6b28dbf3f4c">pixacompExtendArray</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a3870c67a803c9c8bbd89dddb87629d80">pixacompReplacePix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a7a3dd84a23c5c84a3d67654ffd178f29">pixacompReplacePixcomp</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#aaebcb1c2c641c8d5d0a2c2e3d8a07c74">pixacompAddBox</a>()
+
+    Pixacomp accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ae5e35e3e6de0989036ae74058baf5612">pixacompGetCount</a>()
+         <a class="code" href="struct_pix_comp.html">PIXC</a>     *<a class="code" href="leptprotos_8h.html#ace5ac4799047f93726f1d6f6f4c1372c">pixacompGetPixcomp</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ac7ba913e8f97b294c5ea160168d50f4a">pixacompGetPix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a5c234fe0355789bcf4799fb39a3a951b">pixacompGetPixDimensions</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="leptprotos_8h.html#a7c4e79f7d7508be4f07848f95782686e">pixacompGetBoxa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a67f5a0606a86557dab34c902f14ec2df">pixacompGetBoxaCount</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="leptprotos_8h.html#a092accf3d504763579b82e2762557272">pixacompGetBox</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#aeef9d7ac59778e9e05ca61ad27168026">pixacompGetBoxGeometry</a>()
+
+    Pixacomp conversion to <a class="code" href="struct_pixa.html">Pixa</a>
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a6a1589dc11e91d933f64a2c043c757b4">pixaCreateFromPixacomp</a>()
+
+    Pixacomp serialized I/O
+         <a class="code" href="struct_pixa_comp.html">PIXAC</a>    *<a class="code" href="leptprotos_8h.html#a5dc267cec4e67facd8e17a35b7088c42">pixacompRead</a>()
+         <a class="code" href="struct_pixa_comp.html">PIXAC</a>    *<a class="code" href="leptprotos_8h.html#a412593cfc46cf7699c9b341595c8d5fd">pixacompReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a69a0e41c61d05e1ec522edb555981c29">pixacompWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a0913b6299ab0220649782d885fe909cc">pixacompWriteStream</a>()
+
+    Output for debugging
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a2548c5a057d77e481ab8e658a24f53f5">pixacompWriteStreamInfo</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ad0f1a785fd5b82033a96b29b59442c66">pixcompWriteStreamInfo</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a4d8d8498fafee5acc572dd3a835b52a8">pixacompDisplayTiledAndScaled</a>()
+
+ The Pixacomp is an array of Pixcomp, where each Pixcomp is a compressed
+ <span class="keywordtype">string</span> of the image.  We don&#39;t use reference counting here.
+ The basic application is to allow a large array of highly
+ compressible images to reside in memory.  We purposely don&#39;t
+ reuse the <a class="code" href="struct_pixa.html">Pixa</a> for this, to avoid confusion and programming errors.
+
+ Three compression formats are used: g4, png and jpeg.
+ The compression type can be either specified or defaulted.
+ If specified and it is not possible to compress (for example,
+ you specify a jpeg on a 1 bpp image or one with a <a class="code" href="struct_pix.html#a4533ecc980ecee7d0720965f3f0a6b5f">colormap</a>),
+ the compression type defaults to png.
+
+ The serialized <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> of the Pixacomp is similar to that for
+ a <a class="code" href="struct_pixa.html">Pixa</a>, except that each Pixcomp can be compressed by one of
+ tiffg4, png, or jpeg.  Unlike serialization of the Pixa,
+ serialization of the Pixacomp does not require any imaging
+ libraries because it simply reads and writes the compressed <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a>.
+
+ For random insertion and replacement of pixcomp into a pixcomp,
+ initialize a fully populated array using <a class="code" href="leptprotos_8h.html#aaff0ef70aa91c7b52179a104128b9ec5">pixacompCreateInitialized</a>().
+ Then use <a class="code" href="leptprotos_8h.html#a3870c67a803c9c8bbd89dddb87629d80">pixacompReplacePix</a>() or <a class="code" href="leptprotos_8h.html#a7a3dd84a23c5c84a3d67654ffd178f29">pixacompReplacePixcomp</a>() for
+ the random insertion.
+</pre></div> 
 <p>Definition in file <a class="el" href="pixcomp_8c_source.html">pixcomp.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a06803a830c35a498cceb81c58c2d8d44"></a><!-- doxytag: member="pixcomp.c::pixcompCreateFromPix" ref="a06803a830c35a498cceb81c58c2d8d44" args="(PIX *pix, l_int32 comptype)" -->

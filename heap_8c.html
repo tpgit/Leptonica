@@ -157,7 +157,50 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements heap of generic pointers to structs that are keyed by a float, used for priority queue. </p>
+<div class="fragment"><pre class="fragment">    Create/Destroy <a class="code" href="struct_l___heap.html">L_Heap</a>
+        <a class="code" href="struct_l___heap.html">L_HEAP</a>    *<a class="code" href="heap_8c.html#a5a5c54761f5c78f115a98e1d7265df1b">lheapCreate</a>()
+        void      *<a class="code" href="heap_8c.html#a07c7aedd74a1193e13e06719be69d8d5">lheapDestroy</a>()
 
+    Operations to add/remove to/from the heap
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#abfc96d3a166aae8e05acf4b87174f7ca">lheapAdd</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#a19848651a94f9f6cc0b43787058bb39f">lheapExtendArray</a>()
+        <span class="keywordtype">void</span>      *<a class="code" href="heap_8c.html#af0a3c4cde50e8067528ec8ae26ddd2fc">lheapRemove</a>()
+
+    Heap operations
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#ae1a0c07663eca05e17729a1e0d7489c1">lheapSwapUp</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#affe14f8da5aa64ccf074ad4e9a141d1f">lheapSwapDown</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#a3d01958aa0cd233edeb3615234075ea1">lheapSort</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#aaaec900faddafba56fa4ee7984fa3b84">lheapSortStrictOrder</a>()
+
+    Accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#ad52bcb18e14862f4fcaa85ec1eb0a8c0">lheapGetCount</a>()
+
+    Debug output
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="heap_8c.html#a1baaaafdd2ee3dc2e47b4d11d6693358">lheapPrint</a>()
+
+  The <a class="code" href="struct_l___heap.html">L_Heap</a> is useful to implement a priority queue, that is sorted
+  on a key in each element of the heap.  The heap is an array
+  of nearly arbitrary structs, with a <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a> the first field.
+  This field is the key on which the heap is sorted.
+
+  Internally, we keep track of the heap size, n.  The item at the
+  root of the heap is at the head of the array.  Items are removed
+  from the head of the array and added to the end of the array.
+  When an item is removed from the head, the item at the end
+  of the array is moved to the head.  When items are either
+  added or removed, it is usually necesary to swap array items
+  to restore the heap order.  It is guaranteed that the number
+  of swaps does not exceed log(n).
+
+  --------------------------  N.B.  ------------------------------
+  The items on the heap (or, equivalently, in the array) are cast
+  to <span class="keywordtype">void</span>*.  Their key is a <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>, and it is REQUIRED that the
+  key be the first field in the struct.  That allows us to get the
+  key by simply dereferencing the struct.  Alternatively, we could
+  choose (but don&#39;t) to pass an application-specific comparison
+  function into the heap operation functions.
+  --------------------------  N.B.  ------------------------------
+</pre></div> 
 <p>Definition in file <a class="el" href="heap_8c_source.html">heap.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a0f339091e6dd44421361dccaae7f6b3d"></a><!-- doxytag: member="heap.c::SWAP_ITEMS" ref="a0f339091e6dd44421361dccaae7f6b3d" args="(i, j)" -->

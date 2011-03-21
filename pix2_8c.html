@@ -192,7 +192,86 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Pixel poking of image, pad and border pixels. </p>
+<div class="fragment"><pre class="fragment">  This file has these basic operations:
 
+    (1) Get and <span class="keyword">set</span>: individual pixels, full <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, rectangular region,
+        pad pixels, border pixels, and color components <span class="keywordflow">for</span> RGB
+    (2) Add and <span class="keyword">remove</span> border pixels
+    (3) Endian byte swaps
+    (4) Simple method for byte-processing images (instead of words)
+
+    Pixel poking
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a9888f4d973b7bf8516a579e5bdb67d21">pixGetPixel</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a1b7576238fbc20a2b6bf2aab8d8d7f6a">pixSetPixel</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a67981345aee916fe90db9ca46e6c190f">pixGetRGBPixel</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a86ad1d30dfbd34977678531eb8014a62">pixSetRGBPixel</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aaa8773204f48b35dd4a4566eace7f59a">pixGetRandomPixel</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a1eb129106e57fa96236d2b4d58624f26">pixClearPixel</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a4601d00ddd3e31cf10f23892e348f5ef">pixFlipPixel</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#adbb764ea1eae635162fd51bc9d712809">setPixelLow</a>()
+
+    Full <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> clear/set/set-to-arbitrary-value
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a075babbe353b694d401d47bdf5210d82">pixClearAll</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab579ec722d5bbdc42e8aa8c722d9cb67">pixSetAll</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aba51be05fa7719cdb8a54cfbf5f64999">pixSetAllArbitrary</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aa9290e1d45bdb54139a1064fc7204fda">pixSetBlackOrWhite</a>()
+
+    Rectangular region clear/set/set-to-arbitrary-value/blend
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a8c49818b9a2f5539a8ec2b81930cb150">pixClearInRect</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a61a8faa67df0e268b0e75853504e5ccc">pixSetInRect</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aa3b95e42ddd3e0b156ca2e0fd6c45e11">pixSetInRectArbitrary</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a67a475f93acf852b4fb9d8cc157021d4">pixBlendInRect</a>()
+
+    Set pad bits
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a3571530b761626ec1acae617759fd347">pixSetPadBits</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a2370fa7da9231139d4e7207532ecbc94">pixSetPadBitsBand</a>()
+
+    Assign border pixels
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a4ebe60a122a4be8b383bd57086edf5c5">pixSetOrClearBorder</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a04d646c5c7a792ba6dc390b1866c4b4d">pixSetBorderVal</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a8e37f963a25fe7ceb9bedd822720e873">pixSetBorderRingVal</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aaa6b5e7e15db587ad186be564a41e2a2">pixSetMirroredBorder</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ae12b30e3595bbfbb64a112e02b062ce2">pixCopyBorder</a>()
+
+    Add and remove border
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a626fa05b9c7055f8362cd10dbe75054a">pixAddBorder</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a27eccdd746733c6a8c0fb04399a0b1f6">pixAddBlackBorder</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a49c0fe42967413f1ea501de77da30813">pixAddBorderGeneral</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a921220c0b56da24a6e6034497be610d0">pixRemoveBorder</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a8d84b5c74cc3e24216bbfb9d6e0119b0">pixRemoveBorderGeneral</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a1980f3c9411fdfe89a4e3f841d497ea5">pixAddMirroredBorder</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a646f196302067b2a27c5606ddcb4d7dd">pixAddRepeatedBorder</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a18dd1592622746442782321fe4575f52">pixAddMixedBorder</a>()
+
+    Color sample setting and extraction
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a77761c8770bcab983a6d5b025756b2ad">pixCreateRGBImage</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a1bf5c49cbd00228fd32ac1bd530ac7cf">pixGetRGBComponent</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a17e981c7b37f5eb4e9f5dd4d2be66e2b">pixSetRGBComponent</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a6441e13a273ee055615145c674ab6208">pixGetRGBComponentCmap</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a6f300d6236978e9fba198c760c500c4b">composeRGBPixel</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#a30bcb764e91f0bf1c90ab7fcd93fc33d">extractRGBValues</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#afac041892ecbe298ca792745bf485199">extractMinMaxComponent</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a7d687ced89083f7a8938e58a9ec78949">pixGetRGBLine</a>()
+
+    Conversion between big and little endians
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aeb710f801c8f6516ad06a0ba306d5737">pixEndianByteSwapNew</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a3c2ace8f3051e291a9accec2e4213275">pixEndianByteSwap</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aca9d81fc391726e01496b1736873baea">lineEndianByteSwap</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#af3f8102c21eea1411b933d2c0d48cc23">pixEndianTwoByteSwapNew</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a51caf0f039a73589ca42f8a54bfca971">pixEndianTwoByteSwap</a>()
+
+    Extract raster <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> as binary <span class="keywordtype">string</span>
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a80b3fdaaaa5a80b2a78b5d8a05c7a859">pixGetRasterData</a>()
+
+    Setup helpers for 8 bpp byte processing
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   **<a class="code" href="leptprotos_8h.html#aca7fca0339e342f3d8cd26b1bbd366fb">pixSetupByteProcessing</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a65811a349c8e63399ad937efab7a041d">pixCleanupByteProcessing</a>()
+
+    Setting parameters for antialias masking with alpha transforms
+         <span class="keywordtype">void</span>        <a class="code" href="leptprotos_8h.html#ab264c4aa44066ad46ebe2294b8bb523b">l_setAlphaMaskBorder</a>()
+
+ indicates implicit assumption about RGB component ordering
+</pre></div> 
 <p>Definition in file <a class="el" href="pix2_8c_source.html">pix2.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a9b0bb7bb9689c045d41ff58142e4bd42"></a><!-- doxytag: member="pix2.c::DEBUG_SERIALIZE" ref="a9b0bb7bb9689c045d41ff58142e4bd42" args="" -->

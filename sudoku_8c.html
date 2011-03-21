@@ -151,7 +151,113 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Solve a sudoku by brute force search. </p>
+<div class="fragment"><pre class="fragment">    Solve a sudoku by brute force search
 
+    Read input data from file or <span class="keywordtype">string</span>
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>         *<a class="code" href="leptprotos_8h.html#a2e012a9ad00dbb668b8a476c3b08956c">sudokuReadFile</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>         *<a class="code" href="leptprotos_8h.html#a18bdb577a42dd9d707cd2ee1713af10c">sudokuReadString</a>()
+
+    Create/destroy
+        <a class="code" href="struct_l___sudoku.html">L_SUDOKU</a>        *<a class="code" href="leptprotos_8h.html#ae2a258f14c89d402f8ad8ec284a13409">sudokuCreate</a>()
+        <span class="keywordtype">void</span>             <a class="code" href="leptprotos_8h.html#a9327797f2502c2dfa7ae2c4c0953a268">sudokuDestroy</a>()
+
+    Solve the puzzle
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#ac4ce038288d3d674f05393e63334a4c0">sudokuSolve</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="sudoku_8c.html#a3c3bddf3363a3df7b234e743915bf405">sudokuValidState</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="sudoku_8c.html#a2fb6974641eb9f870c8977407fcbb8a7">sudokuNewGuess</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="sudoku_8c.html#a80b86198d1632930e70c1ab18c79cba1">sudokuTestState</a>()
+
+    Test for uniqueness
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#adb91c31e05ef3ee0d5c44a9c0c035812">sudokuTestUniqueness</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="sudoku_8c.html#a62a10ebc6d8d31bfc713c2c0d64c4af0">sudokuCompareState</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  *<a class="code" href="sudoku_8c.html#a60a71157d59abdd6527d10b91324f9cb">sudokuRotateArray</a>()
+
+    Generation
+        <a class="code" href="struct_l___sudoku.html">L_SUDOKU</a>        *<a class="code" href="leptprotos_8h.html#a9bd7568279c196ce853c912e427ecf7c">sudokuGenerate</a>()
+
+    Output
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#aa02e31e1f88ec670ffda8d143eabb9d2">sudokuOutput</a>()
+
+Solving sudokus is a somewhat addictive pastime.  The rules are
+simple but it takes just enough concentration to make it rewarding
+when you find a number.  And you get 50 to 60 such rewards each time
+you complete one.  The downside is that you could have been doing
+something more creative, like keying out a new plant, staining
+the deck, or even writing a computer program to discourage your
+wife from doing sudokus.
+
+My original plan for the sudoku solver was somewhat grandiose.
+The program would model the way a person solves the problem.
+It would examine each empty position and determine how many possible
+numbers could fit.  The empty positions would be entered in a priority
+queue keyed on the number of possible numbers that could fit.
+If there existed a position where only a single number would work,
+it would greedily take it.  Otherwise it would consider a
+positions that could accept two and make a guess, with backtracking
+if an impossible state were reached.  And so on.
+
+Then one of my colleagues announced she had solved the problem
+by brute force and it was fast.  At that point the original plan was
+dead in the water, because the two top requirements for a leptonica
+algorithm are (1) as simple as possible and (2) fast.  The brute
+force approach starts at the UL corner, and in succession at each
+blank position it finds the first valid number (testing in
+sequence from 1 to 9).  When no number will fit a blank position
+it backtracks, choosing the next valid number in the previous
+blank position.
+
+This is an inefficient method for pruning the space of solutions
+(imagine backtracking from the LR corner back to the UL corner
+and starting over with a new guess), but it nevertheless gets
+the job done quickly.  I have made no effort to optimize
+it, because it is fast: a 5-star (highest difficulty) sudoku might
+require a million guesses and take 0.05 sec.  (This BF implementation
+does about 20M guesses/sec at 3 GHz.)
+
+Proving uniqueness of a sudoku solution is tricker than finding
+a solution (or showing that no solution exists).  A good indication
+that a solution is unique is if we get the same result solving
+by brute force when the puzzle is also rotated by 90, 180 and 270
+degrees.  If there are multiple solutions, it seems unlikely
+that you would get the same solution four times in a row, using a
+brute force method that increments guesses and scans LR/TB.
+The function <a class="code" href="leptprotos_8h.html#adb91c31e05ef3ee0d5c44a9c0c035812">sudokuTestUniqueness</a>() does this.
+
+And given a function that can determine uniqueness, it is
+easy to generate valid sudokus.  We provide <a class="code" href="leptprotos_8h.html#a9bd7568279c196ce853c912e427ecf7c">sudokuGenerate</a>(),
+which starts with some valid initial solution, and randomly
+removes numbers, stopping either when a minimum number of non-zero
+elements are left, or when it becomes difficult to remove another
+element without destroying the uniqueness of the solution.
+
+For further reading, see the Wikipedia articles:
+   (1) http:<span class="comment">//en.wikipedia.org/wiki/Algorithmics_of_sudoku</span>
+   (2) http:<span class="comment">//en.wikipedia.org/wiki/Sudoku</span>
+
+How many 9x9 sudokus are there?  Here are the numbers.
+ - From ref(1), there are about 6 x 10^27 &quot;latin squares&quot;, where
+   each row and column has all 9 digits.
+ - There are 7.2 x 10^21 actual solutions, having the added
+   constraint in each of the 9 3<a class="code" href="affine__reg_8c.html#a41b607021994d7ad321d656d6682186b">x3</a> squares.  (The constraint
+   reduced the number by the fraction 1.2 x 10^(-6).)
+ - There are a mere 5.5 billion essentially different solutions (EDS),
+   when symmetries (rotation, reflection, permutation and relabelling)
+   are removed.
+ - Thus there are 1.3 x 10^12 solutions that can be derived by
+   symmetry from each EDS.  Can we account for these?
+ - Sort-of.  From an EDS, you can derive (3!)^8 = 1.7 million solutions
+   by simply permuting rows and columns.  (Do you see why it is
+   not (3!)^6 ?)
+ - Also from an EDS, you can derive 9! solutions by relabelling,
+   and 4 solutions by rotation, for a <a class="code" href="compfilter__reg_8c.html#a720e0421210add66839c567994e2127a">total</a> of 1.45 million solutions
+   by relabelling and rotation.  Then taking the product, by symmetry
+   we can derive 1.7M x 1.45M = 2.45 trillion solutions from each EDS.
+   (Something is off by about a factor of 2 -- close enough.)
+
+Another interesting fact is that there are apparently 48K EDS sudokus
+(with unique solutions) that have only 17 givens.  No sudokus are known
+with less than 17, but there exists no proof that this is the minimum.
+</pre></div> 
 <p>Definition in file <a class="el" href="sudoku_8c_source.html">sudoku.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a3c3bddf3363a3df7b234e743915bf405"></a><!-- doxytag: member="sudoku.c::sudokuValidState" ref="a3c3bddf3363a3df7b234e743915bf405" args="(l_int32 *state)" -->

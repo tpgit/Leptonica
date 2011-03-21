@@ -138,7 +138,13 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Optimized low-level implementation of grayscale convolution and binary rank filter. </p>
+<div class="fragment"><pre class="fragment">    Grayscale block convolution
+        <span class="keywordtype">void</span>      <a class="code" href="convolvelow_8c.html#a89e0a5f92a1d9ed1c95fa7d189932ae5">blockconvLow</a>()
+        void      <a class="code" href="convolvelow_8c.html#a3562ba6a56abf7c8b52df7152937548e">blockconvAccumLow</a>()
 
+    Binary block sum and rank filter
+        <span class="keywordtype">void</span>      <a class="code" href="convolvelow_8c.html#a7d95da5cc7b5dedfef456d09a8801a4a">blocksumLow</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="convolvelow_8c_source.html">convolvelow.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a89e0a5f92a1d9ed1c95fa7d189932ae5"></a><!-- doxytag: member="convolvelow.c::blockconvLow" ref="a89e0a5f92a1d9ed1c95fa7d189932ae5" args="(l_uint32 *data, l_int32 w, l_int32 h, l_int32 wpl, l_uint32 *dataa, l_int32 wpla, l_int32 wc, l_int32 hc)" -->

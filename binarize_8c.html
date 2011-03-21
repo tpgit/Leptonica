@@ -142,7 +142,43 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Special binarization methods, locally adaptive: Otsu and Sauvola. </p>
+<div class="fragment"><pre class="fragment">===================================================================
+Image binarization algorithms are found in:
+  grayquant.c:   standard, simple, general grayscale quantization
+  adaptmap.c:    local adaptive; mostly gray-to-gray in preparation
+                 <span class="keywordflow">for</span> binarization
+  binarize.c:    special binarization methods, locally adaptive.
+===================================================================
 
+    Adaptive Otsu-based thresholding
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="binarize_8c.html#aaef1d6ed54b87144b98c72f675ad7a4c">pixOtsuAdaptiveThreshold</a>()       8 bpp
+
+    Otsu thresholding on adaptive background normalization
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="binarize_8c.html#a9df08b00ef2ffcde09c5af66d5eb54df">pixOtsuThreshOnBackgroundNorm</a>()  8 bpp
+
+    Masking and Otsu estimate on adaptive background normalization
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="binarize_8c.html#a7c47279511d56ae572a67d7d73278135">pixMaskedThreshOnBackgroundNorm</a>()  8 bpp
+
+    Sauvola local thresholding
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="binarize_8c.html#a29c6c3ef62cd152b51b0de1b41194f01">pixSauvolaBinarizeTiled</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="binarize_8c.html#a4879910917d9f3fc56f14b358bbff5f2">pixSauvolaBinarize</a>()
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="binarize_8c.html#ae9d8537f020b5428506732e558b69a95">pixSauvolaGetThreshold</a>()
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="binarize_8c.html#ad798b1bf882a40632239365305d1db26">pixApplyLocalThreshold</a>();
+
+Notes:
+    (1) <a class="code" href="binarize_8c.html#aaef1d6ed54b87144b98c72f675ad7a4c">pixOtsuAdaptiveThreshold</a>() computes a global threshold over each
+        tile and performs the threshold operation, resulting in a
+        binary image for each tile.  These are stitched into the
+        final result.
+    (2) <a class="code" href="binarize_8c.html#a9df08b00ef2ffcde09c5af66d5eb54df">pixOtsuThreshOnBackgroundNorm</a>() and
+        <a class="code" href="binarize_8c.html#a7c47279511d56ae572a67d7d73278135">pixMaskedThreshOnBackgroundNorm</a>() are binarization functions
+        that use background normalization with other techniques.
+    (3) Sauvola binarization computes a local threshold based on
+        the local average and square average.  It takes two constants:
+        the window <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> for the measurment at each pixel and a
+        parameter that determines the amount of normalized local
+        standard deviation to subtract from the local average value.
+</pre></div> 
 <p>Definition in file <a class="el" href="binarize_8c_source.html">binarize.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aaef1d6ed54b87144b98c72f675ad7a4c"></a><!-- doxytag: member="binarize.c::pixOtsuAdaptiveThreshold" ref="aaef1d6ed54b87144b98c72f675ad7a4c" args="(PIX *pixs, l_int32 sx, l_int32 sy, l_int32 smoothx, l_int32 smoothy, l_float32 scorefract, PIX **ppixth, PIX **ppixd)" -->

@@ -189,7 +189,75 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Lower-level PostScript device driver for wrapping images. </p>
+<div class="fragment"><pre class="fragment">  |=============================================================|
+  |                         Important note                      |
+  |=============================================================|
+  | Some of these functions require libtiff, libjpeg and libz.  |
+  | If you <span class="keywordflow">do</span> not have these libraries, you must <span class="keyword">set</span>            |
+  |     #define  <a class="code" href="environ_8h.html#ad1afd7b829b6ecd39920354e9c62e210">USE_PSIO</a>     0                                 |
+  | in environ.h.  This will link psio2stub.c                   |
+  |=============================================================|
 
+   These are lower-level functions that implement a PostScript
+   <span class="stringliteral">&quot;device driver&quot;</span> <span class="keywordflow">for</span> wrapping images in PostScript.  The images
+   can be rendered by a PostScript interpreter <span class="keywordflow">for</span> viewing,
+   <span class="keyword">using</span> evince or gv.  They can also be rasterized <span class="keywordflow">for</span> printing,
+   <span class="keyword">using</span> gs or an embedded interpreter in a PostScript printer.
+   And they can be converted to a pdf <span class="keyword">using</span> gs (ps2pdf).
+
+   For uncompressed images
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#ab0a145bea0d4615b3bae5c5eef6955b1">pixWritePSEmbed</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a74ca34e95b3461f7c99c255eff117e70">pixWriteStreamPS</a>()
+        <span class="keywordtype">char</span>                *<a class="code" href="leptprotos_8h.html#a0740def25928896c51cce8d48f7c300e">pixWriteStringPS</a>()
+        <span class="keywordtype">char</span>                *<a class="code" href="leptprotos_8h.html#a9d84ff63b7278de9fbeab62f14f66cfd">generateUncompressedPS</a>()
+        <span class="keywordtype">void</span>                 <a class="code" href="leptprotos_8h.html#acf617b0f8a846c74a32df47df87321da">getScaledParametersPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a28b370bc2be2685e5d26b6996554b558">convertByteToHexAscii</a>()
+
+   For jpeg compressed images (use dct compression)
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a8af6c626edc97e40ac706f3ebde05069">convertJpegToPSEmbed</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a02ec6e86654c38e700c9f07010dd95a3">convertJpegToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a37e0690b7ffcbc37d7f02565aff2abf3">convertJpegToPSString</a>()
+        <span class="keywordtype">char</span>                *<a class="code" href="leptprotos_8h.html#a70b1de53643755a6165ac885da0aa7a4">generateJpegPS</a>()
+        <a class="code" href="struct_l___compressed___data.html">L_COMPRESSED_DATA</a>   *<a class="code" href="leptprotos_8h.html#a3844e214f7d55d6afbe2d21f012a222f">pixGenerateJpegData</a>()
+        <a class="code" href="struct_l___compressed___data.html">L_COMPRESSED_DATA</a>   *<a class="code" href="leptprotos_8h.html#a31336c29ef104cfafcddd93779ed4cc4">l_generateJpegData</a>()
+        <span class="keywordtype">void</span>                 <a class="code" href="leptprotos_8h.html#a10ea29eb3421ebf3fb4a449fe6d95a3d">compressed_dataDestroy</a>()
+
+   For g4 fax compressed images (use ccitt g4 compression)
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#abcab3cc798d2300dd5cd479ea8b40e47">convertG4ToPSEmbed</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#abf5dceb33545b01e758ef16574350eaa">convertG4ToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#ad5e921dc3051ba9c3490f87fba58b003">convertG4ToPSString</a>()
+        <span class="keywordtype">char</span>                *<a class="code" href="leptprotos_8h.html#a28861773a5d30232bcb871ce912ed77b">generateG4PS</a>()
+        <a class="code" href="struct_l___compressed___data.html">L_COMPRESSED_DATA</a>   *<a class="code" href="leptprotos_8h.html#af92d6c23ce484c2a322af0185d554aab">pixGenerateG4Data</a>()
+        <a class="code" href="struct_l___compressed___data.html">L_COMPRESSED_DATA</a>   *<a class="code" href="leptprotos_8h.html#afa7929f2654d669d6ecaed25700972d3">l_generateG4Data</a>()
+
+   For multipage tiff images
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a7ac147bd7872db02c30fa343d57f8f62">convertTiffMultipageToPS</a>()
+
+   For flate (gzip) compressed images (e.g., png)
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#aa1e1705a976c7fffe91a9599e99ff7f3">convertFlateToPSEmbed</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a33dd8b7df09a60ac502660616b76a1f1">convertFlateToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#af81b912d549fa67bc03e1738ef0004bc">convertFlateToPSString</a>()
+        <span class="keywordtype">char</span>                *<a class="code" href="leptprotos_8h.html#acfaaf36603e94e1d4cbcbfc9ade8bae8">generateFlatePS</a>()
+        <a class="code" href="struct_l___compressed___data.html">L_COMPRESSED_DATA</a>   *<a class="code" href="leptprotos_8h.html#a023e52341e3146583a8b72d0d22ebd0a">l_generateFlateData</a>()
+        <a class="code" href="struct_l___compressed___data.html">L_COMPRESSED_DATA</a>   *<a class="code" href="leptprotos_8h.html#ae3620670d42b7d5bd8892adc2baccab2">pixGenerateFlateData</a>()
+
+   Write to memory
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#a4d4565d71820b5865f721d43c71e0bdd">pixWriteMemPS</a>()
+
+   Converting resolution
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#ab26f3c899a94f5b896b2d93da15e2afb">getResLetterPage</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>              <a class="code" href="leptprotos_8h.html#ab5221b96a3227cfb1e8892e6eeef4fc2">getResA4Page</a>()
+
+   Utility for encoding and decoding <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> with ascii85
+        <span class="keywordtype">char</span>                *<a class="code" href="leptprotos_8h.html#a38ccddb3da59b9e5076f6eb845ad84fd">encodeAscii85</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             *<a class="code" href="psio2_8c.html#af4e6bbb144efce5fedd970d4df00f5bc">convertChunkToAscii85</a>()
+        <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>             *<a class="code" href="leptprotos_8h.html#a38a5f0ad23c8d870a6403f47d25430f6">decodeAscii85</a>()
+
+   Setting flag for writing bounding box hint
+        <span class="keywordtype">void</span>                 <a class="code" href="leptprotos_8h.html#a230013894d96725eea2274e9e9a523f8">l_psWriteBoundingBox</a>()
+
+See psio1.c for higher-level functions and their usage.
+</pre></div> 
 <p>Definition in file <a class="el" href="psio2_8c_source.html">psio2.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="af1791633b3a1a12a9aa449aa6d558327"></a><!-- doxytag: member="psio2.c::L_BUF_SIZE" ref="af1791633b3a1a12a9aa449aa6d558327" args="" -->

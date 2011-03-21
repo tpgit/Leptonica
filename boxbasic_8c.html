@@ -185,7 +185,89 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implementation of <a class="el" href="struct_box.html">Box</a>, <a class="el" href="struct_boxa.html">Boxa</a> (<a class="el" href="struct_box.html">Box</a> array), and <a class="el" href="struct_boxaa.html">Boxaa</a> classes. </p>
+<div class="fragment"><pre class="fragment"> Basic <span class="stringliteral">&#39;class&#39;</span> functions <span class="keywordflow">for</span> box, boxa and boxaa,
+ including accessors and serialization.
 
+    <a class="code" href="struct_box.html">Box</a> creation, copy, clone, destruction
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxbasic_8c.html#ad846c5f00e3aaed3dd4329347acac89d">boxCreate</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxbasic_8c.html#a435610d86a8562dc60bfd75fe0a15420">boxCreateValid</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxbasic_8c.html#acc17644b13ceea936b0449c9ac2ccda9">boxCopy</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxbasic_8c.html#a74134cc9f9357b328689cc74ab0b68aa">boxClone</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="boxbasic_8c.html#a494a2b1bf2e00d030dae5e11e12dbddb">boxDestroy</a>()
+
+    <a class="code" href="struct_box.html">Box</a> accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#aaf754e00c062c3f0f726bea73a17e646">boxGetGeometry</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a3b0b015b49fbfee69081cc0497fdf521">boxSetGeometry</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#ad6ac93e467ebcd6f0cdf6f1487775a57">boxGetRefcount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#ab8ddf24b678cb17b22430b26a048970c">boxChangeRefcount</a>()
+
+    <a class="code" href="struct_boxa.html">Boxa</a> creation, copy, destruction
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxbasic_8c.html#ae59916b7506831be9bf2119dea063253">boxaCreate</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxbasic_8c.html#a349732f7df7a36717f20955ee48acec8">boxaCopy</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="boxbasic_8c.html#ab61d85b07650c3e6c004878d8653b39a">boxaDestroy</a>()
+
+    <a class="code" href="struct_boxa.html">Boxa</a> array extension
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#afcef37266188aa3a9939d486cd7de413">boxaAddBox</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a72cda7fcfb69446eea38ae04f9d1ee6f">boxaExtendArray</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a61a35691e4d5aa420c864dcc451eaf12">boxaExtendArrayToSize</a>()
+
+    <a class="code" href="struct_boxa.html">Boxa</a> accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a82555cab9ef5578c4728ef5109264723">boxaGetCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a082ae4985a20dacf1eb83a864758731a">boxaGetValidCount</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxbasic_8c.html#ac7c6fcfadf130bfa738ce6aab51318e5">boxaGetBox</a>()
+         <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="boxbasic_8c.html#ac13908e209a01dc6e95460c7719962c5">boxaGetValidBox</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a1104d48462e4712920557871508f66e8">boxaGetBoxGeometry</a>()
+
+    <a class="code" href="struct_boxa.html">Boxa</a> array modifiers
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#ae20e540545eda297b25fc842cb0a154d">boxaReplaceBox</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#af919c997cae9dd697d77b4ad198a5dad">boxaInsertBox</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a41033e892b45e63595ac076c2feb7240">boxaRemoveBox</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#ac93829ddfbed592fb7def968ea564b6b">boxaInitFull</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a140349715d1002100e4927e952f70be5">boxaClear</a>()
+
+    <a class="code" href="struct_boxaa.html">Boxaa</a> creation, copy, destruction
+         <a class="code" href="struct_boxaa.html">BOXAA</a>    *<a class="code" href="boxbasic_8c.html#a774bf46a27f2fff18497deacce60494b">boxaaCreate</a>()
+         <a class="code" href="struct_boxaa.html">BOXAA</a>    *<a class="code" href="boxbasic_8c.html#a84daaced7a6c6e6cfd7c48b751547b59">boxaaCopy</a>()
+         <span class="keywordtype">void</span>      <a class="code" href="boxbasic_8c.html#accad8e647312ad097493517568627215">boxaaDestroy</a>()
+
+    <a class="code" href="struct_boxaa.html">Boxaa</a> array extension
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#adb4a445ffe9a2331a2667e5199bda9f4">boxaaAddBoxa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#ac109631e93b9b2ce5e346715a086339a">boxaaExtendArray</a>()
+
+    <a class="code" href="struct_boxaa.html">Boxaa</a> accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a7feecf9a60b228c60096bcd4d981fdb0">boxaaGetCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#ad0ab78e92202f9edf42fdfae38a54df7">boxaaGetBoxCount</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxbasic_8c.html#ac2fa4838f7a7e8994003259e400e181a">boxaaGetBoxa</a>()
+
+    <a class="code" href="struct_boxa.html">Boxa</a> array modifiers
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a7b8b349e9037feef4f7eaa82dd8d2ae9">boxaaReplaceBoxa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a4d61c40a81b7c678f242d61b8001204f">boxaaInsertBoxa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a7706de2069a1ca4a5815a0f6e5dfcb23">boxaaRemoveBoxa</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#aef9a6853d1f6c2c9b1ec5712507191d8">boxaaAddBox</a>()
+
+    <a class="code" href="struct_boxaa.html">Boxaa</a> serialized I/O
+         <a class="code" href="struct_boxaa.html">BOXAA</a>    *<a class="code" href="boxbasic_8c.html#aecd6dafcb68c9c9aab7004fdfc8a2aff">boxaaRead</a>()
+         <a class="code" href="struct_boxaa.html">BOXAA</a>    *<a class="code" href="boxbasic_8c.html#ade93ce5c1afd055c569d33aaaa9aa2e0">boxaaReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a3dda825cf57b0ba8fdca7c5ee99bf741">boxaaWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a910f51e35a93cf75c9c37f3907a21527">boxaaWriteStream</a>()
+
+    <a class="code" href="struct_boxa.html">Boxa</a> serialized I/O
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxbasic_8c.html#a29a45d443992cbf74dcf4dfdd9214077">boxaRead</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="boxbasic_8c.html#a2c10ca31ba55969b34f1e6d911be6410">boxaReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#a045c5c37acc6f2d237b3c03a28ed36eb">boxaWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#aba9fa6ec5d670db0c0d96a6d7aeb4d65">boxaWriteStream</a>()
+
+    <a class="code" href="struct_box.html">Box</a> print (for debug)
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="boxbasic_8c.html#ae2c704ba6ca16a72933619830dd7c575">boxPrintStreamInfo</a>()
+
+ Most functions use only valid boxes, which are boxes that have both
+ width and height &gt; 0.  However, a few functions, such as
+ <a class="code" href="boxfunc2_8c.html#af472f1547125ae5082f905c1ee52e86c">boxaGetMedian</a>() do not assume that all boxes are valid.  For any
+ function that can use a boxa with invalid boxes, it is convenient 
+ to use these accessors:
+     <a class="code" href="boxbasic_8c.html#a082ae4985a20dacf1eb83a864758731a">boxaGetValidCount</a>()   :  count of valid boxes
+     <a class="code" href="boxbasic_8c.html#ac13908e209a01dc6e95460c7719962c5">boxaGetValidBox</a>()     :  returns <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a> for invalid boxes
+</pre></div> 
 <p>Definition in file <a class="el" href="boxbasic_8c_source.html">boxbasic.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ad846c5f00e3aaed3dd4329347acac89d"></a><!-- doxytag: member="boxbasic.c::boxCreate" ref="ad846c5f00e3aaed3dd4329347acac89d" args="(l_int32 x, l_int32 y, l_int32 w, l_int32 h)" -->

@@ -157,7 +157,69 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Code generator, writes dwa code for erosion, dilation, opening and closing, for user-supplied Sels. </p>
+<div class="fragment"><pre class="fragment">  Main function calls:
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="fmorphauto_8c.html#a56512d7a2246929852ba7c1ebc74f5bd">fmorphautogen</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="fmorphauto_8c.html#a9de6f51de80862a88c038d4817b9a6d1">fmorphautogen1</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>             <a class="code" href="fmorphauto_8c.html#a9b1e397f14beb21f88256b1beb5b2c40">fmorphautogen2</a>()
 
+  Static helpers:
+     static <a class="code" href="struct_sarray.html">SARRAY</a>      *<a class="code" href="fhmtauto_8c.html#a7bc99f15492cfc8196305ffca7bf71e5">sarrayMakeWplsCode</a>()
+     static <a class="code" href="struct_sarray.html">SARRAY</a>      *<a class="code" href="fhmtauto_8c.html#a7e9a6411ddc276f8e1462b077cb452cc">sarrayMakeInnerLoopDWACode</a>()
+     static <span class="keywordtype">char</span>        *<a class="code" href="fhmtauto_8c.html#acfe6d63e0a6c0424c49f33ceb20a9194">makeBarrelshiftString</a>()
+
+
+  This automatically generates dwa code for erosion and dilation.
+  Here&#39;s a road map for how it all works.
+
+  (1) You generate an array (a <a class="code" href="struct_sela.html">SELA</a>) of structuring elements (SELs).
+      This can be done in several ways, including
+         (a) calling the function <a class="code" href="leptprotos_8h.html#a77c6613db8b2ca9f7d8a441d2c6d2aef">selaAddBasic</a>() for
+             pre-compiled SELs
+         (b) generating the <a class="code" href="struct_sela.html">SELA</a> in code in line
+         (c) reading in a <a class="code" href="struct_sela.html">SELA</a> from file, using <a class="code" href="leptprotos_8h.html#ac88a47bf9f6ec5764f98cc3924b57e17">selaRead</a>() or
+             various other formats.
+
+  (2) You call <a class="code" href="fmorphauto_8c.html#a9de6f51de80862a88c038d4817b9a6d1">fmorphautogen1</a>() and <a class="code" href="fmorphauto_8c.html#a9b1e397f14beb21f88256b1beb5b2c40">fmorphautogen2</a>() on this <a class="code" href="struct_sela.html">SELA</a>.
+      These use the text files morphtemplate1.txt and
+      morphtemplate2.txt for building up the source code.  See the file
+      prog/<a class="code" href="fmorphauto_8c.html#a56512d7a2246929852ba7c1ebc74f5bd">fmorphautogen</a>.c for an example of how this is done.
+      The output is written to files named fmorphgen.*.c
+      and fmorphgenlow.*.c, where &quot;*&quot; is an integer that you
+      input to this function.  That integer labels both
+      the output files, as well as all the functions that
+      are generated.  That way, using different integers,
+      you can invoke <a class="code" href="fmorphauto_8c.html#a56512d7a2246929852ba7c1ebc74f5bd">fmorphautogen</a>() any number of times
+      to get functions that all have different names so that
+      they can be linked into one program.
+      
+  (3) You copy the generated source files back to your src
+      directory for compilation.  Put their names in the
+      Makefile, regenerate the prototypes, and recompile
+      the library.  Look at the Makefile to see how I&#39;ve
+      included morphgen.1.c and fmorphgenlow.1.c.  These files
+      provide the high-level interfaces for erosion, dilation,
+      opening and closing, and the low-level interfaces to
+      do the actual work, for all 58 SELs in the <span class="keywordtype">SEL</span> array.
+
+  (4) In an application, you now use this interface.  Again
+      for the example files in the library, using integer &quot;1&quot;:
+
+          <a class="code" href="struct_pix.html">PIX</a>   *<a class="code" href="fmorphgen_81_8c.html#accbff81cd192d9f8df2296d05b9296f9">pixMorphDwa_1</a>(<a class="code" href="struct_pix.html">PIX</a> *pixd, <a class="code" href="struct_pix.html">PIX</a>, *pixs,
+                               <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> operation, <span class="keywordtype">char</span> *selname);
+
+               or
+
+          PIX   *<a class="code" href="fmorphgen_81_8c.html#a40aeed87f4ab6443aaeda83469497a2e">pixFMorphopGen_1</a>(PIX *pixd, PIX *pixs,
+                                  <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> operation, <span class="keywordtype">char</span> *selname);
+
+      where the operation is one of {<a class="code" href="morph_8h.html#a6b7b47dd702d9e331586d485013fd1eaa360ecc13ae2ba0c06abd6578121d2b2f">L_MORPH_DILATE</a>, <a class="code" href="morph_8h.html#a6b7b47dd702d9e331586d485013fd1eaa20c29ec2514bfb756a36083f9ec1d624">L_MORPH_ERODE</a>.
+      <a class="code" href="morph_8h.html#a6b7b47dd702d9e331586d485013fd1eaae77a0b25de633b4e90f0cd8a770ae020">L_MORPH_OPEN</a>, <a class="code" href="morph_8h.html#a6b7b47dd702d9e331586d485013fd1eaa4a7e04fd63c9d3975e471a85e07e4888">L_MORPH_CLOSE</a>}, and the selname is one
+      of the <span class="keyword">set</span> that were defined as the name field of sels.
+      This <span class="keyword">set</span> is listed at the beginning of the file fmorphgen.1.c.
+      For examples of use, see the file prog/binmorph_reg1.c, which
+      verifies the consistency of the various implementations by
+      comparing the dwa result with that of full-<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> rasterops. 
+</pre></div> 
 <p>Definition in file <a class="el" href="fmorphauto_8c_source.html">fmorphauto.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a3f45513616abab349630b0ae671d44a1"></a><!-- doxytag: member="fmorphauto.c::OUTROOT" ref="a3f45513616abab349630b0ae671d44a1" args="" -->

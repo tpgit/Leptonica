@@ -163,7 +163,35 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Colorspace conversions between RGB, HSV, and YUV. </p>
+<div class="fragment"><pre class="fragment">    Colorspace conversion between RGB and HSV
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#a1784cf7d99a06d6414dff320689817a8">pixConvertRGBToHSV</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#aba5abb7ad00ae1524dd9b14fffb577f4">pixConvertHSVToRGB</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#a7965a5e4aef8e46a711eef6b6286cefe">convertRGBToHSV</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#ae2cfa662cfcc004a7af94a01ce0ddf9d">convertHSVToRGB</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#a9ea9b96af238e18fba200ed60692098e">pixcmapConvertRGBToHSV</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#a0f6c3dafc63831bebcc35d5cb8d08caa">pixcmapConvertHSVToRGB</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#a631b03ef9c31e00be5cee6d133d46441">pixConvertRGBToHue</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#af17e616036ff033bc20b9d924b07dca2">pixConvertRGBToSaturation</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#a578371475c48c1f7ce77d20d857089a6">pixConvertRGBToValue</a>()
 
+    Selection and display of range of <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> in HSV space
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#abc63737f36381e8d16cf284857661bdf">pixMakeRangeMaskHS</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#a03c653429235032d0ef53e226aa3dcd4">pixMakeRangeMaskHV</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#abe27594779bbff4f0fb49ea3ebc16582">pixMakeRangeMaskSV</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#adc03b38e980ac90c67306cc8c28524bb">pixMakeHistoHS</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#a634f7438c8f2105c79684456e8656a76">pixMakeHistoHV</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#af3fc1cfbe91d1015d099ca578c58e507">pixMakeHistoSV</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#adca1b01d537535238d8bf6108a504b9e">pixFindHistoPeaksHSV</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#a5d858169e2a447383b1302a91aca594d">displayHSVColorRange</a>()
+
+    Colorspace conversion between RGB and YUV
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#acfbc98f7afa5a3d3126687c721abd151">pixConvertRGBToYUV</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="colorspace_8c.html#a99897b1e60449605388c5c7554501892">pixConvertYUVToRGB</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#a5a166697c508d7ff11598ca7ded88b67">convertRGBToYUV</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#a82a9d2f609db6f622fbc642e32c6a528">convertYUVToRGB</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#a85098d347aaf5078924452930ac9bbf8">pixcmapConvertRGBToYUV</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colorspace_8c.html#a4a6f5a0abf22d276182766d46c5ba184">pixcmapConvertYUVToRGB</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="colorspace_8c_source.html">colorspace.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="afa7b10929c94a9a3177b3c9ddc65c8fc"></a><!-- doxytag: member="colorspace.c::DEBUG_HISTO" ref="afa7b10929c94a9a3177b3c9ddc65c8fc" args="" -->

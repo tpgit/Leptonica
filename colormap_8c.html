@@ -174,7 +174,57 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements <a class="el" href="struct_pix_colormap.html">PixColormap</a>; colormap conversions, serialization, transforms. </p>
+<div class="fragment"><pre class="fragment">    Colormap creation, copy, destruction, addition
+         <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>    *<a class="code" href="colormap_8c.html#a41b80672f852c84d4867952c820ac00e">pixcmapCreate</a>()
+         <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>    *<a class="code" href="colormap_8c.html#a0cf5ea3fc0f68fc0aa685c22939e62c7">pixcmapCreateRandom</a>()
+         <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>    *<a class="code" href="colormap_8c.html#ad25833eedb0d41cbe0a8a8b59f1a7aaf">pixcmapCreateLinear</a>()
+         <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>    *<a class="code" href="colormap_8c.html#a85b7a44ebb16c490705773826e73a167">pixcmapCopy</a>()
+         <span class="keywordtype">void</span>        <a class="code" href="colormap_8c.html#a0c36cd95efc0f50a706017a71c62ffa8">pixcmapDestroy</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a910c7bc866f19b8b07a0aa74eb8e1b5e">pixcmapAddColor</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a068917dfbcb3bf106eec3713bee9db5c">pixcmapAddNewColor</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a9687abfec3e14e5258e00154bfe6aee1">pixcmapAddNearestColor</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a0915bb524220fe83323efe691c90604b">pixcmapUsableColor</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a5c015867dad398b9c16043fa4a43fc9d">pixcmapAddBlackOrWhite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a4310385b72f18326adfb249ad760f398">pixcmapSetBlackAndWhite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a29729fdc7efb3d4b7103696eb86be42f">pixcmapGetCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a9aa2d359cab1cf801a4fd6b9063e19ab">pixcmapGetDepth</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a0e83756828fc02cdeb180262c2e1328d">pixcmapGetMinDepth</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#abc036a60086fb73e6e3af80aa6143b89">pixcmapGetFreeCount</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a71bf252f19a47f2eb19c148d11c32fdb">pixcmapClear</a>()
 
+    Colormap random access and test
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#af1a50fb7424bbd2a264ae38df4709dae">pixcmapGetColor</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a11a5c9c28b9ad70611d56074ba0cc9f6">pixcmapGetColor32</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a17a44e20b001ad0b66505544c044072e">pixcmapResetColor</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a9499bb0c006cc1b1467817af31ec7215">pixcmapGetIndex</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a33529500a153b7277ffe617e97c7bc9d">pixcmapHasColor</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#ab21a91b8db7e2f80d72c389eeb5b1210">pixcmapCountGrayColors</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#ab7d07c761e7e6ebfe88e59aaaf91d4a3">pixcmapGetRankIntensity</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#ac16fcd273300ed19021b631b37fb5aac">pixcmapGetNearestIndex</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a022fcd54798bc6a4f0a1cb80ca07714d">pixcmapGetNearestGrayIndex</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a02458a42beaf76d7114b760c016bb344">pixcmapGetComponentRange</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a3382346fb2a77d3269462ecfd1ef2e10">pixcmapGetExtremeValue</a>()
+
+    Colormap conversion
+         <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>    *<a class="code" href="colormap_8c.html#abafe565c2ab1fc408a7fefb267b416a7">pixcmapGrayToColor</a>()
+         <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>    *<a class="code" href="colormap_8c.html#a714d8d4819dfea5f1016c6546de069c8">pixcmapColorToGray</a>()
+
+    Colormap I/O
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a2d1ead4a2c4ceda8d437e754207b3805">pixcmapReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a77f09e2f59d2cad941b416b118d256fe">pixcmapWriteStream</a>()
+
+    Extract colormap arrays and serialization
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#af57402cc52360767763d731cfc5c03c1">pixcmapToArrays</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#ad081b8aac606bc138e428289267f5570">pixcmapToRGBTable</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#aefd014012038d9b07a867222c3ac77c1">pixcmapSerializeToMemory</a>()
+         <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>    *<a class="code" href="colormap_8c.html#ace7f6ca3060bbc3c9a10bca0a2982a93">pixcmapDeserializeFromMemory</a>()
+         <span class="keywordtype">char</span>       *<a class="code" href="colormap_8c.html#ac08680b0fdd5aed297729b5e9e50e96f">pixcmapConvertToHex</a>()
+
+    Colormap transforms
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#ab44c94b505e09a20e13dd2ac2d668304">pixcmapGammaTRC</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#a3de98127e52df5587a0980974589123c">pixcmapContrastTRC</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="colormap_8c.html#ab4a13b372fd349213345ec7ebff8d9e5">pixcmapShiftIntensity</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="colormap_8c_source.html">colormap.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a41b80672f852c84d4867952c820ac00e"></a><!-- doxytag: member="colormap.c::pixcmapCreate" ref="a41b80672f852c84d4867952c820ac00e" args="(l_int32 depth)" -->

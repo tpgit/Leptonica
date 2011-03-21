@@ -180,7 +180,84 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Image up- and down-scaling, by linear interpolation, area mapping, and sampling; scaling from binary to gray; mipmap scaling; upscaling with thresholding; downscaling with min, max and rank value. </p>
+<div class="fragment"><pre class="fragment">       Top-level scaling
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a18e0b7ac7cdcd84fd24bd4fb3bff832a">pixScale</a>()     ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#abe2059c9d4d4070c1c4986b03311b8f0">pixScaleToSize</a>()     ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a2f8ea34f3d02024f5d42ca05d2961177">pixScaleGeneral</a>()     ***
 
+       Linearly interpreted (usually up-) scaling
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a6a71ddc6a79c2e7e8062bf590840f499">pixScaleLI</a>()     ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#af6182f866819c1277828442cd90fda34">pixScaleColorLI</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a178b2bc6a5520d4937b9ed7a75c24f2a">pixScaleColor2xLI</a>()   ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#ad166a6517e03973d3c1755f2b7da9c35">pixScaleColor4xLI</a>()   ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#aa0d47e1eb0924f800f906e8b4c083ce4">pixScaleGrayLI</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a6da6089221b3245cd6eb298d7f85048c">pixScaleGray2xLI</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a5ef286203c6f4f59df18d304a2f80852">pixScaleGray4xLI</a>()
+
+       Scaling by closest pixel sampling
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a54db6134741bbb8aed121780ec4fbc10">pixScaleBySampling</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a220eb1e4a5da0c484a8e6a71da38b31f">pixScaleByIntSubsampling</a>()
+
+       Fast integer factor subsampling RGB to gray and to binary
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#ad7952034dee972892ed4f473479c7781">pixScaleRGBToGrayFast</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a488fe27afc4b9acc9b9b8840f9b7d39b">pixScaleRGBToBinaryFast</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a38cee444b3b99db3f43e611a4899b802">pixScaleGrayToBinaryFast</a>()
+
+       Downscaling with (antialias) smoothing
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a56344f3aeff8b6b07160e7d496be467d">pixScaleSmooth</a>() ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#ad2ceda73fe359e1595a79d5baa1b97e7">pixScaleRGBToGray2</a>()   [special 2x reduction to gray]
+
+       Downscaling with (antialias) area mapping
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a0df67cb7fc7aabe7ec8bc5b69fe80db6">pixScaleAreaMap</a>()     ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#ae67d959053fbffe75c913791f8670eb7">pixScaleAreaMap2</a>()
+
+       Binary scaling by closest pixel sampling
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#adb19bb7764312bc8a7799482b797d368">pixScaleBinary</a>()
+
+       Scale-to-gray (1 bpp --&gt; 8 bpp; arbitrary downscaling)
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a88d11e7f6dd041c81c3e892d4f991a82">pixScaleToGray</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a05fa1a6337d5c94d8966638099709a11">pixScaleToGrayFast</a>()
+
+       Scale-to-gray (1 bpp --&gt; 8 bpp; integer downscaling)
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a4d4ac363659e0f363e64a5a7ddeb2b93">pixScaleToGray2</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a9099cfa17c039cfdd79a5f89d9fed215">pixScaleToGray3</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a225e9e08e47e8565e8d283a3c7662585">pixScaleToGray4</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a9a6649f89e0f13321eb51ad7c2957c66">pixScaleToGray6</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#acf191494e259008a633e73aa304a2522">pixScaleToGray8</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#ab7236b248d50dc370edf69a863875d95">pixScaleToGray16</a>()
+
+       Scale-to-gray by mipmap(1 bpp --&gt; 8 bpp, arbitrary reduction)
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a3ba3115fdd58873d26e4312c8d646861">pixScaleToGrayMipmap</a>()
+
+       Grayscale scaling using mipmap
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a190de2f30383b14caab6723ba1c6e6a6">pixScaleMipmap</a>()
+
+       Replicated (integer) expansion (all depths)
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#ac76b2a8bd772e8aa08921d60481a3c91">pixExpandReplicate</a>()
+
+       Upscale 2x followed by binarization
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a7c40b318c9fa81a8b6c3a98881558153">pixScaleGray2xLIThresh</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a5a604878a5d243f512e97de768b60b6e">pixScaleGray2xLIDither</a>()
+
+       Upscale 4x followed by binarization
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a679735b05acababa2b55c40be9f1f208">pixScaleGray4xLIThresh</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a1006cc4cf2aa29d946382e2566123ef6">pixScaleGray4xLIDither</a>()
+
+       Grayscale downscaling using min and max
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a0e0cbd9cfb503ede5a8e666b32f3e2b5">pixScaleGrayMinMax</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a80b94857ddb50a63c93c99f2dc739901">pixScaleGrayMinMax2</a>()
+
+       Grayscale downscaling using rank value
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a1d25ee830e6f6986fcc553b4496b9c95">pixScaleGrayRankCascade</a>()
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a41963a7fa7d994c09f11af460fc1063f">pixScaleGrayRank2</a>()
+
+       RGB scaling including alpha (blend) component and gamma transform
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#a26ec8e9492b4eed10d25da4cdcf08c6d">pixScaleWithAlpha</a>()   ***
+             <a class="code" href="struct_pix.html">PIX</a>    *<a class="code" href="leptprotos_8h.html#af42e1e0df8a14f871ee673a332713160">pixScaleGammaXform</a>()  ***
+
+ Note: these functions make an implicit assumption about RGB
+          component ordering.
+</pre></div> 
 <p>Definition in file <a class="el" href="scale_8c_source.html">scale.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a18e7060f108e2d8a3eeb7da236953648"></a><!-- doxytag: member="scale.c::pixScale" ref="a18e7060f108e2d8a3eeb7da236953648" args="(PIX *pixs, l_float32 scalex, l_float32 scaley)" -->

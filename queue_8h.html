@@ -138,7 +138,33 @@ Typedefs</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Struct for generic expandable queue (<a class="el" href="struct_l___queue.html">L_Queue</a>) </p>
+<div class="fragment"><pre class="fragment">    Expandable pointer queue <span class="keywordflow">for</span> arbitrary <span class="keywordtype">void</span>* data.
 
+    The <a class="code" href="struct_l___queue.html">L_Queue</a> is a fifo that implements a queue of <span class="keywordtype">void</span>* pointers.
+    It can be used to hold a queue of any type of <span class="keyword">struct</span>.
+
+    Internally, it maintains two counters:
+        nhead:  location of head (in ptrs) from the beginning
+                of the array.
+        nelem:  number of ptr elements stored in the queue.
+
+    The element at the head of the queue, which is the next to
+    be removed, is array[nhead].  The location at the tail of the
+    queue to which the next element will be added is
+    array[nhead + nelem].
+             
+    As items are added to the queue, nelem increases.
+    As items are removed, nhead increases and nelem decreases.
+    Any time the tail reaches the end of the allocated <a class="code" href="struct_l___ptra.html#aa5daf2f4ee969392b3489bcb722d2341">array</a>,
+    all the pointers are shifted to the left, so that the head
+    is at the beginning of the array.
+    If the array becomes more than 3/4 full, it doubles in <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>.
+
+    The auxiliary stack can be used in a wrapper <span class="keywordflow">for</span> re-<span class="keyword">using</span>
+    items popped from the queue.  It is not made by <span class="keywordflow">default</span>.
+
+    For further implementation details, see queue.c.
+</pre></div> 
 <p>Definition in file <a class="el" href="queue_8h_source.html">queue.h</a>.</p>
 </div><hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="a895b084d5d2f1f941fbe8f2ead553420"></a><!-- doxytag: member="queue.h::L_QUEUE" ref="a895b084d5d2f1f941fbe8f2ead553420" args="" -->

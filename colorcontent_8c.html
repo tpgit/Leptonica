@@ -143,7 +143,93 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Measure and map the color content (divergence from gray) of an image. </p>
+<div class="fragment"><pre class="fragment">    Builds an image of the color content, on a per-pixel basis,
+    as a measure of the amount of divergence of each color
+    component (R,G,B) from gray.
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorcontent_8c.html#ae14fccdb7b74a15ad2812bcc067f68d0">pixColorContent</a>()
 
+    Finds the &#39;amount&#39; of color in an image, on a per-pixel basis,
+    as a measure of the difference of the pixel color from gray.
+       <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="colorcontent_8c.html#a8bded9416eacc341a6ce50ea4015b13a">pixColorMagnitude</a>()
+
+    Generates a mask over pixels that have sufficient color and
+    are not too close to gray pixels.
+       <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="colorcontent_8c.html#a488d2e905f2acaf49c41094db6e861a3">pixMaskOverColorPixels</a>()
+
+    Finds the fraction of pixels with &quot;color&quot; that are not close to black
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorcontent_8c.html#a3251f313c1c4c0d9184fec052e06cceb">pixColorFraction</a>()
+
+    Finds the number of perceptually significant gray intensities
+    in a grayscale image.
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorcontent_8c.html#a3c5f5c81147eb3164ae4eb5ae71ebd84">pixNumSignificantGrayColors</a>()
+
+    Identifies images where color quantization will cause posterization
+    due to the existence of many <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> in low-gradient regions.
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorcontent_8c.html#a0acab9d9bd0149c61bc235c3ddc286eb">pixColorsForQuantization</a>()
+
+    Finds the number of unique <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> in an image
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorcontent_8c.html#a4b668650f767aa850b906562bb5c47a7">pixNumColors</a>()
+
+Color is tricky.  If we consider gray (r = g = b) to have no color
+content, how should we define the color content in each component
+of an arbitrary pixel, as well as the overall color magnitude?
+
+I can think of three ways to define the color content in each component:
+
+(1) Linear.  For each component, take the difference from the average
+    of all three.
+(2) Linear.  For each component, take the difference from the average
+    of the other two.
+(3) Nonlinear.  For each component, take the minimum of the differences
+    from the other two.
+
+How might one choose from among these?  Consider two different situations:
+(a) r = g = 0, b = 255            {255}   /255/
+(b) r = 0, g = 127, b = 255       {191}   /128/
+How much g is in each of these?  The three methods above give:
+(a)  1: 85   2: 127   3: 0        [85]
+(b)  1: 0    2: 0     3: 127      [0]
+How much b is in each of these?
+(a)  1: 170  2: 255   3: 255      [255]
+(b)  1: 127  2: 191   3: 127      [191]
+The number I<span class="stringliteral">&#39;d &quot;like&quot; to give is in [].  (Please don&#39;</span>t ask why, it<span class="stringliteral">&#39;s</span>
+<span class="stringliteral">just a feeling.</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">So my preferences seem to be somewhere between (1) and (2).</span>
+<span class="stringliteral">(3) is just too &quot;decisive!&quot;  Let&#39;</span>s pick (2).
+
+We also allow compensation <span class="keywordflow">for</span> white imbalance.  For each
+component, we <span class="keywordflow">do</span> a linear TRC (gamma = 1.0), where the black
+point remains at 0 and the white point is given by the input
+parameter.  This is equivalent to doing a global remapping,
+as with <a class="code" href="adaptmap_8c.html#a3170f659c64f65dbeb102007cb904bba">pixGlobalNormRGB</a>(), followed by color content (or magnitude)
+computation, but without the overhead of first creating the
+white point normalized image.
+
+Another useful <span class="keyword">property</span> is the overall color magnitude in the pixel.
+For <span class="keyword">this</span> there are again several choices, such as:
+    (a) rms deviation from the mean
+    (b) the average L1 deviation from the mean
+    (c) the maximum (over components) of one of the color
+        content measures given above.
+
+For now, we will choose two of the methods in (c):
+   <a class="code" href="morph_8h.html#ae4d5251432e1a9e6803c0240cc492e18ab114a09b7e0aad593a20064ff3843712">L_MAX_DIFF_FROM_AVERAGE_2</a>
+      Define the color magnitude as the maximum over components
+      of the difference between the component value and the
+      average of the other two.  It is easy to show that
+      this is equivalent to selecting the two component values
+      that are closest to each other, averaging them, and
+      using the distance from that average to the third component.
+      For (a) and (b) above, this value is in {..}.
+  <a class="code" href="morph_8h.html#ae4d5251432e1a9e6803c0240cc492e18ac278bbd51ff55fe3c7e5d66eeaafc170">L_MAX_MIN_DIFF_FROM_2</a>
+      Define the color magnitude as the maximum over components
+      of the minimum difference between the component value and the
+      other two values.  It is easy to show that <span class="keyword">this</span> is equivalent
+      to selecting the intermediate value of the three differences
+      between the three components.  For (a) and (b) above,
+      this value is in /../.
+</pre></div> 
 <p>Definition in file <a class="el" href="colorcontent_8c_source.html">colorcontent.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ae14fccdb7b74a15ad2812bcc067f68d0"></a><!-- doxytag: member="colorcontent.c::pixColorContent" ref="ae14fccdb7b74a15ad2812bcc067f68d0" args="(PIX *pixs, l_int32 rwhite, l_int32 gwhite, l_int32 bwhite, l_int32 mingray, PIX **ppixr, PIX **ppixg, PIX **ppixb)" -->

@@ -150,7 +150,56 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write pnm format from/to file and memory. </p>
+<div class="fragment"><pre class="fragment">    Stream interface
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="leptprotos_8h.html#a859c379540fd6377707f43828bfc1279">pixReadStreamPnm</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a8283f607aacd252bcf20e0f925d92503">readHeaderPnm</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#abe8124fe7686b5bf63b69447f6f90110">freadHeaderPnm</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a294144c4f0aaf781a6299bede077ef50">pixWriteStreamPnm</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a4ed5903759a32d423252129080668ff7">pixWriteStreamAsciiPnm</a>()
 
+    Read/write to memory   [not on windows]
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="leptprotos_8h.html#a7420289c69df3c9f7f8af6872ee26fdb">pixReadMemPnm</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a1e34ea1b8e9e0f2d748d334caad2a871">sreadHeaderPnm</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#adcb776442f375ceb30201258bd664269">pixWriteMemPnm</a>()
+
+    Local helpers
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="pnmio_8c.html#ae7ddc0ee57f446048c39841449853dab">pnmReadNextAsciiValue</a>();
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="pnmio_8c.html#adbdc9fc65494ccf7b6562cc76151cd25">pnmSkipCommentLines</a>();
+     
+    These are here by popular demand, with the help of Mattias
+    Kregert (mattias@kregert.se), who provided the first implementation.
+
+    The pnm formats are exceedingly simple, because they have
+    no compression and no colormaps.  They support images that
+    are 1 bpp; 2, 4, 8 and 16 bpp grayscale; and rgb.
+
+    The original pnm formats (&quot;ascii&quot;) are included for completeness,
+    but their use is deprecated for all but tiny iconic images.
+    They are extremely wasteful of memory; for example, the P1 binary
+    ascii format is 16 times as big as the packed uncompressed
+    format, because 2 characters are used to represent every bit
+    (pixel) in the image.  Reading is slow because we check for extra
+    white space and EOL at every sample value.
+ 
+    The packed pnm formats (&quot;raw&quot;) give file <a class="code" href="genfonts_8c.html#a7b4fcaf183d9c0d1f71be15c145df1e0">sizes</a> similar to
+    bmp files, which are uncompressed packed.  However, bmp
+    are more flexible, because they can support colormaps.
+
+    We don&#39;t differentiate between the different types (&quot;pbm&quot;,
+    &quot;pgm&quot;, &quot;ppm&quot;) at the interface level, because this is really a
+    &quot;distinction without a difference.&quot;  You read a file, you get
+    the appropriate <a class="code" href="struct_pix.html">Pix</a>.  You write a file from a <a class="code" href="struct_pix.html">Pix</a>, you get the
+    appropriate type of file.  If there is a colormap on the Pix,
+    and the Pix is more than 1 bpp, you get either an 8 bpp pgm
+    or a 24 bpp RGB pnm, depending on whether the colormap <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a>
+    are gray or rgb, respectively.
+
+    This follows the general policy that the I/O routines don&#39;t
+    make decisions about the content of the image -- you do that
+    with image processing before you write it out to file.
+    The I/O routines just try to make the closest connection
+    possible between the file and the Pix in memory.
+</pre></div> 
 <p>Definition in file <a class="el" href="pnmio_8c_source.html">pnmio.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ae7ddc0ee57f446048c39841449853dab"></a><!-- doxytag: member="pnmio.c::pnmReadNextAsciiValue" ref="ae7ddc0ee57f446048c39841449853dab" args="(FILE *fp, l_int32 *pval)" -->

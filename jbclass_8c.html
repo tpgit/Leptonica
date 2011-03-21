@@ -190,7 +190,181 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>data extraction from a set of pages for jbig2 compression </p>
+<div class="fragment"><pre class="fragment">   These are functions <span class="keywordflow">for</span> unsupervised classification of
+   collections of connected components -- either characters or
+   words -- in binary images.  They can be used as <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+   processing steps in jbig2 compression.
 
+   Initialization
+
+       <a class="code" href="struct_jb_classer.html">JBCLASSER</a>         *<a class="code" href="jbclass_8c.html#a931c9f565b503871ce6d7ebad9655362">jbRankHausInit</a>()      [rank hausdorff encoder]
+       <a class="code" href="struct_jb_classer.html">JBCLASSER</a>         *<a class="code" href="jbclass_8c.html#a91e7cefbfd51053340ec2befc79c81ed">jbCorrelationInit</a>()   [correlation encoder]
+       <a class="code" href="struct_jb_classer.html">JBCLASSER</a>         *<a class="code" href="jbclass_8c.html#a80ff385e97c5edceff41f76e8a5c8420">jbCorrelationInitWithoutComponents</a>()  [ditto]
+       <span class="keyword">static</span> <a class="code" href="struct_jb_classer.html">JBCLASSER</a>  *<a class="code" href="jbclass_8c.html#ac3160c2a27d31616088d1aa014b35f4f">jbCorrelationInitInternal</a>()
+
+   Classify the pages
+
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#add78db94c7b7d2a144dc6aed8eb7d418">jbAddPages</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#a9d9629483ca22afcc193c499ec11f5ee">jbAddPage</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#a5700186ed777b11eb69ab93373c700b6">jbAddPageComponents</a>()
+
+   Rank hausdorff classifier
+
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#a6fbbf1f8a2ec5b4d876c3d6ac76ca31f">jbClassifyRankHaus</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#ac787a3e3e651374769164f7a1a16ae76">pixHaustest</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#a9dc3f1b28677455796ce73eded3b024e">pixRankHaustest</a>()
+
+   Binary correlation classifier
+
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#a55677126ee1d3617dc8bca24992a0171">jbClassifyCorrelation</a>()
+
+   Determine the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> components we start with
+
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#adabba55e90ce4d780626fe54d1b95141">jbGetComponents</a>()
+       <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="jbclass_8c.html#a1086ff75f2b78e26da435fcbda847d71">pixWordMaskByDilation</a>()
+
+   Build grayscale composites (templates)
+
+       <a class="code" href="struct_pixa.html">PIXA</a>       *<a class="code" href="jbclass_8c.html#ac5f0220df26bda8ba3080b0fef17b8f4">jbAccumulateComposites</a>
+       <a class="code" href="struct_pixa.html">PIXA</a>       *<a class="code" href="jbclass_8c.html#aebc85937d82c13a6ae81dc2cd456e5e7">jbTemplatesFromComposites</a>
+
+   Utility functions for Classer
+
+       <a class="code" href="struct_jb_classer.html">JBCLASSER</a>  *<a class="code" href="jbclass_8c.html#aceeab4ff692f0678d098ec66bf507f4d">jbClasserCreate</a>()
+       <span class="keywordtype">void</span>        <a class="code" href="jbclass_8c.html#a9d7dfe6cf87846dd129e541b51563b5e">jbClasserDestroy</a>()
+
+   Utility functions for Data
+
+       <a class="code" href="struct_jb_data.html">JBDATA</a>     *<a class="code" href="jbclass_8c.html#a546a6532d265ba45c380d94a9a1f2461">jbDataSave</a>()
+       <span class="keywordtype">void</span>        <a class="code" href="jbclass_8c.html#a2b36f1ed22475956e5382fbd79787893">jbDataDestroy</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#a2c3cad0429ed158423f0b9b82b51f80a">jbDataWrite</a>()
+       <a class="code" href="struct_jb_data.html">JBDATA</a>     *<a class="code" href="jbclass_8c.html#a26760ab516ce31a4951cbeb469494e5a">jbDataRead</a>()
+       <a class="code" href="struct_pixa.html">PIXA</a>       *<a class="code" href="jbclass_8c.html#a212fa51d15830e2fd48da0d6bbaade0e">jbDataRender</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#a507a86337bc6aa22975be9e3766472ab">jbGetULCorners</a>()
+       <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="jbclass_8c.html#addd30a80d9beb213620e9852eff74918">jbGetLLCorners</a>()
+
+   Static helpers
+
+       static <a class="code" href="struct_jb_find_templates_state.html">JBFINDCTX</a> *<a class="code" href="jbclass_8c.html#a47a48f9129c3e9295d496e5e623d107d">findSimilarSizedTemplatesInit</a>()
+       static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="jbclass_8c.html#a0b32c0b0c58c190fce595dcb8bc51853">findSimilarSizedTemplatesNext</a>()
+       static <span class="keywordtype">void</span>       <a class="code" href="jbclass_8c.html#a87378eb1cec7b96091aa115ad78890ba">findSimilarSizedTemplatesDestroy</a>()
+       static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="jbclass_8c.html#a1daded8379f0aae4dc6b60e7b33b89ee">finalPositioningForAlignment</a>()
+
+   Note: this is NOT an implementation of the JPEG jbig2
+   proposed standard encoder, the specifications for which
+   can be found at http:<span class="comment">//www.jpeg.org/jbigpt2.html.</span>
+   (See below for a full implementation.)
+   It is an implementation of the lower-level part of an encoder that:
+
+      (1) identifies connected components that are going to be used
+      (2) puts them in similarity classes (this is an unsupervised
+          classifier), and
+      (3) stores the result in a simple file format (2 files,
+          one for templates and one for page/coordinate/template-index
+          quartets).
+
+   An actual implementation of the official jbig2 encoder could
+   start with parts (1) and (2), and would then compress the quartets
+   according to the standards requirements (e.g., Huffman or
+   arithmetic coding of coordinate differences and <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> templates).
+
+   The low-level part of the encoder provided here has the
+   following useful features:
+
+       - It is accurate in the identification of templates
+         and classes because it uses a windowed hausdorff
+         distance metric.
+       - It is accurate in the placement of the connected
+         components, doing a two step process of first aligning
+         the the centroids of the template with those of each instance,
+         and then making a further correction of up to +- 1 pixel
+         in each direction to best align the templates.
+       - It is fast because it uses a morphologically based
+         matching algorithm to implement the hausdorff criterion,
+         and it selects the patterns that are possible matches
+         based on their <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>.
+
+   We provide two different matching functions, one using Hausdorff
+   distance and one using a simple <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> correlation.
+   The Hausdorff method sometimes produces better results for the
+   same number of classes, because it gives a relatively small
+   effective weight to foreground pixels near the boundary,
+   and a relatively  large weight to foreground pixels that are
+   not near the boundary.  By effectively ignoring these boundary
+   pixels, Hausdorff weighting corresponds better to the expected
+   probabilities of the pixel values in a scanned <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, where the
+   variations in instances of the same printed character are much
+   more likely to be in pixels near the boundary.  By contrast,
+   the correlation method gives equal weight to all foreground pixels.
+
+   For best results, use the correlation method.  Correlation takes
+   the number of fg pixels in the AND of instance and template,
+   divided by the product of the number of fg pixels in instance
+   and template.  It compares this with a threshold that, in
+   general, depends on the fractional coverage of the template.
+   For heavy text, the threshold is raised above that for light
+   text,  By using both these parameters (basic threshold and
+   adjustment factor for text weight), one has more flexibility
+   and can arrive at the fewest substitution errors, although
+   this comes at the price of more templates.
+
+   The strict Hausdorff scoring is not a rank weighting, because a
+   single pixel beyond the given distance will cause a match
+   failure.  A rank Hausdorff is more robust to non-boundary noise,
+   but it is also more susceptible to confusing components that
+   should be in different classes.  For implementing a jbig2
+   application for visually lossless binary image compression,
+   you have two choices:
+
+      (1) use a 3<a class="code" href="affine__reg_8c.html#a41b607021994d7ad321d656d6682186b">x3</a> structuring element (<a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> = 3) and a strict
+          Hausdorff comparison (rank = 1.0 in the rank Hausdorff
+          function).  This will result in a minimal number of classes,
+          but confusion of small characters, such as italic and
+          non-italic lower-case &#39;o&#39;, can still occur.
+      (2) use the correlation method with a threshold of 0.85
+          and a weighting factor of about 0.7.  This will result in
+          a larger number of classes, but should not be confused
+          either by similar small characters or by extremely
+          thick sans serif characters, such as in prog/cootoots.png.
+
+   As mentioned above, if visual substitution errors must be
+   avoided, you should use the correlation method.
+
+   We provide executables that show how to do the encoding:
+       prog/jbrankhaus.c
+       prog/jbcorrelation.c
+
+   The basic flow for correlation classification goes as follows,
+   where specific choices have been made for parameters (Hausdorff
+   is the same except for initialization):
+
+           <span class="comment">// Initialize and save data in the classer</span>
+       <a class="code" href="struct_jb_classer.html">JBCLASSER</a> *classer =
+           <a class="code" href="jbclass_8c.html#a91e7cefbfd51053340ec2befc79c81ed">jbCorrelationInit</a>(<a class="code" href="jbclass_8h.html#ac36f475ca5b446f4fde4c9b90bec77c8a27e7cdfb87413a6d3686bebc93a3dac6">JB_CONN_COMPS</a>, 0, 0, 0.8, 0.7);
+       <a class="code" href="struct_sarray.html">SARRAY</a> *safiles = <a class="code" href="leptprotos_8h.html#a1e62659c71a4f413e091e3be332c9228">getSortedPathnamesInDirectory</a>(directory,
+                                                       <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 0, 0);
+       <a class="code" href="jbclass_8c.html#add78db94c7b7d2a144dc6aed8eb7d418">jbAddPages</a>(classer, safiles);
+
+           <span class="comment">// Save the data in a data structure for serialization,</span>
+           <span class="comment">// and write it into two files.</span>
+       <a class="code" href="struct_jb_data.html">JBDATA</a> *data = <a class="code" href="jbclass_8c.html#a546a6532d265ba45c380d94a9a1f2461">jbDataSave</a>(classer);
+       <a class="code" href="jbclass_8c.html#a2c3cad0429ed158423f0b9b82b51f80a">jbDataWrite</a>(rootname, data);
+
+           <span class="comment">// Reconstruct (render) the pages from the encoded data.</span>
+       <a class="code" href="struct_pixa.html">PIXA</a> *pixa = <a class="code" href="jbclass_8c.html#a212fa51d15830e2fd48da0d6bbaade0e">jbDataRender</a>(data, <a class="code" href="environ_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>);
+
+   Adam Langley has recently built a jbig2 standards-compliant
+   encoder, the first one to appear in open source.  You can get
+   this encoder at:
+
+        http:<span class="comment">//www.imperialviolet.org/jbig2.html</span>
+
+   It uses arithmetic encoding throughout.  It encodes binary images
+   losslessly with a single arithmetic coding over the full image.
+   It also does both lossy and lossless encoding from connected
+   components, using leptonica to generate the templates representing
+   each cluster.
+</pre></div> 
 <p>Definition in file <a class="el" href="jbclass_8c_source.html">jbclass.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="af1791633b3a1a12a9aa449aa6d558327"></a><!-- doxytag: member="jbclass.c::L_BUF_SIZE" ref="af1791633b3a1a12a9aa449aa6d558327" args="" -->

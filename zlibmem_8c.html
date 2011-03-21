@@ -142,7 +142,22 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Compresses and decompresses a byte array from one memory buffer to another. </p>
+<div class="fragment"><pre class="fragment">    zlib operations in memory, <span class="keyword">using</span> bbuffer
+        <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a7c6e1826a65bc4b0f3a771f57875658e">zlibCompress</a>()
+        <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#ac13c8adb1f755e3c6b7c29ca2461c605">zlibUncompress</a>()
 
+
+  This provides an example use of the byte buffer utility
+  (see bbuffer.c for details of how the bbuffer works internally).
+  We use zlib to compress and decompress a byte array from
+  one memory buffer to another.  The standard method uses streams,
+  but here we use the bbuffer as an expandable queue of pixels
+  for both the reading and writing sides of each operation.
+
+  With memory mapping, one should be able to compress between
+  memory buffers by using the file system to buffer everything in
+  the background, but the bbuffer implementation is more portable.
+</pre></div> 
 <p>Definition in file <a class="el" href="zlibmem_8c_source.html">zlibmem.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="af5f73212da1fc120580a66ad0708e853"></a><!-- doxytag: member="zlibmem.c::zlibCompress" ref="af5f73212da1fc120580a66ad0708e853" args="(l_uint8 *datain, size_t nin, size_t *pnout)" -->

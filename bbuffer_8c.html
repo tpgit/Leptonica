@@ -148,7 +148,71 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements <a class="el" href="struct_byte_buffer.html">ByteBuffer</a>, a byte queue; used for zlib comp/decomp in memory. </p>
+<div class="fragment"><pre class="fragment">    Create/Destroy BBuffer
+        <a class="code" href="struct_byte_buffer.html">BBUFFER</a>   *<a class="code" href="bbuffer_8c.html#af2e89a620293df2b2d182fa75f7d68f5">bbufferCreate</a>()
+        void      *<a class="code" href="bbuffer_8c.html#aaa4b7610490a5f9315caf8ca4ce4b6f7">bbufferDestroy</a>()
+        <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="bbuffer_8c.html#a82e32394162f7ffa65232b4b8e0ecbc6">bbufferDestroyAndSaveData</a>()
 
+    Operations to read data TO a BBuffer
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="bbuffer_8c.html#a5f36de071cd460f68c599a1232e997c4">bbufferRead</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="bbuffer_8c.html#a53ce8438f552001a98c63b70095daad4">bbufferReadStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="bbuffer_8c.html#a382d8bdb02b233891a4ca66c324932bd">bbufferExtendArray</a>()
+
+    Operations to write data FROM a BBuffer
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="bbuffer_8c.html#a895afbf5ccdf4dceb379a53ae21304be">bbufferWrite</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="bbuffer_8c.html#a0699cae890821473261aa5d733d4c083">bbufferWriteStream</a>()
+
+    Accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="bbuffer_8c.html#aef445771dcd739e44cbcc82d9c98be2f">bbufferBytesToWrite</a>()
+
+
+  The bbuffer is an implementation of a byte queue.
+  The bbuffer holds a byte <a class="code" href="struct_numa.html#a61817e4e267f58a697b701a9728db6fe">array</a> from which bytes are
+  processed in a first-in/first-out fashion.  As with
+  any queue, bbuffer maintains two &quot;pointers,&quot; one to the
+  tail of the queue (where you read new bytes onto it)
+  and one to the head of the queue (where you start from
+  when writing bytes out of it. 
+
+  The queue can be visualized:
+
+    
+byte 0                                           byte (<a class="code" href="struct_numa.html#a590dda437cfb5c1f71a3a100cb27294e">nalloc</a> - 1)
+     |                                                |
+     --------------------------------------------------
+               H                             T
+     [   aw   ][  bytes currently on queue  ][  anr   ] 
+  
+     ---:  all allocated data in bbuffer
+     H:    queue head (ptr to next byte to be written out)
+     T:    queue tail (ptr to first byte to be written to) 
+     aw:   already written from queue
+     anr:  allocated but not yet read to
+
+  The purpose of bbuffer is to allow you to safely read
+  bytes in, and to sequentially write them out as well.
+  In the process of writing bytes out, you don&#39;t actually
+  remove the bytes in the <a class="code" href="struct_numa.html#a61817e4e267f58a697b701a9728db6fe">array</a>; you just move the pointer
+  (nwritten) which points to the head of the queue.  In
+  the process of reading bytes in, you sometimes need to
+  expand the array <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>.  If a read is performed after a
+  write, so that the head of the queue is not at the
+  beginning of the array, the bytes already written are
+  first removed by copying the others over them; then the
+  new bytes are read onto the tail of the queue.
+
+  Note that the meaning of &quot;read into&quot; and &quot;write from&quot;
+  the bbuffer is OPPOSITE to that for a stream, where
+  you read &quot;from&quot; a stream and write &quot;into&quot; a stream.
+  As a mnemonic for remembering the direction:
+      - to read bytes from a stream into the bbuffer,
+        you call fread on the stream
+      - to write bytes from the bbuffer into a stream,
+        you call fwrite on the stream
+
+  See zlibmem.c for an example use of bbuffer, where we
+  compress and decompress an array of bytes in memory.
+</pre></div> 
 <p>Definition in file <a class="el" href="bbuffer_8c_source.html">bbuffer.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="af2e89a620293df2b2d182fa75f7d68f5"></a><!-- doxytag: member="bbuffer.c::bbufferCreate" ref="af2e89a620293df2b2d182fa75f7d68f5" args="(l_uint8 *indata, l_int32 nalloc)" -->

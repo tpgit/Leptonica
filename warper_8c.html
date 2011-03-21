@@ -159,7 +159,38 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Simple captcha generator based on random warping. </p>
+<div class="fragment"><pre class="fragment">    High-level captcha interface
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#a1151f3929e03144c14e46656e89209c0">pixSimpleCaptcha</a>()
 
+    Random sinusoidal warping
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#a7630ecd9df8cf390be97b9dece820721">pixRandomHarmonicWarp</a>()
+
+    Helper functions
+        static <a class="code" href="environ_8h.html#ab8d28dcce3b441bb0bb47f124ee3c252">l_float64</a>  *<a class="code" href="warper_8c.html#a433a29f316600e24237e7db891ba1b84">generateRandomNumberArray</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="warper_8c.html#a6b44da965d3c0169d39a9cc982d4af26">applyWarpTransform</a>()
+
+    Version using a LUT for sin
+        <a class="code" href="struct_pix.html">PIX</a>               *pixRandomHarmonicWarpLUT()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     applyWarpTransformLUT()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     makeSinLUT()
+        static <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>   getSinFromLUT()
+
+    Stereoscopic warping
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#a027984de7300fb5acf5e644ff9bf929b">pixWarpStereoscopic</a>()
+
+    Linear and quadratic horizontal stretching
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#aaa0e03eb1ea9ac9c06bd6bfe8ea4be62">pixStretchHorizontal</a>()
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#ac08bb50270e339883e15ec2f1b1b2251">pixStretchHorizontalSampled</a>()
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#a404b19314c36cc4c801f4547f0f21a27">pixStretchHorizontalLI</a>()
+
+    Quadratic vertical shear
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#ae9aff1493558fb8de85d2a30ad5d74d9">pixQuadraticVShear</a>()
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#a7d768302f6a03fbbc5847e63d9190896">pixQuadraticVShearSampled</a>()
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#a51133feabdbebeea967d91536e136f6e">pixQuadraticVShearLI</a>()
+
+    Stereo from a pair of images
+        <a class="code" href="struct_pix.html">PIX</a>               *<a class="code" href="leptprotos_8h.html#a5f7711e1e6d0d1d8c4098153a4578383">pixStereoFromPair</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="warper_8c_source.html">warper.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="aeaf3674bb607aee1627936f1d4b7e4f0"></a><!-- doxytag: member="warper.c::USE_SIN_TABLE" ref="aeaf3674bb607aee1627936f1d4b7e4f0" args="" -->

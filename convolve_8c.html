@@ -161,7 +161,50 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Grayscale, color, float, double convolution; windowed mean, block sum and rank filters; census transform. </p>
+<div class="fragment"><pre class="fragment">    Top level grayscale or color block convolution
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a48fc2b6def6c2a8c8a47ec80816f260d">pixBlockconv</a>()
 
+    Grayscale block convolution
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a7710dd78bd3e0936426a5bac9a62cd4c">pixBlockconvGray</a>()
+
+    Accumulator for 1, 8 and 32 bpp convolution
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#aa5f738603d1c136720f2faa77ae33900">pixBlockconvAccum</a>()
+
+    Un-normalized grayscale block convolution
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a89848b81e6825a436c368d2a9c90a04d">pixBlockconvGrayUnnormalized</a>()
+
+    Tiled grayscale or color block convolution
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a1d25d956ade86cb0627288b686139349">pixBlockconvTiled</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a012993a0e78f56351ca278426e4f1f4d">pixBlockconvGrayTile</a>()
+
+    Convolution for mean, mean square, variance and rms deviation
+    in specified window
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="convolve_8c.html#a15941c0c90d103fed8b73854d657fb2d">pixWindowedStats</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#ac5588d79b9408ce3c7f90e2c09f220a3">pixWindowedMean</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a1ec92e53bf1b0fe9230e3035de31f48a">pixWindowedMeanSquare</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="convolve_8c.html#a6e3c2a7449ce71bb7c5284870fe95802">pixWindowedVariance</a>()
+        <a class="code" href="struct_d_pix.html">DPIX</a>     *<a class="code" href="convolve_8c.html#acf19fd5e7fb628fe67965bc36a5a3d53">pixMeanSquareAccum</a>()
+
+    Binary block sum and rank filter
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a56f48bf0144d2a5002dd639babbd9094">pixBlockrank</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a397824af191089d99d0ff2c973e48504">pixBlocksum</a>()
+
+    Census transform
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a2b6df02fe29a7918f3b06bd94f64409b">pixCensusTransform</a>()
+
+    Generic convolution (with <a class="code" href="struct_pix.html">Pix</a>)
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a7d04971b4f30892631c6b8cde98f16c4">pixConvolve</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#af83200e488331e385f25c51e3a6a03a0">pixConvolveSep</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#a08c75156812a94e72f48dbc16fff5259">pixConvolveRGB</a>()
+        <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="convolve_8c.html#af21e391cd6262f83fae79c0acf0822c4">pixConvolveRGBSep</a>()
+
+    Generic convolution (with <span class="keywordtype">float</span> arrays)
+        <a class="code" href="struct_f_pix.html">FPIX</a>     *<a class="code" href="convolve_8c.html#aa42a89d77483b72c6b123743c6330b4b">fpixConvolve</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>     *<a class="code" href="convolve_8c.html#ae2148272bc20c4d1ca72b98beb1cde7e">fpixConvolveSep</a>()
+
+    Set parameter for convolution subsampling
+        <span class="keywordtype">void</span>      <a class="code" href="convolve_8c.html#a543095511eaef1d65f1b5126d0088f43">l_setConvolveSampling</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="convolve_8c_source.html">convolve.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a48fc2b6def6c2a8c8a47ec80816f260d"></a><!-- doxytag: member="convolve.c::pixBlockconv" ref="a48fc2b6def6c2a8c8a47ec80816f260d" args="(PIX *pix, l_int32 wc, l_int32 hc)" -->

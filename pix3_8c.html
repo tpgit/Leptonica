@@ -168,7 +168,54 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Masking and logical ops, counting, mirrored tiling. </p>
+<div class="fragment"><pre class="fragment">  This file has these operations:
 
+    (1) Mask-directed operations
+    (2) Full-<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> bit-logical operations
+    (3) Foreground pixel counting operations on 1 bpp images
+    (4) Sum of pixel values
+    (5) Mirrored tiling of a smaller <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+
+
+  Masked operations
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a3f858d5fd48e3c6100a623d27bff8b74">pixSetMasked</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a32cb16ed2bb23a7431af56f02d618ea8">pixSetMaskedGeneral</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a813b0bcb13290444ee9bc68ba0f1c93d">pixCombineMasked</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#abea045962a894a2cde2efc6de26a3e73">pixCombineMaskedGeneral</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ad2044b7d3c094b11b6317394a8846e62">pixPaintThroughMask</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a5d4c47a355df1fca7440687f59b57a3c">pixPaintSelfThroughMask</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ac3a14de58a78437be7e7172df82c2ee5">pixMakeMaskFromLUT</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a42974579389e4be6e372f5e22c67df21">pixSetUnderTransparency</a>()
+
+  One and two-<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> <span class="keywordtype">boolean</span> operations on arbitrary depth images
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a6f0dcf6a1fb094a9354b2ec890d46f0c">pixInvert</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a845ef37af1bc454d425bcfabc06664e7">pixOr</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#af7c4153dbf4c98114d736bd629b078bd">pixAnd</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a2cd1afe6b37580d7de1cdd152d054510">pixXor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a7ba072c192bbef9c59417b40f46e2a96">pixSubtract</a>()
+
+  Foreground pixel counting in 1 bpp images
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a6a235d616cb936fa779f4aea0706a0b3">pixZero</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a5908448bd997449a0ebbb3bf8bcb4558">pixCountPixels</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#a2b7100825faf7ca34c1278b2a71b827d">pixaCountPixels</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a6fd1569b6aefe850295e98effb8b4a4b">pixCountPixelsInRow</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#a322523067ceb625344682f5969fd215e">pixCountPixelsByRow</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#a390f6adf99f905bfe7dd440075648311">pixCountPixelsByColumn</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#ac887adb6e54dd0897cb74206e3a8ebf7">pixSumPixelsByRow</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#a15062dc9d166f237907f21fa041f3348">pixSumPixelsByColumn</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a86eb952e0cc7d79ab23e97d2b8dbc5fd">pixThresholdPixelSum</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    *<a class="code" href="leptprotos_8h.html#a230d6654519b5c847e49798b37cd5d1d">makePixelSumTab8</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    *<a class="code" href="leptprotos_8h.html#a3bab57232e526c64a41ab890704ead3c">makePixelCentroidTab8</a>()
+
+  Sum of pixel values
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aeb94554c27b81378124509c06712f855">pixSumPixelValues</a>()
+
+  Mirrored tiling
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#adbf7800e60a3eec5bd9ea01638bb557d">pixMirroredTiling</a>()
+
+  Static helper function
+         static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  <a class="code" href="pix3_8c.html#aeb742e61832f2aa876918d106276c697">findTilePatchCenter</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="pix3_8c_source.html">pix3.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a00b91ccdfe583644771a46b9f7ba4227"></a><!-- doxytag: member="pix3.c::EQUAL_SIZE_WARNING" ref="a00b91ccdfe583644771a46b9f7ba4227" args="" -->

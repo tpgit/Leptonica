@@ -178,7 +178,104 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Impements an array of C strings, and useful utilities based on it. </p>
+<div class="fragment"><pre class="fragment">    Create/Destroy/Copy
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#ad131504b407cbc1aaa1b18e59945d9a5">sarrayCreate</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a1ba7f2b1e8cde1918bfe32130e723d72">sarrayCreateInitialized</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a40ddf6ac097a3fa5474edcdd79ea6f3d">sarrayCreateWordsFromString</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a34eb1025d0583695e599c5043734145e">sarrayCreateLinesFromString</a>()
+        <span class="keywordtype">void</span>      *<a class="code" href="leptprotos_8h.html#a6bc238d36ad4599585c7de09105f83c2">sarrayDestroy</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a0a8333dc0e2958317513d97ecc24e53a">sarrayCopy</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a7a79ee8efa12827545e819af1e0c3c70">sarrayClone</a>()
 
+    Add/Remove <span class="keywordtype">string</span>
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a6800001b8d0e7344e5c828b42a9e04e7">sarrayAddString</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a3e0d2ea4c5704804a1d79cc446c3662c">sarrayExtendArray</a>()
+        <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a4aa6afbf1c556126d1ab73f610ee7977">sarrayRemoveString</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a8bab8145360b334545f073bd9ce131bb">sarrayReplaceString</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a5a8ac6839ee2ac06eb8cfbb374143502">sarrayClear</a>()
+
+    Accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a32bccb817e096fe813a49bb11dabf873">sarrayGetCount</a>()
+        <span class="keywordtype">char</span>     **<a class="code" href="leptprotos_8h.html#a16f449e08e942883c59aa6306625fa3c">sarrayGetArray</a>()
+        <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#aaf3120597e2de74305d3f7b6d603e7aa">sarrayGetString</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a5afc20699fb4269fb802804f893c9bc0">sarrayGetRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a8cf464b31470afff6910cfb8bc93842a">sarrayChangeRefcount</a>()
+
+    Conversion back to <span class="keywordtype">string</span>
+        <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#aa58ee6340678669b10d71c2abe2ab9a0">sarrayToString</a>()
+        <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a051002fe6c8a9f26124cc6da6fe1eb68">sarrayToStringRange</a>()
+
+    Concatenate 2 sarrays
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a71a17c857dd620578af72dc362b15b9c">sarrayConcatenate</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a6c6be28d25a9d9ad42a6728c5f8fe42a">sarrayAppendRange</a>()
+
+    Pad an sarray to be the same <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> as another sarray
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aaa17ee10233391ddd10373fe8aca86b7">sarrayPadToSameSize</a>()
+
+    Convert word sarray to (formatted) line sarray
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a0cb399554b66357490a03f65646275c1">sarrayConvertWordsToLines</a>()
+
+    Split <span class="keywordtype">string</span> on separator list
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#aa52b56935744261d4b1a12d29ffa049a">sarraySplitString</a>()
+
+    Filter sarray
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#acd64125423e570437e4b0d606738ad04">sarraySelectBySubstring</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a957cb4466ccb058a45b33b1376125776">sarraySelectByRange</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a6a4389a438f2e3813bec05aa5cb9a879">sarrayParseRange</a>()
+
+    Sort
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a9e614398934108cdc3bfc01a32a22d9b">sarraySort</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a3063472a56b3f191c4ee04f036babb61">stringCompareLexical</a>()
+
+    Serialize for I/O
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a4e1c757129ce12a699b4f5398d26ac8f">sarrayRead</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#aded5870e7f2534b01f33ade97658c359">sarrayReadStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a83ea00ff1ed75b667e4bf65ced540467">sarrayWrite</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a48873cd933bb8039cc1610ae053a0db9">sarrayWriteStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a1fbccd0838d6bb5af983d43bd9e1c4c7">sarrayAppend</a>()
+
+    Directory filenames
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a45d44201718b3c4aea49d233ce49e89e">getNumberedPathnamesInDirectory</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#a1e62659c71a4f413e091e3be332c9228">getSortedPathnamesInDirectory</a>()
+        <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#aaf8e44ae06674fc47f192bf7f969c4f9">getFilenamesInDirectory</a>()
+
+    Comments on usage:
+
+        These functions are important for efficient manipulation
+        of <span class="keywordtype">string</span> data.  They have been used in leptonica for
+        generating and parsing text files, and for generating
+        code for compilation.  The user is responsible for
+        correctly disposing of strings that have been extracted
+        from sarrays.
+
+          - When you want a <span class="keywordtype">string</span> from an <a class="code" href="struct_sarray.html">Sarray</a> to inspect it, or
+            plan to make a copy of it later, use <a class="code" href="leptprotos_8h.html#aaf3120597e2de74305d3f7b6d603e7aa">sarrayGetString</a>()
+            with copyflag = 0.  In this case, you must neither free
+            the <span class="keywordtype">string</span> nor put it directly in another array.
+            We provide the copyflag constant <a class="code" href="pix_8h.html#a0edd1485ff52527dbe179e4363d6d3bd">L_NOCOPY</a>, which is 0,
+            for this purpose:
+               str-not-owned = <a class="code" href="leptprotos_8h.html#aaf3120597e2de74305d3f7b6d603e7aa">sarrayGetString</a>(sa, <a class="code" href="struct_l___reg_params.html#a6fa45512d6be2dfca4fd0621f3527b08">index</a>, L_NOCOPY);
+            To extract a copy of a <span class="keywordtype">string</span>, use:
+               str-owned = <a class="code" href="leptprotos_8h.html#aaf3120597e2de74305d3f7b6d603e7aa">sarrayGetString</a>(sa, index, <a class="code" href="pix_8h.html#a5d76b81b0ad4c19007a781d4edb8181fa5d4fddf26f28ac80063028939562e17d">L_COPY</a>);
+
+          - When you want to insert a <span class="keywordtype">string</span> that is in one
+            array into another array (always leaving the first
+            array intact), you have two options:
+               (1) use copyflag = L_COPY to make an immediate copy,
+                   which you must then add to the second array
+                   by insertion; namely,
+                     str-owned = <a class="code" href="leptprotos_8h.html#aaf3120597e2de74305d3f7b6d603e7aa">sarrayGetString</a>(sa, index, L_COPY);
+                     <a class="code" href="leptprotos_8h.html#a6800001b8d0e7344e5c828b42a9e04e7">sarrayAddString</a>(sa, str-owned, <a class="code" href="pix_8h.html#a5d76b81b0ad4c19007a781d4edb8181fac1bdfee98ef4dbb3637c7d329cc460a3">L_INSERT</a>);
+               (2) use copyflag = L_NOCOPY to get another handle to
+                   the <span class="keywordtype">string</span>, in which case you must add
+                   a copy of it to the second <span class="keywordtype">string</span> array:
+                     str-not-owned = <a class="code" href="leptprotos_8h.html#aaf3120597e2de74305d3f7b6d603e7aa">sarrayGetString</a>(sa, index, L_NOCOPY);
+                     <a class="code" href="leptprotos_8h.html#a6800001b8d0e7344e5c828b42a9e04e7">sarrayAddString</a>(sa, str-not-owned, L_COPY).
+
+            In all cases, when you use copyflag = L_COPY to extract
+            a <span class="keywordtype">string</span> from an array, you must either free it
+            or insert it in an array that will be freed later.
+</pre></div> 
 <p>Definition in file <a class="el" href="sarray_8c_source.html">sarray.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a1217cfe629930984bc7b9a843737e165"></a><!-- doxytag: member="sarray.c::sarrayCreate" ref="a1217cfe629930984bc7b9a843737e165" args="(l_int32 n)" -->

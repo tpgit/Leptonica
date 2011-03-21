@@ -159,7 +159,23 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Find text baselines; determine and remove local skew. </p>
+<div class="fragment"><pre class="fragment">    Locate text <a class="code" href="bmf_8c.html#a18a519a9b98a53af96ac9b1275368a3e">baselines</a> in an <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+         <a class="code" href="struct_numa.html">NUMA</a>     *<a class="code" href="baseline_8c.html#a715843619c2153a99950a55100ccd2ba">pixFindBaselines</a>()
 
+    Projective transform to remove local skew
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="baseline_8c.html#afae733b08bc9ae9d90f84af551e55921">pixDeskewLocal</a>()
+
+    Determine local skew
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="baseline_8c.html#abb99f4604ebf3316405c73cafcb17d58">pixGetLocalSkewTransform</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>     *<a class="code" href="baseline_8c.html#a8191d6360b6b277edef9bcc4bf44c285">pixGetLocalSkewAngles</a>()
+
+We have two apparently different functions here:
+  - finding <a class="code" href="bmf_8c.html#a18a519a9b98a53af96ac9b1275368a3e">baselines</a>
+  - finding a projective transform to remove keystone warping
+The function <a class="code" href="baseline_8c.html#a8191d6360b6b277edef9bcc4bf44c285">pixGetLocalSkewAngles</a>() returns an <a class="code" href="struct_numa.html#a61817e4e267f58a697b701a9728db6fe">array</a> of angles,
+one for each raster line, and the <a class="code" href="bmf_8c.html#a18a519a9b98a53af96ac9b1275368a3e">baselines</a> of the text lines
+should intersect the left edge of the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> with that angle.
+</pre></div> 
 <p>Definition in file <a class="el" href="baseline_8c_source.html">baseline.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="abd9fad53a1db5c8748706f009f4f2976"></a><!-- doxytag: member="baseline.c::DEBUG_PLOT" ref="abd9fad53a1db5c8748706f009f4f2976" args="" -->

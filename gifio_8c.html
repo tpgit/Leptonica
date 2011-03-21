@@ -148,7 +148,22 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write gif format from/to file and memory. </p>
+<div class="fragment"><pre class="fragment">  Read gif from file
+        <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="gifio_8c.html#aa381c4703df42f671fc9c5b2d3037eb0">pixReadStreamGif</a>()
+        static <a class="code" href="struct_pix.html">PIX</a> *<a class="code" href="gifio_8c.html#a881e0e698fa2790f40992bf949c430d2">pixInterlaceGIF</a>()
 
+  Write gif to file
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gifio_8c.html#ac0bd8299fe39d8e2fdee92dd2a69a88b">pixWriteStreamGif</a>()
+
+  Read/write from/to memory (see warning)
+        <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="gifio_8c.html#a349f947999c0c8dda651b8b3d277ffee">pixReadMemGif</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gifio_8c.html#a9ff33d3975762d1c0547e0e819a23089">pixWriteMemGif</a>()
+   
+  This uses the gif library, <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> 4.1.6.  Do not use 4.1.4.
+
+  This module was generously contribued by Antony Dovgal.
+  He can be contacted at:  tony *AT* daylessday.org
+</pre></div> 
 <p>Definition in file <a class="el" href="gifio_8c_source.html">gifio.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a881e0e698fa2790f40992bf949c430d2"></a><!-- doxytag: member="gifio.c::pixInterlaceGIF" ref="a881e0e698fa2790f40992bf949c430d2" args="(PIX *pixs)" -->

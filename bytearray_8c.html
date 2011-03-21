@@ -156,7 +156,41 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Functions for handling byte arrays, in analogy with C++ 'strings'. </p>
+<div class="fragment"><pre class="fragment"> Functions <span class="keywordflow">for</span> handling byte arrays, in analogy with C++ <span class="stringliteral">&#39;strings&#39;</span>
 
+    Creation, copy, clone, destruction
+         <a class="code" href="struct_l___bytea.html">L_BYTEA</a>      *<a class="code" href="bytearray_8c.html#a79bdd20483c16b97a35ca9e3027b1249">l_byteaCreate</a>()
+         <a class="code" href="struct_l___bytea.html">L_BYTEA</a>      *<a class="code" href="bytearray_8c.html#ac0451f1dc32f3e3e772cae15d79e08e9">l_byteaInitFromMem</a>()
+         <a class="code" href="struct_l___bytea.html">L_BYTEA</a>      *<a class="code" href="bytearray_8c.html#adec8c033948b2462415d3a4b2ea3aed8">l_byteaInitFromFile</a>()
+         <a class="code" href="struct_l___bytea.html">L_BYTEA</a>      *<a class="code" href="bytearray_8c.html#accff94d6c3490e50c16b98149482e158">l_byteaInitFromStream</a>()
+         <a class="code" href="struct_l___bytea.html">L_BYTEA</a>      *<a class="code" href="bytearray_8c.html#a56a51279118ea31e91bcccf9d046c699">l_byteaCopy</a>()
+         <a class="code" href="struct_l___bytea.html">L_BYTEA</a>      *l_byteaClone()
+         <span class="keywordtype">void</span>          <a class="code" href="bytearray_8c.html#a7beadd61be6a14a4fb21fe590f189e0e">l_byteaDestroy</a>()
+
+    Accessors
+         <span class="keywordtype">size_t</span>        <a class="code" href="bytearray_8c.html#a365779d176de4da314ae5ed55a24e6e5">l_byteaGetSize</a>()
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>      *<a class="code" href="bytearray_8c.html#a534cd867f79a2e172c47d6291b05ec4c">l_byteaGetData</a>()
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>      *<a class="code" href="bytearray_8c.html#a1638e4a1b0e3a925a07857e3c3606341">l_byteaCopyData</a>()
+
+    Appending
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#a9f8b3e9c03f4beb24ed79831bfbd06eb">l_byteaAppendData</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#a15da822e50fe5ce694aa4a953dbf4d71">l_byteaAppendString</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#a24e1c935d83f8f93f36be4f0eee85c35">l_byteaExtendArrayToSize</a>()
+
+    Join/Split
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#a043182a2087a648aa65710423dc7e686">l_byteaJoin</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#a827e0660a47f9088b1a629958f2015c8">l_byteaSplit</a>()
+
+    Search
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#aff17fac8c50b99833d6a88d1d18f5e4e">l_byteaFindEachSequence</a>()
+
+    Output to file
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#a8155944d063c02875eb563aaed98f87f">l_byteaWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bytearray_8c.html#a9c6c4d72387b38a4001242e639a96f99">l_byteaWriteStream</a>()
+
+ The internal data array is always null-terminated, for ease of use
+ in the event that it is an ascii <span class="keywordtype">string</span> without null bytes.
+</pre></div> 
 <p>Definition in file <a class="el" href="bytearray_8c_source.html">bytearray.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a79bdd20483c16b97a35ca9e3027b1249"></a><!-- doxytag: member="bytearray.c::l_byteaCreate" ref="a79bdd20483c16b97a35ca9e3027b1249" args="(size_t nbytes)" -->

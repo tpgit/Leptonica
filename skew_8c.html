@@ -168,7 +168,70 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Find and remove text page skew. </p>
+<div class="fragment"><pre class="fragment">    Top-level deskew interfaces
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a3a5f96eb65f6adf26108dcb983c3ca24">pixDeskew</a>()
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a9c4f22f0e618f4b3f6c96c1e8a961717">pixFindSkewAndDeskew</a>()
+        <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#aca470f8d76beb434ed5f221f08f4f9fa">pixDeskewGeneral</a>()
 
+    Top-level angle-finding interface
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a58a505d9eb37ca432e0126321f7c9f30">pixFindSkew</a>()
+
+    Basic angle-finding functions
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae56ced601cf07c10255e5dc2c74fd13a">pixFindSkewSweep</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a62c7407caba2d419fb4825d838b2d2e2">pixFindSkewSweepAndSearch</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae55a6b7d6b9921b3e475091c800da9b1">pixFindSkewSweepAndSearchScore</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a01527eaac96ca25d98fd16a74a1e0c63">pixFindSkewSweepAndSearchScorePivot</a>()
+
+    Search over arbitrary range of angles in orthogonal directions
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ab627972d9c11d77de5c4ac4beb79dd7c">pixFindSkewOrthogonalRange</a>()
+
+    Differential square sum function for scoring
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#af7f18bf63ab93cf90caa3eb9b4fcb4f1">pixFindDifferentialSquareSum</a>()
+
+    Measures of variance of row sums
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a13343f254e10f577c68392c39e254987">pixFindNormalizedSquareSum</a>()
+
+
+    ==============================================================    
+    Page skew detection
+
+    Skew is determined by pixel profiles, which are computed
+    as pixel sums along the raster line for each line in the
+    image.  By vertically shearing the image by a given angle,
+    the sums can be computed quickly along the raster lines
+    rather than along lines at that angle.  The score is
+    computed from these line sums by taking the square of
+    the DIFFERENCE between adjacent line sums, summed over
+    all lines.  The skew angle is then found as the angle
+    that maximizes the score.  The actual computation for
+    any sheared image is done in the function
+    <a class="code" href="leptprotos_8h.html#af7f18bf63ab93cf90caa3eb9b4fcb4f1">pixFindDifferentialSquareSum</a>().
+
+    The search for the angle that maximizes this score is
+    most efficiently performed by first sweeping coarsely
+    over angles, using a significantly reduced image (say, 4x
+    reduction), to find the approximate maximum within a half
+    degree or so, and then doing an interval-halving binary
+    search at higher resolution to get the skew angle to
+    within 1/20 degree or better.
+
+    The differential signal is used (rather than just using
+    that variance of line sums) because it rejects the
+    background noise due to <a class="code" href="compfilter__reg_8c.html#a720e0421210add66839c567994e2127a">total</a> number of black pixels,
+    and has maximum contributions from the <a class="code" href="bmf_8c.html#a18a519a9b98a53af96ac9b1275368a3e">baselines</a> and
+    x-height lines of text when the textlines are aligned
+    with the raster lines.  It also works well in multicolumn
+    pages where the textlines do not line up across columns.
+
+    The method is fast, accurate to within an angle (in radians)
+    of approximately the inverse width in pixels of the image,
+    and will work on a surprisingly small amount of text data
+    (just a couple of text lines).  Consequently, it can
+    also be used to find local skew if the skew were to vary
+    significantly over the page.  Local skew determination
+    is not very important except for locating lines of
+    handwritten text that may be mixed with printed text.
+</pre></div> 
 <p>Definition in file <a class="el" href="skew_8c_source.html">skew.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a27e1882a8c2e1d9544f92db72057b926"></a><!-- doxytag: member="skew.c::DEBUG_PRINT_SCORES" ref="a27e1882a8c2e1d9544f92db72057b926" args="" -->

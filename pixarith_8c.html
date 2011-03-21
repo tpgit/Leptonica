@@ -153,7 +153,55 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Grayscale image arithmetic. </p>
+<div class="fragment"><pre class="fragment">    One-<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> grayscale arithmetic operations (8, 16, 32 bpp)
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab57ae200a71b4b043a21e1b13e1be26d">pixAddConstantGray</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab71bac125512a3473376026c2c65a753">pixMultConstantGray</a>()
 
+    Two-<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> grayscale arithmetic operations (8, 16, 32 bpp)
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#af2b1ddd45e264781ef590198bf82f05e">pixAddGray</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#acf840b02433a5fa93ce2a4fceb083122">pixSubtractGray</a>()
+
+    Grayscale threshold operation (8, 16, 32 bpp)
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a3c132ada1b66ecb3997c2872034019d7">pixThresholdToValue</a>()
+
+    Image accumulator arithmetic operations
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ad179fc83968ea8799fd53d9ea55e3e36">pixInitAccumulate</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#afe6100b79aea3d53b38e3d5e1c6ecfcf">pixFinalAccumulate</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#af00d36fbd6f94012df668f327d37df86">pixFinalAccumulateThreshold</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aabe4c42dae835c3f590acb661e8902c9">pixAccumulate</a>() 
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a87174a55550cc89dacdc5162a4819bb1">pixMultConstAccumulate</a>()
+
+    Absolute value of difference
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a5f3839169243fa370c713c13031dcad1">pixAbsDifference</a>()
+
+    Two-<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> min and max operations (8 and 16 bpp)
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a981b152411b10b82061c1f4e0e597ebd">pixMinOrMax</a>()
+
+    Scale pix for maximum dynamic range in 8 bpp <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>:
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#ac00ac724a94f7cc5cb91ae1dff0d2fef">pixMaxDynamicRange</a>()
+
+    Log base2 lookup
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>  *<a class="code" href="leptprotos_8h.html#aea34b1e38720280280581a30b7c77f08">makeLogBase2Tab</a>()
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>   <a class="code" href="leptprotos_8h.html#a5875f4525a010e5cee58da17f0370c55">getLogBase2</a>()
+
+    The <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> accumulator operations are used when you expect
+    overflow from 8 bits on intermediate results.  For example,
+    you might want a tophat contrast operator which is
+       3*I - opening(I,S) - closing(I,S)
+    To use these operations, first use the init to generate
+    a 16 bpp <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, use the accumulate to add or subtract 8 bpp
+    images from that, or the multiply constant to multiply
+    by a small constant (much less than 256 -- we don&#39;t want
+    overflow from the 16 bit images!), and when you&#39;re finished
+    use final to bring the result back to 8 bpp, clipped
+    if necessary.  There is also a divide function, which
+    can be used to divide one image by another, scaling the
+    result for maximum dynamic range, and giving back the
+    8 bpp result.
+
+    A simpler interface to the arithmetic operations is
+    provided in pixacc.c.
+</pre></div> 
 <p>Definition in file <a class="el" href="pixarith_8c_source.html">pixarith.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a8a80ced8a11cd1e71d41a1dc61438e70"></a><!-- doxytag: member="pixarith.c::pixAddConstantGray" ref="a8a80ced8a11cd1e71d41a1dc61438e70" args="(PIX *pixs, l_int32 val)" -->

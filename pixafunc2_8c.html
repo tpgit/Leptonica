@@ -147,7 +147,69 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Render a <a class="el" href="struct_pixa.html">Pixa</a> or <a class="el" href="struct_pixaa.html">Pixaa</a> in a <a class="el" href="struct_pix.html">Pix</a>. </p>
+<div class="fragment"><pre class="fragment">    <a class="code" href="struct_pixa.html">Pixa</a> Display (render into a pix)
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a6535561de2a8024c72d75babe15131a9">pixaDisplay</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#af5eaaa058edac60f8a963773ed843ac4">pixaDisplayOnColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a3235978ca28ef8f92e6e0ec2924b5aca">pixaDisplayRandomCmap</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#aa484d914ef5145af5582d39d1b2ba24a">pixaDisplayOnLattice</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#adaf20e900c37c2f622254b2868d30d17">pixaDisplayUnsplit</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ad08c37c1c12e172d74e8d17a531c7d48">pixaDisplayTiled</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ae5516145136478bdcdc02051ff72392f">pixaDisplayTiledInRows</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a447f256b8aea30acaa1a61e8634b3935">pixaDisplayTiledAndScaled</a>()
 
+    <a class="code" href="struct_pixaa.html">Pixaa</a> Display (render into a pix)
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a17323ebfdaf1df5a1da896fd2970cd66">pixaaDisplay</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a8cd127242298b5818b64ef4ac0b6e39d">pixaaDisplayByPixa</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>     *<a class="code" href="leptprotos_8h.html#a6928408895914e6cf36a3490229c71bf">pixaaDisplayTiledAndScaled</a>()
+
+We give seven methods for displaying a pixa in a pix.
+Some work for 1 bpp input; others for any input depth.
+Some give an output depth that depends on the input depth;
+others give a different output depth or allow you to choose it.
+Some use a boxes to determine where each pix goes; others tile
+onto a regular lattice; yet others tile onto an irregular lattice.
+
+Here is a brief description of what these functions do.
+
+  <a class="code" href="leptprotos_8h.html#a6535561de2a8024c72d75babe15131a9">pixaDisplay</a>()
+      This uses the boxes to lay out each pix.  It is typically
+      used to reconstruct a pix that has been broken into components.
+  <a class="code" href="leptprotos_8h.html#af5eaaa058edac60f8a963773ed843ac4">pixaDisplayOnColor</a>()
+      <a class="code" href="leptprotos_8h.html#a6535561de2a8024c72d75babe15131a9">pixaDisplay</a>() with choice of background color
+  <a class="code" href="leptprotos_8h.html#a3235978ca28ef8f92e6e0ec2924b5aca">pixaDisplayRandomCmap</a>()
+      This also uses the boxes to lay out each pix.  However, it creates
+      a colormapped dest, where each 1 bpp pix is given a randomly
+      generated color (up to 256 are used).
+  <a class="code" href="leptprotos_8h.html#aa484d914ef5145af5582d39d1b2ba24a">pixaDisplayOnLattice</a>()
+      This puts each pix, sequentially, onto a regular lattice,
+      omitting any pix that are too big for the lattice <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>.
+      This is useful, for example, to store bitmapped fonts,
+      where all the characters are stored in a single <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>.
+  <a class="code" href="leptprotos_8h.html#adaf20e900c37c2f622254b2868d30d17">pixaDisplayUnsplit</a>()
+      This lays out a mosaic of tiles (the pix in the pixa) that
+      are all of equal <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>.  (Don&#39;t use this for unequal sized pix!)
+      For example, it can be used to invert the action of
+      <a class="code" href="leptprotos_8h.html#a5e3f965e552c7531c215fb194d792b6c">pixaSplitPix</a>().
+  <a class="code" href="leptprotos_8h.html#ad08c37c1c12e172d74e8d17a531c7d48">pixaDisplayTiled</a>()
+      Like <a class="code" href="leptprotos_8h.html#aa484d914ef5145af5582d39d1b2ba24a">pixaDisplayOnLattice</a>(), this places each pix on a regular
+      lattice, but here the lattice <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> is determined by the
+      largest component, and no components are omitted.  This is
+      dangerous if there are thousands of small components and
+      one or more very large one, because the <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> of the resulting
+      pix can be huge!
+  <a class="code" href="leptprotos_8h.html#ae5516145136478bdcdc02051ff72392f">pixaDisplayTiledInRows</a>()
+      This puts each pix down in a series of rows, where the upper
+      <a class="code" href="compfilter__reg_8c.html#aa76c39342559c1b1c8e43e89850fe00c">edges</a> of each pix in a row are alined and there is a uniform
+      spacing between the pix.  The height of each row is determined
+      by the tallest pix that was put in the row.  This function
+      is a reasonably efficient way to pack the subimages.
+  <a class="code" href="leptprotos_8h.html#a447f256b8aea30acaa1a61e8634b3935">pixaDisplayTiledAndScaled</a>()
+      This scales each pix to a given width and output depth,
+      and then tiles them in rows with a given number placed in
+      each row.  This is very useful for presenting a sequence
+      of images that can be at different resolutions, but which
+      are derived from the same initial <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>.
+</pre></div> 
 <p>Definition in file <a class="el" href="pixafunc2_8c_source.html">pixafunc2.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a018dee508cb4da24d84e5a298245aa8c"></a><!-- doxytag: member="pixafunc2.c::pixaDisplay" ref="a018dee508cb4da24d84e5a298245aa8c" args="(PIXA *pixa, l_int32 w, l_int32 h)" -->

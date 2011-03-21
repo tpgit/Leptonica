@@ -149,7 +149,44 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_f_pix.html">FPix</a> operations: interconversion <a class="el" href="struct_f_pix.html">FPix</a> &lt;-&gt; <a class="el" href="struct_pix.html">Pix</a>; borders; rasterop; arithmetic. </p>
+<div class="fragment"><pre class="fragment">  This file has these <a class="code" href="struct_f_pix.html">FPix</a> utilities:
+     - interconversion with pix
+     - interconversion with dpix
+     - min and max values
+     - border functions
+     - simple rasterop (source --&gt; dest)
+     - integer scaling
+     - arithmetic operations
 
+  Interconversions between <a class="code" href="struct_pix.html">Pix</a> and <a class="code" href="struct_f_pix.html">FPix</a>
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix2_8c.html#aabfd27542dbf273137b4e85e63596e3b">pixConvertToFPix</a>()
+        <a class="code" href="struct_pix.html">PIX</a>           *<a class="code" href="fpix2_8c.html#a0f1317ed5b324405a57796af5188ebae">fpixConvertToPix</a>()
+        <a class="code" href="struct_pix.html">PIX</a>           *<a class="code" href="fpix2_8c.html#a4738237ca2fd3dd7e12d4ed52944da29">fpixDisplayMaxDynamicRange</a>()  [useful for debugging]
+
+  Interconversions between <a class="code" href="struct_f_pix.html">FPix</a> and <a class="code" href="struct_d_pix.html">DPix</a>
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix2_8c.html#a7aa81813ca2b0e92bbd9d9e2a619fdba">fpixConvertToDPix</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix2_8c.html#ae96b121541eee4eeb04dffd9dc76ffef">dpixConvertToFPix</a>()
+
+  <a class="code" href="struct_f_pix.html">FPix</a> min/max value
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix2_8c.html#a6fad1c0a6507ccff9fd2a81e0e8ff3e0">fpixGetMin</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix2_8c.html#aace24bc09af76007fb35751b371b3648">fpixGetMax</a>()
+
+  <a class="code" href="struct_f_pix.html">FPix</a> border functions
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix2_8c.html#aa23a8e36d6bbc0d2748089b83f6cad9d">fpixAddBorder</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix2_8c.html#a6b624e428a85aea0f62a41cb01a8e1b2">fpixRemoveBorder</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix2_8c.html#a0b97251b9ce237cd10ff45a02dd8ff92">fpixAddMirroredBorder</a>()
+
+  <a class="code" href="struct_f_pix.html">FPix</a> simple rasterop
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix2_8c.html#a67a0b4218b30a7e0e84a07138ff043c3">fpixRasterop</a>()
+
+  Integer scaling
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix2_8c.html#a690224e54566b71d17b95f90244935ab">fpixScaleByInteger</a>()
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix2_8c.html#a09f55a8702578e5414b79f73c7316665">dpixScaleByInteger</a>()
+
+  <a class="code" href="struct_f_pix.html">FPix</a> arithmetic operations
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix2_8c.html#aaea34e236ace0d7e0a9572bf2dc4f870">fpixLinearCombination</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix2_8c.html#a3502e500c9e2fbcdcfe2751207049ab7">fpixAddMultConstant</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="fpix2_8c_source.html">fpix2.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aabfd27542dbf273137b4e85e63596e3b"></a><!-- doxytag: member="fpix2.c::pixConvertToFPix" ref="aabfd27542dbf273137b4e85e63596e3b" args="(PIX *pixs, l_int32 ncomps)" -->

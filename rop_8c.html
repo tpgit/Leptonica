@@ -141,7 +141,20 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>General rasterops. "pixRasterop() is your friend; it is worth memorizing!". </p>
+<div class="fragment"><pre class="fragment">    General rasterop
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ac36759948f467dfed4c52c9c45332a80">pixRasterop</a>()
 
+    In-place full <a class="code" href="compfilter__reg_8c.html#a378ac8eb7b178044b43ce69ea642a629">band</a> translation
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aa3b1d908ac084c8dc409401059f95c20">pixRasteropVip</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae91a4eb7ebfd37c1528ce8c8c7b69581">pixRasteropHip</a>()
+
+    Full <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> translation (general and in-place)
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae714ec2876129a0d14ff3e4c29ee709d">pixTranslate</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a45c4edf12be286fab0fcca62ae2af7ab">pixRasteropIP</a>()
+
+    Full <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> rasterop with no translation
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a6eeb51805cb504dc652666a96107eff5">pixRasteropFullImage</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="rop_8c_source.html">rop.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a3c9a3521d57a663302a0d33bf7a0be33"></a><!-- doxytag: member="rop.c::pixRasterop" ref="a3c9a3521d57a663302a0d33bf7a0be33" args="(PIX *pixd, l_int32 dx, l_int32 dy, l_int32 dw, l_int32 dh, l_int32 op, PIX *pixs, l_int32 sx, l_int32 sy)" -->

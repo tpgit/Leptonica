@@ -172,7 +172,32 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_pix.html">Pix</a> from memory and disk; detecting format. </p>
+<div class="fragment"><pre class="fragment">:  reads <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> on file into memory
 
+    Top-level functions <span class="keywordflow">for</span> reading images from file
+         <a class="code" href="struct_pixa.html">PIXA</a>      *<a class="code" href="leptprotos_8h.html#a832c1b2d890dc5a5ddf01ba936d4226a">pixaReadFiles</a>()
+         <a class="code" href="struct_pixa.html">PIXA</a>      *<a class="code" href="leptprotos_8h.html#a4e4e9bc39adf7a767114db61a125d7e6">pixaReadFilesSA</a>()
+         <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a84634846cbb5e01df667d6e9241dfc53">pixRead</a>()
+         <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a3ce88fc6a624a5c5c2f698f49db1d8a5">pixReadWithHint</a>()
+         <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#ab6bc9ccb869899195ed932d1d6687b61">pixReadIndexed</a>()
+         <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a7b53d13ffda82312619c2c9c6fbd2713">pixReadStream</a>()
+
+    Read <a class="code" href="alltests__reg_8c.html#ae64f2c0aa53b2c8ed55b251ca159af46">header</a> information from file
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a8438c60a4e1fbb74caf7cf8f67ee0df8">pixReadHeader</a>()
+
+    Format finders
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a037d7ba950c5359ee7993600c9efab54">findFileFormat</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a13e4c41df3a94df5a0ff1a35c31580bb">findFileFormatStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ad8a903d01fa1554de7043b94f4952a91">findFileFormatBuffer</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a183133c5630bd11e1d997812be02cb48">fileFormatIsTiff</a>()
+
+    Read from memory
+         <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a027a927dc3438192e3bdae8c219d7f6a">pixReadMem</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a02de0d616de251929f9022b7b6a50774">pixReadHeaderMem</a>()
+
+    Test function for I/O with different formats 
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a927f7c8e4936b8a0017e38e28da19adc">ioFormatTest</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="readfile_8c_source.html">readfile.c</a>.</p>
 </div><hr/><h2>Enumeration Type Documentation</h2>
 <a class="anchor" id="a109bfaad92bd6d348dab484aec11edbb"></a><!-- doxytag: member="readfile.c::@69" ref="a109bfaad92bd6d348dab484aec11edbb" args="" -->

@@ -144,7 +144,22 @@ Enumerations</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Sudoku related structures. </p>
+<div class="fragment"><pre class="fragment">  The <a class="code" href="struct_l___sudoku.html">L_Sudoku</a> holds all the information of the current state.
 
+  The input to <a class="code" href="leptprotos_8h.html#ae2a258f14c89d402f8ad8ec284a13409">sudokuCreate</a>() is a file with any number of lines
+  starting with &#39;<span class="preprocessor">#&#39;, followed by 9 lines consisting of 9 numbers</span>
+<span class="preprocessor"></span>  in each line.  These have the known values and use 0 <span class="keywordflow">for</span> the unknowns.
+  Blank lines are ignored.
+
+  The @locs array holds the indices of the unknowns, numbered
+  left-to-right and top-to-bottom from 0 to 80.  The array <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>
+  is initialized to @num.  @current is the index into the @locs
+  array of the current guess: locs[current].
+
+  The @state array is used to determine the validity of each guess.
+  It is of <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> 81, and is initialized by setting the unknowns to 0
+  and the knowns to their input values.
+</pre></div> 
 <p>Definition in file <a class="el" href="sudoku_8h_source.html">sudoku.h</a>.</p>
 </div><hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="aeaf06bedaba6eace18f79c5197af0e54"></a><!-- doxytag: member="sudoku.h::L_SUDOKU" ref="aeaf06bedaba6eace18f79c5197af0e54" args="" -->

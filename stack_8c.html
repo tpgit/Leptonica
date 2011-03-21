@@ -147,7 +147,32 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements a stack of generic pointers. </p>
+<div class="fragment"><pre class="fragment">    Generic stack
 
+    The lstack is an array of <span class="keywordtype">void</span> * ptrs, onto which
+    objects can be stored.  At any time, the number of
+    stored objects is lstack-&gt;n.  The <span class="keywordtype">object</span> at the bottom
+    of the lstack is at array[0]; the <span class="keywordtype">object</span> at the top of
+    the lstack is at array[n-1].  New objects are added
+    to the top of the lstack; i.e., the first available 
+    location, which is at array[n].  The lstack is expanded
+    by doubling, when needed.  Objects are removed
+    from the top of the lstack.  When an attempt is made
+    to <span class="keyword">remove</span> an <span class="keywordtype">object</span> from an empty lstack, the result is null.
+
+    Create/Destroy
+         <a class="code" href="struct_l___stack.html">L_STACK</a>   *<a class="code" href="leptprotos_8h.html#aa83bc7cecb51692083ddcc58dc6040c7">lstackCreate</a>()
+         void       <a class="code" href="leptprotos_8h.html#a3aac8386a3fb508bf64d778837f87c27">lstackDestroy</a>()
+
+    Accessors
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#af768b44bed1ba988fb0a02aaa5d4f02f">lstackAdd</a>()
+         <span class="keywordtype">void</span>      *<a class="code" href="leptprotos_8h.html#ad8cbd71b01f9013eb98b19066962f956">lstackRemove</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a21c119547a59a7d767ea711d346a845b">lstackExtendArray</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a79b1e0738203d1213c17b2d5fea135de">lstackGetCount</a>()
+
+    Text description
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ade2cde0c9d6da96240ce2ad27afbef14">lstackPrint</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="stack_8c_source.html">stack.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a17dde4ba2dd7797162950cfff572de9f"></a><!-- doxytag: member="stack.c::lstackCreate" ref="a17dde4ba2dd7797162950cfff572de9f" args="(l_int32 nalloc)" -->

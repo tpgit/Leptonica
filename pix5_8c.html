@@ -170,7 +170,50 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Property measurement of 1bbp images, rectangular region extraction, property measurement along lines, cropping to foreground. </p>
+<div class="fragment"><pre class="fragment">  This file has these operations:
 
+    (1) Measurement of 1 bpp <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> properties
+    (2) Extract rectangular region
+    (3) Clip to foreground
+    (4) Extract pixel averages and reversals along lines
+    (5) Rank row and column transforms
+
+  Measurement of properties
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ad67d957b83a6fcf8e68ae45e5707c674">pixaFindDimensions</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#a819f6e98452df58465d78e38b2fb9a85">pixaFindAreaPerimRatio</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aab3269620c893cdb93784882a43dc43d">pixFindAreaPerimRatio</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#ac73e261eaeee87162f5db72b6240360f">pixaFindPerimSizeRatio</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a58f84ad94d4c212852326643df386c9f">pixFindPerimSizeRatio</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#af5515fe5400c3d335a95623d083819ab">pixaFindAreaFraction</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#afc38c5f2ac4afe3986ea61d1cb6055fa">pixFindAreaFraction</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#aca2da996fee11b57ad786e5c2d125aae">pixaFindWidthHeightRatio</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#a31137228a6e7b6adf44ab701ebf83ad1">pixaFindWidthHeightProduct</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ad6f7daf34132973917c19d398aa56d75">pixFindOverlapFraction</a>()
+         <a class="code" href="struct_boxa.html">BOXA</a>       *<a class="code" href="leptprotos_8h.html#add132de83e01f0000de54cbfc5f88a81">pixFindRectangleComps</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a0c4ebd772af3c4f4e4c8fc4c7decf262">pixConformsToRectangle</a>()
+
+  Extract rectangular region
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a679fd22fd63f9c368f4417c0a2a11b2a">pixClipRectangle</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a42dc0e91817cbf93396b258279907074">pixClipMasked</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a49c23911f9dc8d968cafd881c74a9641">pixResizeToMatch</a>()
+
+  Clip to foreground
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a98f6daaf4affed436b8f2da85967e06d">pixClipToForeground</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a027811cdb45d2b1a7b5309e1d6ac5a9c">pixClipBoxToForeground</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a61b4859472a6e2481c84fa48ad60f8c8">pixScanForForeground</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab3ad6f28c740bbb07b8745f03e9ce6a3">pixClipBoxToEdges</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a8b8a5d958fed4b487f34ab58af694c83">pixScanForEdge</a>()
+
+  Extract pixel averages and reversals along lines
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#a67c17ff8c239658adda4a1b388be45bc">pixExtractOnLine</a>()
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>   <a class="code" href="leptprotos_8h.html#a62991d9ea6f9a8f9632890d82acac283">pixAverageOnLine</a>();
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#ae79599eca7dd394e264fe23b5be5f5f7">pixAverageIntensityProfile</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>       *<a class="code" href="leptprotos_8h.html#adb2953058e7af4921dc7c7530382643d">pixReversalProfile</a>()
+
+  Rank row and column transforms
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aab6dc057b8e1b8cdbf7c2473d949a375">pixRankRowTransform</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#af04b148f7c561bfd4f341454d0bed134">pixRankColumnTransform</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="pix5_8c_source.html">pix5.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ac690bd480bc15cf55db0ec68a2e5f24e"></a><!-- doxytag: member="pix5.c::DEBUG_EDGES" ref="ac690bd480bc15cf55db0ec68a2e5f24e" args="" -->

@@ -166,7 +166,68 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write jpeg format from/to file and memory. </p>
+<div class="fragment"><pre class="fragment">  Read jpeg from file
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="jpegio_8c.html#a640e375004b119c3133051915d179f1c">pixReadJpeg</a>()  [ special top level ]
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="jpegio_8c.html#a02f8e0e264a246d49260bb54fdb04455">pixReadStreamJpeg</a>()
 
+  Read jpeg metadata from file
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#a657d22d68893648d0bb2c815f2f157fb">readHeaderJpeg</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#a3945d4f9598087557683965d5e78857b">freadHeaderJpeg</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#ac673376f1ed19b64dd0d24547e1af049">fgetJpegResolution</a>()
+
+  Write jpeg to file
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#a2f03a58879e0d6eaba5f42b3003342ff">pixWriteJpeg</a>()  [ special top level ]
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#af7c16710b4df0f90a89ea4589d1375e0">pixWriteStreamJpeg</a>()
+
+  Read/write to memory
+        <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="jpegio_8c.html#a1e83ea2f84a0ed0ce16fd0ef881cfbfb">pixReadMemJpeg</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#a575686713164d69ed13372539b39b5aa">readHeaderMemJpeg</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#af5fc7250a77d2ceb7f8a0b3f41594323">pixWriteMemJpeg</a>()
+
+  Setting special flag(s)
+        <span class="keywordtype">void</span>             <a class="code" href="jpegio_8c.html#a892304e7d8d1adaee5c028923a5979ad">l_jpegSetNoChromaSampling</a>()
+
+  Static system helpers
+        static <span class="keywordtype">void</span>      <a class="code" href="jpegio_8c.html#a5de870cb0f26b60192f979eb4485ca7b">jpeg_error_do_not_exit</a>()
+        static <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   <a class="code" href="jpegio_8c.html#ad2f586e0056492e6b5d79f7e4aa62ac2">jpeg_getc</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="jpegio_8c.html#ae34159952d980f7d6381c7aff1eb6ea2">jpeg_comment_callback</a>()
+
+  Extraction of jpeg <a class="code" href="alltests__reg_8c.html#ae64f2c0aa53b2c8ed55b251ca159af46">header</a> information by parsing
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#adb0c8200b7d0fcf5fa155a554510ca0c">extractJpegDataFromFile</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="jpegio_8c.html#aa5a6c075cd7348e250acbbc6e3630678">extractJpegDataFromArray</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="jpegio_8c.html#a00e37ec7624e196d2ea145dfd0bc6dbd">extractJpegHeaderDataFallback</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="jpegio_8c.html#a5f55071a733710ceff7b94af3e4c17e4">locateJpegImageParameters</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="jpegio_8c.html#afb427836c57211a122d7a4e89614b3bb">getNextJpegMarker</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="jpegio_8c.html#a2b51436bc0284fb7be1656a5ca3c6c59">getTwoByteParameter</a>()
+
+  Documentation: libjpeg.doc can be found, along with all
+  source code, at ftp:<span class="comment">//ftp.uu.net/graphics/jpeg</span>
+  Download and untar the file:  jpegsrc.v6b.tar.gz
+  A good paper on jpeg can also be found there: wallace.ps.gz
+
+  The functions in libjpeg make it very simple to compress
+  and decompress images.  On input (decompression from file),
+  3 component color images can be read into either an 8 bpp <a class="code" href="struct_pix.html">Pix</a>
+  with a colormap or a 32 bpp <a class="code" href="struct_pix.html">Pix</a> with RGB components.  For output
+  (compression to file), all color <a class="code" href="struct_pix.html">Pix</a>, whether 8 bpp with a
+  colormap or 32 bpp, are written compressed as a set of three
+  8 bpp (rgb) images.
+
+  The default behavior of the jpeg library is to call exit.
+  This is often undesirable, and the caller should make the
+  decision when to abort a process.  So I inserted setjmp(s)
+  in the reader and writer, wrote a static error handler that
+  does not exit, and set up the cinfo structure so that the
+  low-level jpeg library will call this error handler instead
+  of the default function error_exit().
+
+  There is a special flag for not subsampling the U,V (chroma)
+  channels.  This gives higher quality for the color, which is
+  important for some situations.  The standard subsampling is
+  2<a class="code" href="affine__reg_8c.html#ad85afc03d55324b175bbccc3ecfc983c">x2</a> on both channels.
+    <a class="code" href="jpegio_8c.html#ab781c5a35bd438d60a188e5920c74128">var_JPEG_NO_CHROMA_SAMPLING</a>: default is 0 (false)
+  This is set with <a class="code" href="jpegio_8c.html#a892304e7d8d1adaee5c028923a5979ad">l_jpegSetNoChromaSampling</a>().
+</pre></div> 
 <p>Definition in file <a class="el" href="jpegio_8c_source.html">jpegio.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a4407b4d6eae3ba7fe9538b1242a7e165"></a><!-- doxytag: member="jpegio.c::DEBUG_INFO" ref="a4407b4d6eae3ba7fe9538b1242a7e165" args="" -->

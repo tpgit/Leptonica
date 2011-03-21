@@ -223,7 +223,131 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Error, warning and info macros; safe string ops; file &lt;-&gt; memory ops; byte-swapping, file naming and timing ops. </p>
+<div class="fragment"><pre class="fragment">     Error, warning and info procs; all invoked by macros
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aed6037245f117905db43c154fb6546da">returnErrorInt</a>()
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>  <a class="code" href="leptprotos_8h.html#a41be2c5dbbf9cbf414b092c16092746a">returnErrorFloat</a>()
+         <span class="keywordtype">void</span>      *<a class="code" href="leptprotos_8h.html#abcd8e97111b6016bcb221016bce5eb38">returnErrorPtr</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#afe7c788437cc6bfe2dc416fa28fda605">l_error</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ab9e7014e335ea79ab19189dbc441eb89">l_errorString</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a5c05e9087454c690e77f043bbc02ba1c">l_errorInt</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a1991d3141e2f912aa9419161accbfb90">l_errorFloat</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#af8fb1130de59112300e0c1f3d6236e13">l_warning</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a8e2532b0132b54cc16c2ae061d39723c">l_warningString</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#adc9b018bd950140653583d6253d60695">l_warningInt</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a39076516ebd3039516807b3ce9a077e5">l_warningInt2</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#adb1f496ba14c78528883e31e459aef89">l_warningFloat</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ac243b148bdfaaf6538ea611fa385ec29">l_warningFloat2</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a4023c17e5599588b34676578cf08c246">l_info</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#afb8354d8c41aeb76280cf856516eb00f">l_infoString</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ab71c9803acd9f58b991f48f4461931ca">l_infoInt</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ae5433e2ccc12226c58282fc5dc2e892b">l_infoInt2</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a9dd7ec16fa11528da6b3b74811cb32ee">l_infoFloat</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ad92570726468ee9d713e54e6821338f6">l_infoFloat2</a>()
 
+     Safe <span class="keywordtype">string</span> procs
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#aa1b26404d7c35551a1e04174e4ccf564">stringNew</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a40694eaf2d074426fc58d2443ce2a465">stringCopy</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ace87abd0cfd1a5cef910e281ba51c6dc">stringReplace</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae089db9c50faa7724f2c01160cf8ff2f">stringLength</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aedea782683898156d494e3e5124f2a17">stringCat</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a4b1eafe046a719e43e345c6c60ad87bd">stringJoin</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a4b60ca0c92c4b6c785e713f5c7da5b5d">stringReverse</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a15c10a2997bd832bbbfb1cfd116dc9e0">strtokSafe</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a169c2a97c0e00061cdf85ec55deee150">stringSplitOnToken</a>()
+
+     Find and replace <span class="keywordtype">string</span> and array procs
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#af06f229a93aa997ca6d08443a5733a1e">stringRemoveChars</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ab9b50b4a3f4503ee64057ddfd54f3522">stringFindSubstr</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a48e479a17d4bceb59ad2180ca24db288">stringReplaceSubstr</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a587dbfa1b135ad51fc5d427036b70394">stringReplaceEachSubstr</a>()
+         <a class="code" href="struct_numa.html">NUMA</a>      *<a class="code" href="leptprotos_8h.html#a7f895e5e40a00626163e8c76b68bd480">arrayFindEachSequence</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a0903d193fe0f950a6bdaf5c273c18953">arrayFindSequence</a>()
+
+     Safe realloc
+         <span class="keywordtype">void</span>      *<a class="code" href="leptprotos_8h.html#abe8bc34cbaea6831e51796aa917a8471">reallocNew</a>()
+
+     Read and write between file and memory
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a3c6cc030405a520b5ad850c80c9211ae">l_binaryRead</a>()
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a19b6bf62138a6703236626ce86a4bea9">l_binaryReadStream</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aebc18ee4e11cf721b8d2eb46b4f20a83">l_binaryWrite</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae5e93328f830c77f5b4124d2baea1d9f">nbytesInFile</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a3530d36a07e316f7e556d02b3776adea">fnbytesInFile</a>()
+
+     Copy in memory
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#add288aa29ee3ffcb331699914260a092">l_binaryCopy</a>()
+
+     File copy operations
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a9ad8376b79e4f29b6cfaebf5fd24df8a">fileCopy</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a8bb723b0c782d849adf831c7722635d4">fileConcatenate</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aff839b0e5e3266473a2509197422b5a0">fileAppendString</a>()
+
+     Test files for equivalence
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a5163f72a3001ac7ff7d71e7b6d1b2f94">filesAreIdentical</a>()
+
+     Byte-swapping data conversion
+         <a class="code" href="environ_8h.html#a44325897ae2a352c62931134b7c7b6a2">l_uint16</a>   <a class="code" href="leptprotos_8h.html#a40491aa07db4319c7619ffaa0bc26a89">convertOnBigEnd16</a>()
+         <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>   <a class="code" href="leptprotos_8h.html#af93e9578057fc644074cd408cc8c52ed">convertOnBigEnd32</a>()
+         <a class="code" href="environ_8h.html#a44325897ae2a352c62931134b7c7b6a2">l_uint16</a>   <a class="code" href="leptprotos_8h.html#a2bc475c955d86ce13916e3b8dc88ce5c">convertOnLittleEnd16</a>()
+         <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>   <a class="code" href="leptprotos_8h.html#a112e3674c2de44762b3eb96668a9b7f5">convertOnLittleEnd32</a>()
+
+     Opening file streams
+         FILE      *<a class="code" href="leptprotos_8h.html#a1796abf2eefccf7f0d3d2cc99f946979">fopenReadStream</a>()
+         FILE      *<a class="code" href="leptprotos_8h.html#a33897cfec13616080528eaefe37954b1">fopenWriteStream</a>()
+
+     Functions to avoid C-runtime boundary crossing with Windows DLLs
+         FILE      *<a class="code" href="leptprotos_8h.html#a68aadbbcd35203a6e67d1747a7c83b72">lept_fopen</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a83bddee119771cec7c202422f27b9695">lept_fclose</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#af56fa6ed3373c09d557f8b5dd03f19a8">lept_calloc</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#ab57b50a91a79dab1cb178eea577c58c8">lept_free</a>()
+
+     Cross-platform file system operations
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a059b2e4149dcea58ae40091c3ef92cce">lept_mkdir</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aa9a6ade7f4be672be61b5ff96b52187d">lept_rmdir</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a14c6101d74251d6d33f22592fce87d0a">lept_mv</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#adfe5c2fa87db39121f2dd47a61299e4e">lept_rm</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a2f1ae6097bef5f7ea1913430b7dac143">lept_cp</a>()
+
+     File name operations
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ac0e4bd626dcf798fbc378e8ddb13b1fc">splitPathAtDirectory</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a38d7ee973dd8a4829264db497e04bccf">splitPathAtExtension</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#ac2dd7b81566376b8d547af7702e92571">pathJoin</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#af7b8982452cbe0ac76dd55b6a4c6d37b">genPathname</a>()
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a42aaf4f1511e9cb01e7f6c7b5ddf12a6">genTempFilename</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a56d9e5404c864fb41209953fb369a6d6">extractNumberFromFilename</a>()
+
+     Generate random integer in given range
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a4273bf223ca7c9cc865db3513be0e9b5">genRandomIntegerInRange</a>()
+
+     Leptonica <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> number
+         <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a458a7767dab2d0991ad1fde6950f25a5">getLeptonicaVersion</a>()
+
+     Timing
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a3b58105731ea14395c2e99707cb53bd6">startTimer</a>()
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>  <a class="code" href="leptprotos_8h.html#a5b08ca0bdebf5dc30d27676baa5a82ba">stopTimer</a>()
+         <a class="code" href="environ_8h.html#a637d3706171ae0e852c3c2e577ca986f">L_TIMER</a>    <a class="code" href="leptprotos_8h.html#a04e5d47678619fe5cc51ecac9a14d729">startTimerNested</a>()
+         <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>  <a class="code" href="leptprotos_8h.html#afdefff403f165647acc256fac522dd24">stopTimerNested</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a0a942fb26691eb012ad58e64b5de38ac">l_getCurrentTime</a>()
+         <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a65c4e9b0ac5c311db0af544217155777">l_getFormattedDate</a>()
+
+     Deprecated binary read functions  (don&#39;t use these!)
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a98083b0019ec51652b14595dae0044c3">arrayRead</a>()
+         <a class="code" href="environ_8h.html#a7ed60554e7d6dd89aca643189b1e70ad">l_uint8</a>   *<a class="code" href="leptprotos_8h.html#a11ded58a86ad1a203f8d8475f173d2d6">arrayReadStream</a>()
+
+
+Notes on cross-platform development
+-----------------------------------
+(1) With the exception of <a class="code" href="leptprotos_8h.html#ac0e4bd626dcf798fbc378e8ddb13b1fc">splitPathAtDirectory</a>() and
+    <a class="code" href="leptprotos_8h.html#a38d7ee973dd8a4829264db497e04bccf">splitPathAtExtension</a>(), all input pathnames must have unix separators.
+(2) The conversion from unix to windows pathnames happens in <a class="code" href="leptprotos_8h.html#af7b8982452cbe0ac76dd55b6a4c6d37b">genPathname</a>().
+(3) Use <a class="code" href="leptprotos_8h.html#a1796abf2eefccf7f0d3d2cc99f946979">fopenReadStream</a>() and <a class="code" href="leptprotos_8h.html#a33897cfec13616080528eaefe37954b1">fopenWriteStream</a>() to open files,
+    because these use <a class="code" href="leptprotos_8h.html#af7b8982452cbe0ac76dd55b6a4c6d37b">genPathname</a>() to find the platform-dependent
+    filenames.  Likewise for <a class="code" href="leptprotos_8h.html#a3c6cc030405a520b5ad850c80c9211ae">l_binaryRead</a>() and <a class="code" href="leptprotos_8h.html#aebc18ee4e11cf721b8d2eb46b4f20a83">l_binaryWrite</a>().
+(4) For moving, copying and removing files and directories,
+    use the lept_*() file system shell wrappers:
+       <a class="code" href="leptprotos_8h.html#a059b2e4149dcea58ae40091c3ef92cce">lept_mkdir</a>(), <a class="code" href="leptprotos_8h.html#aa9a6ade7f4be672be61b5ff96b52187d">lept_rmdir</a>(), <a class="code" href="leptprotos_8h.html#a14c6101d74251d6d33f22592fce87d0a">lept_mv</a>(), <a class="code" href="leptprotos_8h.html#adfe5c2fa87db39121f2dd47a61299e4e">lept_rm</a>() and <a class="code" href="leptprotos_8h.html#a2f1ae6097bef5f7ea1913430b7dac143">lept_cp</a>().
+(5) Use the lept_*() C library wrappers:
+       <a class="code" href="leptprotos_8h.html#a68aadbbcd35203a6e67d1747a7c83b72">lept_fopen</a>(), <a class="code" href="leptprotos_8h.html#a83bddee119771cec7c202422f27b9695">lept_fclose</a>(), <a class="code" href="leptprotos_8h.html#af56fa6ed3373c09d557f8b5dd03f19a8">lept_calloc</a>() and <a class="code" href="leptprotos_8h.html#ab57b50a91a79dab1cb178eea577c58c8">lept_free</a>().
+</pre></div> 
 <p>Definition in file <a class="el" href="utils_8c_source.html">utils.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aee7bea41cc502ffbe0590bb0942cc2c7"></a><!-- doxytag: member="utils.c::returnErrorInt" ref="aee7bea41cc502ffbe0590bb0942cc2c7" args="(const char *msg, const char *procname, l_int32 ival)" -->

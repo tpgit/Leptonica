@@ -156,7 +156,43 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Generate hit-miss Sels for doing a loose match to a small bitmap. </p>
+<div class="fragment"><pre class="fragment">    This file contains functions that generate hit-miss Sels
+    <span class="keywordflow">for</span> doing a loose match to a small bitmap.  The hit-miss
+    <a class="code" href="struct_sel.html">Sel</a> is made from a given bitmap.  Several <span class="stringliteral">&quot;knobs&quot;</span>
+    are available to control the looseness of the match.
+    In general, a tight match will have fewer <span class="keyword">false</span> positives
+    (bad matches) but more <span class="keyword">false</span> negatives (missed patterns).
+    The values to be used depend on the quality and variation
+    of the image in which the pattern is to be searched,
+    and the relative penalties of <span class="keyword">false</span> positives and
+    <span class="keyword">false</span> negatives.  Default values <span class="keywordflow">for</span> the three knobs --
+    minimum distance to boundary pixels, number of extra pixels
+    added to selected sides, and minimum acceptable runlength
+    in eroded <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> -- are provided.
 
+    The generated hit-miss Sels can always be used in the
+    rasterop implementation of binary morphology (in morph.h).
+    If they are small enough (not more than 31 pixels extending
+    in any direction from the <a class="code" href="struct_sel.html">Sel</a> origin), they can also be used
+    to <span class="keyword">auto</span>-generate dwa code (fmorphauto.c).
+
+
+    Generate a subsampled structuring element
+          <span class="keywordtype">SEL</span>     *<a class="code" href="leptprotos_8h.html#a316666e52d8dcdf4f946a707e44af273">pixGenerateSelWithRuns</a>()
+          <a class="code" href="struct_sel.html">SEL</a>     *<a class="code" href="leptprotos_8h.html#a3dec8068b27626a7f47cbb25ea3772bb">pixGenerateSelRandom</a>()
+          <span class="keywordtype">SEL</span>     *<a class="code" href="leptprotos_8h.html#ad89dc56e5eef8562644e87c2b4814d5b">pixGenerateSelBoundary</a>()
+    
+    Accumulate data on runs along lines
+          <a class="code" href="struct_numa.html">NUMA</a>    *<a class="code" href="leptprotos_8h.html#a12ae2a862e6a7618089f704272c97727">pixGetRunCentersOnLine</a>()
+          <a class="code" href="struct_numa.html">NUMA</a>    *<a class="code" href="leptprotos_8h.html#af25ee30928d14dc452d44cade85f0d5e">pixGetRunsOnLine</a>()
+
+    Subsample boundary pixels in relatively ordered way
+          <a class="code" href="struct_pta.html">PTA</a>     *<a class="code" href="leptprotos_8h.html#a452f1c3fbe5e5e61769d4e57e3b0c100">pixSubsampleBoundaryPixels</a>()
+          <a class="code" href="struct_pta.html">PTA</a>     *<a class="code" href="leptprotos_8h.html#ae0b5723a92cdcfc0f68d1d0d573797d6">adjacentOnPixelInRaster</a>()
+
+    Display generated sel with originating image
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="leptprotos_8h.html#add3daae06f71dee1d414aadcb8aa061b">pixDisplayHitMissSel</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="selgen_8c_source.html">selgen.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="aa8c8112a46dc5b9babc79b094d6c9197"></a><!-- doxytag: member="selgen.c::DEBUG_DISPLAY_HM_SEL" ref="aa8c8112a46dc5b9babc79b094d6c9197" args="" -->

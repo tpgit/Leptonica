@@ -145,7 +145,14 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level implementation of integer upscaling. </p>
+<div class="fragment"><pre class="fragment">    Low level power-of-2 binary expansion
+            <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>      <a class="code" href="binexpandlow_8c.html#a66cd1b8b6a09c228f4333ad756645f79">expandBinaryPower2Low</a>()
 
+    Expansion tables
+            <a class="code" href="environ_8h.html#a44325897ae2a352c62931134b7c7b6a2">l_uint16</a>    *<a class="code" href="binexpandlow_8c.html#a6ff9ee64f11b63e48932f5644a40666e">makeExpandTab2x</a>()
+            <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>    *<a class="code" href="binexpandlow_8c.html#aa34b9e3bfa5da488166c70b7d08a39c2">makeExpandTab4x</a>()
+            <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>    *<a class="code" href="binexpandlow_8c.html#a49a7cee2cf8b59436430ecf76869c4d1">makeExpandTab8x</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="binexpandlow_8c_source.html">binexpandlow.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a66cd1b8b6a09c228f4333ad756645f79"></a><!-- doxytag: member="binexpandlow.c::expandBinaryPower2Low" ref="a66cd1b8b6a09c228f4333ad756645f79" args="(l_uint32 *datad, l_int32 wd, l_int32 hd, l_int32 wpld, l_uint32 *datas, l_int32 ws, l_int32 hs, l_int32 wpls, l_int32 factor)" -->

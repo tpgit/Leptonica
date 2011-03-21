@@ -155,7 +155,17 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level general rasterop implementation. </p>
+<div class="fragment"><pre class="fragment">    Low level dest-only
+         <span class="keywordtype">void</span>            <a class="code" href="leptprotos_8h.html#a57beda9896d252dec482dc804f672905">rasteropUniLow</a>()
+         static <span class="keywordtype">void</span>     rasteropUniWordAlignedlLow()
+         static <span class="keywordtype">void</span>     <a class="code" href="roplow_8c.html#a5060feb69c9abcc0454d1cb91d136035">rasteropUniGeneralLow</a>()
 
+    Low level src and dest
+         <span class="keywordtype">void</span>            <a class="code" href="leptprotos_8h.html#a1fc3d093857e4afb70d9c1c1551bc627">rasteropLow</a>()
+         static <span class="keywordtype">void</span>     <a class="code" href="roplow_8c.html#a3ad82158ab48cb618ac9a244ed26694b">rasteropWordAlignedLow</a>()
+         static <span class="keywordtype">void</span>     <a class="code" href="roplow_8c.html#abf41530bced1b1e940d5ac0b5c4913e4">rasteropVAlignedLow</a>()
+         static <span class="keywordtype">void</span>     <a class="code" href="roplow_8c.html#a7cb4819786e9935cfc98629b5e817b4a">rasteropGeneralLow</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="roplow_8c_source.html">roplow.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a1c9e198c8991a0cb8127c88f8fd48896"></a><!-- doxytag: member="roplow.c::COMBINE_PARTIAL" ref="a1c9e198c8991a0cb8127c88f8fd48896" args="(d, s, m)" -->

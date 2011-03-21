@@ -193,7 +193,113 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements <a class="el" href="struct_sel.html">Sel</a> (morph structuring element) and <a class="el" href="struct_sela.html">Sela</a> (array of sel) </p>
+<div class="fragment"><pre class="fragment">    Basic ops on Sels and Selas
 
+       Create/destroy/copy:
+          <a class="code" href="struct_sela.html">SELA</a>      *<a class="code" href="leptprotos_8h.html#a5998dabd2149ead9c48cd56517c48d82">selaCreate</a>()
+          void       <a class="code" href="leptprotos_8h.html#a293b3c8615c06466fcd7465659e2bf27">selaDestroy</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#ae9ad802a07dd8e0494b7c7bfdae1b7bd">selCreate</a>()
+          <span class="keywordtype">void</span>       <a class="code" href="leptprotos_8h.html#a4bb811007e4d825b4be1712433584df9">selDestroy</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#a8842cba268450f08463873b3675c903d">selCopy</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#acee5ec03dbf621f7bf42f4c4d5f4abd9">selCreateBrick</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#aa0cf403890bcdf584cb73e91d483a28c">selCreateComb</a>()
+
+       Helper proc:
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>  **<a class="code" href="leptprotos_8h.html#af3ea0832a6bf53eccaa81bc2cdb4aba6">create2dIntArray</a>()
+
+       Extension of sela:
+          <a class="code" href="struct_sela.html">SELA</a>      *<a class="code" href="leptprotos_8h.html#a8e2cc1d8b035e2c38109da9d247aa21b">selaAddSel</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a07b91519ae0d8181144360324d57f888">selaExtendArray</a>()
+
+       Accessors:
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a99a11d3d9d9abfaaaa6ecfc8290ed9d8">selaGetCount</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#a794490849eca0bf203468772e274cee5">selaGetSel</a>()
+          <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a06f9c66face72dd75653b4ca1d71513f">selGetName</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a0220533eb7cc5d1d7f9d949af14c6731">selSetName</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a2d13ab60ca6a4bc624775dc5ec622ce9">selaFindSelByName</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aba5f6ac2bf24a822859fdb92ba90c6e1">selGetElement</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#af264b73d9a1637e511d01979298adb0c">selSetElement</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a4a7387344c38c0bbb420f767e20de451">selGetParameters</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ad97e494cc82c94bcae699272b912e7f1">selSetOrigin</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#aab860231541fa5ab907f6eb6f55f2fe3">selGetTypeAtOrigin</a>()
+          <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a28a2d50eda838687a1208ab41895af1b">selaGetBrickName</a>()
+          <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#adccd8bfc0397f0be748233eeaa378a69">selaGetCombName</a>()
+   static <span class="keywordtype">char</span>      *selaComputeCompositeParameters()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a07e30d99ef5b3a000de2d3b0f9194b4c">getCompositeParameters</a>()
+          <a class="code" href="struct_sarray.html">SARRAY</a>    *<a class="code" href="leptprotos_8h.html#aff4669eba795603855140e631e0ecc8f">selaGetSelnames</a>()
+
+       Max translations for erosion and hmt
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a432665a4d6285ac90122cf1348e10c82">selFindMaxTranslations</a>()
+
+       Rotation by multiples of 90 degrees
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#a2a0e21b79b937bf58ca81d06f6cbaa5a">selRotateOrth</a>()
+
+       <a class="code" href="struct_sela.html">Sela</a> and <a class="code" href="struct_sel.html">Sel</a> serialized I/O
+          <a class="code" href="struct_sela.html">SELA</a>      *<a class="code" href="leptprotos_8h.html#ac88a47bf9f6ec5764f98cc3924b57e17">selaRead</a>()
+          <a class="code" href="struct_sela.html">SELA</a>      *<a class="code" href="leptprotos_8h.html#af995a440b5d49180b2c4e09806b06ebf">selaReadStream</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#adba8ad1219742c286d92d61f98f5a449">selRead</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#a1812f0ebf06f7e03486358842984c4f6">selReadStream</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#ae4bd0ba51e1de00be4795a54bfaee882">selaWrite</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a9b9dd01931d8b9e98d4fcf6add684267">selaWriteStream</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a753ae1cbf092d6d83e001a6b367a0b9d">selWrite</a>()
+          <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="leptprotos_8h.html#a9328493fd73afa1baee281ece1ae8ea5">selWriteStream</a>()
+     
+       Building custom hit-miss sels from compiled strings
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#a41c4a6cabb492dce756c8344a5057d6b">selCreateFromString</a>()
+          <span class="keywordtype">char</span>      *<a class="code" href="leptprotos_8h.html#a856b92816d595d1cb376505999cfc592">selPrintToString</a>()     [for debugging]
+
+       Building custom hit-miss sels from a simple file format
+          <a class="code" href="struct_sela.html">SELA</a>      *<a class="code" href="leptprotos_8h.html#adba61fcedc2ab1ca1ac734808b12bfae">selaCreateFromFile</a>()
+          static <span class="keywordtype">SEL</span> *<a class="code" href="sel1_8c.html#a01c49ae1c8be1401e4a9aaa5d917d8e4">selCreateFromSArray</a>()
+
+       Making hit-only sels from <a class="code" href="struct_pta.html">Pta</a> and <a class="code" href="struct_pix.html">Pix</a>
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#abbc41a285ad1af9c240caedc63aece0a">selCreateFromPta</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#a3c60120be8cc74374855967bfbc53757">selCreateFromPix</a>()
+
+       Making hit-miss sels from <a class="code" href="struct_pix.html">Pix</a> and image files
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#a4c43328f31ec23f3c09d946a55a9a160">selReadFromColorImage</a>()
+          <span class="keywordtype">SEL</span>       *<a class="code" href="leptprotos_8h.html#acbc265d93a72adf4353a46a77e2a6fba">selCreateFromColorPix</a>()
+
+       Printable <a class="code" href="struct_l___reg_params.html#a6907e4514a9014ba21bb23e5faf85923">display</a> of sel
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#ac3c53ff5929220baf4e20ac0ecdd1cb8">selDisplayInPix</a>()
+          <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="leptprotos_8h.html#a36d8b9763c1f92528512c20be5cc3879">selaDisplayInPix</a>()
+
+   Usage notes:
+      In this file we have seven functions that make sels:
+        (1)  <a class="code" href="leptprotos_8h.html#ae9ad802a07dd8e0494b7c7bfdae1b7bd">selCreate</a>(), with input (h, w, [name])
+             The generic function.  Roll your own, using <a class="code" href="leptprotos_8h.html#af264b73d9a1637e511d01979298adb0c">selSetElement</a>().
+        (2)  <a class="code" href="leptprotos_8h.html#acee5ec03dbf621f7bf42f4c4d5f4abd9">selCreateBrick</a>(), with input (h, w, cy, cx, val)
+             The most popular function.  Makes a rectangular sel of
+             all hits, misses or don&#39;t-cares.  We have many morphology
+             operations that create a sel of all hits, use it, and
+             destroy it.
+        (3)  <a class="code" href="leptprotos_8h.html#a41c4a6cabb492dce756c8344a5057d6b">selCreateFromString</a>() with input (text, h, w, [name])
+             Adam Langley&#39;s clever function, allows you to make a hit-miss
+             sel from a <span class="keywordtype">string</span> in code that is geometrically laid out
+             just like the actual sel.
+        (4)  <a class="code" href="leptprotos_8h.html#adba61fcedc2ab1ca1ac734808b12bfae">selaCreateFromFile</a>() with input (<a class="code" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a>)
+             This parses a simple file format to create an array of
+             hit-miss sels.  The sel data uses the same encoding
+             as in (3), with geometrical layout enforced.
+        (5)  <a class="code" href="leptprotos_8h.html#abbc41a285ad1af9c240caedc63aece0a">selCreateFromPta</a>() with input (pta, cy, cx, [name])
+             Another way to make a sel with only hits.
+        (6)  <a class="code" href="leptprotos_8h.html#a3c60120be8cc74374855967bfbc53757">selCreateFromPix</a>() with input (pix, cy, cx, [name])
+             Yet another way to make a sel from hits.
+        (7)  <a class="code" href="leptprotos_8h.html#acbc265d93a72adf4353a46a77e2a6fba">selCreateFromColorPix</a>() with input (pix, name).
+             Another way to make a general hit-miss sel, starting with
+             an image editor.
+      In addition, there are three functions in selgen.c that
+      automatically generate a hit-miss sel from a pix and
+      a number of parameters.  This is useful for problems like
+      &quot;find all patterns that look like this one.&quot;
+
+      Consistency, being the hobgoblin of small minds,
+      is adhered to here in the dimensioning and accessing of sels.
+      Everything is done in standard matrix (row, column) order.
+      When we set specific elements in a sel, we likewise use
+      (row, col) ordering:
+           <a class="code" href="leptprotos_8h.html#af264b73d9a1637e511d01979298adb0c">selSetElement</a>(), with input (row, col, type)
+</pre></div> 
 <p>Definition in file <a class="el" href="sel1_8c_source.html">sel1.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="af1791633b3a1a12a9aa449aa6d558327"></a><!-- doxytag: member="sel1.c::L_BUF_SIZE" ref="af1791633b3a1a12a9aa449aa6d558327" args="" -->

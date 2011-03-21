@@ -157,7 +157,27 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Image shear about arbitrary lines and special points. </p>
+<div class="fragment"><pre class="fragment">  About arbitrary lines
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a258583ceac7003db795a52f90ec1bb5a">pixHShear</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a92c7e61d8d175082aa6523f484b888e0">pixVShear</a>()
 
+  About special &#39;points&#39;: UL corner and center
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a2a0ebd3d3bbe469ffabf6eb3965ce9c9">pixHShearCorner</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a6f5c3ba52fe490d7b3b17a8f70a6ab66">pixVShearCorner</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a6e3664bb8dfd4d3516f040d94a8fad2e">pixHShearCenter</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ad3ee047da1970094204006e391b4be27">pixVShearCenter</a>()
+
+  In place about arbitrary lines
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#ad6819aeb89e0dbe3c5dd3d68778bc532">pixHShearIP</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a111cc1ba2344c01e171bc80b8de2a4d5">pixVShearIP</a>()
+
+  Linear interpolated shear about arbitrary lines
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a09aced82387cb20de00aae5af72b899c">pixHShearLI</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#aa26890ae970c92aee9cf9f191cd66b10">pixVShearLI</a>()
+
+  Static helper
+    static <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>  <a class="code" href="shear_8c.html#a1b492a06ad29358ef2db8a4cefaf6947">normalizeAngleForShear</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="shear_8c_source.html">shear.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ad72dbcf6d0153db1b8d8a58001feed83"></a><!-- doxytag: member="shear.c::DEBUG" ref="ad72dbcf6d0153db1b8d8a58001feed83" args="" -->

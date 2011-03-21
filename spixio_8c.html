@@ -144,7 +144,26 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Fast pix serialization to/from file. </p>
+<div class="fragment"><pre class="fragment">  This does fast serialization of a pix in memory to file,
+  copying the raw data <span class="keywordflow">for</span> maximum speed.  The underlying
+  function serializes it to memory, and it is wrapped to be
+  callable from standard <a class="code" href="leptprotos_8h.html#a84634846cbb5e01df667d6e9241dfc53">pixRead</a> and <a class="code" href="leptprotos_8h.html#a5a9a534e77de5e57d74ff3d678ca59e0">pixWrite</a> functions.
 
+    Reading spix from file
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#aac5af118b6ea30d7590e425673d438c7">pixReadStreamSpix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ad97984878cfdb498d56f2ff4881150ab">readHeaderSpix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a019a842e6512ce5f12bf9c193a34af69">freadHeaderSpix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#aeb219c59b6715df33d0540caaccfdedf">sreadHeaderSpix</a>()
+
+    Writing spix to file
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#a06b755ab77cf91f857ee90e83e748029">pixWriteStreamSpix</a>()
+
+    Low-level serialization of pix to/from memory (uncompressed)
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#a8cc4ff982cd682a7cabcd475b25cb974">pixReadMemSpix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#ab49b2ecef37a28ef2123ef31c0d86d00">pixWriteMemSpix</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="leptprotos_8h.html#adbffed5af4307a9c1ef9a76736836efb">pixSerializeToMemory</a>()
+         <a class="code" href="struct_pix.html">PIX</a>        *<a class="code" href="leptprotos_8h.html#acf0b67f8d7d57e4c9f56d3cb0be64e19">pixDeserializeFromMemory</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="spixio_8c_source.html">spixio.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a47d5b56e8ad2dd2731eca8e6be7439f3"></a><!-- doxytag: member="spixio.c::pixReadStreamSpix" ref="a47d5b56e8ad2dd2731eca8e6be7439f3" args="(FILE *fp)" -->

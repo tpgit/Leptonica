@@ -145,7 +145,76 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>High level PostScript device driver for wrapping sets of images in PostScript. </p>
+<div class="fragment"><pre class="fragment">  |=============================================================|
+  |                         Important note                      |
+  |=============================================================|
+  | Some of these functions require libtiff, libjpeg and libz.  |
+  | If you <span class="keywordflow">do</span> not have these libraries, you must <span class="keyword">set</span>            |
+  |     #define  <a class="code" href="environ_8h.html#ad1afd7b829b6ecd39920354e9c62e210">USE_PSIO</a>     0                                 |
+  | in environ.h.  This will link psio1stub.c                   |
+  |=============================================================|
 
+   This is a PostScript <span class="stringliteral">&quot;device driver&quot;</span> <span class="keywordflow">for</span> wrapping images
+   in PostScript.  The images can be rendered by a PostScript
+   interpreter <span class="keywordflow">for</span> viewing, <span class="keyword">using</span> evince or gv.  They can also be
+   rasterized <span class="keywordflow">for</span> printing, <span class="keyword">using</span> gs or an embedded interpreter
+   in a PostScript printer.  And they can be converted to a pdf
+   <span class="keyword">using</span> gs (ps2pdf).
+
+   Convert specified files to PS
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a50ad68a9090a3c26253a87ed746085a5">convertFilesToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a05e5b21649b2f01906dfb2f91c2f9a27">sarrayConvertFilesToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a42a8fde136aaca8093789fd0789b8490">convertFilesFittedToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a215d7ddf6711e5bcf73b6f8632040d40">sarrayConvertFilesFittedToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a318500549938dd56beced3a652ec9db6">writeImageCompressedToPSFile</a>()
+
+   Convert mixed <a class="code" href="struct_pix.html#ab62f4da47c1559827756cfd60168e139">text</a>/image files to PS
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#af3b7d94187c37be7f88f6487e4858047">convertSegmentedPagesToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#af4343a0e9d901dc0e959a5bbbffc9509">pixWriteSegmentedPageToPS</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a92c38ddd34bb13e28ac94d0ea4ed8336">pixWriteMixedToPS</a>()
+
+   Convert any image file to PS for embedding
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a3b6b34d6b11cc3ace827302722d0a22b">convertToPSEmbed</a>()
+
+   Write all images in a pixa out to PS
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a7f0ccccf6006be29323afa0ea362277a">pixaWriteCompressedToPS</a>()
+
+These PostScript converters are used in three different ways.
+
+(1) For embedding a PS file in a program like TeX.
+    <a class="code" href="leptprotos_8h.html#a3b6b34d6b11cc3ace827302722d0a22b">convertToPSEmbed</a>() handles this for levels 1, 2 and 3 output,
+    and prog/converttops wraps this in an executable.
+    converttops is a generalization of Thomas Merz&#39;s jpeg2ps wrapper,
+    in that it works for all types (formats, depth, colormap)
+    of input images and gives PS output in one of these formats
+ level 1 (uncompressed)
+ level 2 (compressed ccittg4 or dct)
+ level 3 (compressed flate)
+
+(2) For composing a set of pages with any number of images
+    painted on them, in either level 2 or level 3 formats.
+
+(3) For printing a page image or a set of page images, at a
+    resolution that optimally fills the page, using
+    <a class="code" href="leptprotos_8h.html#a42a8fde136aaca8093789fd0789b8490">convertFilesFittedToPS</a>().
+
+The top-level calls of utilities in category 2, which can compose
+multiple images on a page, and which generate a PostScript file for
+printing or display (e.g., conversion to pdf), are:
+    <a class="code" href="leptprotos_8h.html#a50ad68a9090a3c26253a87ed746085a5">convertFilesToPS</a>()
+    <a class="code" href="leptprotos_8h.html#a42a8fde136aaca8093789fd0789b8490">convertFilesFittedToPS</a>()
+    <a class="code" href="leptprotos_8h.html#af3b7d94187c37be7f88f6487e4858047">convertSegmentedPagesToPS</a>()
+
+All images are output with page numbers.  Bounding box hints are
+more subtle.  They must be included for embeding images in
+TeX, for example, and the low-level writers include bounding
+box hints by default.  However, these hints should not be included for
+multi-page PostScript that is composed of a sequence of images;
+consequently, they are not written when calling higher level
+functions such as <a class="code" href="leptprotos_8h.html#a50ad68a9090a3c26253a87ed746085a5">convertFilesToPS</a>(), <a class="code" href="leptprotos_8h.html#a42a8fde136aaca8093789fd0789b8490">convertFilesFittedToPS</a>()
+and <a class="code" href="leptprotos_8h.html#af3b7d94187c37be7f88f6487e4858047">convertSegmentedPagesToPS</a>().  The function <a class="code" href="leptprotos_8h.html#a230013894d96725eea2274e9e9a523f8">l_psWriteBoundingBox</a>()
+sets a flag to give low-level control over this.
+</pre></div> 
 <p>Definition in file <a class="el" href="psio1_8c_source.html">psio1.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a9643992ad74dfb3367404ecbb57a581d"></a><!-- doxytag: member="psio1.c::convertFilesToPS" ref="a9643992ad74dfb3367404ecbb57a581d" args="(const char *dirin, const char *substr, l_int32 res, const char *fileout)" -->

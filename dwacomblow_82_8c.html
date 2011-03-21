@@ -287,7 +287,13 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level <a class="el" href="struct_sel.html">Sel</a> implementation for <a class="el" href="dwacomb_82_8c.html" title="DWA morphology with auto-generated comb Sels for composite operations on brick Sels.">dwacomb.2.c</a>. </p>
-
+<div class="fragment"><pre class="fragment">N.B.  In all the low-level routines, the part of the image
+      that is accessed has been clipped by 32 pixels on
+      all four sides.  This is done in the higher level
+      code by redefining w and h smaller and by moving the
+      start-of-image pointers up to the beginning of <span class="keyword">this</span>
+      interior rectangle.
+</pre></div> 
 <p>Definition in file <a class="el" href="dwacomblow_82_8c_source.html">dwacomblow.2.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a300c5e61b7b994d014ccc068e3a908a1"></a><!-- doxytag: member="dwacomblow.2.c::fdilate_2_0" ref="a300c5e61b7b994d014ccc068e3a908a1" args="(l_uint32 *, l_int32, l_int32, l_int32, l_uint32 *, l_int32)" -->

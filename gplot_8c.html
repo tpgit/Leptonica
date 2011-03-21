@@ -158,7 +158,67 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Basic gnuplot-based plotting; serialization of plots. </p>
+<div class="fragment"><pre class="fragment">   Basic plotting functions
+        <a class="code" href="struct_g_plot.html">GPLOT</a>      *<a class="code" href="gplot_8c.html#a1cea7ad39c28d5fafe6d7c78dcde1a38">gplotCreate</a>()
+        void        <a class="code" href="gplot_8c.html#a4aa17b7b0a295467906f76b7d7209d4f">gplotDestroy</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#a22647c46c1f717aa07b7fb32c3ff4405">gplotAddPlot</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#a59261ec0ddd010b4f8fd2c9d15846485">gplotSetScaling</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#a845b86586092c48fa4e8d3e85ee8538b">gplotMakeOutput</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#a461ea6f90c9b5f472379d754f7c30c2f">gplotGenCommandFile</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#a05eabe5e3d4b83fe7a9bb71a784daef6">gplotGenDataFiles</a>()
 
+   Quick and dirty plots
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#a7899384c9adf752fdfbab603bc865f18">gplotSimple1</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#aaf2f31f529c93eb03b01238467374df9">gplotSimple2</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#a03515b9cedb3e4badbe20563a9897041">gplotSimpleN</a>()
+
+   Serialize for I/O
+        <a class="code" href="struct_g_plot.html">GPLOT</a>      *<a class="code" href="gplot_8c.html#a92fba07f564a35fceee38ddbddf1fc32">gplotRead</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>     <a class="code" href="gplot_8c.html#ab0173835ce01b6c6f0db5eafd7755e80">gplotWrite</a>()
+
+
+   Utility for programmatic plotting using gnuplot 7.3.2 or later
+   Enabled:
+       - output to png (color), ps (mono), x11 (color), latex (mono)
+       - optional title for graph
+       - optional x and y axis labels
+       - multiple plots on one frame
+       - optional title for each plot on the frame
+       - optional log scaling on either or both axes
+       - choice of 5 plot styles for each plot
+       - choice of 2 plot modes, either using one input array
+         (<a class="code" href="blendtest1_8c.html#a798e4073d613ca5ba9618e1b3253df14">Y</a> vs index) or two input arrays (<a class="code" href="blendtest1_8c.html#a798e4073d613ca5ba9618e1b3253df14">Y</a> vs <a class="code" href="blendtest1_8c.html#a207fd5507206d307cd63f95374fcd00d">X</a>).  This
+         choice is made implicitly depending on the number of
+         input arrays.
+
+   Usage:
+       <a class="code" href="gplot_8c.html#a1cea7ad39c28d5fafe6d7c78dcde1a38">gplotCreate</a>() initializes for plotting
+       <a class="code" href="gplot_8c.html#a22647c46c1f717aa07b7fb32c3ff4405">gplotAddPlot</a>() for each plot on the frame
+       <a class="code" href="gplot_8c.html#a845b86586092c48fa4e8d3e85ee8538b">gplotMakeOutput</a>() to generate all output files and run gnuplot
+       <a class="code" href="gplot_8c.html#a4aa17b7b0a295467906f76b7d7209d4f">gplotDestroy</a>() to clean up
+
+   Example of use:
+       gplot = <a class="code" href="gplot_8c.html#a1cea7ad39c28d5fafe6d7c78dcde1a38">gplotCreate</a>(&quot;tempskew&quot;, <a class="code" href="gplot_8h.html#ad61780b3a55293b7407ebc21664d12c7a4b08f0c99fe0e26e5d711e1e62e9fd28">GPLOT_PNG</a>, &quot;Skew score vs angle&quot;,
+                  &quot;angle (deg)&quot;, &quot;score&quot;);
+       <a class="code" href="gplot_8c.html#a22647c46c1f717aa07b7fb32c3ff4405">gplotAddPlot</a>(gplot, natheta, nascore1, <a class="code" href="gplot_8h.html#a06937a26d77a22b1f8a05a56d51f3e0fa6a9387171728ae8645d8b9b723656874">GPLOT_LINES</a>, &quot;plot 1&quot;);
+       <a class="code" href="gplot_8c.html#a22647c46c1f717aa07b7fb32c3ff4405">gplotAddPlot</a>(gplot, natheta, nascore2, <a class="code" href="gplot_8h.html#a06937a26d77a22b1f8a05a56d51f3e0fa858fada803704128f8b8c4ecafe213e3">GPLOT_POINTS</a>, &quot;plot 2&quot;);
+       <a class="code" href="gplot_8c.html#a59261ec0ddd010b4f8fd2c9d15846485">gplotSetScaling</a>(gplot, <a class="code" href="gplot_8h.html#abcb782b5089bfa1036bed724b0bd9393a8405ca7bbbee958371605d86baf66a5e">GPLOT_LOG_SCALE_Y</a>);
+       <a class="code" href="gplot_8c.html#a845b86586092c48fa4e8d3e85ee8538b">gplotMakeOutput</a>(gplot);
+       <a class="code" href="gplot_8c.html#a4aa17b7b0a295467906f76b7d7209d4f">gplotDestroy</a>(&amp;gplot);
+
+   Note for output to <a class="code" href="gplot_8h.html#ad61780b3a55293b7407ebc21664d12c7acf3270c5f29f035fff9b4914d25bcf4b">GPLOT_LATEX</a>:
+       This creates latex output of the plot, named &lt;rootname&gt;.tex.
+       It needs to be placed in a latex file &lt;latexname&gt;.tex
+       that precedes the plot output with, at a minimum:
+         \documentclass{article}
+         \begin{document}
+       and ends with
+         \end{document}
+       You can then generate a dvi file &lt;latexname&gt;.dvi <span class="keyword">using</span>
+         latex &lt;latexname&gt;.tex
+       and a PostScript file &lt;psname&gt;.ps from that <span class="keyword">using</span>
+         dvips -o &lt;psname&gt;.ps &lt;latexname&gt;.dvi
+</pre></div> 
 <p>Definition in file <a class="el" href="gplot_8c_source.html">gplot.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="af1791633b3a1a12a9aa449aa6d558327"></a><!-- doxytag: member="gplot.c::L_BUF_SIZE" ref="af1791633b3a1a12a9aa449aa6d558327" args="" -->

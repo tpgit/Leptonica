@@ -155,7 +155,85 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>4-pt bilinear transforms on images and coordinates, with sampling and interpolation </p>
+<div class="fragment"><pre class="fragment">    Bilinear (4 pt) <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> transformation using a sampled
+    (to nearest integer) transform on each dest point
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a4f3574a47c72332a4e38cab21d5384c1">pixBilinearSampledPta</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a0335ce400bd87b0d383d2ec35bedd1a0">pixBilinearSampled</a>()
 
+    Bilinear (4 pt) <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> transformation using interpolation 
+    (or area mapping) for anti-aliasing images that are
+    2, 4, or 8 bpp gray, or colormapped, or 32 bpp RGB
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a866a16d9b1b7b1eeccee5a99db770f6c">pixBilinearPta</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a3cd91f17e187a01167d6eb202327f5f9">pixBilinear</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#aa967eb84f3a887aa448d6b9ac706f31e">pixBilinearPtaColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#aa67483a6e7485e402548fcaf5bdcb30b">pixBilinearColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a788c2c4ea2a64a9f0274898477dbd113">pixBilinearPtaGray</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a7f5121c569440ea4ee49100e2bc5b631">pixBilinearGray</a>()
+
+    Bilinear transform including alpha (blend) component and gamma xform
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a739ebd4cf6b26d52b186236430fd64fb">pixBilinearPtaWithAlpha</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="bilinear_8c.html#a8c6a4b1ffc5d17ab5ca7496813da1c85">pixBilinearPtaGammaXform</a>()
+
+    Bilinear coordinate transformation
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="bilinear_8c.html#aa3a0074fac267cd853f517dad1f928fb">getBilinearXformCoeffs</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="bilinear_8c.html#a49a64f65c6156091745cb4336d273279">bilinearXformSampledPt</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="bilinear_8c.html#a8ac1cde6ef928602fd8106cc66031e06">bilinearXformPt</a>()
+
+    A bilinear transform can be specified as a specific functional
+    mapping between 4 points in the source and 4 points in the dest.
+    It can be used as an approximation to a (nonlinear) projective
+    transform, because for small warps it is very similar and
+    it is more stable.  (Projective transforms have a division
+    by a quantity that can get arbitrarily small.)
+
+    We give both a bilinear coordinate transformation and
+    a bilinear <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> transformation.
+
+    For the former, we ask for the coordinate value (x&#39;,y&#39;)
+    in the transformed space for any point (x,y) in the original
+    space.  The coefficients of the transformation are found by
+    solving 8 simultaneous equations for the 8 coordinates of
+    the 4 points in src and dest.  The transformation can then
+    be used to compute the associated <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> transform, by
+    computing, for each dest pixel, the relevant pixel(s) in
+    the source.  This can be done either by taking the closest
+    src pixel to each transformed dest pixel (&quot;sampling&quot;) or
+    by doing an interpolation and averaging over 4 source 
+    pixels with appropriate weightings (&quot;interpolated&quot;).
+
+    A typical application would be to remove some of the 
+    keystoning due to a projective transform in the imaging system.
+
+    The bilinear transform is given by specifying two equations:
+
+        x&#39; = ax + by + cxy + d
+        y&#39; = ex + fy + gxy + h
+
+    where the eight coefficients have been computed from four
+    sets of these equations, each for two corresponding data pts.
+    In practice, for each point (x,y) in the dest <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, this
+    equation is used to compute the corresponding point (x&#39;,y&#39;)
+    in the src.  That computed point in the src is then used
+    to determine the dest value in one of two ways:
+
+     - sampling: take the value of the src pixel in which this
+                 point falls
+     - interpolation: take appropriate linear combinations of the
+                      four src pixels that this dest pixel would
+                      overlap, with the coefficients proportional
+                      to the amount of overlap
+
+    For small warp, like rotation, area mapping in the
+    interpolation is equivalent to linear interpolation.
+
+    Typical relative timing of transforms (sampled = 1.0):
+    8 bpp:   sampled        1.0
+             interpolated   1.6
+    32 bpp:  sampled        1.0
+             interpolated   1.8
+    Additionally, the computation time/pixel is nearly the same
+    for 8 bpp and 32 bpp, for both sampled and interpolated.
+</pre></div> 
 <p>Definition in file <a class="el" href="bilinear_8c_source.html">bilinear.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a4f3574a47c72332a4e38cab21d5384c1"></a><!-- doxytag: member="bilinear.c::pixBilinearSampledPta" ref="a4f3574a47c72332a4e38cab21d5384c1" args="(PIX *pixs, PTA *ptad, PTA *ptas, l_int32 incolor)" -->

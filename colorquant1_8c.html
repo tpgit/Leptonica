@@ -195,7 +195,89 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Octcube color quantization. </p>
+<div class="fragment"><pre class="fragment">Octcube color quantization
 
+There are several different octcube/octree based quantizations.
+These can be classified, in the order in which they appear in <span class="keyword">this</span>
+file, as follows:
+
+-----------------------------------------------------------------
+(1) General adaptive octree
+(2) Adaptive octree by population at fixed level
+(3) Adaptive octree using population and with specified number
+    of output <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a>
+(4) Octcube with colormap representation of mixed color/gray
+(5) 256 fixed octcubes covering color space
+(6) Octcubes at fixed level for ncolors &lt;= 256
+(7) Octcubes at fixed level with RGB output
+(8) Quantizing an rgb image using a specified colormap
+-----------------------------------------------------------------
+
+(1) Two-pass adaptive octree color quantization
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a4021a336fd52303b8635172089f46708">pixOctreeColorQuant</a>()
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a563fe9f0c788718722dafe10d22b16e2">pixOctreeColorQuantGeneral</a>()
+
+      which calls
+        static <a class="code" href="struct_color_quant_cell.html">CQCELL</a>  ***<a class="code" href="colorquant1_8c.html#a92e168c2ca102186948df124b37f042b">octreeGenerateAndPrune</a>()
+        static <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="colorquant1_8c.html#afebfd1d44adf9aba64c3209438b739e2">pixOctreeQuantizePixels</a>()
+
+      which calls
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant1_8c.html#a1807a67d3402b8a16831e145d8ea239f">octreeFindColorCell</a>()
+        
+    Helper cqcell functions
+        static <a class="code" href="struct_color_quant_cell.html">CQCELL</a>  ***<a class="code" href="colorquant1_8c.html#a65789003c15bfca5b7d303b4baa90f69">cqcellTreeCreate</a>()
+        static <span class="keywordtype">void</span>       <a class="code" href="colorquant1_8c.html#a583fa921ff138917a985a1c89b8bf66c">cqcellTreeDestroy</a>()
+
+    Helper index functions
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>           <a class="code" href="colorquant1_8c.html#a795cf764d048c422fae9c0881e827967">makeRGBToIndexTables</a>()
+        <span class="keywordtype">void</span>              <a class="code" href="colorquant1_8c.html#af3066cc002e0b6e4ffe09d881744845f">getOctcubeIndexFromRGB</a>()
+        static <span class="keywordtype">void</span>       <a class="code" href="colorquant1_8c.html#a0584f1f773ce375f03f540f5f8e6b5b2">getRGBFromOctcube</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant1_8c.html#a7d4ae88ca70fb1367d1ad81501c16b52">getOctcubeIndices</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant1_8c.html#abbb75ad068c16da65d75be4bd360da9e">octcubeGetCount</a>()
+
+(2) Adaptive octree quantization based on population at a fixed level
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a22770d10755077f8d19e064225bf087e">pixOctreeQuantByPopulation</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant1_8c.html#ae9b9555af2a26e1403c6646e30b18a0f">pixDitherOctindexWithCmap</a>()
+
+(3) Adaptive octree quantization to 4 and 8 bpp with specified
+    number of output <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> in colormap
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#afc47c3e44c770c6f2937215ed7868b66">pixOctreeQuantNumColors</a>()
+
+(4) Mixed color/gray quantization with specified number of <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a>
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a8a2436cf441f989fc3eeb22a46d656f4">pixOctcubeQuantMixedWithGray</a>()
+
+(5) Fixed partition octcube quantization with 256 cells
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#aa0e721960a82b596c44ed7cc2608be0f">pixFixedOctcubeQuant256</a>()
+
+(6) Fixed partition quantization for images with few <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a>
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a1d2112468014c21e0a9879bb839c18ea">pixFewColorsOctcubeQuant1</a>()
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a4cdee00af2505828f935cf677fd15ce3">pixFewColorsOctcubeQuant2</a>()
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a8526360e93b594bb5278f551bcac8316">pixFewColorsOctcubeQuantMixed</a>()
+
+(7) Fixed partition octcube quantization at specified level
+    with quantized output to RGB
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a2bbae086386e80478f2c90be735ad70c">pixFixedOctcubeQuantGenRGB</a>()
+
+(8) Color quantize RGB image using existing colormap
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a630809518ac5eaa4b63e710e4e02027e">pixQuantFromCmap</a>()  [high-level wrapper]
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a6e64581d313cbc09a362e8deb9839c0f">pixOctcubeQuantFromCmap</a>()
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant1_8c.html#a219f6fb87860960c149bd5fccee79da6">pixOctcubeQuantFromCmapLUT</a>()
+
+    Generation of octcube histogram
+        <a class="code" href="struct_numa.html">NUMA</a>             *<a class="code" href="colorquant1_8c.html#a34dc09d7a98fbee0cdb7ea7ce70ef3ed">pixOctcubeHistogram</a>()
+        
+    Get filled octcube table from colormap
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          *<a class="code" href="colorquant1_8c.html#a49d0d706b36b0ee43c26254f51a034e8">pixcmapToOctcubeLUT</a>()
+
+    Strip out unused elements in colormap
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>           <a class="code" href="colorquant1_8c.html#abab8a3de2731a11a794ea71be7d314f6">pixRemoveUnusedColors</a>()
+
+    Find number of occupied octcubes at the specified level
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>           <a class="code" href="colorquant1_8c.html#a4e4dfe00e261e215bfa58d8d17b917fe">pixNumberOccupiedOctcubes</a>()
+
+Note: leptonica also provides color quantization using a modified
+      form of median cut.  See colorquant2.c for details.
+</pre></div> 
 <p>Definition in file <a class="el" href="colorquant1_8c_source.html">colorquant1.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a6efa1730c3d1efaa20a5805a872230a5"></a><!-- doxytag: member="colorquant1.c::DEBUG_OCTINDEX" ref="a6efa1730c3d1efaa20a5805a872230a5" args="" -->

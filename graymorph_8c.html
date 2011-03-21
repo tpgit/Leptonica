@@ -148,7 +148,32 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Top-level grayscale morphological operations. </p>
+<div class="fragment"><pre class="fragment">    Top-level binary morphological operations (van Herk / Gil-Werman)
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#aee278aba67aee93d3c0df36a33726e0d">pixErodeGray</a>()
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#adea1263a1aaf5a3ee2e8f21ce9e1a6e9">pixDilateGray</a>()
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#ae898276be044c7065b9a137c391a7f34">pixOpenGray</a>()
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#abd3c4853a1f9991d96137af92f76666f">pixCloseGray</a>()
 
+    Special operations for 1<a class="code" href="affine__reg_8c.html#a41b607021994d7ad321d656d6682186b">x3</a>, 3<a class="code" href="affine__reg_8c.html#ae7a35515457046b7539c24062cf94d40">x1</a> and 3x3 Sels  (direct)
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#a77a10f4e4853fc30a1bd96598ec90164">pixErodeGray3</a>()
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#af3106f02376d054e61c57b36174d214b">pixDilateGray3</a>()
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#a800ba59689bc7595ede7c36e9f672744">pixOpenGray3</a>()
+          <a class="code" href="struct_pix.html">PIX</a>     *<a class="code" href="graymorph_8c.html#ad1ce93537005e5fa711f4848fce3179a">pixCloseGray3</a>()
+
+
+    Method: Algorithm by van Herk and Gil and Werman, 1992
+
+    Measured speed of the vH/G-W implementation is about 1 output
+    pixel per 120 PIII clock cycles, for a horizontal or vertical
+    erosion or dilation.  The computation time doubles for opening
+    or closing, or for a square SE, as expected, and is independent
+    of the <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> of the SE.
+
+    A faster implementation can be made directly for brick Sels
+    of maximum <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> 3.  We unroll the computation for sets of 8 bytes.
+    It needs to be called explicitly; the general functions do not
+    default for the <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> 3 brick Sels.
+</pre></div> 
 <p>Definition in file <a class="el" href="graymorph_8c_source.html">graymorph.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a225cc80b36c34c5d4c9058fce8f5a711"></a><!-- doxytag: member="graymorph.c::pixErodeGray3h" ref="a225cc80b36c34c5d4c9058fce8f5a711" args="(PIX *pixs)" -->

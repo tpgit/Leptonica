@@ -153,7 +153,36 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Low-level implementation for some grayscale quantiziation functions. </p>
+<div class="fragment"><pre class="fragment">    Thresholding from 8 bpp to 1 bpp
 
+        Floyd-Steinberg dithering to binary
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#a87e435e6f8ffc61fccf55b9b74b5d8aa">ditherToBinaryLow</a>()
+            void       <a class="code" href="grayquantlow_8c.html#a1774621a3a8a5c3c16223744b295a67c">ditherToBinaryLineLow</a>()
+
+        Simple (pixelwise) binarization
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#a33f95768dd56c1eed1e7cfdc8221f063">thresholdToBinaryLow</a>()
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#a9e712b0a24818d73cf86a9880bc2f996">thresholdToBinaryLineLow</a>()
+
+        A slower <a class="code" href="src_2xtractprotos_8c.html#aa31f487a99743d24af9076a3e11e5425">version</a> of Floyd-Steinberg dithering that uses LUTs
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#a2441df01831f0fa4fa675c1fb584d383">ditherToBinaryLUTLow</a>()
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#a971adefaf2e3f84e7e6aa7b7e3deccbd">ditherToBinaryLineLUTLow</a>()
+            <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="grayquantlow_8c.html#a023c0d60d5977fc759e701558baf6ee6">make8To1DitherTables</a>()
+
+    Thresholding from 8 bpp to 2 bpp
+
+        Floyd-Steinberg-like dithering to 2 bpp
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#abaec784bf10519edf272213b4847bfaa">ditherTo2bppLow</a>()
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#a9da70db5eee469999f348d11ee20bb25">ditherTo2bppLineLow</a>()
+            <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="grayquantlow_8c.html#a5531e5f63b0e4dd601e7e42e67f3219e">make8To2DitherTables</a>()
+
+        Simple thresholding to 2 bpp
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#ac54aaf8e9733d236d10fec472012813f">thresholdTo2bppLow</a>()
+
+    Thresholding from 8 bpp to 4 bpp
+
+        Simple thresholding to 4 bpp
+            <span class="keywordtype">void</span>       <a class="code" href="grayquantlow_8c.html#af9b623be11a1a323d2dc0d2fa6d4788c">thresholdTo4bppLow</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="grayquantlow_8c_source.html">grayquantlow.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a6f3e911ef473940bb25b5f50c65055b7"></a><!-- doxytag: member="grayquantlow.c::DEBUG_UNROLLING" ref="a6f3e911ef473940bb25b5f50c65055b7" args="" -->

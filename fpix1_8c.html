@@ -200,7 +200,90 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements <a class="el" href="struct_f_pix.html">FPix</a> and <a class="el" href="struct_d_pix.html">DPix</a> classes (float and double images) </p>
+<div class="fragment"><pre class="fragment">  This file has basic constructors, destructors and field accessors
+  <span class="keywordflow">for</span> <a class="code" href="struct_f_pix.html">FPix</a>, <a class="code" href="struct_f_pixa.html">FPixa</a> and <a class="code" href="struct_d_pix.html">DPix</a>.  It also has uncompressed read/write.
 
+  <a class="code" href="struct_f_pix.html">FPix</a> Create/copy/destroy
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#adbbb61d64f5c6262dca09633b1693f4d">fpixCreate</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#a0efdf0d6bbe26f6dbc22b3f6285994d1">fpixCreateTemplate</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#aedd2f209aa6dffa8423bb89c26d4c1b2">fpixClone</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#a56336c678733d924db5a4a2eaf137e6f">fpixCopy</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#aed1775d9f2f754e0b1bd73c38b2727a6">fpixResizeImageData</a>()
+        <span class="keywordtype">void</span>           <a class="code" href="fpix1_8c.html#ad1bdac136a0a5f67a7187414d5686dd0">fpixDestroy</a>()
+
+  <a class="code" href="struct_f_pix.html">FPix</a> accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a4f225dfa8c1e081c7d32b60acccc3638">fpixGetDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a47f92a9728a8f4e4c98b9cc2bbad7683">fpixSetDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ab7f19e7fb19716b478b16f5f20c059c3">fpixGetWpl</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ac096eeb73f47bd8516f0d68185bd648b">fpixSetWpl</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#afc645d7fe17fb2091f82386acf96c2ab">fpixGetRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#aa23bad1c8b73f00e5991d21d9e04e91c">fpixChangeRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a4ca75324c2901899be6fb031a458eaa1">fpixGetResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a793e30009a76587717b0124d1f542610">fpixSetResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ad94cba9b348260a215cad0885ec126a8">fpixCopyResolution</a>()
+        <a class="code" href="environ_8h.html#af59419416d96ecf5fca70c8d05adb456">l_float32</a>     *<a class="code" href="fpix1_8c.html#af27ae584a0480d0f65258e8d8465846b">fpixGetData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a3dbf656c17b96620c06511c39854583f">fpixSetData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ae7ebe65c9e819d2281162fb33188fcad">fpixGetPixel</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a0d52d1bc2bd9827c600efdb2dfeb42f7">fpixSetPixel</a>()
+
+  <a class="code" href="struct_f_pixa.html">FPixa</a> Create/copy/destroy
+        <a class="code" href="struct_f_pixa.html">FPIXA</a>         *<a class="code" href="fpix1_8c.html#ab95243c74c96a6e5f04ca71d5955966e">fpixaCreate</a>()
+        <a class="code" href="struct_f_pixa.html">FPIXA</a>         *<a class="code" href="fpix1_8c.html#a187fa91b9217315bb6be1085dd03f229">fpixaCopy</a>()
+        <span class="keywordtype">void</span>           <a class="code" href="fpix1_8c.html#a1bf91da7d2c3c73eeafb0eac06bb5536">fpixaDestroy</a>()
+
+  <a class="code" href="struct_f_pixa.html">FPixa</a> addition
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ae85e599dd2186069617963f9f68eab9a">fpixaAddFPix</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a55e2e5a7ca4b5d5f811011794c33296f">fpixaExtendArray</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#aef09800fe39b7317a51152c7aa5c6cbc">fpixaExtendArrayToSize</a>()
+
+  <a class="code" href="struct_f_pixa.html">FPixa</a> accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ad33ac1095c03c0e2b34527f411e6654c">fpixaGetCount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#af98c97af658562c8221cda3c2bbf7de3">fpixaChangeRefcount</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#ab7243a5c487c3cf26ffc06267d24a424">fpixaGetFPix</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ad390abc51679ebb2967855b0e40fd89b">fpixaGetFPixDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a4773dcad04b7adfa2db83738f9cb41dd">fpixaGetPixel</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#aa3511874c02e056c86a5d9707329d377">fpixaSetPixel</a>()
+
+  <a class="code" href="struct_d_pix.html">DPix</a> Create/copy/destroy
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix1_8c.html#a3ed74abab861b6ad0250d0ee1866e723">dpixCreate</a>()
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix1_8c.html#ac2530ac25b77e172b4dea449bbd5a2b3">dpixCreateTemplate</a>()
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix1_8c.html#a644a6875b7a776edf9c0fc28872a25e5">dpixClone</a>()
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix1_8c.html#a49d2932df4dc66d877df26bef4a32135">dpixCopy</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#af9dc55c55a5c3549ff9ae9725bd74c29">dpixResizeImageData</a>()
+        <span class="keywordtype">void</span>           <a class="code" href="fpix1_8c.html#a1b732a7ffdd810c46fa2269998e27708">dpixDestroy</a>()
+
+  <a class="code" href="struct_d_pix.html">DPix</a> accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a92b07ec1ebb7df0a4fe6379de2270cd1">dpixGetDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a96ea25b17b5ea17ba67f72fc37da80df">dpixSetDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a35139a80097545ccb082a1b920e45c17">dpixGetWpl</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a15375299432d8237aff2dbb5c5de5714">dpixSetWpl</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a6c6b9c5b3a946edbc03408a2eabb0937">dpixGetRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#afe86e01efe53bdb8a0957bc2c683aff2">dpixChangeRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a6030e771d5d3dadfed445cd719a28d57">dpixGetResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a0c681458293eac5022aded55ff66733d">dpixSetResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a95783578ed4dea7554b3d2f16aa6c7d2">dpixCopyResolution</a>()
+        <a class="code" href="environ_8h.html#ab8d28dcce3b441bb0bb47f124ee3c252">l_float64</a>     *<a class="code" href="fpix1_8c.html#a725e2c82ef6848ee180ffe4793ab78dd">dpixGetData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a2da33f440f7b3e60dcb27a4f11682bef">dpixSetData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ab83a12ffe9a0c839b19fe3be160a4cf8">dpixGetPixel</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a6973f58877679968b4e5d8dda7ae13a0">dpixSetPixel</a>()
+
+  <a class="code" href="struct_f_pix.html">FPix</a> serialized I/O
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#aa03e8d574349fd5c937ed080e6cbd80b">fpixRead</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#ade94f5b1c475f5cdf3f6a90d2298c2ad">fpixReadStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#ac8bcfd35388a59a92943f899ea5ddd4b">fpixWrite</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a8791b84366c3fa4bfeb4d65d27e6b68a">fpixWriteStream</a>()
+        <a class="code" href="struct_f_pix.html">FPIX</a>          *<a class="code" href="fpix1_8c.html#aabb3326902d74882c57a2d3008e162ea">fpixEndianByteSwap</a>()
+
+  <a class="code" href="struct_d_pix.html">DPix</a> serialized I/O
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix1_8c.html#a7171ec80976b888f3300e86d244450b7">dpixRead</a>()
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix1_8c.html#a5e033ab7b7ea868bd939d3cf79719e7b">dpixReadStream</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a67a6302d53ffb1eacf18a575317d5535">dpixWrite</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a015bf34fce4ea80728c4be01e80442d9">dpixWriteStream</a>()
+        <a class="code" href="struct_d_pix.html">DPIX</a>          *<a class="code" href="fpix1_8c.html#a22510b74c453e4511546721da007b4c2">dpixEndianByteSwap</a>()
+ 
+  Print <a class="code" href="struct_f_pix.html">FPix</a> (subsampled, for debugging)
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>        <a class="code" href="fpix1_8c.html#a920b03ed31f55abc306dab196d4ea670">fpixPrintStream</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="fpix1_8c_source.html">fpix1.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="adbbb61d64f5c6262dca09633b1693f4d"></a><!-- doxytag: member="fpix1.c::fpixCreate" ref="adbbb61d64f5c6262dca09633b1693f4d" args="(l_int32 width, l_int32 height)" -->

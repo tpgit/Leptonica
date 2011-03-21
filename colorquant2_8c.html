@@ -174,7 +174,144 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Modified median cut color quantization (Heckbert) </p>
+<div class="fragment"><pre class="fragment">Modified median cut color quantization
 
+    High level
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant2_8c.html#a17313a67b0e30e21ba4a55e6f0c72a64">pixMedianCutQuant</a>()
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant2_8c.html#abdadca450a70fd804e42c96bef994036">pixMedianCutQuantGeneral</a>()
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant2_8c.html#a85f531598db89f95bf249e3e21b5bec6">pixMedianCutQuantMixed</a>()
+        <a class="code" href="struct_pix.html">PIX</a>              *<a class="code" href="colorquant2_8c.html#afc52f054e2d80e33977a70fc3e50ae5c">pixFewColorsMedianCutQuantMixed</a>()
+
+    Median cut indexed histogram
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          *<a class="code" href="colorquant2_8c.html#a65e698ce7d802ae7124c517246efce7f">pixMedianCutHisto</a>()
+
+    Static helpers
+        static <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>   *<a class="code" href="colorquant2_8c.html#a88887c5db557976f2bc51e0ad0845179">pixcmapGenerateFromHisto</a>()
+        static <a class="code" href="struct_pix.html">PIX</a>       *<a class="code" href="colorquant2_8c.html#adfd283be95887c0392ccc59a7317d12d">pixQuantizeWithColormap</a>()
+        static <span class="keywordtype">void</span>       <a class="code" href="colorquant2_8c.html#a912a9b2607e28f1695aabcc3e630829a">getColorIndexMedianCut</a>()
+        static <a class="code" href="struct_l___box3d.html">L_BOX3D</a>   *<a class="code" href="colorquant2_8c.html#aded94e853e04c7d91aa2acc0d7f6963e">pixGetColorRegion</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant2_8c.html#aadecca3d9409c1065db2fc46c8d07f3f">medianCutApply</a>()
+        static <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>   *<a class="code" href="colorquant2_8c.html#aa5e7e49e513f7cac7056a1d1294901fb">pixcmapGenerateFromMedianCuts</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant2_8c.html#a36bca8d8fba5410064eda4d2851d17ba">vboxGetAverageColor</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant2_8c.html#a4ab65c042bff8576b6977c496b05e87a">vboxGetCount</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>    <a class="code" href="colorquant2_8c.html#ad57a7b0f986df14ddbe8cb2c80a0344f">vboxGetVolume</a>()
+        static <a class="code" href="struct_l___box3d.html">L_BOX3D</a>   *<a class="code" href="colorquant2_8c.html#ab8a45c7f996945175164337fdb4e7ea1">box3dCreate</a>();
+        static <a class="code" href="struct_l___box3d.html">L_BOX3D</a>   *<a class="code" href="colorquant2_8c.html#a1ba882dc729364a57331c2314f2a67da">box3dCopy</a>();
+
+ Paul Heckbert published the median cut algorithm, &quot;Color Image
+ Quantization for Frame Buffer Display,&quot; in Proc. SIGGRAPH &#39;82,
+ Boston, July 1982, pp. 297-307.  A copy of the paper without
+ figures can be found on the web.
+
+ Median cut starts with either the full color space or the occupied
+ region of color space.  If you&#39;re not dithering, the occupied region
+ can be used, but with dithering, pixels can end up in any place
+ in the color space, so you must represent the entire color space in
+ the final colormap.
+
+ Color components are quantized to typically 5 or 6 significant
+ bits (for each of r, g and b).   Call a 3D region of color
+ space a &#39;vbox&#39;.  Any color in this quantized space is represented
+ by an element of a linear histogram array, indexed by rgb value.
+ The initial region is then divided into two regions that have roughly
+ equal pixel occupancy (hence the name &quot;median cut&quot;).  Subdivision
+ continues until the requisite number of vboxes has been generated.
+
+ But the devil is in the details of the subdivision process.
+ Here are some choices that you must make:
+   (1) Along which axis to subdivide?
+   (2) Which box to put the bin with the median pixel?
+   (3) How to order the boxes for subdivision?
+   (4) How to adequately handle boxes with very small numbers of pixels?
+   (5) How to prevent a little-represented but highly visible color
+       from being masked out by other <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a> in its vbox.
+
+ Taking these in order:
+   (1) Heckbert suggests using either the largest vbox side, or the vbox
+       side with the largest variance in pixel occupancy.  We choose
+       to divide based on the largest vbox side.
+   (2) Suppose you&#39;ve chosen a side.  Then you have a histogram
+       of pixel occupancy in 2D slices of the vbox.  One of those
+       slices includes the median pixel.  Suppose there are L bins
+       to the left (smaller index) and R bins to the right.  Then
+       this slice (or bin) should be assigned to the box containing
+       the smaller of L and R.  This both shortens the larger
+       of the subdivided dimensions and helps a low-count color
+       far from the subdivision boundary to better express itself.
+   (2a) One can also ask if the boundary should be moved even
+       farther into the longer side.  This is feasable if we have
+       a method for doing extra subdivisions on the high count
+       vboxes.  And we do (see (3)).
+   (3) To make sure that the boxes are subdivided toward equal
+       occupancy, use an occupancy-sorted priority queue, rather
+       than a simple queue.
+   (4) With a priority queue, boxes with small number of pixels
+       won&#39;t be repeatedly subdivided.  This is good.
+   (5) Use of a priority queue allows tricks such as in (2a) to let
+       small occupancy clusters be better expressed.  In addition,
+       rather than splitting near the median, small occupancy <a class="code" href="writetext__reg_8c.html#a4ebbf30ad0e54b03f69dd59a5fa97b18">colors</a>
+       are best reproduced by cutting half-way into the longer side.
+
+ However, serious problems can arise with dithering if a priority
+ queue is used based on population alone.  If the picture has
+ large regions of nearly constant color, some vboxes can be very
+ large and have a sizeable population (but not big enough to get to
+ the head of the queue).  If one of these large, occupied vboxes
+ is near in color to a nearly constant color region of the
+ image, dithering can inject pixels from the large vbox into
+ the nearly uniform region.  These pixels can be very far away
+ in color, and the oscillations are highly visible.  To prevent
+ this, we can take either or both of these actions:
+
+   (1) Subdivide a fraction (&lt; 1.0) based on population, and
+       do the rest of the subdivision based on the product of
+       the vbox volume and its population.  By using the product,
+       we avoid further subdivision of nearly empty vboxes, and
+       directly target large vboxes with significant population.
+
+   (2) Threshold the excess color transferred in dithering to
+       neighboring pixels.
+
+ Doing either of these will stop the most annoying oscillations
+ in dithering.  Furthermore, by doing (1), we also improve the
+ rendering of regions of nearly constant color, both with and
+ without dithering.  It turns out that the image quality is
+ not sensitive to the value of the parameter in (1); values
+ between 0.3 and 0.9 give very good results.
+
+ Here&#39;s the lesson: subdivide the color space into vboxes such
+ that (1) the most populated vboxes that can be further
+ subdivided (i.e., that occupy more than one quantum volume
+ in color space) all have approximately the same population,
+ and (2) all large vboxes have no significant population.
+ If these conditions are met, the quantization will be excellent.
+
+ Once the subdivision has been made, the colormap is generated,
+ with one color for each vbox and using the average color in the vbox.
+ At the same time, the histogram array is converted to an inverse
+ colormap table, storing the colormap index in every cell in the
+ vbox.  Finally, using both the colormap and the inverse colormap,
+ a colormapped pix is quickly generated from the original rgb pix.
+
+ In the present implementation, subdivided regions of colorspace
+ that are not occupied are retained, but not further subdivided.
+ This is required for our inverse colormap lookup table for
+ dithering, because dithered pixels may fall into these unoccupied
+ regions.  For such empty regions, we use the center as the rgb
+ colormap value.
+
+ This variation on median cut can be referred to as &quot;Modified Median
+ Cut&quot; quantization, or MMCQ.  Overall, the undithered MMCQ gives
+ comparable results to the two-pass Octcube Quantizer (OQ).
+ Comparing the two methods on the test24.jpg painting, we see:
+
+   (1) For rendering spot color (the various reds and pinks in
+       the image), MMCQ is not as good as OQ.
+
+   (2) For rendering majority color regions, MMCQ does a better
+       job of avoiding posterization.  That is, it does better
+       dividing the color space up in the most heavily populated regions.
+</pre></div> 
 <p>Definition in file <a class="el" href="colorquant2_8c_source.html">colorquant2.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="aaa2c5a3f90206306ef9beacd44a94616"></a><!-- doxytag: member="colorquant2.c::DEBUG_MC_COLORS" ref="aaa2c5a3f90206306ef9beacd44a94616" args="" -->

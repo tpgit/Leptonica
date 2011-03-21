@@ -144,7 +144,32 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Simple utility to put text on images. </p>
+<div class="fragment"><pre class="fragment">  Font layout
+     <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="leptprotos_8h.html#aa41c0c55011cb7b7f8920f244f5aae29">pixAddSingleTextblock</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a96036a1bfb1cbe86af45431d9eb26a47">pixSetTextblock</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a58e31c386c99779e56771cafd5728dd6">pixSetTextline</a>()
 
+  Text size estimation and partitioning
+     <a class="code" href="struct_sarray.html">SARRAY</a>          *<a class="code" href="leptprotos_8h.html#aa4468bfa624386078d27c4c8da31bd9a">bmfGetLineStrings</a>()
+     <a class="code" href="struct_numa.html">NUMA</a>            *<a class="code" href="leptprotos_8h.html#a91d9afeff7260ae50dbb5a1e1e65c9eb">bmfGetWordWidths</a>()
+     <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a3a9bf245ccb6ba722e87f3fbb2365093">bmfGetStringWidth</a>()
+
+  Text splitting
+     <a class="code" href="struct_sarray.html">SARRAY</a>          *<a class="code" href="leptprotos_8h.html#a7a060323fe9c438030a42f8a4903b396">splitStringToParagraphs</a>()
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="textops_8c.html#aa3028ba36bb7b5340104d07469fbf6cc">stringAllWhitespace</a>() 
+     static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="textops_8c.html#af2a70209a3cb2e53630cb1f0cb12cb21">stringLeadingWhitespace</a>() 
+
+  This is a simple utility to put text on images.  One font and style
+  is provided, with a variety of pt <a class="code" href="genfonts_8c.html#a7b4fcaf183d9c0d1f71be15c145df1e0">sizes</a>.  For example, to put a
+  line of green 10 pt text on an image, with the beginning baseline
+  at (50, 50):
+      <a class="code" href="struct_l___bmf.html">L_Bmf</a>  *bmf = <a class="code" href="bmf_8c.html#a139b8a8d92a9bc0f1f3b6232fa76cccd">bmfCreate</a>(&quot;./fonts&quot;, 10);
+      const <span class="keywordtype">char</span> *<a class="code" href="subpixel__reg_8c.html#a5057951a9b7ede9ed9091480cfae1f2a">textstr</a> = &quot;This is a funny cat&quot;;
+      <a class="code" href="leptprotos_8h.html#a58e31c386c99779e56771cafd5728dd6">pixSetTextline</a>(pixs, bmf, <a class="code" href="subpixel__reg_8c.html#a5057951a9b7ede9ed9091480cfae1f2a">textstr</a>, 0x00ff0000, 50, 50, <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, NULL);
+
+  A simpler interface for adding text to an image is pixAddTextblock().
+  See prog/writetext_reg.c for examples of its use.
+</pre></div> 
 <p>Definition in file <a class="el" href="textops_8c_source.html">textops.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aa3028ba36bb7b5340104d07469fbf6cc"></a><!-- doxytag: member="textops.c::stringAllWhitespace" ref="aa3028ba36bb7b5340104d07469fbf6cc" args="(char *textstr, l_int32 *pval)" -->

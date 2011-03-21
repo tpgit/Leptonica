@@ -155,7 +155,84 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>4-pt projective transforms on images and coordinates, with sampling and interpolation </p>
+<div class="fragment"><pre class="fragment">    Projective (4 pt) image transformation using a sampled
+    (to nearest integer) transform on each dest point
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ab7c6ace43627b61effead62f7da5b905">pixProjectiveSampledPta</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a08228d51b08fdf875ed7707e59c9593e">pixProjectiveSampled</a>()
 
+    Projective (4 pt) image transformation using interpolation 
+    (or area mapping) for anti-aliasing images that are
+    2, 4, or 8 bpp gray, or colormapped, or 32 bpp RGB
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a4f96f4cbda53dee77fc743aaa7788f0f">pixProjectivePta</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a294d885ef680f582bd7f95c55a76b4a8">pixProjective</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a617525dc8f4808a8b2b4e34ddea2d5d1">pixProjectivePtaColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ab33ac4a9299d2c250d6745b3a6192ff6">pixProjectiveColor</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#aa8627931b9b0e7071dfc9305a011f345">pixProjectivePtaGray</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#ad1f200316ad6be256341a89aa61793c5">pixProjectiveGray</a>()
+
+    Projective transform including alpha (blend) component and gamma xform
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a34e36030aaa3cfe88188bcf644c750ca">pixProjectivePtaWithAlpha</a>()
+         <a class="code" href="struct_pix.html">PIX</a>      *<a class="code" href="leptprotos_8h.html#a97e3845ef1e22e4575673ccc525871a3">pixProjectivePtaGammaXform</a>()
+
+    Projective coordinate transformation
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a2a8e71ddbe5c1ed6cbce61ca65fe9d2f">getProjectiveXformCoeffs</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a0236ca422dd848c5d471d45b1438eaf0">projectiveXformSampledPt</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="leptprotos_8h.html#a1d71156790ed629299571f1de872ab7a">projectiveXformPt</a>()
+
+    A projective transform can be specified as a specific functional
+    mapping between 4 points in the source and 4 points in the dest.
+    It preserves straight lines, but is less stable than a bilinear
+    transform, because it contains a division by a quantity that
+    can get arbitrarily small.)
+
+    We give both a projective coordinate transformation and
+    two projective image transformations.
+
+    For the former, we ask for the coordinate value (x&#39;,y&#39;)
+    in the transformed space for any point (x,y) in the original
+    space.  The coefficients of the transformation are found by
+    solving 8 simultaneous equations for the 8 coordinates of
+    the 4 points in src and dest.  The transformation can then
+    be used to compute the associated image transform, by
+    computing, for each dest pixel, the relevant pixel(s) in
+    the source.  This can be done either by taking the closest
+    src pixel to each transformed dest pixel (&quot;sampling&quot;) or
+    by doing an interpolation and averaging over 4 source
+    pixels with appropriate weightings (&quot;interpolated&quot;).
+
+    A typical application would be to remove keystoning
+    due to a projective transform in the imaging system.
+
+    The projective transform is given by specifying two equations:
+
+        x&#39; = (ax + by + c) / (gx + hy + 1)
+        y&#39; = (dx + ey + f) / (gx + hy + 1)
+
+    where the eight coefficients have been computed from four
+    sets of these equations, each for two corresponding <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> pts.
+    In practice, for each point (x,y) in the dest image, this
+    equation is used to compute the corresponding point (x&#39;,y&#39;)
+    in the src.  That computed point in the src is then used
+    to determine the dest value in one of two ways:
+
+     - sampling: take the value of the src pixel in which this
+                 point falls
+     - interpolation: take appropriate linear combinations of the
+                      four src pixels that this dest pixel would
+                      overlap, with the coefficients proportional
+                      to the amount of overlap
+
+    For small warp where there is little scale change, (e.g.,
+    for rotation) area mapping is nearly equivalent to interpolation.
+
+    Typical relative timing of pointwise transforms (sampled = 1.0):
+    8 bpp:   sampled        1.0
+             interpolated   1.5
+    32 bpp:  sampled        1.0
+             interpolated   1.6
+    Additionally, the computation time/pixel is nearly the same
+    for 8 bpp and 32 bpp, for both sampled and interpolated.
+</pre></div> 
 <p>Definition in file <a class="el" href="projective_8c_source.html">projective.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="afb164d69545d66c7a6f8e1d147c0e0a2"></a><!-- doxytag: member="projective.c::pixProjectiveSampledPta" ref="afb164d69545d66c7a6f8e1d147c0e0a2" args="(PIX *pixs, PTA *ptad, PTA *ptas, l_int32 incolor)" -->

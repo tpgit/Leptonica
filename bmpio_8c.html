@@ -148,7 +148,16 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write bmp format, from/to file and memory. </p>
+<div class="fragment"><pre class="fragment">    Read bmp from file
+         <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="bmpio_8c.html#a657bc3de2cab48f6e93d7536f007635b">pixReadStreamBmp</a>()
 
+    Write bmp to file
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bmpio_8c.html#a223012d6d4376e683c92acc9687ba337">pixWriteStreamBmp</a>()
+
+    Read/write to memory   [only on linux]
+         <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="bmpio_8c.html#a4ae1d381ec4abb36c539f484a69fb417">pixReadMemBmp</a>()
+         <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="bmpio_8c.html#adc2d7d49277594af003631ee18fde2bd">pixWriteMemBmp</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="bmpio_8c_source.html">bmpio.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ad72dbcf6d0153db1b8d8a58001feed83"></a><!-- doxytag: member="bmpio.c::DEBUG" ref="ad72dbcf6d0153db1b8d8a58001feed83" args="" -->

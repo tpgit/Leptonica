@@ -199,7 +199,155 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Implements <a class="el" href="struct_pix.html">Pix</a> (image) class - the fundamental one for this library. </p>
+<div class="fragment"><pre class="fragment">  The pixN.c {N = 1,2,3,4,5} files are sorted by the type of operation.
+  The primary functions in these files are:
 
+      pix1.c: constructors, destructors and field accessors
+      pix2.c: pixel poking of <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>, pad and border pixels
+      pix3.c: masking and logical ops, counting, mirrored tiling
+      pix4.c: histograms, statistics, fg/bg estimation
+      pix5.c: <span class="keyword">property</span> measurements, rectangle extraction
+
+
+  This file has the basic constructors, destructors and field accessors
+
+  <a class="code" href="struct_pix.html">Pix</a> memory management (allows custom allocator and deallocator)
+        <span class="keyword">static</span> <span class="keywordtype">void</span>  *<a class="code" href="pix1_8c.html#af19b7a09ee8a62b54096fa3e22b4c8bc">pix_malloc</a>()
+        static <span class="keywordtype">void</span>   <a class="code" href="pix1_8c.html#aae015361d9c5d34a03f10c93e88c8371">pix_free</a>()
+        <span class="keywordtype">void</span>          <a class="code" href="leptprotos_8h.html#a290a03bfce7dd85e1f58adbaa5fba5a9">setPixMemoryManager</a>()
+
+  <a class="code" href="struct_pix.html">Pix</a> creation
+        <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="leptprotos_8h.html#a009df4671d39f94b50a0368af210aebe">pixCreate</a>()
+        <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="leptprotos_8h.html#ae543abd33a12b28abe481e36b1bbf21f">pixCreateNoInit</a>()
+        <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="leptprotos_8h.html#a818df07aa55f619dee3073a9f75c5754">pixCreateTemplate</a>()
+        <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="leptprotos_8h.html#a8f510e51884b7bdea99f652e1ad0078a">pixCreateTemplateNoInit</a>()
+        <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="leptprotos_8h.html#a10cb44be994dcac24c9c04119d9f3183">pixCreateHeader</a>()
+        <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="leptprotos_8h.html#a48c3df1b04f60de6d7fcabd8375250d8">pixClone</a>()
+
+  <a class="code" href="struct_pix.html">Pix</a> destruction
+        <span class="keywordtype">void</span>          <a class="code" href="leptprotos_8h.html#a1b238e61b64e4e5c62f44849cddb9658">pixDestroy</a>()
+        static <span class="keywordtype">void</span>   <a class="code" href="pix1_8c.html#a8baf6b023f376874b57fdb2c738b4d50">pixFree</a>()
+
+  <a class="code" href="struct_pix.html">Pix</a> copy
+        <a class="code" href="struct_pix.html">PIX</a>          *<a class="code" href="leptprotos_8h.html#a421e342a65236aa6770965d34101e0ee">pixCopy</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a5086f8fe045975ec0edf3d352847fe2a">pixResizeImageData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#ad7bc25c649c4c6df53d1b75416eb9451">pixCopyColormap</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a8fdbab6e1cfe4c367f4d72c4f209b631">pixSizesEqual</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#acbf8564c358269de6f9def17f6059f4b">pixTransferAllData</a>()
+
+  <a class="code" href="struct_pix.html">Pix</a> accessors
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#aa71e0b02548a56e723c76996ab145257">pixGetWidth</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a97efd9460df51a03643cc4ae46018c77">pixSetWidth</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a511e60efcf1d9f3f59b5308ef5f49a06">pixGetHeight</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#ab320ab6fbb717f0b91429807ccdfa321">pixSetHeight</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a1646270a1eae38cd7af74c68351ce513">pixGetDepth</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a35c7446e6420463ae5b80b713400d151">pixSetDepth</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a11b8bc890f3872b0a19307f4c5a9b41e">pixGetDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a0190228999e06b0eff244ddc9dc0397e">pixSetDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a54b20aa52d583110566f386621a551bb">pixCopyDimensions</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#af0b490472ab7999f208098dd37167d73">pixGetWpl</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a9a1b088a797e983ee89a77b953f99df9">pixSetWpl</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#ada5af222806428634f7b92cf786d8a07">pixGetRefcount</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a9c561cadc269262d0629dd06830aa7e9">pixChangeRefcount</a>()
+        <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>      <a class="code" href="leptprotos_8h.html#ab47b081faee7f1193117ece8178daaee">pixGetXRes</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#af04bd949cef6d6f3443994dc337c6ec0">pixSetXRes</a>()
+        <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>      <a class="code" href="leptprotos_8h.html#a0af66aa6035deb8e431e79cb3aeb645d">pixGetYRes</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a9b07625ad6bc1f488426e082454b311d">pixSetYRes</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a332894b399c0aa3f32627f8d7546edb3">pixGetResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a15a3a26237a82addc17cca9f04524cb6">pixSetResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a785b5c3616267bb4be5e0d4f749461fc">pixCopyResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#aaf405ac9dfb00400ed8fc7c50c099834">pixScaleResolution</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#af854ba4d6f3babd8f2b6881f85468904">pixGetInputFormat</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a39738461018080fed3097dbac75fdddd">pixSetInputFormat</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a4465dd891f3ae1a778437fb73ecc55b9">pixCopyInputFormat</a>()
+        <span class="keywordtype">char</span>         *<a class="code" href="leptprotos_8h.html#abaf38ffce283483cabb0b1a4b08b8276">pixGetText</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#ab6d2b91d889c9c65812c427f8c6bc250">pixSetText</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a18cb7b13ebb3ed770c33e3b4a589977a">pixAddText</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a7e4fe14df69b5a4d4d11817a03a85ecb">pixCopyText</a>()
+        <a class="code" href="struct_pix_colormap.html">PIXCMAP</a>      *<a class="code" href="leptprotos_8h.html#a6c959f1c381ebe5a4abc867a3d8ae1e6">pixGetColormap</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#a6015decaf96da4e73708bc34527df065">pixSetColormap</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#af4a5de4d4bdf2fed490eb0e86025e041">pixDestroyColormap</a>()
+        <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>     *<a class="code" href="leptprotos_8h.html#a44546f758f2cf71bb109bfc114e3ca7f">pixGetData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#ad4df5a15d1a246deb77c774570a33c37">pixSetData</a>()
+        <a class="code" href="environ_8h.html#a4d4d7254020fc95aef5dde8884405358">l_uint32</a>     *<a class="code" href="leptprotos_8h.html#a994ac440b7dc46c36845b70530769da0">pixExtractData</a>()
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#aa03f1b557e17ec8abedefa8fbf2d006e">pixFreeData</a>()
+
+  <a class="code" href="struct_pix.html">Pix</a> line ptrs
+        <span class="keywordtype">void</span>        **<a class="code" href="leptprotos_8h.html#a5b80b30d89ea4541aadde89502c802ec">pixGetLinePtrs</a>()
+
+  <a class="code" href="struct_pix.html">Pix</a> debug
+        <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>       <a class="code" href="leptprotos_8h.html#ab8a6ff9fa7d3ae6263e568f987a61070">pixPrintStreamInfo</a>()
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    Important notes on direct management of pix <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Custom allocator and deallocator
+--------------------------------
+
+At the lowest level, you can specify the function that does the
+allocation and deallocation of the <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> field in the pix.
+By default, this is malloc and free.  However, by calling
+<a class="code" href="leptprotos_8h.html#a290a03bfce7dd85e1f58adbaa5fba5a9">setPixMemoryManager</a>(), custom functions can be substituted.
+When using this, keep two things in mind:
+
+ (1) Call setPixMemoryManager() before any pix have been allocated
+ (2) Destroy all pix as usual, in order to prevent leaks.
+
+In pixalloc.c, we provide an example custom allocator and deallocator.
+To use it, you must call <a class="code" href="leptprotos_8h.html#aea041e96ed9efc1ccc647afb8a8d9b4e">pmsCreate</a>() before any pix have been allocated
+and <a class="code" href="leptprotos_8h.html#a9fe96f718380a805d8007918dbb835da">pmsDestroy</a>() at the end after all pix have been destroyed.
+
+
+Direct manipulation of the pix <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> field
+-----------------------------------------
+
+Memory management of the (<a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>) <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> field in the pix is
+handled differently from that in the <a class="code" href="struct_pix.html#a4533ecc980ecee7d0720965f3f0a6b5f">colormap</a> or <a class="code" href="struct_pix.html#ab62f4da47c1559827756cfd60168e139">text</a> fields.
+For <a class="code" href="struct_pix.html#a4533ecc980ecee7d0720965f3f0a6b5f">colormap</a> and <a class="code" href="struct_pix.html#ab62f4da47c1559827756cfd60168e139">text</a>, the functions <a class="code" href="leptprotos_8h.html#a6015decaf96da4e73708bc34527df065">pixSetColormap</a>() and
+<a class="code" href="leptprotos_8h.html#ab6d2b91d889c9c65812c427f8c6bc250">pixSetText</a>() remove the existing heap <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a> and insert the
+new <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a>.  For the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> <a class="code" href="struct_pix.html#a2ecf6ebd07b2d01566d9935feacdea94">data</a>, <a class="code" href="leptprotos_8h.html#ad4df5a15d1a246deb77c774570a33c37">pixSetData</a>() just reassigns the
+data field; any existing data will be lost if there isn&#39;t
+another handle for it.
+
+Why is <a class="code" href="leptprotos_8h.html#ad4df5a15d1a246deb77c774570a33c37">pixSetData</a>() limited in this way?  Because the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+data can be very large, we need flexible ways to handle it,
+particularly when you want to re-use the data in a different
+context without making a copy.  Here are some different
+things you might want to do:
+
+(1) Use <a class="code" href="leptprotos_8h.html#a421e342a65236aa6770965d34101e0ee">pixCopy</a>(pixd, pixs) where pixd is not the same <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a>
+    as pixs.  This will remove the data in pixd, allocate a
+    new data field in pixd, and copy the data from pixs, leaving
+    pixs unchanged.
+
+(2) Use <a class="code" href="leptprotos_8h.html#acbf8564c358269de6f9def17f6059f4b">pixTransferAllData</a>(pixd, &amp;pixs, ...) to transfer the
+    data from pixs to pixd without making a copy of it.  If
+    pixs is not cloned, this will do the transfer and destroy pixs.
+    But if the <a class="code" href="struct_pix.html#a8f352c3925929c5e9abab19716175b3c">refcount</a> of pixs is greater than 1, it just copies
+    the data and decrements the ref count.
+
+(3) Use <a class="code" href="leptprotos_8h.html#a994ac440b7dc46c36845b70530769da0">pixExtractData</a>() to extract the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> data from the pix
+    without copying if possible.  This could be used, for example,
+    to convert from a pix to some other data structure with minimal
+    heap allocation.  After the data is extracated, the pixels can
+    be munged and used in another context.  However, the danger
+    here is that the pix might have a <a class="code" href="struct_pix.html#a8f352c3925929c5e9abab19716175b3c">refcount</a> &gt; 1, in which case
+    a copy of the data must be made and the input pix left unchanged.
+    If there are no clones, the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a> data can be extracted without
+    a copy, and the data ptr in the pix must be nulled before
+    destroying it because the pix will no longer &#39;own&#39; the data.
+
+We have provided accessors and functions here that should be
+sufficient so that you can do anything you want without
+explicitly referencing any of the pix member fields.
+
+However, to avoid memory smashes and leaks when doing special operations
+on the pix data field, look carefully at the behavior of the <a class="code" href="colorquant__reg_8c.html#aabec89bef1d1e1f9faf4e7d2e685c317">image</a>
+data accessors and keep in mind that when you invoke <a class="code" href="leptprotos_8h.html#a1b238e61b64e4e5c62f44849cddb9658">pixDestroy</a>(),
+the pix considers itself the owner of all its heap data.
+</pre></div> 
 <p>Definition in file <a class="el" href="pix1_8c_source.html">pix1.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a8baf6b023f376874b57fdb2c738b4d50"></a><!-- doxytag: member="pix1.c::pixFree" ref="a8baf6b023f376874b57fdb2c738b4d50" args="(PIX *pix)" -->

@@ -160,7 +160,18 @@ Variables</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Bruel algorithm for extracting large whitespace boxes from a binary image: classification and location of connected components (characters or words) </p>
+<div class="fragment"><pre class="fragment">    Whitespace block extraction
+        <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="leptprotos_8h.html#a89b70ccf68554ad44544e642df96fcc0">boxaGetWhiteblocks</a>()
 
+    Helpers
+        static <a class="code" href="struct_partition_element.html">PARTEL</a>   *<a class="code" href="partition_8c.html#a479a50871e50d054edcc80ccab9b95f6">partelCreate</a>()
+        static <span class="keywordtype">void</span>      <a class="code" href="partition_8c.html#ab7733f7af5cbc6b562b038bc3ee4c223">partelDestroy</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   <a class="code" href="partition_8c.html#a5309a3754f2407acf310a59f50e2a628">partelSetSize</a>()
+        static <a class="code" href="struct_boxa.html">BOXA</a>     *<a class="code" href="partition_8c.html#a4711e566e533e8a9423a090b11d4d821">boxaGenerateSubboxes</a>()
+        static <a class="code" href="struct_box.html">BOX</a>      *<a class="code" href="partition_8c.html#ae59dbafe0ec2034006c31223d8cdb420">boxaSelectPivotBox</a>()
+        static <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>   boxaCheckIfOverlapIsSmall()
+        <a class="code" href="struct_boxa.html">BOXA</a>            *<a class="code" href="leptprotos_8h.html#a812af78fd6ed7d8fbbe9db6101591b44">boxaPruneSortedOnOverlap</a>()
+</pre></div> 
 <p>Definition in file <a class="el" href="partition_8c_source.html">partition.c</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a058cf3628aa6139f6493752bb27cd365"></a><!-- doxytag: member="partition.c::OUTPUT_HEAP_STATS" ref="a058cf3628aa6139f6493752bb27cd365" args="" -->

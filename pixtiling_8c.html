@@ -143,7 +143,61 @@ Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Split an image into tiles and perform operations independently on each tile. </p>
+<div class="fragment"><pre class="fragment">      <a class="code" href="struct_pix_tiling.html">PIXTILING</a>       *<a class="code" href="leptprotos_8h.html#a96bc65e8a150a428b3332d3eacdf3239">pixTilingCreate</a>()
+      void            *<a class="code" href="leptprotos_8h.html#ae9211bb962033bc2bf576aca15c78bc2">pixTilingDestroy</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a4e6ca2cc8509e3eb09c6b5b81d1f5975">pixTilingGetCount</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a04c08be62f8d1e8adec23652af14ba20">pixTilingGetSize</a>()
+      <a class="code" href="struct_pix.html">PIX</a>             *<a class="code" href="leptprotos_8h.html#a0f89dc212c03f4c26362324d92fd4192">pixTilingGetTile</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a855a3d605f9c9e8c31749f1e1f871303">pixTilingNoStripOnPaint</a>()
+      <a class="code" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>          <a class="code" href="leptprotos_8h.html#a7776311303dee61d28f92a592e95ed0f">pixTilingPaintTile</a>()
+        
 
+ This provides a simple way to split an image into tiles
+ and to perform operations independently on each tile.
+
+ The tile created with <a class="code" href="leptprotos_8h.html#a0f89dc212c03f4c26362324d92fd4192">pixTilingGetTile</a>() can have pixels in
+ adjacent tiles for computation.  The number of extra pixels
+ on each side of the tile is given by an &#39;overlap&#39; parameter
+ to <a class="code" href="leptprotos_8h.html#a96bc65e8a150a428b3332d3eacdf3239">pixTilingCreate</a>().  For tiles at the boundary of
+ the input image, quasi-overlap pixels are created by reflection
+ symmetry into the tile.
+
+ Here&#39;s a typical intended usage.  Suppose you want to parallelize
+ the operation on an image, by operating on tiles.  For each
+ tile, you want to generate an in-place image result at the same
+ resolution.  Suppose you choose a one-dimensional vertical tiling,
+ where the desired tile width is 256 pixels and the overlap is
+ 30 pixels on left and right sides:
+
+   <a class="code" href="struct_pix.html">PIX</a> *pixd = <a class="code" href="leptprotos_8h.html#a8f510e51884b7bdea99f652e1ad0078a">pixCreateTemplateNoInit</a>(pixs);  <span class="comment">// output</span>
+   <a class="code" href="struct_pix_tiling.html">PIXTILING</a>  *pt = <a class="code" href="leptprotos_8h.html#a96bc65e8a150a428b3332d3eacdf3239">pixTilingCreate</a>(pixs, 0, 1, 256, 30, 0);
+   <a class="code" href="leptprotos_8h.html#a4e6ca2cc8509e3eb09c6b5b81d1f5975">pixTilingGetCount</a>(pt, &amp;<a class="code" href="pixaatest_8c.html#aa4374004b101d3331b46aeef4a143df0">nx</a>, <a class="code" href="environ_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);
+   for (j = 0; j &lt; nx; j++) {
+       <a class="code" href="struct_pix.html">PIX</a> *pixt = <a class="code" href="leptprotos_8h.html#a0f89dc212c03f4c26362324d92fd4192">pixTilingGetTile</a>(pt, 0, j);
+       SomeInPlaceOperation(pixt, 30, 0, ...);
+       <a class="code" href="leptprotos_8h.html#a7776311303dee61d28f92a592e95ed0f">pixTilingPaintTile</a>(pixd, 0, j, pixt, pt);
+       <a class="code" href="leptprotos_8h.html#a1b238e61b64e4e5c62f44849cddb9658">pixDestroy</a>(&amp;pixt);
+   }
+
+ In <span class="keyword">this</span> example, note the following:
+  - The unspecfified in-place operation could instead generate
+    a <span class="keyword">new</span> pix.  If <span class="keyword">this</span> is done, the resulting pix must be the
+    same <a class="code" href="warper__reg_8c.html#a711275dc7bbe85bb6fa721bc60b8637c">size</a> as pixt, because <a class="code" href="leptprotos_8h.html#a7776311303dee61d28f92a592e95ed0f">pixTilingPaintTile</a>() makes that
+    assumption, removing the overlap pixels before painting
+    into the destination.
+  - The &#39;overlap&#39; parameters have been included in your function,
+    to indicate which pixels are not in the exterior overlap region.
+    You will need to change only pixels that are not in the overlap
+    region, because those are the pixels that will be painted
+    into the destination.
+  - For tiles on the outside of the image, mirrored pixels are
+    added to substitute for the overlap that is added to interior
+    tiles.  This allows you to implement your function without
+    reference to which tile it is; no special coding is necessary
+    for pixels that are near the image boundary.
+  - The tiles are labeled by (i, j) = (row, column),
+    and in this example there is one row and <a class="code" href="pixaatest_8c.html#aa4374004b101d3331b46aeef4a143df0">nx</a> columns.
+</pre></div> 
 <p>Definition in file <a class="el" href="pixtiling_8c_source.html">pixtiling.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ac12cfaf09bee8f3d794cd648164e07f8"></a><!-- doxytag: member="pixtiling.c::pixTilingCreate" ref="ac12cfaf09bee8f3d794cd648164e07f8" args="(PIX *pixs, l_int32 nx, l_int32 ny, l_int32 w, l_int32 h, l_int32 xoverlap, l_int32 yoverlap)" -->

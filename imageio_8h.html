@@ -183,7 +183,15 @@ Enumerations</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Enums for supported image file formats. </p>
+<div class="fragment"><pre class="fragment">In use, either datacomp or data85 will be produced, depending
+on whether the data needs to be ascii85 encoded.  PostScript
+requires ascii85 encoding; pdf does not.
 
+For the colormap (flate compression only), PostScript uses ascii85
+encoding and pdf uses a bracketed array of space-separated
+hex-encoded rgb triples.  Only tiff g4 (type == <a class="code" href="imageio_8h.html#ab04a0655cd1e3bcac5e8f48c18df1a57a9941521dc0a9ae70aa4e87be3651cf32">L_G4_ENCODE</a>) uses
+the minisblack field.
+</pre></div> 
 <p>Definition in file <a class="el" href="imageio_8h_source.html">imageio.h</a>.</p>
 </div><hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="a3490cf528e77057e373651b2c656b3b9"></a><!-- doxytag: member="imageio.h::L_COMPRESSED_DATA" ref="a3490cf528e77057e373651b2c656b3b9" args="" -->
