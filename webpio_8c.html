@@ -116,6 +116,8 @@ function toggleVisibility(linkObj) {
 </script>
 <div id="doc-content">
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <h1>webpio.c File Reference</h1>  </div>
 </div>
@@ -125,15 +127,219 @@ function toggleVisibility(linkObj) {
 <a href="#_details">More...</a></p>
 <div class="textblock"><code>#include &lt;math.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="allheaders_8h_source.html">allheaders.h</a>&quot;</code><br/>
+<code>#include &quot;webp/decode.h&quot;</code><br/>
+<code>#include &quot;webp/encode.h&quot;</code><br/>
 </div>
 <p><a href="webpio_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webpio_8c.html#a2250de8b6b660dbf1e38c82b353d82dc">pixReadStreamWebP</a> (FILE *fp)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webpio_8c.html#ab46b84e4e2585643d3f8d115219456de">readHeaderWebP</a> (const char *<a class="el" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a>, <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> *pwidth, <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> *pheight)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webpio_8c.html#ac410606cf33522b0f0ee414b58bee589">pixWriteWebP</a> (const char *<a class="el" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a>, <a class="el" href="struct_pix.html">PIX</a> *pixs, <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> quality)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webpio_8c.html#aa752c3e97c8032d5636edb15421385a0">pixWriteStreamWebP</a> (FILE *fp, <a class="el" href="struct_pix.html">PIX</a> *pixs, <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> quality)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webpio_8c.html#a4d1f23c03a121cc946bef9c7cf879b79">pixWriteWebPwithTargetPSNR</a> (const char *<a class="el" href="pixserial__reg_8c.html#acbe1cede344a3bc567aea2d2e2ec0b20">filename</a>, <a class="el" href="struct_pix.html">PIX</a> *pixs, <a class="el" href="environ_8h.html#ab8d28dcce3b441bb0bb47f124ee3c252">l_float64</a> target_psnr, <a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> *pquality)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Read/write webp format from/to file. </p>
 
 <p>Definition in file <a class="el" href="webpio_8c_source.html">webpio.c</a>.</p>
-</div></div>
+</div><hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a2250de8b6b660dbf1e38c82b353d82dc"></a><!-- doxytag: member="webpio.c::pixReadStreamWebP" ref="a2250de8b6b660dbf1e38c82b353d82dc" args="(FILE *fp)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_pix.html">PIX</a>* pixReadStreamWebP </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="leptprotos_8h.html#a2f851c5dfadfb6fec05329f8a4cffb9c">pixReadStreamWebP()</a></p>
+<p>Input: stream corresponding to WebP image Return: pix (32 bpp), or null on error</p>
+<p>Notes: (1) Use 'free', and not leptonica's 'FREE', for all heap data that is returned from the WebP library. </p>
+
+<p>Definition at line <a class="el" href="webpio_8c_source.html#l00061">61</a> of file <a class="el" href="webpio_8c_source.html">webpio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00250">ERROR_PTR</a>, <a class="el" href="environ_8h_source.html#l00216">FREE</a>, <a class="el" href="utils_8c_source.html#l01569">l_binaryReadStream()</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="pix1_8c_source.html#l00269">pixCreate()</a>, <a class="el" href="pix1_8c_source.html#l00466">pixDestroy()</a>, <a class="el" href="pix2_8c_source.html#l02283">pixEndianByteSwap()</a>, <a class="el" href="pix1_8c_source.html#l01358">pixGetData()</a>, <a class="el" href="pix1_8c_source.html#l00970">pixGetWpl()</a>, and <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>.</p>
+
+<p>Referenced by <a class="el" href="readfile_8c_source.html#l00285">pixReadStream()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab46b84e4e2585643d3f8d115219456de"></a><!-- doxytag: member="webpio.c::readHeaderWebP" ref="ab46b84e4e2585643d3f8d115219456de" args="(const char *filename, l_int32 *pwidth, l_int32 *pheight)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> readHeaderWebP </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> *&#160;</td>
+          <td class="paramname"><em>pwidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> *&#160;</td>
+          <td class="paramname"><em>pheight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="leptprotos_8h.html#a416cc11301f44dd9d080d3e1caf35a6f">readHeaderWebP()</a></p>
+<p>Input: filename &amp;width (&lt;return&gt;) &amp;height (&lt;return&gt;) Return: 0 if OK, 1 on error </p>
+
+<p>Definition at line <a class="el" href="webpio_8c_source.html#l00114">114</a> of file <a class="el" href="webpio_8c_source.html">webpio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>, <a class="el" href="utils_8c_source.html#l01953">fopenReadStream()</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, and <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>.</p>
+
+<p>Referenced by <a class="el" href="readfile_8c_source.html#l00384">pixReadHeader()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac410606cf33522b0f0ee414b58bee589"></a><!-- doxytag: member="webpio.c::pixWriteWebP" ref="ac410606cf33522b0f0ee414b58bee589" args="(const char *filename, PIX *pixs, l_int32 quality)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> pixWriteWebP </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
+          <td class="paramname"><em>pixs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td>
+          <td class="paramname"><em>quality</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="leptprotos_8h.html#a1db5efb2e508d6c3bea105a6ba71b9bb">pixWriteWebP()</a></p>
+<p>Input: filename pixs quality (1 - 100; 75 is default) Return: 0 if OK, 1 on error </p>
+
+<p>Definition at line <a class="el" href="webpio_8c_source.html#l00154">154</a> of file <a class="el" href="webpio_8c_source.html">webpio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>, <a class="el" href="utils_8c_source.html#l01993">fopenWriteStream()</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="webpio_8c_source.html#l00193">pixWriteStreamWebP()</a>, and <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa752c3e97c8032d5636edb15421385a0"></a><!-- doxytag: member="webpio.c::pixWriteStreamWebP" ref="aa752c3e97c8032d5636edb15421385a0" args="(FILE *fp, PIX *pixs, l_int32 quality)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> pixWriteStreamWebP </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
+          <td class="paramname"><em>pixs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a>&#160;</td>
+          <td class="paramname"><em>quality</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>pixWriteStreampWebP()</p>
+<p>Input: stream pix (all depths) quality (1 - 100; 75 is default) Return: 0 if OK, 1 on error</p>
+<p>Notes: (1) webp only encodes rgb images, so the input image is converted to rgb if necessary. </p>
+
+<p>Definition at line <a class="el" href="webpio_8c_source.html#l00193">193</a> of file <a class="el" href="webpio_8c_source.html">webpio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="pixconv_8c_source.html#l02453">pixConvertTo32()</a>, <a class="el" href="pix1_8c_source.html#l00466">pixDestroy()</a>, <a class="el" href="pix2_8c_source.html#l02222">pixEndianByteSwapNew()</a>, <a class="el" href="pix1_8c_source.html#l01358">pixGetData()</a>, <a class="el" href="pix1_8c_source.html#l00863">pixGetDepth()</a>, <a class="el" href="pix1_8c_source.html#l00898">pixGetDimensions()</a>, <a class="el" href="pix1_8c_source.html#l00970">pixGetWpl()</a>, <a class="el" href="pixconv_8c_source.html#l00223">pixRemoveColormap()</a>, <a class="el" href="watershed_8h_source.html#l00032">L_WShed::pixt</a>, <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>, and <a class="el" href="pix_8h_source.html#l00180">REMOVE_CMAP_TO_FULL_COLOR</a>.</p>
+
+<p>Referenced by <a class="el" href="writefile_8c_source.html#l00277">pixWriteStream()</a>, and <a class="el" href="webpio_8c_source.html#l00154">pixWriteWebP()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4d1f23c03a121cc946bef9c7cf879b79"></a><!-- doxytag: member="webpio.c::pixWriteWebPwithTargetPSNR" ref="a4d1f23c03a121cc946bef9c7cf879b79" args="(const char *filename, PIX *pixs, l_float64 target_psnr, l_int32 *pquality)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> pixWriteWebPwithTargetPSNR </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pix.html">PIX</a> *&#160;</td>
+          <td class="paramname"><em>pixs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="environ_8h.html#ab8d28dcce3b441bb0bb47f124ee3c252">l_float64</a>&#160;</td>
+          <td class="paramname"><em>target_psnr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="environ_8h.html#a9085c7874153c280a4171244aa052e4e">l_int32</a> *&#160;</td>
+          <td class="paramname"><em>pquality</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="leptprotos_8h.html#a9098c3ef39bf7cb9cfedeb36cd5d1094">pixWriteWebPwithTargetPSNR()</a></p>
+<p>Input: filename pix (all depths) target_psnr (target psnr to control the quality [1 ... 100]) pquality (&lt;optional return&gt;=""&gt; final quality value used to obtain the target_psnr; can be null) Return: 0 if OK, 1 on error</p>
+<p>Notes: (1) The parameter to control quality while encoding WebP is quality. This function does a line search over the quality values between MIN_QUALITY and MAX_QUALITY to achieve the target PSNR as close as possible. </p>
+
+<p>Definition at line <a class="el" href="webpio_8c_source.html#l00275">275</a> of file <a class="el" href="webpio_8c_source.html">webpio.c</a>.</p>
+
+<p>References <a class="el" href="environ_8h_source.html#l00251">ERROR_INT</a>, <a class="el" href="utils_8c_source.html#l01993">fopenWriteStream()</a>, <a class="el" href="environ_8h_source.html#l00155">L_MAX</a>, <a class="el" href="environ_8h_source.html#l00151">L_MIN</a>, <a class="el" href="environ_8h_source.html#l00171">NULL</a>, <a class="el" href="pixconv_8c_source.html#l02453">pixConvertTo32()</a>, <a class="el" href="pix1_8c_source.html#l00466">pixDestroy()</a>, <a class="el" href="pix1_8c_source.html#l01358">pixGetData()</a>, <a class="el" href="pix1_8c_source.html#l00863">pixGetDepth()</a>, <a class="el" href="pix1_8c_source.html#l00898">pixGetDimensions()</a>, <a class="el" href="pix1_8c_source.html#l00970">pixGetWpl()</a>, <a class="el" href="pixconv_8c_source.html#l00223">pixRemoveColormap()</a>, <a class="el" href="environ_8h_source.html#l00249">PROCNAME</a>, and <a class="el" href="pix_8h_source.html#l00180">REMOVE_CMAP_TO_FULL_COLOR</a>.</p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
